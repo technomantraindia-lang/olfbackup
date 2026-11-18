@@ -52,19 +52,39 @@ export class WithdrawalController extends MasterController {
       }
 
       // Check current live vendor balance
-      const balanceQuery = `
-        SELECT COALESCE(get_vendor_balance($1::integer), 0) as current_balance
-      `;
-      const balanceResult: any = await this.sql.executeQuery(balanceQuery, [Number(vendor_id)]);
-      const currentBalance = Number(balanceResult.rows?.[0]?.current_balance || 0);
+      let currentBalance = 0;
+      try {
+        const balanceQuery = `
+          SELECT COALESCE(get_vendor_balance($1::integer), 0) as current_balance
+        `;
+        const balanceResult: any = await this.sql.executeQuery(balanceQuery, [Number(vendor_id)]);
+        currentBalance = Number(balanceResult.rows?.[0]?.current_balance || 0);
+      } catch (balErr: any) {
+        const fallbackRes: any = await this.sql.executeQuery(`
+          SELECT COALESCE(SUM(wallet_amount), 0) as current_balance
+          FROM restraunts.restraunt_master
+          WHERE vendor_id = $1::text AND status != -1
+        `, [String(vendor_id)]);
+        currentBalance = Number(fallbackRes.rows?.[0]?.current_balance || 0);
+      }
 
       // Check if requested outlet has sufficient balance if specific outlet was selected
       if (outlet_id) {
-        const outletBalanceQuery = `
-          SELECT COALESCE(get_current_balance($1::bigint), 0) as outlet_balance
-        `;
-        const outletRes: any = await this.sql.executeQuery(outletBalanceQuery, [Number(outlet_id)]);
-        const outletBalance = Number(outletRes.rows?.[0]?.outlet_balance || 0);
+        let outletBalance = 0;
+        try {
+          const outletBalanceQuery = `
+            SELECT COALESCE(get_current_balance($1::bigint), 0) as outlet_balance
+          `;
+          const outletRes: any = await this.sql.executeQuery(outletBalanceQuery, [Number(outlet_id)]);
+          outletBalance = Number(outletRes.rows?.[0]?.outlet_balance || 0);
+        } catch {
+          const fallbackRes: any = await this.sql.executeQuery(`
+            SELECT COALESCE(wallet_amount, 0) as outlet_balance
+            FROM restraunts.restraunt_master
+            WHERE outlet_id = $1::bigint
+          `, [Number(outlet_id)]);
+          outletBalance = Number(fallbackRes.rows?.[0]?.outlet_balance || 0);
+        }
 
         if (numAmount > outletBalance) {
           resModel.status = Constants.ERROR;
@@ -154,7 +174,7 @@ export class WithdrawalController extends MasterController {
       return res.status(Constants.HTTP_OK).json(resModel);
     } catch (error: any) {
       resModel.status = Constants.ERROR;
-      resModel.info = `catch: ${error.message}`;
+      resModel.info = error.message || "An unexpected error occurred while processing withdrawal request.";
       this.logger.error(JSON.stringify(resModel), `${this.constructor.name} : createRequest`);
       return res.status(Constants.HTTP_INTERNAL_SERVER_ERROR).json(resModel);
     }
