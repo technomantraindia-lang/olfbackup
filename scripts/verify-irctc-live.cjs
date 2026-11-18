@@ -1,0 +1,24 @@
+/* Read-only browser verification of the authorized live release. Token is environment-only. */
+const fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/dell/AppData/Local/Temp/olf-admin-audit/node_modules/playwright');
+(async()=>{
+ const base='https://olf.technomantra.in',authorization='Bearer '+process.env.OLF_VERIFY_TOKEN;
+ if(!process.env.OLF_VERIFY_TOKEN)throw Error('Short-lived verification token required.');
+ const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});const errors=[],failed=[],checks=[];
+ try{
+  const context=await browser.newContext({viewport:{width:1440,height:1080}});await context.route(base+'/**',route=>route.continue({headers:{...route.request().headers(),authorization}}));
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().startsWith(base+'/api/')&&r.status()>=400)failed.push({path:new URL(r.url()).pathname,status:r.status()});});
+  const get=async url=>{const r=await context.request.get(base+url,{headers:{authorization}});assert.equal(r.status(),200,url);const body=await r.json();assert.equal(body.status,1,url);return body.data;};
+  const status=await get('/api/v1/irctc/sync/status');assert.equal(status.environment,'staging');assert.equal(status.workerEnabled,true);assert.equal(status.workerHealthy,true);assert.equal(status.webhookAuthConfigured,true);checks.push('Live worker heartbeat is current; staging preserved; local callback authentication configured');
+  const queue=await get('/api/v1/irctc/sync/jobs'),logs=await get('/api/v1/irctc/logs'),summary=await get('/api/v1/irctc/logs/summary');assert(Array.isArray(queue.rows));assert(Array.isArray(logs.rows));assert.equal(logs.pagination.total,summary.total);checks.push('Live queue, log rows, pagination and totals agree');
+  await page.goto(base+'/irctc-logs');await page.waitForFunction(()=>document.getElementById('sync-connection')?.textContent.includes('Heartbeat current'));await page.waitForFunction(()=>!document.getElementById('ir-state').textContent.includes('Loading'));assert.equal(await page.locator('#count-all').innerText(),Number(summary.total).toLocaleString('en-IN'));assert((await page.locator('#sync-connection').innerText()).toLowerCase().includes('staging'));checks.push('Production IRCTC Logs page renders actual worker/connection/log data');
+  await page.locator('#sync-new').click();await page.locator('#sync-order-dialog').waitFor({state:'visible'});assert((await page.locator('#sync-outlet option').count())>1);await page.locator('#sync-order-dialog [data-sync-close]').click();checks.push('Live IRCTC create form loads real outlet choices without submitting an order');
+  await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.locator('#sync-new').click();await page.locator('#sync-order-dialog').waitFor({state:'visible'});assert(await page.locator('#sync-order-dialog').evaluate(el=>el.getBoundingClientRect().width<=innerWidth));await page.locator('#sync-order-dialog [data-sync-close]').click();checks.push('Live mobile console and order dialog fit viewport');
+  await page.setViewportSize({width:1440,height:1080});const stats=(await get('/api/v1/stats?range=all')).dashboard_data.stats;assert.equal(stats.totalOutlets,1017);
+  await page.goto(base+'/');await page.waitForFunction(()=>document.getElementById('stats-total-outlets')?.textContent==='1,017');assert(!(await page.locator('body').innerText()).includes('100% Synced'));assert(!/â‚¹|â€™/.test(await page.locator('body').innerText()));checks.push('Original dashboard shows 1,017 non-deleted outlet rows and no false sync percentage or broken rupee text');
+  await page.goto(base+'/dashboardv2');await page.waitForFunction(()=>document.getElementById('v2-outlets')?.textContent==='1,017');checks.push('Dashboard V2 remains available with matching actual outlet count');
+  await page.goto(base+'/orders');await page.waitForSelector('a[href="/irctc-logs?newOrder=1"]');checks.push('Orders links to the separate IRCTC workflow');
+  assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);const report={status:'PASS',base,checks,browserErrors:errors,unexpectedApiFailures:failed,workerHeartbeat:status.workerHeartbeat,providerEnvironment:status.environment,historicalUnmapped:status.historicalUnmapped,counts:{outlets:stats.totalOutlets,orders:stats.totalOrders,logEvents:summary.total,jobs:queue.pagination.total},realProviderOrdersCreated:0};
+  fs.writeFileSync(path.resolve(__dirname,'../docs/irctc-sync-live-browser-2026-10-22.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

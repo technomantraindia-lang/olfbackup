@@ -1,0 +1,2902 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OLF Stores - HRMS Operations Command</title>
+  
+  <!-- Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B00',
+            'primary-hover': '#E05E00',
+            'surface-dark': '#07090D',
+            'surface-sidebar': '#0B0F17',
+            'card-dark': '#0F1523',
+            'card-border': 'rgba(255, 255, 255, 0.08)'
+          }
+        }
+      }
+    };
+  </script>
+
+  
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
+
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\\[\\#111622\\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\\[\\#111318\\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\\[\\#171A20\\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\\[\\#171F30\\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\\[\\#0B0F17\\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\\[\\#111622\\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\\[\\#111318\\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\\[\\#171A20\\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\\[\\#171F30\\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\\[\\#0B0F17\\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\\[\\#FF7A00\\],
+  html.light a.bg-\\[\\#FF7A00\\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\\[\\#FF7A00\\] *,
+  html.light a.bg-\\[\\#FF7A00\\] * {
+    color: #FFFFFF !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+  html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+</style>
+
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+
+    .tab-btn.active {
+      background-color: #FF6B00 !important;
+      color: #FFFFFF !important;
+      font-weight: 600;
+    }
+  </style>
+<link rel="stylesheet" href="/assets/admin-runtime.css">
+<script src="/assets/admin-core.js"></script>
+<style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
+</head>
+<body class="bg-[#07090D] text-slate-200 min-h-screen flex antialiased">
+
+  <!-- CANONICAL UNIFIED SIDEBAR (245px) -->
+  <aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
+    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF — Command Center">
+      <span class="olf-wordmark">OLF</span>
+    </a>
+    <div class="flex items-center gap-1.5">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="Provider sync has not been verified">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
+        <span class="truncate">Dashboard</span>
+      </a>
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
+        <span class="truncate">Customers</span>
+      </a>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/outlets?filter=all" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5">
+      <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
+      </div>
+      <a href="/login" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="ml-[245px] flex-1 flex flex-col min-w-0 bg-[#07090D]">
+
+    <!-- TOPBAR -->
+    <header class="h-14 border-b border-white/10 px-6 flex items-center justify-between sticky top-0 z-20 bg-[#07090D]/90 backdrop-blur-md">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[#FF6B00] text-2xl">badge</span>
+        <div>
+          <h1 class="text-sm font-bold text-white tracking-wide uppercase">HRMS Command Hub &amp; Workforce Lifecycle</h1>
+          <p class="text-[10px] text-slate-400">IRCTC Railway e-Catering Station Operations Staff &bull; Official Indian Labour Code Statutory Compliance</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Live Badge -->
+        <div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-[11px] font-medium">PostgreSQL Live Sync</span>
+        </div>
+
+        <!-- Quick Refresh -->
+        <button onclick="refreshAllHrData()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all text-xs flex items-center gap-1 border border-white/5" title="Refresh Live DB Data">
+          <span class="material-symbols-outlined text-sm">refresh</span>
+          <span>Sync</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
+          <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
+          <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
+        </button>
+
+        <!-- User Profile Pill -->
+        <div class="flex items-center gap-2 pl-3 border-l border-white/10">
+          <div class="w-7 h-7 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] flex items-center justify-center font-bold text-xs border border-[#FF6B00]/30">HR</div>
+          <div class="text-left hidden md:block">
+            <div class="text-xs font-semibold text-white leading-tight">HR Operations</div>
+            <div class="text-[10px] text-slate-400 leading-tight">Admin &bull; Superfast Hub</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- HORIZONTAL SUB-NAVIGATION TABS (THE 6 CORE INTERNAL HR PILLARS + OVERVIEW) -->
+    <div class="bg-[#0B0F17] border-b border-white/10 px-6 py-2.5 flex items-center justify-between overflow-x-auto gap-4 sticky top-14 z-10">
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn active px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">dashboard</span>
+          <span>Overview &amp; Radar</span>
+        </button>
+        <button onclick="switchTab('directory')" id="tab-btn-directory" class="tab-btn px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">badge</span>
+          <span>Employee Database</span>
+        </button>
+        <button onclick="switchTab('offers')" id="tab-btn-offers" class="tab-btn px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">assignment_turned_in</span>
+          <span>Offer Letters &amp; ATS</span>
+        </button>
+        <button onclick="switchTab('attendance')" id="tab-btn-attendance" class="tab-btn px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">schedule</span>
+          <span>24/7 Shifts &amp; Attendance</span>
+        </button>
+        <button onclick="switchTab('leaves')" id="tab-btn-leaves" class="tab-btn px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">event_busy</span>
+          <span>Leave Quotas &amp; Approvals</span>
+        </button>
+        <button onclick="switchTab('payroll')" id="tab-btn-payroll" class="tab-btn px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">payments</span>
+          <span>Salary &amp; Payroll</span>
+        </button>
+        <button onclick="switchTab('separation')" id="tab-btn-separation" class="tab-btn px-3 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 bg-white/5 text-slate-300 hover:text-white">
+          <span class="material-symbols-outlined text-[16px]">history_edu</span>
+          <span>Separation &amp; Relieving</span>
+        </button>
+      </div>
+
+      <!-- Quick Header Actions -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="openModal('modal-add-employee')" class="px-3 py-1.5 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-[#FF6B00]/20 transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">person_add</span>
+          <span>Add Employee</span>
+        </button>
+        <button onclick="openModal('modal-punch-attendance')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">login</span>
+          <span>Punch Clock</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN SCROLLABLE CONTENT BODY -->
+    <div class="flex-1 p-6 space-y-6 overflow-y-auto">
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: EXECUTIVE OVERVIEW & KPI RADAR                                  -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-overview" class="tab-content space-y-6">
+        <!-- KPI METRICS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <!-- Total Internal Employees -->
+          <div class="bg-[#0F1523] border border-white/10 rounded-xl p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400 font-medium">Active Internal Staff</span>
+              <span class="p-2 rounded-lg bg-blue-500/10 text-blue-400 material-symbols-outlined text-lg">badge</span>
+            </div>
+            <div class="text-2xl font-bold text-white" id="kpi-active-employees">-</div>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-emerald-400 font-semibold">&bull; 100% Internal workforce</span> across stations
+            </div>
+          </div>
+
+          <!-- Attendance Today -->
+          <div class="bg-[#0F1523] border border-white/10 rounded-xl p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400 font-medium">Clocked In Today</span>
+              <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 material-symbols-outlined text-lg">fact_check</span>
+            </div>
+            <div class="text-2xl font-bold text-white" id="kpi-attendance-today">-</div>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-emerald-400 font-semibold">24/7 Rotational shifts active</span>
+            </div>
+          </div>
+
+          <!-- Open Requisitions -->
+          <div class="bg-[#0F1523] border border-white/10 rounded-xl p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400 font-medium">Open Requisitions</span>
+              <span class="p-2 rounded-lg bg-[#FF6B00]/10 text-[#FF6B00] material-symbols-outlined text-lg">work</span>
+            </div>
+            <div class="text-2xl font-bold text-white" id="kpi-open-jobs">-</div>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-[#FF6B00] font-semibold" id="kpi-budgeted-headcount">-</span>
+            </div>
+          </div>
+
+          <!-- Candidates in ATS Pipeline -->
+          <div class="bg-[#0F1523] border border-white/10 rounded-xl p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400 font-medium">ATS Pipeline Total</span>
+              <span class="p-2 rounded-lg bg-purple-500/10 text-purple-400 material-symbols-outlined text-lg">how_to_reg</span>
+            </div>
+            <div class="text-2xl font-bold text-white" id="kpi-total-candidates">-</div>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-purple-400 font-semibold" id="kpi-selected-candidates">-</span> for Offer
+            </div>
+          </div>
+
+          <!-- Monthly Payroll Liability -->
+          <div class="bg-[#0F1523] border border-white/10 rounded-xl p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-slate-400 font-medium">Disbursed Payroll</span>
+              <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400 material-symbols-outlined text-lg">account_balance</span>
+            </div>
+            <div class="text-2xl font-bold text-white" id="kpi-payroll-liability">-</div>
+            <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-amber-400 font-semibold">Indian Statutory Compliant</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-COLUMN SECTION: REQUISITIONS & OPERATIONAL POLICIES -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-[#0F1523] border border-white/10 rounded-xl p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#FF6B00]">hub</span>
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Station Delivery Headcount &amp; Shift Distribution</h3>
+              </div>
+              <button onclick="openModal('modal-post-job')" class="px-3 py-1.5 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+                <span class="material-symbols-outlined text-sm">add</span>
+                <span>Post Requisition</span>
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                  <tr>
+                    <th class="p-3">Job Role</th>
+                    <th class="p-3">Station</th>
+                    <th class="p-3">Department</th>
+                    <th class="p-3 text-center">Headcount</th>
+                    <th class="p-3 text-right">Budgeted CTC</th>
+                    <th class="p-3 text-center">ATS Status</th>
+                  </tr>
+                </thead>
+                <tbody id="overview-jobs-tbody" class="divide-y divide-white/5">
+                  <tr><td colspan="6" class="p-4 text-center text-slate-500">Loading requisitions...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Action Shortcuts & Info -->
+          <div class="bg-[#0F1523] border border-white/10 rounded-xl p-5 space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-emerald-400">gavel</span>
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider">Internal HR Standards</h3>
+            </div>
+            <div class="space-y-2.5 text-xs text-slate-300">
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                <div class="font-bold text-[#FF6B00]">Internal Workforce Only</div>
+                <p class="text-[11px] text-slate-400">Strictly governs internal company staff. External vendors &amp; restaurant partners are segregated under <a href="/vendors" class="text-blue-400 underline">/vendors</a>.</p>
+              </div>
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                <div class="font-bold text-emerald-400">Smart Document OCR</div>
+                <p class="text-[11px] text-slate-400">Upload Aadhaar, PAN, Bank Cheque, or Resume to automatically extract KYC details and auto-fill onboarding fields.</p>
+              </div>
+              <div class="p-3 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                <div class="font-bold text-purple-400">Role-Based System Access</div>
+                <p class="text-[11px] text-slate-400">Roles are dynamically mapped from the <a href="/roles" class="text-purple-400 underline">Roles &amp; Access</a> section with associated department hierarchies.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: PILLAR 1 - EMPLOYEE DATABASE & STAFF DIRECTORY                 -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-directory" class="tab-content hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-base font-bold text-white uppercase tracking-wider">Internal Employee Database &amp; Staff Directory</h2>
+            <p class="text-xs text-slate-400">Master database of in-house station delivery executives, shift supervisors, and corporate personnel</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openModal('modal-add-employee')" class="px-3.5 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-[#FF6B00]/20 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-sm">person_add</span>
+              <span>Add Employee (with OCR)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="p-4 rounded-xl bg-[#0F1523] border border-white/10 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2 flex-1 min-w-[240px]">
+            <span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+            <input type="text" id="directory-search-input" onkeyup="filterDirectoryTable()" placeholder="Search staff by name, EMP ID, email, station or role..." class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="directory-station-filter" onchange="filterDirectoryTable()" class="bg-[#0B0F17] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#FF6B00]">
+              <option value="">All Station Hubs</option>
+              <option value="NDLS">NDLS - New Delhi</option>
+              <option value="BRC">BRC - Vadodara</option>
+              <option value="ABR">ABR - Abu Road</option>
+              <option value="GWL">GWL - Gwalior</option>
+              <option value="ET">ET - Itarsi</option>
+              <option value="DHN">DHN - Dhanbad</option>
+              <option value="RTM">RTM - Ratlam</option>
+              <option value="BSL">BSL - Bhusaval</option>
+            </select>
+            <select id="directory-role-filter" onchange="filterDirectoryTable()" class="bg-[#0B0F17] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#FF6B00]">
+              <option value="">All Job Roles</option>
+            </select>
+            <select id="directory-status-filter" onchange="filterDirectoryTable()" class="bg-[#0B0F17] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#FF6B00]">
+              <option value="">All Statuses</option>
+              <option value="ACTIVE">Active Staff</option>
+              <option value="INACTIVE">Inactive / Exited</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Master Directory Table -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Emp ID</th>
+                  <th class="p-3.5">Staff Name &amp; Contact</th>
+                  <th class="p-3.5">Station Hub</th>
+                  <th class="p-3.5">Mapped Role (Roles Section)</th>
+                  <th class="p-3.5">Shift &amp; Contract</th>
+                  <th class="p-3.5 text-right">Basic Monthly</th>
+                  <th class="p-3.5">Joining Date</th>
+                  <th class="p-3.5 text-center">Status</th>
+                  <th class="p-3.5 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="directory-table-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="9" class="p-6 text-center text-slate-500">Loading Staff Directory...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Master Departments & Job Roles Table from Roles Section -->
+        <div id="hr-master-directory" class="space-y-4"></div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: PILLAR 2 - OFFER LETTERS & ATS PIPELINE                        -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-offers" class="tab-content hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-white uppercase tracking-wider">Digital Offer Letters &amp; Pre-Onboarding KYC</h2>
+            <p class="text-xs text-slate-400">Automated PDF Offer Letters, dynamic CTC calculator, and digital candidate onboarding</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openModal('modal-add-candidate')" class="px-3 py-2 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <span class="material-symbols-outlined text-sm">person_add</span>
+              <span>Ingest Candidate</span>
+            </button>
+            <button onclick="openModal('modal-rollout-offer')" class="px-3.5 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <span class="material-symbols-outlined text-sm">send</span>
+              <span>Rollout New Offer Letter</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Generated Offer Letters Table -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 font-bold text-xs uppercase tracking-wider text-slate-300">
+            Generated Employment Offer Letters
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Candidate</th>
+                  <th class="p-3.5">Offered Designation</th>
+                  <th class="p-3.5">Station Code</th>
+                  <th class="p-3.5 text-right">Offered CTC</th>
+                  <th class="p-3.5">Joining Date</th>
+                  <th class="p-3.5">Status &amp; Token</th>
+                  <th class="p-3.5 text-center">PDF Letter</th>
+                  <th class="p-3.5 text-center">Onboard</th>
+                </tr>
+              </thead>
+              <tbody id="offers-table-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="8" class="p-6 text-center text-slate-500">Loading Offer Letters...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ATS Candidates Pipeline Table -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 font-bold text-xs uppercase tracking-wider text-slate-300">
+            Applicant Tracking Pipeline (ATS)
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Candidate</th>
+                  <th class="p-3.5">Requisition &amp; Station</th>
+                  <th class="p-3.5">Contact</th>
+                  <th class="p-3.5">Prior Experience</th>
+                  <th class="p-3.5">Stage</th>
+                  <th class="p-3.5">Notes</th>
+                  <th class="p-3.5 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="candidates-table-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="7" class="p-6 text-center text-slate-500">Loading ATS Candidates...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 4: PILLAR 3 - 24/7 SHIFTS & ATTENDANCE                            -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-attendance" class="tab-content hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-white uppercase tracking-wider">24/7 Station Shift Rosters &amp; Clock-In Radar</h2>
+            <p class="text-xs text-slate-400">Geo-fenced mobile platform clock-ins, biometric synchronization, and working hours calculation</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openModal('modal-punch-attendance')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-sm">schedule</span>
+              <span>Punch Clock (In / Out)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 SHIFT CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-[#0F1523] border border-white/10">
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+              <span class="font-bold text-emerald-400">SH-M &bull; Morning Superfast</span>
+              <span>06:00 - 14:30</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Breakfast &amp; Early Lunch coach delivery dispatch</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#0F1523] border border-white/10">
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+              <span class="font-bold text-blue-400">SH-E &bull; Evening Express</span>
+              <span>14:00 - 22:30</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Snacks &amp; Major Dinner train rush delivery</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#0F1523] border border-white/10">
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+              <span class="font-bold text-[#FF6B00]">SH-N &bull; Night Mail</span>
+              <span>22:00 - 06:30</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Midnight express trains + &#8377;150 night allowance</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#0F1523] border border-white/10">
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+              <span class="font-bold text-purple-400">SH-G &bull; General Corporate</span>
+              <span>09:30 - 18:00</span>
+            </div>
+            <p class="text-[11px] text-slate-400">HR, Finance, Tech &amp; Customer Support Desk</p>
+          </div>
+        </div>
+
+        <!-- TODAY'S ATTENDANCE LOG TABLE -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 flex items-center justify-between">
+            <div class="font-bold text-xs uppercase tracking-wider text-slate-300">
+              Today's Station Clock-In / Out Log
+            </div>
+            <button onclick="refreshAllHrData()" class="text-xs text-[#FF6B00] hover:underline flex items-center gap-1">
+              <span class="material-symbols-outlined text-xs">refresh</span>
+              <span>Refresh Log</span>
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Staff Name</th>
+                  <th class="p-3.5">Designation</th>
+                  <th class="p-3.5">Station Hub</th>
+                  <th class="p-3.5">Shift</th>
+                  <th class="p-3.5">Punch In Time</th>
+                  <th class="p-3.5">Punch Out Time</th>
+                  <th class="p-3.5 text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-today-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="7" class="p-6 text-center text-slate-500">Loading Today's Attendance...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 5: PILLAR 4 - LEAVE MANAGEMENT & APPROVALS                        -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-leaves" class="tab-content hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-white uppercase tracking-wider">Leave Quotas &amp; Balance Ledger</h2>
+            <p class="text-xs text-slate-400">Casual Leave (12), Sick Leave (12), Earned Leave (15), and Short Leaves (24h) with Maker-Checker Approvals</p>
+          </div>
+          <button onclick="openModal('modal-apply-leave')" class="px-3.5 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+            <span class="material-symbols-outlined text-sm">date_range</span>
+            <span>Apply For Leave</span>
+          </button>
+        </div>
+
+        <!-- PENDING LEAVE REQUESTS APPROVAL QUEUE -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 flex items-center justify-between">
+            <div class="font-bold text-xs uppercase tracking-wider text-amber-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+              <span>Pending Leave Approvals Queue (Maker-Checker)</span>
+            </div>
+            <span id="pending-leave-count" class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400">0 Pending</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Staff Name</th>
+                  <th class="p-3.5">Leave Category</th>
+                  <th class="p-3.5">From Date</th>
+                  <th class="p-3.5 text-center">Days</th>
+                  <th class="p-3.5">Reason</th>
+                  <th class="p-3.5 text-center">Approval Decision</th>
+                </tr>
+              </thead>
+              <tbody id="leave-requests-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="6" class="p-6 text-center text-slate-500">No pending leave applications.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- LEAVE BALANCES LEDGER TABLE -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 font-bold text-xs uppercase tracking-wider text-slate-300">
+            Employee Leave Balance Quotas
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Staff Name</th>
+                  <th class="p-3.5">Role</th>
+                  <th class="p-3.5 text-center">Casual Leave (CL)</th>
+                  <th class="p-3.5 text-center">Earned Leave (EL)</th>
+                  <th class="p-3.5 text-center">Sick Leave (SL)</th>
+                  <th class="p-3.5 text-center">Short Leave (Hrs)</th>
+                  <th class="p-3.5 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="leaves-table-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="7" class="p-6 text-center text-slate-500">Loading Leave Ledger...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 6: PILLAR 5 - STATUTORY PAYROLL & SALARY SLIPS                    -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-payroll" class="tab-content hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-white uppercase tracking-wider">Indian Statutory Payroll &amp; Payslip Studio</h2>
+            <p class="text-xs text-slate-400">Maker-Checker approvals, automated PDF salary slips, and corporate banking NEFT disbursement</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="processPayrollRun()" class="px-3.5 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <span class="material-symbols-outlined text-sm">calculate</span>
+              <span>Execute Monthly Payroll</span>
+            </button>
+            <a href="/api/v1/hr/payroll/bank-csv" target="_blank" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+              <span class="material-symbols-outlined text-sm">file_download</span>
+              <span>Corporate Bank CSV</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PAYROLL BATCHES TABLE -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 font-bold text-xs uppercase tracking-wider text-slate-300">
+            Monthly Payroll Batches (Maker-Checker)
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Batch ID</th>
+                  <th class="p-3.5">Month &amp; Year</th>
+                  <th class="p-3.5 text-center">Employees</th>
+                  <th class="p-3.5 text-right">Gross Earnings</th>
+                  <th class="p-3.5 text-right">Statutory Deductions</th>
+                  <th class="p-3.5 text-right">Net Payable</th>
+                  <th class="p-3.5 text-center">Batch Status</th>
+                  <th class="p-3.5">Bank UTR Reference</th>
+                  <th class="p-3.5 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="payroll-batches-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="9" class="p-6 text-center text-slate-500">Loading Payroll Batches...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ITEMIZED PAYSLIPS TABLE -->
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-white/10 font-bold text-xs uppercase tracking-wider text-slate-300">
+            Itemized Employee Payslips (with PDF Download)
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Payslip ID</th>
+                  <th class="p-3.5">Staff Name</th>
+                  <th class="p-3.5">Month</th>
+                  <th class="p-3.5 text-right">Basic Earned</th>
+                  <th class="p-3.5 text-right">HRA</th>
+                  <th class="p-3.5 text-right">EPF (12%)</th>
+                  <th class="p-3.5 text-right">ESIC &amp; PT</th>
+                  <th class="p-3.5 text-right font-bold">Net Salary</th>
+                  <th class="p-3.5">Bank UTR</th>
+                  <th class="p-3.5 text-center">Download PDF</th>
+                </tr>
+              </thead>
+              <tbody id="payslips-table-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="10" class="p-6 text-center text-slate-500">Loading Payslips...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 7: PILLAR 6 - SEPARATION, F&F & RELIEVING LETTERS                 -->
+      <!-- ===================================================================== -->
+      <section id="tab-content-separation" class="tab-content hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-white uppercase tracking-wider">Separation, F&amp;F Settlement &amp; Relieving Letters</h2>
+            <p class="text-xs text-slate-400">Departmental NOC checklist (Station Ops, IT, Finance) and 1-click authorized Relieving &amp; Experience Certificate PDF</p>
+          </div>
+          <button onclick="openModal('modal-initiate-exit')" class="px-3.5 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+            <span class="material-symbols-outlined text-sm">exit_to_app</span>
+            <span>Initiate Staff Separation</span>
+          </button>
+        </div>
+
+        <div class="bg-[#0F1523] border border-white/10 rounded-xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-white/5 uppercase text-[10px] text-slate-400 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-3.5">Staff Name</th>
+                  <th class="p-3.5">Role &amp; Station</th>
+                  <th class="p-3.5">Resignation Date</th>
+                  <th class="p-3.5">Last Working Day</th>
+                  <th class="p-3.5 text-center">Ops NOC</th>
+                  <th class="p-3.5 text-center">IT NOC</th>
+                  <th class="p-3.5 text-center">Finance NOC</th>
+                  <th class="p-3.5 text-right">Net F&amp;F Payable</th>
+                  <th class="p-3.5 text-center">Relieving Letter</th>
+                  <th class="p-3.5 text-center">Experience Letter</th>
+                </tr>
+              </thead>
+              <tbody id="exit-table-tbody" class="divide-y divide-white/5">
+                <tr><td colspan="10" class="p-6 text-center text-slate-500">Loading Separation Records...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- INTERACTIVE MODALS & DRAWERS                                              -->
+  <!-- ========================================================================= -->
+
+  <!-- MODAL: ADD EMPLOYEE (WITH SMART DOCUMENT OCR & ROLE MAPPING) -->
+  <div id="modal-add-employee" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <!-- Header -->
+      <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between shrink-0 bg-white/5">
+        <div class="flex items-center gap-2.5">
+          <span class="p-2 rounded-lg bg-[#FF6B00]/10 text-[#FF6B00] material-symbols-outlined text-lg">person_add</span>
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Add Internal Employee &bull; KYC Onboarding</h3>
+            <p class="text-[11px] text-slate-400">Map internal role and auto-fill details using Smart Document OCR</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-add-employee')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg p-1">close</button>
+      </div>
+
+      <!-- Form Body -->
+      <form id="form-add-employee" onsubmit="handleCreateEmployee(event)" class="p-5 space-y-4 overflow-y-auto text-xs flex-1">
+
+        <!-- 1. SMART OCR DROPZONE -->
+        <div class="p-4 rounded-xl bg-gradient-to-r from-[#FF6B00]/10 via-purple-500/10 to-blue-500/10 border border-[#FF6B00]/30 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 font-bold text-xs text-[#FF6B00]">
+              <span class="material-symbols-outlined text-sm">document_scanner</span>
+              <span>⚡ SMART KYC DOCUMENT OCR AUTO-FILL</span>
+            </div>
+            <span class="text-[10px] text-slate-400">Aadhaar &bull; PAN &bull; Cheque &bull; Resume</span>
+          </div>
+          
+          <label class="border-2 border-dashed border-[#FF6B00]/40 hover:border-[#FF6B00] bg-white/5 hover:bg-white/10 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all">
+            <span class="material-symbols-outlined text-2xl text-[#FF6B00] mb-1">upload_file</span>
+            <span class="text-xs font-semibold text-white">Click or drag &amp; drop document to scan</span>
+            <span class="text-[10px] text-slate-400 mt-0.5">Scans Aadhaar, PAN, Bank Cheque, or Resume to auto-fill form</span>
+            <input type="file" id="ocr-doc-file" accept="image/*,application/pdf" class="hidden" onchange="handleOcrUpload(event)">
+          </label>
+
+          <div id="ocr-status-indicator" class="hidden py-1.5 px-3 rounded-lg text-[11px] font-medium"></div>
+          <div id="ocr-staged-docs-list" class="flex flex-wrap gap-2 text-[10px]"></div>
+        </div>
+
+        <!-- 2. PERSONAL INFORMATION -->
+        <div class="space-y-3 pt-1">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">person</span>
+            <span>1. Personal &amp; Contact Credentials</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Full Name *</label>
+              <input type="text" id="emp-name" required placeholder="e.g. Ramesh Kumar" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Contact Phone *</label>
+              <input type="text" id="emp-phone" required placeholder="9876543210" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Company / Contact Email *</label>
+              <input type="email" id="emp-email" required placeholder="ramesh.k@olfstores.com" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Date of Birth (DOB)</label>
+              <input type="date" id="emp-dob" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Gender</label>
+              <select id="emp-gender" class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Father's / Spouse's Name</label>
+              <input type="text" id="emp-father" placeholder="Father's full name" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Permanent Residential Address</label>
+            <input type="text" id="emp-address" placeholder="House No, Street, City, State, PIN" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+        </div>
+
+        <!-- 3. ROLE MAPPING & WORKFORCE ALLOCATION -->
+        <div class="space-y-3 pt-2 border-t border-white/10">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-xs">shield_person</span>
+              <span>2. Role Mapping (from Roles Section)</span>
+            </div>
+            <a href="/roles" target="_blank" class="text-[10px] text-[#FF6B00] hover:underline flex items-center gap-0.5">
+              <span>Manage Roles</span>
+              <span class="material-symbols-outlined text-[10px]">open_in_new</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Job Role (Mapped from Roles Section) *</label>
+              <select id="emp-role" required class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+                <option value="">Select internal job role...</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Base Station Hub *</label>
+              <input type="text" id="emp-station" required placeholder="e.g. NDLS / BRC / ABR" value="NDLS" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white uppercase focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Work Shift</label>
+              <select id="emp-shift" class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+                <option value="Morning">SH-M (Morning 06:00-14:30)</option>
+                <option value="Evening">SH-E (Evening 14:00-22:30)</option>
+                <option value="Night">SH-N (Night 22:00-06:30)</option>
+                <option value="General">SH-G (General Corporate)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Contract Type</label>
+              <select id="emp-contract" class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+                <option value="Full-time">Full-time Regular</option>
+                <option value="Contract">Contractual (Station Rush)</option>
+                <option value="Probation">Probationary (3 Months)</option>
+                <option value="Trainee">Trainee</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Date of Joining</label>
+              <input type="date" id="emp-joining" required class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. STATUTORY & BANKING DETAILS -->
+        <div class="space-y-3 pt-2 border-t border-white/10">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs">account_balance</span>
+            <span>3. Statutory Indian Banking &amp; Tax IDs</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Basic Monthly (INR) *</label>
+              <input type="number" id="emp-basic" required value="15000" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">PAN Card Number</label>
+              <input type="text" id="emp-pan" placeholder="ABCDE1234F" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white uppercase focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Aadhaar Card (12 Digits)</label>
+              <input type="text" id="emp-aadhaar" placeholder="123456789012" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Bank Name</label>
+              <input type="text" id="emp-bank-name" placeholder="HDFC Bank / SBI" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Bank Account Number</label>
+              <input type="text" id="emp-bank-account" placeholder="501002348921" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">IFSC Code</label>
+              <input type="text" id="emp-bank-ifsc" placeholder="HDFC0001245" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white uppercase focus:outline-none focus:border-[#FF6B00]" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-3 border-t border-white/10 shrink-0">
+          <button type="button" onclick="closeModal('modal-add-employee')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" id="btn-save-employee" class="px-5 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white font-semibold rounded-lg flex items-center gap-1.5 shadow-lg shadow-[#FF6B00]/20">
+            <span class="material-symbols-outlined text-sm">check</span>
+            <span>Save &amp; Onboard Employee</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DRAWER: 360° EMPLOYEE PROFILE & KYC DOCUMENTS VAULT -->
+  <div id="drawer-emp-profile" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex justify-end">
+    <div class="bg-[#0F1523] border-l border-white/10 w-full max-w-xl h-full flex flex-col shadow-2xl overflow-hidden">
+      <!-- Drawer Header -->
+      <div class="p-5 border-b border-white/10 flex items-center justify-between shrink-0 bg-white/5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#FF6B00]/20 text-[#FF6B00] font-bold text-sm flex items-center justify-center border border-[#FF6B00]/30" id="drawer-avatar">
+            EMP
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white" id="drawer-name">Staff Name</h3>
+            <div class="text-[11px] text-slate-400 flex items-center gap-2 mt-0.5">
+              <span id="drawer-emp-id" class="font-mono text-[#FF6B00]">EMP-1001</span>
+              <span>&bull;</span>
+              <span id="drawer-role-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-400">Role</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="closeDrawer('drawer-emp-profile')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg p-1.5 rounded-lg hover:bg-white/5">close</button>
+      </div>
+
+      <!-- Drawer Content -->
+      <div class="p-5 overflow-y-auto space-y-5 flex-1 text-xs text-slate-300">
+        <!-- Overview Card -->
+        <div class="p-4 rounded-xl bg-white/5 border border-white/5 space-y-2">
+          <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Station &amp; Duty Allocation</div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div><span class="text-slate-500">Base Station:</span> <span id="drawer-station" class="font-bold text-white">NDLS</span></div>
+            <div><span class="text-slate-500">Work Shift:</span> <span id="drawer-shift" class="font-bold text-emerald-400">Morning</span></div>
+            <div><span class="text-slate-500">Contract:</span> <span id="drawer-contract" class="text-white">Full-time</span></div>
+            <div><span class="text-slate-500">Joining Date:</span> <span id="drawer-joining" class="text-white">--</span></div>
+          </div>
+        </div>
+
+        <!-- Personal & Bank Details -->
+        <div class="p-4 rounded-xl bg-white/5 border border-white/5 space-y-2">
+          <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Personal &amp; Bank Credentials</div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div><span class="text-slate-500">Phone:</span> <span id="drawer-phone" class="text-white">--</span></div>
+            <div><span class="text-slate-500">Email:</span> <span id="drawer-email" class="text-white truncate">--</span></div>
+            <div><span class="text-slate-500">PAN Number:</span> <span id="drawer-pan" class="font-mono text-white">--</span></div>
+            <div><span class="text-slate-500">Aadhaar:</span> <span id="drawer-aadhaar" class="font-mono text-white">--</span></div>
+            <div class="col-span-2"><span class="text-slate-500">Bank Account:</span> <span id="drawer-bank" class="font-mono text-emerald-400">--</span></div>
+          </div>
+        </div>
+
+        <!-- KYC Documents Vault -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[#FF6B00] text-sm">folder_shared</span>
+              <span>Private KYC Documents Vault</span>
+            </div>
+            <label class="px-2.5 py-1 bg-white/5 hover:bg-white/10 text-white rounded text-[11px] font-medium flex items-center gap-1 cursor-pointer transition-all border border-white/10">
+              <span class="material-symbols-outlined text-xs">upload</span>
+              <span>Upload Doc</span>
+              <input type="file" id="drawer-doc-upload" class="hidden" onchange="handleDrawerDocUpload(event)" />
+            </label>
+          </div>
+          <div id="drawer-docs-list" class="space-y-2">
+            <div class="p-4 text-center text-slate-500 bg-white/5 rounded-xl border border-white/5">Loading employee documents...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PUNCH LIVE ATTENDANCE (WITH SEARCHABLE EMPLOYEE & SHIFT) -->
+  <div id="modal-punch-attendance" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-md p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-emerald-400">schedule</span>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Record Station Punch</h3>
+        </div>
+        <button onclick="closeModal('modal-punch-attendance')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg">close</button>
+      </div>
+      <form id="form-punch-attendance" onsubmit="handlePunchAttendanceSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Select Staff Member *</label>
+          <select id="punch-emp-id" required class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+            <option value="">Choose employee...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Punch Action *</label>
+            <select id="punch-type" required class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+              <option value="IN">CLOCK IN (Punch IN)</option>
+              <option value="OUT">CLOCK OUT (Punch OUT)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Shift</label>
+            <select id="punch-shift" class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+              <option value="Morning">SH-M (Morning)</option>
+              <option value="Evening">SH-E (Evening)</option>
+              <option value="Night">SH-N (Night)</option>
+              <option value="General">SH-G (General)</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Supervisor Remark / Station Location</label>
+          <input type="text" id="punch-notes" placeholder="e.g. Platform 2 breakfast dispatch" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-white/10">
+          <button type="button" onclick="closeModal('modal-punch-attendance')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">check</span>
+            <span>Record Punch Now</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ROLLOUT OFFER LETTER (WITH DYNAMIC CTC CALCULATOR) -->
+  <div id="modal-rollout-offer" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-lg p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Generate &amp; Rollout Offer Letter</h3>
+        <button onclick="closeModal('modal-rollout-offer')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg">close</button>
+      </div>
+      <form id="form-rollout-offer" onsubmit="handleRolloutOfferSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Candidate</label>
+          <select id="offer-candidate" required class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+            <option value="">Select candidate...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Designation</label>
+            <input type="text" id="offer-designation" required value="Platform Delivery Executive" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Station Code</label>
+            <input type="text" id="offer-station" required value="NDLS" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white uppercase focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Joining Date</label>
+          <input type="date" id="offer-joining" required class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="p-3 bg-white/5 rounded-lg space-y-2 border border-white/5">
+          <div class="text-[11px] font-bold text-slate-400 uppercase">Monthly Salary Structure</div>
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-slate-400 text-[10px]">Basic (INR)</label>
+              <input type="number" id="offer-basic" value="12000" onkeyup="recalcOfferCtc()" class="w-full bg-white/5 border border-white/10 rounded p-1.5 text-white" />
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[10px]">HRA (INR)</label>
+              <input type="number" id="offer-hra" value="4800" onkeyup="recalcOfferCtc()" class="w-full bg-white/5 border border-white/10 rounded p-1.5 text-white" />
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[10px]">Allowances</label>
+              <input type="number" id="offer-allowance" value="3200" onkeyup="recalcOfferCtc()" class="w-full bg-white/5 border border-white/10 rounded p-1.5 text-white" />
+            </div>
+          </div>
+          <div class="text-[11px] text-emerald-400 pt-1 flex justify-between font-bold">
+            <span>Computed Annual CTC:</span>
+            <span id="offer-computed-ctc">&#8377;2,40,000 / year</span>
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-white/10">
+          <button type="button" onclick="closeModal('modal-rollout-offer')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white font-semibold rounded-lg">Generate &amp; Issue Offer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: APPLY LEAVE -->
+  <div id="modal-apply-leave" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-md p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Submit Leave Application</h3>
+        <button onclick="closeModal('modal-apply-leave')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg">close</button>
+      </div>
+      <form id="form-apply-leave" onsubmit="handleApplyLeaveSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Select Employee *</label>
+          <select id="leave-emp-id" required class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+            <option value="">Select staff...</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Leave Category</label>
+          <select id="leave-type" class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+            <option value="Casual Leave">Casual Leave (CL)</option>
+            <option value="Sick Leave">Sick Leave (SL)</option>
+            <option value="Earned Leave">Earned Leave (EL)</option>
+            <option value="Short Leave">Short Leave (2 Hours)</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">From Date</label>
+            <input type="date" id="leave-from-date" required class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Duration (Days / Hours)</label>
+            <input type="number" id="leave-days" value="1" min="1" max="15" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Reason for Leave</label>
+          <input type="text" id="leave-reason" placeholder="Personal emergency, family event, medical..." class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-white/10">
+          <button type="button" onclick="closeModal('modal-apply-leave')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white font-semibold rounded-lg">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: INITIATE SEPARATION / EXIT -->
+  <div id="modal-initiate-exit" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-md p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Initiate Staff Separation</h3>
+        <button onclick="closeModal('modal-initiate-exit')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg">close</button>
+      </div>
+      <form id="form-initiate-exit" onsubmit="handleInitiateExitSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Select Employee *</label>
+          <select id="exit-emp-id" required class="w-full bg-[#0B0F17] border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]">
+            <option value="">Select resigning staff...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Resignation Date</label>
+            <input type="date" id="exit-resignation-date" required class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Last Working Day</label>
+            <input type="date" id="exit-last-day" required class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Reason for Leaving</label>
+          <textarea id="exit-reason" rows="2" placeholder="Better opportunity, relocation, personal reasons..." class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]"></textarea>
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-white/10">
+          <button type="button" onclick="closeModal('modal-initiate-exit')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white font-semibold rounded-lg">Log Separation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: POST JOB (PRESERVED) -->
+  <div id="modal-post-job" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-md p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Create Station Requisition</h3>
+        <button onclick="closeModal('modal-post-job')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg">close</button>
+      </div>
+      <form id="form-post-job" onsubmit="handlePostJob(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Job Title</label>
+          <input type="text" id="job-title" required placeholder="e.g. Platform Delivery Executive" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Station Code</label>
+            <input type="text" id="job-station" required placeholder="e.g. NDLS" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white uppercase focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Headcount Target</label>
+            <input type="number" id="job-headcount" required value="3" min="1" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Annual Budgeted CTC (INR)</label>
+          <input type="number" id="job-ctc" required value="240000" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-white/10">
+          <button type="button" onclick="closeModal('modal-post-job')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white font-semibold rounded-lg">Submit Requisition</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD CANDIDATE (PRESERVED) -->
+  <div id="modal-add-candidate" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0F1523] border border-white/10 rounded-2xl w-full max-w-md p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Ingest Candidate into ATS</h3>
+        <button onclick="closeModal('modal-add-candidate')" class="text-slate-400 hover:text-white material-symbols-outlined text-lg">close</button>
+      </div>
+      <form id="form-add-candidate" onsubmit="handleAddCandidate(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1">Full Name</label>
+          <input type="text" id="cand-name" required placeholder="e.g. Ramesh Kumar" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-300 mb-1">Email</label>
+            <input type="email" id="cand-email" required placeholder="ramesh@gmail.com" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Phone</label>
+            <input type="text" id="cand-phone" required placeholder="9876543210" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1">Past Experience (Company &amp; Years)</label>
+          <input type="text" id="cand-exp" placeholder="Zomato / Swiggy / IRCTC - 2 Years" class="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-[#FF6B00]" />
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-white/10">
+          <button type="button" onclick="closeModal('modal-add-candidate')" class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-[#FF6B00] hover:bg-[#E05E00] text-white font-semibold rounded-lg">Add to Pipeline</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tesseract.js for In-Browser Offline OCR -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+  <!-- JAVASCRIPT LOGIC & LIVE DB SYNC -->
+  <script>
+    let hrRefreshId = 0;
+    let cachedEmployees = [];
+    let cachedRoles = [];
+    let stagedEmployeeDocs = [];
+    let activeProfileEmpId = null;
+
+    const hrDisplay = value => Array.isArray(value) ? value.map(hrDisplay) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k,v]) => [k, hrDisplay(v)])) : typeof value === 'string' ? Admin.esc(value) : value;
+
+    // Tab Switching
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+      const activeBtn = document.getElementById('tab-btn-' + tabKey);
+      const activeContent = document.getElementById('tab-content-' + tabKey);
+
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activeContent) activeContent.classList.remove('hidden');
+    }
+
+    // Modal Control
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    }
+    function openDrawer(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
+    }
+    function closeDrawer(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    }
+
+    function recalcOfferCtc() {
+      const basic = Number(document.getElementById('offer-basic')?.value || 0);
+      const hra = Number(document.getElementById('offer-hra')?.value || 0);
+      const allow = Number(document.getElementById('offer-allowance')?.value || 0);
+      const total = (basic + hra + allow) * 12;
+      const el = document.getElementById('offer-computed-ctc');
+      if (el) el.innerHTML = '&#8377;' + total.toLocaleString('en-IN') + ' / year';
+    }
+
+    // Smart OCR Upload Handler
+    async function handleOcrUpload(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const indicator = document.getElementById('ocr-status-indicator');
+      indicator.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-400', 'bg-rose-500/10', 'text-rose-400');
+      indicator.classList.add('bg-blue-500/10', 'text-blue-400', 'flex', 'items-center', 'gap-2');
+      indicator.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">sync</span> Scanning document with OCR & extracting fields...';
+
+      let clientText = '';
+      try {
+        if (window.Tesseract && file.type.startsWith('image/')) {
+          const worker = await Tesseract.createWorker('eng');
+          const ret = await worker.recognize(file);
+          clientText = ret.data.text || '';
+          await worker.terminate();
+        }
+      } catch (err) {
+        console.warn('Client OCR warning, falling back to server regex:', err);
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('client_text', clientText);
+
+      try {
+        const token = localStorage.getItem('olf_auth_token') || '';
+        const res = await fetch('/api/v1/hr/documents/ocr-extract', {
+          method: 'POST',
+          headers: token ? { 'Authorization': 'Bearer ' + token } : {},
+          body: formData
+        });
+        const json = await res.json();
+        if (json.status !== 1) throw new Error(json.info || 'Could not process document');
+
+        const data = json.data || {};
+        const fields = data.fields || {};
+
+        stagedEmployeeDocs.push({
+          doc_type: data.doc_type || 'KYC_DOCUMENT',
+          file_name: data.file_name,
+          stored_name: data.stored_name,
+          mime_type: data.mime_type,
+          size_bytes: data.size_bytes,
+          title: data.title
+        });
+        renderStagedDocs();
+
+        let filled = 0;
+        if (fields.name) { document.getElementById('emp-name').value = fields.name; filled++; }
+        if (fields.email) { document.getElementById('emp-email').value = fields.email; filled++; }
+        if (fields.phone) { document.getElementById('emp-phone').value = fields.phone; filled++; }
+        if (fields.dob) { document.getElementById('emp-dob').value = fields.dob; filled++; }
+        if (fields.gender) { document.getElementById('emp-gender').value = fields.gender; filled++; }
+        if (fields.father_name) { document.getElementById('emp-father').value = fields.father_name; filled++; }
+        if (fields.address) { document.getElementById('emp-address').value = fields.address; filled++; }
+        if (fields.pan) { document.getElementById('emp-pan').value = fields.pan; filled++; }
+        if (fields.aadhaar) { document.getElementById('emp-aadhaar').value = fields.aadhaar; filled++; }
+        if (fields.account_number) { document.getElementById('emp-bank-account').value = fields.account_number; filled++; }
+        if (fields.ifsc_code) { document.getElementById('emp-bank-ifsc').value = fields.ifsc_code; filled++; }
+        if (fields.bank_name) { document.getElementById('emp-bank-name').value = fields.bank_name; filled++; }
+
+        indicator.classList.remove('bg-blue-500/10', 'text-blue-400');
+        indicator.classList.add('bg-emerald-500/10', 'text-emerald-400');
+        indicator.innerHTML = `<span class="material-symbols-outlined text-sm">check_circle</span> Detected ${data.doc_type}: Auto-filled ${filled} field(s) &amp; staged for KYC vault!`;
+      } catch (e) {
+        indicator.classList.remove('bg-blue-500/10', 'text-blue-400');
+        indicator.classList.add('bg-rose-500/10', 'text-rose-400');
+        indicator.innerHTML = `<span class="material-symbols-outlined text-sm">error</span> OCR Notice: ${e.message}`;
+      }
+    }
+
+    function renderStagedDocs() {
+      const container = document.getElementById('ocr-staged-docs-list');
+      if (!container) return;
+      container.innerHTML = stagedEmployeeDocs.map((d, i) => `
+        <span class="px-2 py-1 rounded bg-white/10 text-slate-300 flex items-center gap-1 border border-white/10">
+          <span class="material-symbols-outlined text-xs text-emerald-400">attach_file</span>
+          <span>${d.doc_type}: ${d.file_name}</span>
+          <button type="button" onclick="removeStagedDoc(${i})" class="text-slate-400 hover:text-rose-400 material-symbols-outlined text-xs">close</button>
+        </span>
+      `).join('');
+    }
+
+    function removeStagedDoc(index) {
+      stagedEmployeeDocs.splice(index, 1);
+      renderStagedDocs();
+    }
+
+    // Refresh all HR data
+    async function refreshAllHrData() {
+      await AdminAccess.ready;
+      const generation = ++hrRefreshId;
+
+      const tasks = [
+        ['recruitment', 'jobs', renderJobs],
+        ['recruitment', 'candidates', renderCandidates],
+        ['recruitment', 'offers', renderOffers],
+        ['attendance', 'attendance/today', renderAttendance],
+        ['leaves', 'leaves', renderLeaves],
+        ['leaves', 'leaves/requests', renderLeaveRequests],
+        ['payroll', 'payroll/batches', renderPayrollBatches],
+        ['payroll', 'payslips', renderPayslips],
+        ['exits', 'exit/clearances', renderExits],
+        ['employees', 'employees', renderDirectory]
+      ];
+
+      const requests = tasks.map(async ([module, path, render]) => {
+        try {
+          const body = AdminAccess.can(module) ? await Admin.api('/api/v1/hr/' + path) : { data: [] };
+          if (generation === hrRefreshId) render(hrDisplay(Admin.rows(body)));
+        } catch (e) {
+          console.error('Error fetching ' + path, e);
+        }
+      });
+
+      // Fetch summary stats
+      requests.push((async () => {
+        try {
+          const body = await Admin.api('/api/v1/hr/summary-stats');
+          if (generation !== hrRefreshId) return;
+          const d = body.data || {};
+          const kpiMap = {
+            'kpi-active-employees': d.employees?.active_employees ?? d.employees?.total_employees ?? 0,
+            'kpi-open-jobs': d.jobs?.open_jobs ?? 0,
+            'kpi-budgeted-headcount': (d.jobs?.total_headcount ?? 0) + ' target positions',
+            'kpi-total-candidates': d.candidates?.total_candidates ?? 0,
+            'kpi-selected-candidates': (d.candidates?.selected_candidates ?? 0) + ' Selected',
+            'kpi-attendance-today': d.attendance?.present_today ?? 0,
+            'kpi-payroll-liability': 'INR ' + Number(d.payroll?.monthly_liability || 0).toLocaleString('en-IN')
+          };
+          for (const [id, val] of Object.entries(kpiMap)) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+          }
+        } catch (e) {}
+      })());
+
+      // Fetch Roles and Departments
+      requests.push((async () => {
+        try {
+          const [rolesRes, deptRes] = await Promise.all([
+            Admin.api('/api/v1/hr/roles'),
+            Admin.api('/api/v1/hr/departments')
+          ]);
+          if (generation !== hrRefreshId) return;
+          cachedRoles = Admin.rows(rolesRes);
+          populateRoleDropdowns(cachedRoles);
+        } catch (e) {}
+      })());
+
+      await Promise.allSettled(requests);
+    }
+
+    function populateRoleDropdowns(roles) {
+      const select = document.getElementById('emp-role');
+      const filterSelect = document.getElementById('directory-role-filter');
+      if (select) {
+        const prior = select.value;
+        select.innerHTML = '<option value="">Select internal job role...</option>' + 
+          roles.map(r => `<option value="${r.role_id}">${Admin.esc(r.name)} (${r.level || 'Staff'})</option>`).join('');
+        if (prior) select.value = prior;
+      }
+      if (filterSelect) {
+        const prior = filterSelect.value;
+        filterSelect.innerHTML = '<option value="">All Job Roles</option>' + 
+          roles.map(r => `<option value="${Admin.esc(r.name)}">${Admin.esc(r.name)}</option>`).join('');
+        if (prior) filterSelect.value = prior;
+      }
+    }
+
+    function populateEmployeeDropdowns(emps) {
+      cachedEmployees = emps;
+      const ids = ['punch-emp-id', 'leave-emp-id', 'exit-emp-id', 'leave-employee'];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const prior = el.value;
+          el.innerHTML = '<option value="">Select staff member...</option>' + 
+            emps.map(e => `<option value="${e.emp_id}">EMP-${e.emp_id} - ${Admin.esc(e.name)} (${Admin.esc(e.job_location || 'Hub')})</option>`).join('');
+          if (prior) el.value = prior;
+        }
+      });
+    }
+
+    // Render Master Directory
+    function renderDirectory(staff) {
+      cachedEmployees = staff;
+      populateEmployeeDropdowns(staff);
+      const tbody = document.getElementById('directory-table-tbody');
+      if (!tbody) return;
+      if (staff.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="p-6 text-center text-slate-500">No staff members found in internal directory.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = staff.map(s => `
+        <tr class="hover:bg-white/5 transition-all staff-row" data-name="${(s.name||'').toLowerCase()}" data-id="${s.emp_id}" data-station="${(s.job_location||'').toUpperCase()}" data-role="${(s.role_name||'').toLowerCase()}" data-status="${s.is_active ? 'ACTIVE' : 'INACTIVE'}">
+          <td class="p-3.5 font-mono text-slate-400">EMP-${s.emp_id}</td>
+          <td class="p-3.5">
+            <div class="font-bold text-white flex items-center gap-2">
+              <span>${s.name}</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-0.5">${s.email} &bull; ${s.phone || '--'}</div>
+          </td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-[#FF6B00]/10 text-[#FF6B00] font-bold text-[10px]">${s.job_location || 'Hub'}</span></td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-semibold text-[11px]">${s.role_name || 'Staff'}</span>
+            <div class="text-[9px] text-slate-500 mt-0.5">${s.department_name || 'Operations'}</div>
+          </td>
+          <td class="p-3.5 text-slate-300 text-[11px]">${s.contract_type || 'Full-time'} &bull; <span class="text-emerald-400">${s.work_shift || 'Morning'}</span></td>
+          <td class="p-3.5 text-right font-medium text-emerald-400">&#8377;${s.basic_salary == null ? '15,000' : Number(s.basic_salary).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-slate-400 text-[11px]">${s.date_of_joining ? new Date(s.date_of_joining).toLocaleDateString('en-IN') : '--'}</td>
+          <td class="p-3.5 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${s.is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-500/10 text-slate-400'}">${s.is_active ? 'ACTIVE' : 'INACTIVE'}</span>
+          </td>
+          <td class="p-3.5 text-center">
+            <button onclick="viewEmployeeProfile(${s.emp_id})" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-medium text-xs inline-flex items-center gap-1 border border-white/5 transition-all">
+              <span class="material-symbols-outlined text-xs text-[#FF6B00]">visibility</span>
+              <span>Profile &amp; KYC</span>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterDirectoryTable() {
+      const q = (document.getElementById('directory-search-input')?.value || '').toLowerCase().trim();
+      const station = (document.getElementById('directory-station-filter')?.value || '').toUpperCase();
+      const role = (document.getElementById('directory-role-filter')?.value || '').toLowerCase();
+      const status = (document.getElementById('directory-status-filter')?.value || '').toUpperCase();
+
+      document.querySelectorAll('.staff-row').forEach(row => {
+        const rName = row.getAttribute('data-name') || '';
+        const rId = row.getAttribute('data-id') || '';
+        const rStation = row.getAttribute('data-station') || '';
+        const rRole = row.getAttribute('data-role') || '';
+        const rStatus = row.getAttribute('data-status') || '';
+
+        const matchQ = !q || rName.includes(q) || rId.includes(q) || rStation.toLowerCase().includes(q) || rRole.includes(q);
+        const matchStation = !station || rStation === station;
+        const matchRole = !role || rRole.includes(role);
+        const matchStatus = !status || rStatus === status;
+
+        if (matchQ && matchStation && matchRole && matchStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // View 360 Profile Drawer & Documents
+    async function viewEmployeeProfile(empId) {
+      const emp = cachedEmployees.find(e => e.emp_id === empId);
+      if (!emp) return;
+      activeProfileEmpId = empId;
+
+      document.getElementById('drawer-name').textContent = emp.name;
+      document.getElementById('drawer-emp-id').textContent = 'EMP-' + emp.emp_id;
+      document.getElementById('drawer-avatar').textContent = (emp.name || 'EM').slice(0, 2).toUpperCase();
+      document.getElementById('drawer-role-badge').textContent = emp.role_name || 'Staff';
+      document.getElementById('drawer-station').textContent = emp.job_location || 'Hub';
+      document.getElementById('drawer-shift').textContent = emp.work_shift || 'Morning';
+      document.getElementById('drawer-contract').textContent = emp.contract_type || 'Full-time';
+      document.getElementById('drawer-joining').textContent = emp.date_of_joining ? new Date(emp.date_of_joining).toLocaleDateString('en-IN') : '--';
+      document.getElementById('drawer-phone').textContent = emp.phone || '--';
+      document.getElementById('drawer-email').textContent = emp.email || '--';
+
+      const bd = emp.bank_details || {};
+      document.getElementById('drawer-pan').textContent = bd.pan || 'Not provided';
+      document.getElementById('drawer-aadhaar').textContent = bd.aadhaar || 'Not provided';
+      document.getElementById('drawer-bank').textContent = bd.bankName ? (bd.bankName + ' • ' + (bd.accountNumber || '')) : 'Not configured';
+
+      openDrawer('drawer-emp-profile');
+      loadEmployeeDocuments(empId);
+    }
+
+    async function loadEmployeeDocuments(empId) {
+      const container = document.getElementById('drawer-docs-list');
+      if (!container) return;
+      try {
+        const res = await Admin.api('/api/v1/hr/employees/' + empId + '/documents');
+        const docs = Admin.rows(res);
+        if (docs.length === 0) {
+          container.innerHTML = '<div class="p-4 text-center text-slate-500 bg-white/5 rounded-xl border border-white/5">No KYC documents uploaded yet. Use the upload button above.</div>';
+          return;
+        }
+        container.innerHTML = docs.map(d => `
+          <div class="p-3 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-slate-400 text-base">description</span>
+              <div>
+                <div class="font-bold text-white">${Admin.esc(d.doc_type)}: ${Admin.esc(d.title || d.file_name)}</div>
+                <div class="text-[10px] text-slate-400">${d.file_name} &bull; ${Math.round((d.size_bytes||0)/1024)} KB</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <a href="/api/v1/hr/documents/${d.doc_id}/download" target="_blank" class="p-1 rounded text-slate-300 hover:text-white hover:bg-white/10" title="Download Document">
+                <span class="material-symbols-outlined text-sm">download</span>
+              </a>
+              <button onclick="handleDeleteDocument(${d.doc_id})" class="p-1 rounded text-slate-400 hover:text-rose-400 hover:bg-rose-500/10" title="Delete Document">
+                <span class="material-symbols-outlined text-sm">delete</span>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="p-4 text-center text-rose-400">Could not load documents: ' + err.message + '</div>';
+      }
+    }
+
+    async function handleDrawerDocUpload(event) {
+      const file = event.target.files?.[0];
+      if (!file || !activeProfileEmpId) return;
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('doc_type', 'KYC_DOCUMENT');
+      formData.append('title', file.name);
+
+      try {
+        const token = localStorage.getItem('olf_auth_token') || '';
+        const res = await fetch('/api/v1/hr/employees/' + activeProfileEmpId + '/documents', {
+          method: 'POST',
+          headers: token ? { 'Authorization': 'Bearer ' + token } : {},
+          body: formData
+        });
+        const json = await res.json();
+        if (json.status !== 1) throw new Error(json.info || 'Could not upload document');
+        Admin.message('Document uploaded successfully');
+        loadEmployeeDocuments(activeProfileEmpId);
+      } catch (e) {
+        Admin.message(e.message, true);
+      }
+    }
+
+    async function handleDeleteDocument(docId) {
+      if (!confirm('Are you sure you want to delete this KYC document?')) return;
+      try {
+        await Admin.api('/api/v1/hr/documents/' + docId, { method: 'DELETE' });
+        Admin.message('Document deleted');
+        if (activeProfileEmpId) loadEmployeeDocuments(activeProfileEmpId);
+      } catch (e) {
+        Admin.message(e.message, true);
+      }
+    }
+
+    // Handle Create Employee with OCR attachments
+    async function handleCreateEmployee(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btn-save-employee');
+      btn.disabled = true;
+
+      const payload = {
+        name: document.getElementById('emp-name').value.trim(),
+        email: document.getElementById('emp-email').value.trim(),
+        phone: document.getElementById('emp-phone').value.trim(),
+        role_id: Number(document.getElementById('emp-role').value) || 4,
+        job_location: document.getElementById('emp-station').value.trim().toUpperCase() || 'NDLS',
+        work_shift: document.getElementById('emp-shift').value,
+        contract_type: document.getElementById('emp-contract').value,
+        date_of_joining: document.getElementById('emp-joining').value,
+        basic_salary: Number(document.getElementById('emp-basic').value) || 15000,
+        is_active: true,
+        bank_details: {
+          bankName: document.getElementById('emp-bank-name').value.trim(),
+          accountNumber: document.getElementById('emp-bank-account').value.trim(),
+          ifscCode: document.getElementById('emp-bank-ifsc').value.trim().toUpperCase(),
+          pan: document.getElementById('emp-pan').value.trim().toUpperCase(),
+          aadhaar: document.getElementById('emp-aadhaar').value.trim(),
+          address: document.getElementById('emp-address').value.trim()
+        },
+        attached_documents: stagedEmployeeDocs
+      };
+
+      try {
+        await Admin.api('/api/v1/hr/employees', {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        Admin.message('Employee created and mapped to role successfully!');
+        closeModal('modal-add-employee');
+        stagedEmployeeDocs = [];
+        renderStagedDocs();
+        document.getElementById('form-add-employee').reset();
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // Handle Punch Attendance Submit
+    async function handlePunchAttendanceSubmit(event) {
+      event.preventDefault();
+      const empId = Number(document.getElementById('punch-emp-id').value);
+      const type = document.getElementById('punch-type').value;
+      if (!empId) {
+        Admin.message('Select an employee to record punch', true);
+        return;
+      }
+      try {
+        await Admin.api('/api/v1/hr/attendance/punch', {
+          method: 'POST',
+          body: JSON.stringify({ emp_id: empId, type })
+        });
+        Admin.message('Attendance punch logged successfully');
+        closeModal('modal-punch-attendance');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // Handle Rollout Offer Submit
+    async function handleRolloutOfferSubmit(event) {
+      event.preventDefault();
+      const candId = Number(document.getElementById('offer-candidate').value);
+      const designation = document.getElementById('offer-designation').value.trim();
+      const station = document.getElementById('offer-station').value.trim().toUpperCase();
+      const joining = document.getElementById('offer-joining').value;
+      const basic = Number(document.getElementById('offer-basic').value) || 12000;
+      const hra = Number(document.getElementById('offer-hra').value) || 4800;
+      const allowances = Number(document.getElementById('offer-allowance').value) || 3200;
+      const offered_ctc = (basic + hra + allowances) * 12;
+
+      try {
+        await Admin.api('/api/v1/hr/offers', {
+          method: 'POST',
+          body: JSON.stringify({
+            candidate_id: candId || null,
+            designation,
+            station_code: station,
+            joining_date: joining,
+            basic_salary: basic,
+            hra,
+            allowances,
+            offered_ctc,
+            status: 'GENERATED'
+          })
+        });
+        Admin.message('Offer Letter issued successfully!');
+        closeModal('modal-rollout-offer');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // Handle Apply Leave Submit
+    async function handleApplyLeaveSubmit(event) {
+      event.preventDefault();
+      const empId = Number(document.getElementById('leave-emp-id').value);
+      const type = document.getElementById('leave-type').value;
+      const days = Number(document.getElementById('leave-days').value) || 1;
+      const fromDate = document.getElementById('leave-from-date').value;
+      const reason = document.getElementById('leave-reason').value.trim();
+
+      if (!empId) {
+        Admin.message('Select an employee', true);
+        return;
+      }
+
+      try {
+        await Admin.api('/api/v1/hr/leaves/requests', {
+          method: 'POST',
+          body: JSON.stringify({
+            emp_id: empId,
+            leave_type: type,
+            days,
+            from_date: fromDate,
+            reason
+          })
+        });
+        Admin.message('Leave application submitted for approval');
+        closeModal('modal-apply-leave');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // Leave Approval / Rejection
+    async function decideLeave(requestId, decision) {
+      const note = prompt('Optional decision note / remark for this leave request:');
+      try {
+        await Admin.api('/api/v1/hr/leaves/requests/' + requestId + '/decision', {
+          method: 'PUT',
+          body: JSON.stringify({ decision, note })
+        });
+        Admin.message('Leave request ' + decision.toLowerCase() + ' successfully');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // Handle Initiate Exit Submit
+    async function handleInitiateExitSubmit(event) {
+      event.preventDefault();
+      const empId = Number(document.getElementById('exit-emp-id').value);
+      const resignationDate = document.getElementById('exit-resignation-date').value;
+      const lastWorkingDay = document.getElementById('exit-last-day').value;
+      const reason = document.getElementById('exit-reason').value.trim();
+
+      try {
+        await Admin.api('/api/v1/hr/exit/initiate', {
+          method: 'POST',
+          body: JSON.stringify({
+            emp_id: empId,
+            resignation_date: resignationDate,
+            last_working_day: lastWorkingDay,
+            reason_for_leaving: reason,
+            fnf_status: 'PENDING'
+          })
+        });
+        Admin.message('Staff separation recorded and NOC checklists initiated');
+        closeModal('modal-initiate-exit');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // Toggle Department NOC
+    async function toggleNoc(exitId, deptField, currentVal) {
+      try {
+        await Admin.api('/api/v1/hr/exit/clearance/' + exitId, {
+          method: 'PUT',
+          body: JSON.stringify({ [deptField]: !currentVal })
+        });
+        Admin.message('Clearance status updated');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // 1-Click Hire from Offer / ATS
+    async function hireCandidateDirectly(candidateId) {
+      if (!confirm('Onboard this candidate as an internal employee now?')) return;
+      try {
+        await Admin.api('/api/v1/hr/candidates/' + candidateId + '/hire', { method: 'POST' });
+        Admin.message('Candidate onboarded as active employee with default leave quota!');
+        await refreshAllHrData();
+      } catch (err) {
+        Admin.message(err.message, true);
+      }
+    }
+
+    // Render Leave Requests Queue
+    function renderLeaveRequests(requests) {
+      const tbody = document.getElementById('leave-requests-tbody');
+      const countEl = document.getElementById('pending-leave-count');
+      if (!tbody) return;
+      const pending = requests.filter(r => r.status === 'PENDING');
+      if (countEl) countEl.textContent = pending.length + ' Pending';
+
+      if (pending.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-slate-500">No pending leave applications.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = pending.map(r => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-bold text-white">${r.employee_name || 'Staff (EMP-' + r.emp_id + ')'}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded font-bold text-[10px] bg-amber-500/10 text-amber-400 uppercase">${r.leave_type}</span></td>
+          <td class="p-3.5 text-slate-400 text-xs">${r.from_date ? new Date(r.from_date).toLocaleDateString('en-IN') : '--'}</td>
+          <td class="p-3.5 text-center font-bold text-white">${r.days}</td>
+          <td class="p-3.5 text-slate-400 text-xs">${r.reason || 'Personal leave'}</td>
+          <td class="p-3.5 text-center">
+            <div class="flex items-center justify-center gap-1.5">
+              <button onclick="decideLeave(${r.request_id}, 'APPROVED')" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all">
+                Approve
+              </button>
+              <button onclick="decideLeave(${r.request_id}, 'REJECTED')" class="px-2.5 py-1 rounded bg-rose-600/80 hover:bg-rose-500 text-white font-semibold text-xs transition-all">
+                Reject
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Jobs
+    function renderJobs(jobs) {
+      const tbody = document.getElementById('overview-jobs-tbody');
+      if (!tbody) return;
+      if (jobs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-500">No active requisitions found.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = jobs.map(j => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3 font-semibold text-white">${j.title}</td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded bg-[#FF6B00]/10 text-[#FF6B00] font-bold text-[10px]">${j.station_code || 'Not recorded'}</span></td>
+          <td class="p-3 text-slate-400">${j.department_name || 'Operations'}</td>
+          <td class="p-3 text-center font-bold text-white">${j.headcount}</td>
+          <td class="p-3 text-right font-medium text-emerald-400">&#8377;${Number(j.budgeted_ctc).toLocaleString('en-IN')}</td>
+          <td class="p-3 text-center">
+            <button onclick="switchTab('offers')" class="text-xs text-[#FF6B00] hover:underline font-semibold">View ATS (${j.applicants_count || 0})</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Candidates
+    function renderCandidates(cands) {
+      const tbody = document.getElementById('candidates-table-tbody');
+      const select = document.getElementById('offer-candidate');
+      if (select) {
+        select.innerHTML = '<option value="">Select candidate...</option>' + 
+          cands.map(c => `<option value="${c.candidate_id}">${Admin.esc(c.full_name)} (${Admin.esc(c.job_title || 'Role')})</option>`).join('');
+      }
+      if (!tbody) return;
+      if (cands.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-slate-500">No candidates currently in ATS pipeline.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = cands.map(c => {
+        let stageColor = 'bg-slate-500/10 text-slate-300';
+        if (c.stage === 'SELECTED') stageColor = 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+        if (String(c.stage||'').includes('INTERVIEW')) stageColor = 'bg-purple-500/10 text-purple-400 border border-purple-500/20';
+
+        return `
+          <tr class="hover:bg-white/5 transition-all">
+            <td class="p-3.5 font-bold text-white">${c.full_name}</td>
+            <td class="p-3.5 text-slate-300">${c.job_title || 'Platform Staff'} (${c.station_code || 'NDLS'})</td>
+            <td class="p-3.5 text-slate-400">${c.email}<br><span class="text-[10px] text-slate-500">${c.phone}</span></td>
+            <td class="p-3.5 text-slate-300">${c.current_company || 'Not recorded'} &bull; ${c.experience_years || 0} yrs</td>
+            <td class="p-3.5"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${stageColor}">${c.stage}</span></td>
+            <td class="p-3.5 text-[11px] text-slate-400">${c.interview_feedback?.notes || 'Cleared'}</td>
+            <td class="p-3.5 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                ${c.stage === 'SELECTED' 
+                  ? `<button onclick="hireCandidateDirectly(${c.candidate_id})" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-[11px] transition-all">Onboard &rarr;</button>`
+                  : `<button onclick="progressStage(${c.candidate_id})" class="px-2.5 py-1 rounded bg-[#FF6B00]/10 hover:bg-[#FF6B00] text-[#FF6B00] hover:text-white font-semibold text-[11px] transition-all">Select for Offer</button>`
+                }
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Render Offers
+    function renderOffers(offers) {
+      const tbody = document.getElementById('offers-table-tbody');
+      if (!tbody) return;
+      if (offers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="p-6 text-center text-slate-500">No offer letters generated yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = offers.map(o => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-bold text-white">${o.candidate_name || 'Candidate'}</td>
+          <td class="p-3.5 text-slate-300">${o.designation}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-bold text-[10px]">${o.station_code || 'NDLS'}</span></td>
+          <td class="p-3.5 text-right font-medium text-emerald-400">&#8377;${Number(o.offered_ctc).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-slate-400 text-xs">${new Date(o.joining_date).toLocaleDateString('en-IN')}</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400">${o.status}</span>
+            <div class="text-[9px] text-slate-500 font-mono mt-0.5">${o.acceptance_token || 'TOKEN'}</div>
+          </td>
+          <td class="p-3.5 text-center">
+            <a href="/api/v1/hr/offers/${o.offer_id}/pdf" target="_blank" class="px-3 py-1 bg-white/5 hover:bg-white/10 text-white rounded text-xs font-medium inline-flex items-center gap-1">
+              <span class="material-symbols-outlined text-xs">picture_as_pdf</span>
+              <span>PDF Offer</span>
+            </a>
+          </td>
+          <td class="p-3.5 text-center">
+            ${o.status === 'ACCEPTED' 
+              ? '<span class="text-emerald-400 font-bold text-[10px]">Onboarded</span>'
+              : `<button onclick="hireCandidateDirectly(${o.candidate_id})" class="px-2.5 py-1 rounded bg-[#FF6B00]/10 hover:bg-[#FF6B00] text-[#FF6B00] hover:text-white font-semibold text-[11px] transition-all">Convert &rarr;</button>`
+            }
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Attendance
+    function renderAttendance(att) {
+      const tbody = document.getElementById('attendance-today-tbody');
+      if (!tbody) return;
+      if (att.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-slate-500">No clock-ins recorded today. Use "Punch Clock" above to record duty.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = att.map(a => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-bold text-white">${a.employee_name || 'Staff'}</td>
+          <td class="p-3.5 text-slate-400">${a.role_name || 'Station Operations'}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-[#FF6B00]/10 text-[#FF6B00] font-bold text-[10px]">${a.job_location || 'Hub'}</span></td>
+          <td class="p-3.5 text-slate-300 text-xs">${a.work_shift || 'Morning'}</td>
+          <td class="p-3.5 font-mono text-emerald-400">${a.check_in || '--'}</td>
+          <td class="p-3.5 font-mono text-amber-400">${a.check_out || 'Active Duty'}</td>
+          <td class="p-3.5 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400">PRESENT</span></td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Leaves
+    function renderLeaves(leaves) {
+      const tbody = document.getElementById('leaves-table-tbody');
+      if (!tbody) return;
+      if (leaves.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-slate-500">No leave quota records found.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = leaves.map(l => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-bold text-white">${l.employee_name || 'Staff'}</td>
+          <td class="p-3.5 text-slate-400">${l.role_name || 'Staff'}</td>
+          <td class="p-3.5 text-center font-bold text-emerald-400">${l.casual_leave} days</td>
+          <td class="p-3.5 text-center font-bold text-blue-400">${l.earned_leave} days</td>
+          <td class="p-3.5 text-center font-bold text-amber-400">${l.sick_leave} days</td>
+          <td class="p-3.5 text-center font-bold text-purple-400">${l.short_leave} hrs</td>
+          <td class="p-3.5 text-center">
+            <button onclick="openApplyLeaveFor(${l.emp_id})" class="text-xs text-[#FF6B00] hover:underline font-semibold">Apply Leave</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openApplyLeaveFor(empId) {
+      const sel = document.getElementById('leave-emp-id');
+      if (sel) sel.value = empId;
+      openModal('modal-apply-leave');
+    }
+
+    // Render Payroll Batches
+    function renderPayrollBatches(batches) {
+      const tbody = document.getElementById('payroll-batches-tbody');
+      if (!tbody) return;
+      if (batches.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="p-6 text-center text-slate-500">No payroll batches executed yet. Click "Execute Monthly Payroll" above.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = batches.map(b => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-mono text-slate-400">#${b.batch_id}</td>
+          <td class="p-3.5 font-bold text-white">${b.month_year}</td>
+          <td class="p-3.5 text-center font-bold">${b.total_employees}</td>
+          <td class="p-3.5 text-right text-slate-300">&#8377;${Number(b.gross_disbursement).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-right text-rose-400">&#8377;${Number(b.total_deductions).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-right font-bold text-emerald-400">&#8377;${Number(b.net_disbursement).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-center">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${b.status}</span>
+          </td>
+          <td class="p-3.5 font-mono text-xs text-slate-400">${b.bank_batch_ref || '--'}</td>
+          <td class="p-3.5 text-center">
+            <a href="/api/v1/hr/payroll/bank-csv?batch_id=${b.batch_id}" class="text-xs text-emerald-400 hover:underline font-semibold">Bank CSV</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Payslips
+    function renderPayslips(slips) {
+      const tbody = document.getElementById('payslips-table-tbody');
+      if (!tbody) return;
+      if (slips.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" class="p-6 text-center text-slate-500">No payslips found for current payroll batches.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = slips.map(s => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-mono text-slate-400">#${s.payslip_id}</td>
+          <td class="p-3.5 font-bold text-white">${s.employee_name || 'Staff'}</td>
+          <td class="p-3.5 text-slate-300 text-xs">${s.month_year}</td>
+          <td class="p-3.5 text-right text-slate-300">&#8377;${Number(s.basic_earned).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-right text-slate-300">&#8377;${Number(s.hra_earned).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-right text-rose-400">&#8377;${Number(s.pf_deduction).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-right text-rose-400">&#8377;${(Number(s.esic_deduction) + Number(s.pt_deduction)).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-right font-bold text-emerald-400">&#8377;${Number(s.net_salary).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 font-mono text-xs text-slate-400">${s.utr_number || 'PENDING'}</td>
+          <td class="p-3.5 text-center">
+            <a href="/api/v1/hr/payslips/${s.payslip_id}/pdf" target="_blank" class="px-2.5 py-1 rounded bg-[#FF6B00]/10 hover:bg-[#FF6B00] text-[#FF6B00] hover:text-white font-semibold text-xs inline-flex items-center gap-1 transition-all">
+              <span class="material-symbols-outlined text-xs">receipt_long</span>
+              <span>PDF Payslip</span>
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Exits
+    function renderExits(exits) {
+      const tbody = document.getElementById('exit-table-tbody');
+      if (!tbody) return;
+      if (exits.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" class="p-6 text-center text-slate-500">No separation or relieving records logged.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = exits.map(e => `
+        <tr class="hover:bg-white/5 transition-all">
+          <td class="p-3.5 font-bold text-white">${e.employee_name || 'Staff'}</td>
+          <td class="p-3.5 text-slate-300">${e.role_name || 'Staff'} (${e.job_location || 'Hub'})</td>
+          <td class="p-3.5 text-slate-400 text-xs">${new Date(e.resignation_date).toLocaleDateString('en-IN')}</td>
+          <td class="p-3.5 text-slate-400 text-xs">${new Date(e.last_working_day).toLocaleDateString('en-IN')}</td>
+          <td class="p-3.5 text-center">
+            <button onclick="toggleNoc(${e.exit_id}, 'operations_clearance', ${!!e.operations_clearance})" class="px-2 py-0.5 rounded text-[10px] font-bold ${e.operations_clearance ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-500/10 text-slate-400'}">
+              ${e.operations_clearance ? 'PASSED' : 'PENDING'}
+            </button>
+          </td>
+          <td class="p-3.5 text-center">
+            <button onclick="toggleNoc(${e.exit_id}, 'it_clearance', ${!!e.it_clearance})" class="px-2 py-0.5 rounded text-[10px] font-bold ${e.it_clearance ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-500/10 text-slate-400'}">
+              ${e.it_clearance ? 'PASSED' : 'PENDING'}
+            </button>
+          </td>
+          <td class="p-3.5 text-center">
+            <button onclick="toggleNoc(${e.exit_id}, 'finance_clearance', ${!!e.finance_clearance})" class="px-2 py-0.5 rounded text-[10px] font-bold ${e.finance_clearance ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-500/10 text-slate-400'}">
+              ${e.finance_clearance ? 'CLEARED' : 'PENDING'}
+            </button>
+          </td>
+          <td class="p-3.5 text-right font-bold text-emerald-400">&#8377;${Number(e.fnf_gross_payable || 0).toLocaleString('en-IN')}</td>
+          <td class="p-3.5 text-center">
+            <a href="/api/v1/hr/exit/${e.exit_id}/relieving-pdf" target="_blank" class="px-2.5 py-1 rounded bg-blue-500/10 hover:bg-blue-600 text-blue-400 hover:text-white font-semibold text-xs inline-flex items-center gap-1 transition-all">
+              <span class="material-symbols-outlined text-xs">verified</span>
+              <span>Relieving PDF</span>
+            </a>
+          </td>
+          <td class="p-3.5 text-center">
+            <a href="/api/v1/hr/exit/${e.exit_id}/experience-pdf" target="_blank" class="px-2.5 py-1 rounded bg-purple-500/10 hover:bg-purple-600 text-purple-400 hover:text-white font-semibold text-xs inline-flex items-center gap-1 transition-all">
+              <span class="material-symbols-outlined text-xs">workspace_premium</span>
+              <span>Experience PDF</span>
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Set defaults on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const joinEl = document.getElementById('offer-joining');
+      if (joinEl) {
+        const d = new Date();
+        d.setDate(d.getDate() + 10);
+        joinEl.value = d.toISOString().split('T')[0];
+      }
+      const empJoinEl = document.getElementById('emp-joining');
+      if (empJoinEl) {
+        empJoinEl.value = new Date().toISOString().split('T')[0];
+      }
+      const leaveDateEl = document.getElementById('leave-from-date');
+      if (leaveDateEl) {
+        leaveDateEl.value = new Date().toISOString().split('T')[0];
+      }
+      const exitResign = document.getElementById('exit-resignation-date');
+      if (exitResign) {
+        exitResign.value = new Date().toISOString().split('T')[0];
+      }
+      const exitLast = document.getElementById('exit-last-day');
+      if (exitLast) {
+        const d = new Date();
+        d.setDate(d.getDate() + 30);
+        exitLast.value = d.toISOString().split('T')[0];
+      }
+
+      refreshAllHrData();
+    });
+  </script>
+
+<script src="/assets/admin-existing.js"></script>
+<script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
+    }
+    updateThemeToggleIcons();
+  }
+
+  function updateThemeToggleIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll('.theme-icon-topbar').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    document.querySelectorAll('.theme-label-topbar').forEach(el => {
+      el.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+    document.querySelectorAll('.theme-toggle-btn .material-symbols-outlined, .dark-icon').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    const oldIcon = document.getElementById('themeIcon');
+    if (oldIcon) oldIcon.innerText = isDark ? 'dark_mode' : 'light_mode';
+    const oldLabel = document.getElementById('themeLabel');
+    if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  // Auto-highlight active route on page load & apply theme
+  (function initSidebar() {
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    updateThemeToggleIcons();
+
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (['/roles','/access','/roles-access'].includes(p)) {
+      activate('nav-access');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/customers')) {
+      activate('nav-customers');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      if (search.includes('filter=active')) {
+        activate(null, 'sublink-orders-live', 'sub-orders', 'chev-orders');
+      } else {
+        activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+      }
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/irctc-logs')) {
+      activate(null, 'sublink-irctc-logs', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      const report = new URLSearchParams(window.location.search).get('report') || '';
+      let reportLink = 'sublink-reports';
+      if (p.startsWith('/complaint-reports') || ['complaints','ratings'].includes(report)) reportLink = 'sublink-complaint-reports';
+      else if (report === 'invoices') reportLink = 'sublink-report-invoices';
+      else if (['wallet-balances','wallet-ledger','vendor-settlements','settlement-exceptions','refunds'].includes(report)) reportLink = 'sublink-report-finance';
+      else if (['compliance','menu-margins','network-health'].includes(report)) reportLink = 'sublink-report-network';
+      else if (['customers','item-sales','payment-mix','channel-performance'].includes(report)) reportLink = 'sublink-report-sales';
+      else if (['employees','attendance','leave-balances','payroll','recruitment'].includes(report)) reportLink = 'sublink-report-people';
+      else if (report && report !== 'daily-sales') reportLink = 'sublink-report-operations';
+      activate(null, reportLink, 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  })();
+</script>
+</body>
+</html>
+
+
+

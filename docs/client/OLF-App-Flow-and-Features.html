@@ -1,0 +1,281 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OLF Stores Platform: How Everything Fits Together</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;max-width:900px;margin:32px auto;padding:0 20px;color:#1f2937;line-height:1.55}
+h1{color:#9a3412;border-bottom:3px solid #f97316;padding-bottom:8px}
+h2{color:#9a3412;margin-top:36px}
+h3{color:#374151;margin-top:24px}
+table{border-collapse:collapse;width:100%;margin:12px 0 20px}
+th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#fff7ed}
+tr:nth-child(even) td{background:#fafafa}
+hr{border:0;border-top:1px solid #e5e7eb;margin:28px 0}
+code{background:#f3f4f6;padding:1px 5px;border-radius:4px}
+@media print{body{margin:0}h2{page-break-after:avoid}}
+</style></head><body><h1>OLF Stores Platform: How Everything Fits Together</h1>
+<p>This note explains how the platform works, from a railway passenger placing an order to the restaurant getting paid. It also shows what is ready to try now and what is still to come.</p>
+<p><strong>How to read the status labels</strong></p>
+<ul>
+<li><strong>Ready to try:</strong> the feature is built and running. Please try it with your own data and tell us what you see.</li>
+<li><strong>Being finished:</strong> partly done. We are working on the rest.</li>
+<li><strong>Waiting for you or a partner:</strong> we need a decision or information before we can continue.</li>
+</ul>
+<hr />
+<h2>1. Who uses the platform</h2>
+<table>
+<thead>
+<tr>
+<th>Who</th>
+<th>What they do on the platform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OLF team</strong></td>
+<td>Set up stations, restaurants and menus. Follow orders, payments, invoices, complaints and staff.</td>
+</tr>
+<tr>
+<td><strong>Restaurant partners</strong></td>
+<td>Keep their menu and prices up to date, receive orders, and see their balance and invoices.</td>
+</tr>
+<tr>
+<td><strong>Passengers</strong></td>
+<td>Order food to be delivered at their train station, through the railway's catering service.</td>
+</tr>
+<tr>
+<td><strong>Railway (IRCTC)</strong></td>
+<td>Sends us orders and receives our confirmations, cancellations and updates.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. The journey of an order</h2>
+<h3>Step 1: Signing in</h3>
+<p>Each team member signs in with their own email and password. You see only the screens your role allows.</p>
+<h3>Step 2: Setting up stations and restaurants</h3>
+<ol>
+<li>Add the railway station, using its official code (for example NDLS).</li>
+<li>Add a restaurant at that station. Enter its name, vendor, address, licence and contact people.</li>
+<li>The restaurant appears in the <strong>Outlets</strong> list, sorted by name. To see the restaurants at one station, pick that station from the filter.</li>
+<li>Each restaurant is either active, inactive, waiting for approval, prepaid only, or deleted. Each has its own tab.</li>
+</ol>
+<h3>Step 3: Building the menu</h3>
+<ol>
+<li>Add dishes for each restaurant, with the price, GST rate and whether the dish is vegetarian.</li>
+<li>Dishes can be switched on or off. Prices can be changed in bulk, and dishes can be uploaded from a spreadsheet.</li>
+<li>Changes to the menu are sent to the railway, so what passengers see matches what the restaurant offers.</li>
+</ol>
+<h3>Step 4: Orders arrive</h3>
+<ul>
+<li><strong>From the railway:</strong> when a passenger orders, the order appears in our admin panel with the train, coach, berth, PNR and items.</li>
+<li><strong>Created by our team:</strong> an order can also be entered by hand in the panel. It is sent to the railway the same way, so both systems have it.</li>
+<li>The order waits as <strong>pending</strong> until the railway confirms it. Confirming or cancelling is done on the <strong>IRCTC Sync</strong> screen. That screen shows whether each request has been accepted, is waiting to go, or needs a look.</li>
+</ul>
+<h3>Step 5: The restaurant prepares and delivers</h3>
+<p>The order moves through each stage: confirmed, being prepared, ready, out for delivery, and then one of these:
+- <strong>Delivered:</strong> the restaurant is paid for the whole order.
+- <strong>Partly delivered:</strong> the restaurant is paid half of its cost.
+- <strong>Not delivered:</strong> a fixed penalty of ₹100 is charged to the restaurant.
+- <strong>Cancelled:</strong> nothing is charged or paid.</p>
+<p>Every change is recorded, with the person who made it and the time.</p>
+<h3>Step 6: The restaurant's wallet</h3>
+<p>Each restaurant has a wallet. It shows every amount between OLF and that restaurant, one line at a time.
+- <strong>Delivered prepaid orders</strong> add the restaurant's share to its wallet.
+- <strong>Cash-on-delivery orders</strong> record the amount OLF collects.
+- <strong>Top-ups</strong> are paid through Razorpay. Each payment is added only once.
+- <strong>Manual adjustments</strong> (a credit or debit, with a reason and a date) appear in the same list.
+- When a restaurant's balance drops to its set level, it is marked <strong>prepaid only</strong>, so it takes prepaid orders only.</p>
+<p><strong>A note on negative balances:</strong> around 460 restaurants show a negative balance. These came over from our previous system, and we have not changed them. We need to agree the correct starting balance for each one (see section 4).</p>
+<h3>Step 7: Invoices</h3>
+<ul>
+<li>An invoice covers a chosen period for one restaurant. It is built from that restaurant's wallet lines for the period.</li>
+<li>It shows the balance brought forward, the amount due for the period, GST at 18% on OLF's margin for completed orders, and the balance carried forward.</li>
+<li>Invoices are numbered in order for each financial year, for example <code>INV/2026-27/00001</code>.</li>
+<li>Once a payment has been recorded against an invoice, that invoice can no longer be rebuilt, so the record stays as it was.</li>
+<li>Payments are recorded against the invoice. It then shows as <strong>part paid</strong> or <strong>paid</strong>.</li>
+<li>An invoice can be emailed to the restaurant.</li>
+</ul>
+<h3>Step 8: Complaints</h3>
+<ol>
+<li>A complaint is raised about an order. It is linked to the <strong>restaurant</strong> (taken from the order) and to the passenger.</li>
+<li>It gets a reference number, for example <code>CMP-000123</code>, and a <strong>due date</strong>, 24 hours after it is raised.</li>
+<li>Someone is made responsible for it. It then moves from <strong>Open</strong> to <strong>In progress</strong> to <strong>Closed</strong>. Closing needs a note on how it was resolved.</li>
+<li>Every change is recorded in the complaint's history.</li>
+<li>Complaints past their due date are shown in a warning bar at the top of the complaints page. One click shows only those.</li>
+<li>Every six hours, an overdue complaint is recorded again as a reminder. Reminders can also be sent by email once an address is set.</li>
+</ol>
+<p>To see every complaint for one restaurant, filter the complaints by that restaurant.</p>
+<h3>Step 9: Staff (HR)</h3>
+<ul>
+<li><strong>People:</strong> employees, departments and roles, kept in one place.</li>
+<li><strong>Hiring:</strong> job openings, candidates, and offer letters that can be downloaded as PDFs.</li>
+<li><strong>Attendance:</strong> daily check-in and check-out.</li>
+<li><strong>Leave:</strong> leave balances, and requests that are approved or declined.</li>
+<li><strong>Salary:</strong> one salary run per month. It uses each person's salary details, attendance and approved leave. A month can only be run once.</li>
+<li><strong>Payslips</strong> are available as PDFs.</li>
+<li><strong>Leaving:</strong> clearances, and relieving and experience letters.</li>
+</ul>
+<h3>Step 10: The dashboard and reports</h3>
+<ul>
+<li>The dashboard shows today's orders, revenue and restaurant status at a glance.</li>
+<li>Reports cover wallets, invoices, payments, refunds and profit. Each report can be exported to a spreadsheet.</li>
+</ul>
+<hr />
+<h2>3. What is ready and what is still to come</h2>
+<h3>Ready to try</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What you can do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Signing in</td>
+<td>Sign in with your email and password. You see the screens your role allows.</td>
+</tr>
+<tr>
+<td>Restaurants</td>
+<td>See the list by name, filter by station, switch between the status tabs, and add a new restaurant.</td>
+</tr>
+<tr>
+<td>Stations</td>
+<td>See the list of stations, add a station by its code, and see the restaurants at each station.</td>
+</tr>
+<tr>
+<td>Menu</td>
+<td>Manage dishes and prices for each restaurant, switch dishes on and off, and change prices in bulk.</td>
+</tr>
+<tr>
+<td>Orders</td>
+<td>See the order list and each order's details, enter an order by hand, and update its status.</td>
+</tr>
+<tr>
+<td>Railway orders (IRCTC Sync)</td>
+<td>Send orders to the railway, confirm or cancel them, see the queue, and retry anything that failed.</td>
+</tr>
+<tr>
+<td>Wallets</td>
+<td>See each restaurant's wallet history, make manual adjustments, take top-ups through Razorpay, and see the prepaid flag.</td>
+</tr>
+<tr>
+<td>Invoices</td>
+<td>Create and rebuild invoices, number them in order, record payments, and email them to the restaurant.</td>
+</tr>
+<tr>
+<td>Complaints</td>
+<td>See the list, reference numbers, due dates, owners and history. Use the overdue bar and filter by restaurant.</td>
+</tr>
+<tr>
+<td>Staff</td>
+<td>Manage people, departments and roles, hiring, attendance, leave, the monthly salary run, payslips and leaving records.</td>
+</tr>
+<tr>
+<td>Reports</td>
+<td>Browse the report list and export reports.</td>
+</tr>
+</tbody>
+</table>
+<h3>Being finished</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What is left</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Railway sync screen</td>
+<td>Adding the payment details needed to confirm prepaid orders from this screen.</td>
+</tr>
+<tr>
+<td>Manual orders</td>
+<td>Orders with more than one dish, and delivery or packaging charges.</td>
+</tr>
+<tr>
+<td>Invoice detail</td>
+<td>Lining up the line-by-line detail in the CSV and PDF with the invoice totals.</td>
+</tr>
+<tr>
+<td>Salary</td>
+<td>Income tax deduction (TDS) is not calculated yet.</td>
+</tr>
+<tr>
+<td>Complaints</td>
+<td>Email reminders, once an address is set. Testing the complaints screen with your team.</td>
+</tr>
+</tbody>
+</table>
+<h3>Waiting for you or a partner</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What we need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Starting balances</td>
+<td>The correct starting balance for each restaurant with a negative balance.</td>
+</tr>
+<tr>
+<td>Negative balances</td>
+<td>Whether new restaurants should be stopped from going negative and marked prepaid. This would pause cash-on-delivery orders for affected restaurants until they top up.</td>
+</tr>
+<tr>
+<td>Railway feedback</td>
+<td>Feedback and complaints from the railway's system. We need the railway's documentation for this.</td>
+</tr>
+<tr>
+<td>Holding deliveries</td>
+<td>Stopping an order from being marked delivered while a complaint about it is open.</td>
+</tr>
+<tr>
+<td>Refunds</td>
+<td>Recording a refund against a complaint and adding it to the restaurant's wallet.</td>
+</tr>
+<tr>
+<td>Customers</td>
+<td>Adding, editing and exporting customer records.</td>
+</tr>
+<tr>
+<td>Zones</td>
+<td>Creating zones.</td>
+</tr>
+<tr>
+<td>Licence alerts</td>
+<td>Reminders before a restaurant's food licence expires.</td>
+</tr>
+<tr>
+<td>Offers and campaigns</td>
+<td>Discount codes and promotions.</td>
+</tr>
+<tr>
+<td>Activity log</td>
+<td>A record of changes to orders, restaurants and menus.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. What we need from you</h2>
+<ol>
+<li><strong>Starting balances:</strong> the correct starting balance for each restaurant that shows a negative balance. We will update each wallet and keep a record of the change.</li>
+<li><strong>Negative balances:</strong> should a new restaurant be stopped from going negative, and marked prepaid automatically?</li>
+<li><strong>Complaint time limit:</strong> is 24 hours right for every complaint, or should urgent ones have a shorter limit?</li>
+<li><strong>Reminder email:</strong> which address should receive the overdue complaint reminders?</li>
+<li><strong>Railway feedback:</strong> when can we receive the railway's documentation for feedback and complaints?</li>
+</ol>
+<hr />
+<h2>5. Using the API</h2>
+<p>For developers who connect other systems to the platform, the file <code>OLF-API-Collection.postman_collection.json</code> lists every request the platform accepts. To use it:</p>
+<ol>
+<li>Open the file in Postman.</li>
+<li>Set <code>baseUrl</code> to the platform's web address.</li>
+<li>Sign in first, using the <strong>Sign in</strong> request with your email and password. Postman keeps the session for the requests that follow.</li>
+<li>Add the header <code>x-olf-request: 1</code> to every request.</li>
+</ol>
+<p>The requests are grouped by area (restaurants, menu, orders, wallets, invoices, complaints, staff and more). Each request has a short description. The request bodies are left blank, so fill them in from the description.</p></body></html>

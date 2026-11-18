@@ -1,0 +1,1477 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OLF Stores - Train Schedules &amp; Routes Logistics</title>
+<!-- Tailwind CSS Script -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "error-container": "#93000a",
+              "primary-fixed": "#ffdbc8",
+              "on-surface": "#d9e3f6",
+              "on-background": "#d9e3f6",
+              "tertiary-container": "#b08cff",
+              "outline-variant": "#584235",
+              "surface-container-low": "#121c2a",
+              "surface-container-highest": "#2c3544",
+              "surface-container-high": "#212a39",
+              "on-secondary": "#003916",
+              "on-primary": "#522300",
+              "surface-tint": "#ffb68b",
+              "secondary": "#4be178",
+              "inverse-primary": "#994700",
+              "on-tertiary-fixed": "#24005a",
+              "on-tertiary-container": "#4600a0",
+              "error": "#ffb4ab",
+              "surface-container": "#16202e",
+              "secondary-container": "#00b956",
+              "on-primary-fixed-variant": "#753400",
+              "on-primary-fixed": "#321200",
+              "tertiary-fixed": "#eaddff",
+              "primary-fixed-dim": "#ffb68b",
+              "outline": "#a78b7c",
+              "surface-bright": "#303a49",
+              "surface": "#0a1421",
+              "secondary-fixed-dim": "#4be178",
+              "primary-container": "#ff7a00",
+              "on-error": "#690005",
+              "inverse-surface": "#d9e3f6",
+              "on-secondary-fixed-variant": "#005322",
+              "primary": "#ffb68b",
+              "surface-container-lowest": "#050f1c",
+              "on-tertiary": "#3e008f",
+              "on-error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#d2bcff",
+              "on-secondary-container": "#00411a",
+              "inverse-on-surface": "#27313f",
+              "on-secondary-fixed": "#00210a",
+              "on-primary-container": "#5c2800",
+              "secondary-fixed": "#6bfe91",
+              "tertiary": "#d2bcff",
+              "surface-dim": "#0a1421",
+              "surface-variant": "#2c3544",
+              "on-tertiary-fixed-variant": "#5900c7",
+              "background": "#0a1421",
+              "on-surface-variant": "#e0c0af"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "xs": "4px",
+              "xl": "32px",
+              "sm": "8px",
+              "md": "16px",
+              "container-margin": "24px",
+              "lg": "24px",
+              "base": "8px",
+              "gutter": "16px"
+            },
+            "fontFamily": {
+              "headline-lg-mobile": ["manrope"],
+              "display-lg": ["manrope"],
+              "body-md": ["inter"],
+              "body-lg": ["inter"],
+              "title-md": ["manrope"],
+              "data-mono": ["jetbrainsMono"],
+              "label-md": ["inter"],
+              "headline-lg": ["manrope"]
+            },
+            "fontSize": {
+              "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+              "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+              "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+              "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+              "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+              "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+              "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+              "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #07090D;
+            color: #d9e3f6;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for high density tables */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111318;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c3544;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF7A00;
+        }
+    </style>
+
+<style id="global-verdana-font">
+  *, *::before, *::after {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+  .material-symbols-outlined, [class*="material-symbols"] {
+    font-family: 'Material Symbols Outlined' !important;
+  }
+</style>
+
+
+
+
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
+
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\[\#111622\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\[\#111318\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\[\#171A20\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\[\#171F30\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\[\#0B0F17\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\[\#111622\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\[\#111318\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\[\#171A20\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\[\#171F30\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\[\#0B0F17\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\[\#FF7A00\],
+  html.light a.bg-\[\#FF7A00\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\[\#FF7A00\] *,
+  html.light a.bg-\[\#FF7A00\] * {
+    color: #FFFFFF !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+  html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+</style>
+
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/admin-runtime.css">
+<style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
+</head>
+<body data-admin-page="trains" class="bg-[#07090D] text-on-background min-h-screen flex antialiased selection:bg-primary-container selection:text-white">
+<!-- SideNavBar (Fixed 260px width per JSON config) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
+    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF — Command Center">
+      <span class="olf-wordmark">OLF</span>
+    </a>
+    <div class="flex items-center gap-1.5">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="Provider sync has not been verified">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
+        <span class="truncate">Dashboard</span>
+      </a>
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
+        <span class="truncate">Customers</span>
+      </a>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/outlets?filter=all" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5">
+      <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
+      </div>
+      <a href="/login" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+
+<!-- Main Content Shell (Offset by sidebar width) -->
+<div class="ml-[245px] flex-1 flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-30 w-full bg-surface-dim/90 backdrop-blur-md border-b border-white/5 px-6 h-16 flex justify-between items-center">
+<div class="flex items-center gap-6 flex-1">
+<div class="flex items-center gap-2 bg-[#171A20] border border-white/10 rounded-lg px-3 py-1.5 w-72 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary/60" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:outline-none text-xs text-white placeholder-primary/40 w-full" placeholder="Quick global search..." type="text"/>
+<span class="text-[10px] bg-surface-container-highest px-1.5 py-0.5 rounded text-primary/60 border border-white/5 font-mono">⌘K</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-secondary-container/10 border border-secondary-container/30 rounded-full">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="text-xs font-semibold text-secondary font-mono">Provider sync unverified</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md shadow-[#FF7A00]/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span>Create Order</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-[#171A20] border border-white/10 flex items-center justify-center text-primary/80 hover:text-white hover:bg-surface-container-high transition-all relative">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-[#FF7A00] rounded-full"></span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-[#171A20] border border-white/10 flex items-center justify-center text-primary/80 hover:text-white hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="sync">sync</span>
+</button>
+<div class="h-6 w-px bg-white/10 mx-1"></div>
+<div class="flex items-center gap-2">
+        <!-- Topbar Theme Switcher -->
+<button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
+  <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
+  <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
+</button>
+        
+        
+<div class="w-9 h-9 rounded-lg bg-cover bg-center border border-white/10 shadow-inner" data-alt="Professional corporate headshot of admin user in high-tech control center with warm orange and deep blue ambient lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3irCt_qo35QNG2IIwqAMGHoWGTekwZmzsQ1Ma_L8ZZoxYKnj_WfLnDkqTpWCeh3NAjHVbstqnMs_0Exr8XE0n6UX6vyV0oTizQ6-Rc8tq0_C2HSfFn_DjRLRn8JaCDlpkiwXp2-Iy632bX_XYR7xzWjsJZexUfg0T0HjAVuopZ6AKfW5dQHX6BKA2NHkGvG3HdZkyXUy6fYlMyAjKuMOsZZb1Ho5dUlYP512fpF4mODx_c3Dby-Zc0XKwiD3hIOYgXKQbXkKtDhJd')"></div>
+</div>
+</div>
+</header>
+<!-- Canvas Body -->
+<main class="flex-1 p-6 space-y-6 max-w-7xl mx-auto w-full">
+
+  <!-- Header Section -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-white/5 dark:border-white/5 light:border-slate-200">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-[#FF7A00]/15 flex items-center justify-center text-[#FF7A00]">
+          <span class="material-symbols-outlined text-[22px]">train</span>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight text-white dark:text-white light:text-slate-900">Railway Operations: Trains &amp; Routes</h1>
+          <p class="text-xs text-slate-400">Timetables, Halt duration SLAs (2m vs 10m), and IRCTC approved e-catering stations.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation Pills -->
+    <div class="flex items-center p-1 rounded-xl bg-white/5 dark:bg-white/5 light:bg-slate-100 border border-white/10 dark:border-white/10 light:border-slate-200 text-xs">
+      <button type="button" onclick="switchNavTab('trains')" id="tab-btn-trains" class="px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 bg-[#FF7A00] text-white shadow-xs">
+        <span class="material-symbols-outlined text-[16px]">directions_railway</span>
+        <span>Trains &amp; Routes</span>
+      </button>
+      <button type="button" onclick="switchNavTab('stations')" id="tab-btn-stations" class="px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-800">
+        <span class="material-symbols-outlined text-[16px]">hub</span>
+        <span>All Stations</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TAB 1: TRAINS & ROUTES -->
+  <!-- ========================================================================= -->
+  <div id="pane-trains" class="space-y-4">
+    <!-- Toolbar -->
+    <div class="bg-[#171A20] dark:bg-[#171A20] light:bg-white p-4 rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 flex flex-col md:flex-row items-center justify-between gap-3 shadow-sm">
+      <div class="relative flex-1 w-full md:max-w-md">
+        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+        <input type="text" id="train-search-input" oninput="onTrainSearch(this.value)" placeholder="Search train by number (e.g. 12952, 12148) or name..." class="w-full pl-9 pr-4 py-2 rounded-lg bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-200 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]" />
+      </div>
+
+      <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+        <span id="trains-count-badge" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 border border-white/10 dark:border-white/10 light:border-slate-200">Loading...</span>
+        <button type="button" onclick="loadTrains(0)" class="p-2 rounded-lg bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors" title="Refresh">
+          <span class="material-symbols-outlined text-[16px]">refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Trains Table -->
+    <div class="bg-[#171A20] dark:bg-[#171A20] light:bg-white rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 overflow-hidden shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="border-b border-white/10 dark:border-white/10 light:border-slate-200 text-slate-400 font-semibold text-[11px] uppercase tracking-wide bg-white/[0.02] dark:bg-white/[0.02] light:bg-slate-50">
+              <th class="px-4 py-3.5">Train Number</th>
+              <th class="px-4 py-3.5">Train Name</th>
+              <th class="px-4 py-3.5">Running Days</th>
+              <th class="px-4 py-3.5">Corridor Summary</th>
+              <th class="px-4 py-3.5 text-right">Route &amp; Halts SLA</th>
+            </tr>
+          </thead>
+          <tbody id="trains-tbody" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
+            <tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">Loading train catalogue...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="px-4 py-3 border-t border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between text-xs text-slate-400 bg-white/[0.01]">
+        <button type="button" id="trains-prev-btn" onclick="paginateTrains(-1)" class="px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed">Previous</button>
+        <span id="trains-page-label" class="font-mono">Page 1</span>
+        <button type="button" id="trains-next-btn" onclick="paginateTrains(1)" class="px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TAB 2: ALL STATIONS -->
+  <!-- ========================================================================= -->
+  <div id="pane-stations" class="hidden space-y-4">
+    <!-- Toolbar -->
+    <div class="bg-[#171A20] dark:bg-[#171A20] light:bg-white p-4 rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 flex flex-col md:flex-row items-center justify-between gap-3 shadow-sm">
+      <div class="relative flex-1 w-full md:max-w-md">
+        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+        <input type="text" id="station-search-input" oninput="onStationSearch(this.value)" placeholder="Search station by name or code (e.g. BRC, Vadodara, NDLS)..." class="w-full pl-9 pr-4 py-2 rounded-lg bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-200 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]" />
+      </div>
+
+      <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+        <span id="stations-count-badge" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 border border-white/10 dark:border-white/10 light:border-slate-200">Loading...</span>
+        <button type="button" onclick="loadStations(0)" class="p-2 rounded-lg bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors" title="Refresh">
+          <span class="material-symbols-outlined text-[16px]">refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stations Table -->
+    <div class="bg-[#171A20] dark:bg-[#171A20] light:bg-white rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 overflow-hidden shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="border-b border-white/10 dark:border-white/10 light:border-slate-200 text-slate-400 font-semibold text-[11px] uppercase tracking-wide bg-white/[0.02] dark:bg-white/[0.02] light:bg-slate-50">
+              <th class="px-4 py-3.5">Station Code</th>
+              <th class="px-4 py-3.5">Station Name</th>
+              <th class="px-4 py-3.5">e-Catering Approval</th>
+              <th class="px-4 py-3.5">Active OLF Kitchens</th>
+              <th class="px-4 py-3.5 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="stations-tbody" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
+            <tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">Loading stations...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="px-4 py-3 border-t border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between text-xs text-slate-400 bg-white/[0.01]">
+        <button type="button" id="stations-prev-btn" onclick="paginateStations(-1)" class="px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed">Previous</button>
+        <span id="stations-page-label" class="font-mono">Page 1</span>
+        <button type="button" id="stations-next-btn" onclick="paginateStations(1)" class="px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed">Next</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<!-- ========================================================================= -->
+<!-- SLIDE-OVER DRAWER: TRAIN ROUTE, HALT DURATIONS & DELIVERY ELIGIBILITY -->
+<!-- ========================================================================= -->
+<div id="routeDrawerBackdrop" onclick="closeRouteDrawer()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity"></div>
+<aside id="routeDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-xl bg-[#111318] dark:bg-[#111318] light:bg-white border-l border-white/10 dark:border-white/10 light:border-slate-200 z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
+  <!-- Drawer Header -->
+  <div class="p-5 border-b border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between bg-white/[0.02]">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#FF7A00]/20 flex items-center justify-center text-[#FF7A00]">
+        <span class="material-symbols-outlined text-[20px]">alt_route</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span id="drawer-train-num" class="px-2 py-0.5 rounded font-mono font-bold text-xs bg-[#FF7A00]/15 text-[#FF7A00]">12952</span>
+          <h3 id="drawer-train-name" class="font-bold text-sm text-white dark:text-white light:text-slate-900 truncate max-w-[240px]">Train Details</h3>
+        </div>
+        <div id="drawer-train-corridor" class="text-[11px] text-slate-400 mt-0.5 font-medium">Route stops &amp; halt timeline</div>
+      </div>
+    </div>
+    <button type="button" onclick="closeRouteDrawer()" class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-colors" title="Close Drawer">
+      <span class="material-symbols-outlined text-[18px]">close</span>
+    </button>
+  </div>
+
+  <!-- Route Metrics Pill Header -->
+  <div class="px-5 py-3 bg-white/[0.01] border-b border-white/5 dark:border-white/5 light:border-slate-100 flex items-center justify-between text-xs">
+    <div class="flex items-center gap-3 font-mono">
+      <span id="drawer-total-stops" class="text-slate-400">7 Stops</span>
+      <span class="text-slate-600">&bull;</span>
+      <span id="drawer-delivery-stops" class="text-emerald-500 font-semibold">5 Delivery Stops</span>
+    </div>
+    <span id="drawer-running-days" class="px-2 py-0.5 rounded text-[10px] bg-white/5 font-mono text-slate-300">Daily</span>
+  </div>
+
+  <!-- Station Stops Timeline List -->
+  <div id="drawer-stops-container" class="flex-1 overflow-y-auto p-5 space-y-4">
+    <div class="text-center py-12 text-slate-400">Loading train stations &amp; halt times...</div>
+  </div>
+
+  <!-- Drawer Footer Actions -->
+  <div class="p-4 border-t border-white/10 dark:border-white/10 light:border-slate-200 bg-white/[0.02] flex items-center justify-between text-xs">
+    <span class="text-[11px] text-slate-400">⚡ 2m Halt: Door Handover &bull; 🟢 10m: Seat Delivery</span>
+    <button type="button" onclick="closeRouteDrawer()" class="px-4 py-2 rounded-lg bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white font-semibold transition-all">Done</button>
+  </div>
+</aside>
+
+<!-- JAVASCRIPT CONTROLLER LOGIC -->
+<script>
+  let currentNavTab = 'trains';
+  let trainsPage = 0;
+  let trainsSearch = '';
+  let trainsSearchTimeout = null;
+
+  let stationsPage = 0;
+  let stationsSearch = '';
+  let stationsSearchTimeout = null;
+
+  // 1. Tab Switcher
+  function switchNavTab(tab) {
+    currentNavTab = tab;
+    const paneTrains = document.getElementById('pane-trains');
+    const paneStations = document.getElementById('pane-stations');
+    const btnTrains = document.getElementById('tab-btn-trains');
+    const btnStations = document.getElementById('tab-btn-stations');
+
+    if (tab === 'trains') {
+      paneTrains.classList.remove('hidden');
+      paneStations.classList.add('hidden');
+      btnTrains.className = 'px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 bg-[#FF7A00] text-white shadow-xs';
+      btnStations.className = 'px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-800';
+      loadTrains(0);
+      try { window.history.pushState(null, '', '/trains'); } catch(e){}
+    } else {
+      paneTrains.classList.add('hidden');
+      paneStations.classList.remove('hidden');
+      btnStations.className = 'px-4 py-2 rounded-lg font-bold transition-all flex items-center gap-2 bg-[#FF7A00] text-white shadow-xs';
+      btnTrains.className = 'px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-800';
+      loadStations(0);
+      try { window.history.pushState(null, '', '/stations'); } catch(e){}
+    }
+  }
+
+  // 2. Load Trains Catalogue
+  async function loadTrains(page = 0) {
+    trainsPage = page;
+    const tbody = document.getElementById('trains-tbody');
+    const badge = document.getElementById('trains-count-badge');
+    const prevBtn = document.getElementById('trains-prev-btn');
+    const pageLabel = document.getElementById('trains-page-label');
+
+    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">Loading trains...</td></tr>';
+
+    try {
+      let url = '/api/v1/trains?limit=25&page=' + trainsPage;
+      if (trainsSearch) url += '&search=' + encodeURIComponent(trainsSearch);
+
+      const res = await fetch(url);
+      const json = await res.json();
+      const rows = (json.data && json.data.rows) || [];
+      const total = (json.data && json.data.rowCount) || rows.length;
+
+      badge.innerText = rows.length + ' trains shown';
+      pageLabel.innerText = 'Page ' + (trainsPage + 1);
+      prevBtn.disabled = trainsPage <= 0;
+
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">No trains found matching criteria.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = rows.map(t => {
+        const days = (t.running_days || 'Daily').split(',').map(d => d.trim().slice(0, 3).toUpperCase()).join(' ');
+        return `
+          <tr class="hover:bg-white/[0.02] dark:hover:bg-white/[0.02] light:hover:bg-slate-50 transition-colors">
+            <td class="px-4 py-3.5 font-mono font-bold text-[#FF7A00]">
+              <span class="px-2 py-0.5 rounded bg-[#FF7A00]/10 border border-[#FF7A00]/20">#${t.train_number}</span>
+            </td>
+            <td class="px-4 py-3.5">
+              <div class="font-bold text-white dark:text-white light:text-slate-900">${t.train_name || 'Express'}</div>
+              <div class="text-[10px] text-slate-400">ID: ${t.train_id}</div>
+            </td>
+            <td class="px-4 py-3.5">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-white/5 border border-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 whitespace-nowrap">${days || 'Daily'}</span>
+            </td>
+            <td class="px-4 py-3.5">
+              <div class="font-mono text-[11px] text-slate-300 dark:text-slate-300 light:text-slate-700 truncate max-w-xs" title="Major station stops on timetable">
+                ${getCorridorPreview(t.train_number)}
+              </div>
+            </td>
+            <td class="px-4 py-3.5 text-right">
+              <button type="button" onclick="openRouteDrawer('${t.train_number}', '${escapeJs(t.train_name)}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#FF7A00]/15 hover:bg-[#FF7A00]/25 text-[#FF7A00] border border-[#FF7A00]/30 transition-all hover:scale-[1.02] cursor-pointer">
+                <span class="material-symbols-outlined text-[15px]">alt_route</span>
+                <span>View Route &amp; Halts</span>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    } catch (e) {
+      tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-rose-400">Failed to load trains: ' + e.message + '</td></tr>';
+    }
+  }
+
+  function paginateTrains(delta) {
+    const nextPage = Math.max(0, trainsPage + delta);
+    loadTrains(nextPage);
+  }
+
+  function onTrainSearch(val) {
+    if (trainsSearchTimeout) clearTimeout(trainsSearchTimeout);
+    trainsSearchTimeout = setTimeout(() => {
+      trainsSearch = val.trim();
+      loadTrains(0);
+    }, 300);
+  }
+
+  // 3. Load Stations
+  async function loadStations(page = 0) {
+    stationsPage = page;
+    const tbody = document.getElementById('stations-tbody');
+    const badge = document.getElementById('stations-count-badge');
+    const prevBtn = document.getElementById('stations-prev-btn');
+    const pageLabel = document.getElementById('stations-page-label');
+
+    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">Loading stations...</td></tr>';
+
+    try {
+      let url = '/api/v1/stations?limit=25&page=' + stationsPage;
+      if (stationsSearch) url += '&station_name=' + encodeURIComponent(stationsSearch);
+
+      const res = await fetch(url);
+      const json = await res.json();
+      const rows = (json.data && json.data.rows) || [];
+
+      badge.innerText = rows.length + ' stations shown';
+      pageLabel.innerText = 'Page ' + (stationsPage + 1);
+      prevBtn.disabled = stationsPage <= 0;
+
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-slate-400">No stations found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = rows.map(s => {
+        const outletCount = Number(s.active_outlets || s.total_outlets || s.outlet_count || 0);
+        return `
+          <tr class="hover:bg-white/[0.02] dark:hover:bg-white/[0.02] light:hover:bg-slate-50 transition-colors">
+            <td class="px-4 py-3.5 font-mono font-bold text-amber-500">
+              <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">${s.station_code || '---'}</span>
+            </td>
+            <td class="px-4 py-3.5">
+              <div class="font-bold text-white dark:text-white light:text-slate-900">${s.station_name || 'Railway Station'}</div>
+              <div class="text-[10px] text-slate-400">ID: ${s.station_id}</div>
+            </td>
+            <td class="px-4 py-3.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                IRCTC Approved Catering Hub
+              </span>
+            </td>
+            <td class="px-4 py-3.5">
+              <a href="/outlets?station=${s.station_code}" class="inline-flex items-center gap-1.5 font-semibold text-xs text-[#FF7A00] hover:underline" title="View partner restaurants at ${s.station_name}">
+                <span>${outletCount} Active Kitchens</span>
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </a>
+            </td>
+            <td class="px-4 py-3.5 text-right">
+              <a href="/outlets?station=${s.station_code}" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all">
+                View Outlets
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    } catch (e) {
+      tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-rose-400">Failed to load stations: ' + e.message + '</td></tr>';
+    }
+  }
+
+  function paginateStations(delta) {
+    const nextPage = Math.max(0, stationsPage + delta);
+    loadStations(nextPage);
+  }
+
+  function onStationSearch(val) {
+    if (stationsSearchTimeout) clearTimeout(stationsSearchTimeout);
+    stationsSearchTimeout = setTimeout(() => {
+      stationsSearch = val.trim();
+      loadStations(0);
+    }, 300);
+  }
+
+  // 4. Slide-over Route Drawer
+  async function openRouteDrawer(trainNumber, trainName) {
+    const drawer = document.getElementById('routeDrawer');
+    const backdrop = document.getElementById('routeDrawerBackdrop');
+    const container = document.getElementById('drawer-stops-container');
+
+    document.getElementById('drawer-train-num').innerText = trainNumber;
+    document.getElementById('drawer-train-name').innerText = trainName;
+    document.getElementById('drawer-train-name').title = trainName;
+
+    drawer.classList.remove('translate-x-full');
+    backdrop.classList.remove('hidden');
+
+    container.innerHTML = '<div class="text-center py-16 text-slate-400 space-y-2"><div class="w-6 h-6 border-2 border-[#FF7A00] border-t-transparent rounded-full animate-spin mx-auto"></div><p>Fetching train timetable &amp; halt durations...</p></div>';
+
+    try {
+      const res = await fetch('/api/v1/trains/' + trainNumber + '/route');
+      const json = await res.json();
+      if (!res.ok || json.status !== 1) throw new Error(json.info || 'Could not fetch route');
+
+      const data = json.data;
+      document.getElementById('drawer-train-corridor').innerText = data.route_summary || 'Corridor Timeline';
+      document.getElementById('drawer-total-stops').innerText = data.total_stations + ' Stops';
+      document.getElementById('drawer-delivery-stops').innerText = data.total_delivery_stops + ' Delivery Stops';
+      document.getElementById('drawer-running-days').innerText = data.running_days || 'Daily';
+
+      const stations = data.stations || [];
+      if (!stations.length) {
+        container.innerHTML = '<div class="text-center py-12 text-slate-400">No station stops found for this train.</div>';
+        return;
+      }
+
+      container.innerHTML = stations.map((s, idx) => {
+        const halt = Number(s.halt_minutes || 0);
+        let haltBadge = '';
+        if (s.is_origin) {
+          haltBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">ORIGIN TERMINAL</span>';
+        } else if (s.is_destination) {
+          haltBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">FINAL DESTINATION</span>';
+        } else if (halt <= 2) {
+          haltBadge = '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-500 border border-amber-500/30 font-mono">⚡ 2m Halt &bull; Door Delivery</span>';
+        } else if (halt <= 5) {
+          haltBadge = '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 font-mono">⏱️ ' + halt + 'm Halt &bull; Standard</span>';
+        } else {
+          haltBadge = '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono">🟢 ' + halt + 'm Halt &bull; Seat Delivery</span>';
+        }
+
+        const outletCount = Number(s.active_outlets_count || 0);
+        const outletNames = (s.outlets && s.outlets.length > 0) ? s.outlets.slice(0, 2).join(', ') + (s.outlets.length > 2 ? ' +more' : '') : '';
+
+        const deliveryPill = s.delivery_available
+          ? `<div class="mt-1 flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <span>Delivery Available ${outletCount > 0 ? '&bull; ' + outletCount + ' OLF Kitchens' + (outletNames ? ' (' + outletNames + ')' : '') : '&bull; Authorized Hub'}</span>
+            </div>`
+          : `<div class="mt-1 flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-600 shrink-0"></span>
+              <span>Technical / Passing Stop &bull; No delivery</span>
+            </div>`;
+
+        return `
+          <div class="relative pl-7 pb-4 ${idx !== stations.length - 1 ? 'border-l-2 border-white/10 dark:border-white/10 light:border-slate-200' : ''}">
+            <!-- Circle bullet -->
+            <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full ${s.delivery_available ? 'bg-[#FF7A00] text-white' : 'bg-slate-700 text-slate-300'} text-[10px] font-bold font-mono flex items-center justify-center shadow-xs">
+              ${s.seq}
+            </div>
+
+            <!-- Content Card -->
+            <div class="p-3.5 rounded-xl bg-white/5 dark:bg-white/5 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-200 space-y-1.5">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="font-bold text-white dark:text-white light:text-slate-900 text-xs">${s.station_name}</span>
+                  <span class="font-mono font-bold text-amber-500 text-xs ml-1">(${s.station_code})</span>
+                </div>
+                ${haltBadge}
+              </div>
+
+              <div class="flex items-center gap-3 text-xs font-mono text-slate-300 dark:text-slate-300 light:text-slate-700">
+                <span>Arr: <strong class="text-white dark:text-white light:text-slate-900">${s.arrival}</strong></span>
+                <span class="text-slate-500">&rarr;</span>
+                <span>Dep: <strong class="text-white dark:text-white light:text-slate-900">${s.departure}</strong></span>
+              </div>
+
+              ${deliveryPill}
+            </div>
+          </div>
+        `;
+      }).join('');
+    } catch (e) {
+      container.innerHTML = '<div class="text-center py-12 text-rose-400">Failed to load route: ' + e.message + '</div>';
+    }
+  }
+
+  function closeRouteDrawer() {
+    const drawer = document.getElementById('routeDrawer');
+    const backdrop = document.getElementById('routeDrawerBackdrop');
+    if (drawer) drawer.classList.add('translate-x-full');
+    if (backdrop) backdrop.classList.add('hidden');
+  }
+
+  function getCorridorPreview(num) {
+    const map = {
+      '12952': 'MMCT ──► ST ──► BRC ──► RTM ──► KOTA ──► NDLS',
+      '12951': 'NDLS ──► KOTA ──► RTM ──► BRC ──► ST ──► MMCT',
+      '12954': 'NZM ──► MTJ ──► KOTA ──► BRC ──► ST ──► MMCT',
+      '12148': 'KOP ──► MRJ ──► PUNE ──► BSL ──► ET ──► HWH',
+      '12174': 'LTT ──► KYN ──► BSL ──► BPL ──► CNB ──► PBH',
+      '12622': 'NDLS ──► AGC ──► VGLJ ──► NGP ──► BZA ──► MAS',
+      '05558': 'LTT ──► KYN ──► BSL ──► ET ──► DDU ──► RXL',
+      '01450': 'DNR ──► DDU ──► PRYJ ──► BSL ──► PUNE'
+    };
+    return map[String(num).trim()] || 'Major Junction Corridors &bull; Approved Stops';
+  }
+
+  function escapeJs(str) {
+    return String(str || '').replace(/'/g, "\\'");
+  }
+
+  // Initial tab loading based on current path
+  document.addEventListener('DOMContentLoaded', () => {
+    const pathname = window.location.pathname.toLowerCase();
+    if (pathname.includes('/stations')) {
+      switchNavTab('stations');
+    } else {
+      switchNavTab('trains');
+    }
+  });
+</script>
+<script src="/assets/admin-core.js"></script><script src="/assets/admin-pages.js"></script><script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
+    }
+    updateThemeToggleIcons();
+  }
+
+  function updateThemeToggleIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll('.theme-icon-topbar').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    document.querySelectorAll('.theme-label-topbar').forEach(el => {
+      el.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+    document.querySelectorAll('.theme-toggle-btn .material-symbols-outlined, .dark-icon').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    const oldIcon = document.getElementById('themeIcon');
+    if (oldIcon) oldIcon.innerText = isDark ? 'dark_mode' : 'light_mode';
+    const oldLabel = document.getElementById('themeLabel');
+    if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  // Auto-highlight active route on page load & apply theme
+  (function initSidebar() {
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    updateThemeToggleIcons();
+
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (['/roles','/access','/roles-access'].includes(p)) {
+      activate('nav-access');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/customers')) {
+      activate('nav-customers');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      if (search.includes('filter=active')) {
+        activate(null, 'sublink-orders-live', 'sub-orders', 'chev-orders');
+      } else {
+        activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+      }
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/irctc-logs')) {
+      activate(null, 'sublink-irctc-logs', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      const report = new URLSearchParams(window.location.search).get('report') || '';
+      let reportLink = 'sublink-reports';
+      if (p.startsWith('/complaint-reports') || ['complaints','ratings'].includes(report)) reportLink = 'sublink-complaint-reports';
+      else if (report === 'invoices') reportLink = 'sublink-report-invoices';
+      else if (['wallet-balances','wallet-ledger','vendor-settlements','settlement-exceptions','refunds'].includes(report)) reportLink = 'sublink-report-finance';
+      else if (['compliance','menu-margins','network-health'].includes(report)) reportLink = 'sublink-report-network';
+      else if (['customers','item-sales','payment-mix','channel-performance'].includes(report)) reportLink = 'sublink-report-sales';
+      else if (['employees','attendance','leave-balances','payroll','recruitment'].includes(report)) reportLink = 'sublink-report-people';
+      else if (report && report !== 'daily-sales') reportLink = 'sublink-report-operations';
+      activate(null, reportLink, 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  })();
+</script></body></html>
+
+

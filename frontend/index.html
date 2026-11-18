@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icon.png?v=3" />
+    <meta name="theme-color" content="#EB8041" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OLF</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="module" crossorigin src="/assets/index-BhuWBBOU.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bm7dN8l4.css">
+  
+    <style id="global-verdana-font">
+      *, *::before, *::after {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      .material-symbols-outlined, [class*="material-symbols"] {
+        font-family: 'Material Symbols Outlined' !important;
+      }
+      body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, span:not(.material-symbols-outlined), label, td, th {
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+      }
+    </style>
+  
+  
+    <!-- UNIFIED SIDEBAR MASTER STYLES FOR ALL PAGES -->
+    <style id="global-unified-sidebar">
+      :root {
+        --sidebar-width: 245px !important;
+        --sidebar-width-icon: 4rem !important;
+        --sidebar: #FFFFFF !important;
+        --sidebar-foreground: #334155 !important;
+        --sidebar-border: #E2E8F0 !important;
+        --sidebar-accent: #FFF7ED !important;
+        --sidebar-accent-foreground: #C2410C !important;
+        --sidebar-ring: #FF7A00 !important;
+      }
+      .dark, html.dark {
+        --sidebar: #0B0F17 !important;
+        --sidebar-foreground: #94A3B8 !important;
+        --sidebar-border: rgba(255, 255, 255, 0.07) !important;
+        --sidebar-accent: rgba(255, 122, 0, 0.12) !important;
+        --sidebar-accent-foreground: #FFFFFF !important;
+        --sidebar-ring: #FF7A00 !important;
+      }
+      /* Sidebar Container */
+      [data-sidebar="sidebar"], [data-slot="sidebar"] {
+        width: 245px !important;
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+        transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease !important;
+      }
+      html.dark [data-sidebar="sidebar"], .dark [data-sidebar="sidebar"] {
+        background-color: #0B0F17 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+      }
+      html.light [data-sidebar="sidebar"], :not(.dark) [data-sidebar="sidebar"] {
+        background-color: #FFFFFF !important;
+        border-right: 1px solid #E2E8F0 !important;
+      }
+      /* Menu items */
+      [data-sidebar="menu-button"] {
+        border-radius: 8px !important;
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        transition: all 0.15s ease !important;
+      }
+      html.dark [data-sidebar="menu-button"] {
+        color: #94A3B8 !important;
+      }
+      html.dark [data-sidebar="menu-button"]:hover {
+        background-color: #141A26 !important;
+        color: #FFFFFF !important;
+      }
+      html.dark [data-sidebar="menu-button"][data-active="true"],
+      html.dark [data-sidebar="menu-button"].active {
+        background-color: rgba(255, 122, 0, 0.12) !important;
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+      }
+      html.dark [data-sidebar="menu-button"][data-active="true"] svg,
+      html.dark [data-sidebar="menu-button"].active svg {
+        color: #FF7A00 !important;
+      }
+
+      html.light [data-sidebar="menu-button"], :not(.dark) [data-sidebar="menu-button"] {
+        color: #334155 !important;
+      }
+      html.light [data-sidebar="menu-button"]:hover, :not(.dark) [data-sidebar="menu-button"]:hover {
+        background-color: #F8FAFC !important;
+        color: #0F172A !important;
+      }
+      html.light [data-sidebar="menu-button"][data-active="true"],
+      html.light [data-sidebar="menu-button"].active {
+        background-color: #FFF7ED !important;
+        color: #C2410C !important;
+        font-weight: 600 !important;
+      }
+      html.light [data-sidebar="menu-button"][data-active="true"] svg,
+      html.light [data-sidebar="menu-button"].active svg {
+        color: #EA580C !important;
+      }
+
+      /* Submenu */
+      [data-sidebar="menu-sub"] {
+        margin-left: 18px !important;
+        padding-left: 12px !important;
+      }
+      html.dark [data-sidebar="menu-sub"] {
+        border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+      }
+      html.light [data-sidebar="menu-sub"], :not(.dark) [data-sidebar="menu-sub"] {
+        border-left: 1px dashed #E2E8F0 !important;
+      }
+      [data-sidebar="menu-sub-button"] {
+        font-size: 11.5px !important;
+        border-radius: 6px !important;
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+      }
+      html.dark [data-sidebar="menu-sub-button"] {
+        color: #8899A6 !important;
+      }
+      html.dark [data-sidebar="menu-sub-button"]:hover {
+        background-color: #141A26 !important;
+        color: #FFFFFF !important;
+      }
+      html.dark [data-sidebar="menu-sub-button"][data-active="true"] {
+        background-color: rgba(255, 122, 0, 0.1) !important;
+        color: #FF7A00 !important;
+        font-weight: 600 !important;
+      }
+      html.light [data-sidebar="menu-sub-button"], :not(.dark) [data-sidebar="menu-sub-button"] {
+        color: #64748B !important;
+      }
+      html.light [data-sidebar="menu-sub-button"]:hover, :not(.dark) [data-sidebar="menu-sub-button"]:hover {
+        background-color: #F1F5F9 !important;
+        color: #0F172A !important;
+      }
+      html.light [data-sidebar="menu-sub-button"][data-active="true"] {
+        background-color: #FFF7ED !important;
+        color: #EA580C !important;
+        font-weight: 600 !important;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

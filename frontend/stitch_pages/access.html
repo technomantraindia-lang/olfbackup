@@ -1,0 +1,957 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OLF Stores - Roles &amp; Access</title>
+<script src="https://cdn.jsdelivr.net/npm/tailwindcss5-plugin"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "on-tertiary-fixed-variant": "#5900c7",
+              "surface-bright": "#303a49",
+              "on-secondary-fixed-variant": "#005322",
+              "on-secondary-fixed": "#00210a",
+              "primary-fixed-dim": "#ffb68b",
+              "tertiary-fixed-dim": "#d2bcff",
+              "inverse-on-surface": "#27313f",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#24005a",
+              "on-surface-variant": "#e0c0af",
+              "on-error": "#690005",
+              "inverse-surface": "#d9e3f6",
+              "surface-container": "#16202e",
+              "secondary-container": "#00b956",
+              "background": "#07090D",
+              "primary-fixed": "#ffdbc8",
+              "tertiary": "#d2bcff",
+              "secondary-fixed": "#6bfe91",
+              "on-primary-container": "#5c2800",
+              "on-background": "#d9e3f6",
+              "primary": "#FF7A00",
+              "outline": "#a78b7c",
+              "on-secondary": "#003916",
+              "surface-tint": "#ffb68b",
+              "surface": "#111318",
+              "surface-variant": "#2c3544",
+              "surface-container-high": "#212a39",
+              "on-primary-fixed-variant": "#753400",
+              "on-primary-fixed": "#321200",
+              "on-tertiary": "#3e008f",
+              "surface-container-low": "#111318",
+              "on-secondary-container": "#00411a",
+              "secondary": "#4be178",
+              "surface-dim": "#07090D",
+              "error-container": "#93000a",
+              "surface-container-lowest": "#050f1c",
+              "outline-variant": "#584235",
+              "surface-container-highest": "#2c3544",
+              "tertiary-container": "#b08cff",
+              "secondary-fixed-dim": "#4be178",
+              "primary-container": "#ff7a00",
+              "on-surface": "#d9e3f6",
+              "inverse-primary": "#994700",
+              "on-tertiary-container": "#4600a0",
+              "on-primary": "#522300",
+              "tertiary-fixed": "#eaddff",
+              "error": "#ffb4ab"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "gutter": "16px",
+              "lg": "24px",
+              "container-margin": "24px",
+              "xs": "4px",
+              "xl": "32px",
+              "sm": "8px",
+              "md": "16px",
+              "base": "8px"
+            },
+            "fontFamily": {
+              "headline-lg": ["Manrope", "sans-serif"],
+              "label-md": ["Inter", "sans-serif"],
+              "display-lg": ["Manrope", "sans-serif"],
+              "data-mono": ["JetBrains Mono", "monospace"],
+              "title-md": ["Manrope", "sans-serif"],
+              "body-lg": ["Inter", "sans-serif"],
+              "headline-lg-mobile": ["Manrope", "sans-serif"],
+              "body-md": ["Inter", "sans-serif"],
+              "sidebar": ["Verdana", "sans-serif"]
+            },
+            "fontSize": {
+              "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+              "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+              "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+              "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+              "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+              "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+              "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+              "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        background-color: #07090D;
+        color: #d9e3f6;
+        font-family: 'Inter', sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111318;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2c3544;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #FF7A00;
+      }
+    </style>
+
+<style id="global-verdana-font">
+  *, *::before, *::after {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+  .material-symbols-outlined, [class*="material-symbols"] {
+    font-family: 'Material Symbols Outlined' !important;
+  }
+</style>
+
+
+
+
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
+
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\[\#111622\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\[\#111318\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\[\#171A20\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\[\#171F30\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\[\#0B0F17\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\[\#111622\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\[\#111318\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\[\#171A20\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\[\#171F30\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\[\#0B0F17\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\[\#FF7A00\],
+  html.light a.bg-\[\#FF7A00\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\[\#FF7A00\] *,
+  html.light a.bg-\[\#FF7A00\] * {
+    color: #FFFFFF !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+  html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+</style>
+
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/admin-runtime.css">
+<link rel="stylesheet" href="/assets/access.css"/>
+<style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
+</head>
+<body data-admin-page="access" class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased selection:bg-primary selection:text-white">
+<!-- SIDEBAR (SideNavBar) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
+    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF — Command Center">
+      <span class="olf-wordmark">OLF</span>
+    </a>
+    <div class="flex items-center gap-1.5">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="Provider sync has not been verified">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
+        <span class="truncate">Dashboard</span>
+      </a>
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
+        <span class="truncate">Customers</span>
+      </a>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/outlets?filter=all" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5">
+      <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
+      </div>
+      <a href="/login" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+
+<button class="ac-overlay" data-action="toggle-nav" aria-label="Close navigation"></button><div class="ac-shell">
+<header class="ac-header"><div class="ac-buttons"><button class="ac-button ac-mobile-toggle" data-action="toggle-nav" aria-label="Open navigation"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button><a href="/">Workspace</a><span>/</span><strong>Roles &amp; Access</strong></div><button class="ac-button" onclick="toggleTheme()" aria-label="Toggle color theme"><span class="material-symbols-outlined" aria-hidden="true">contrast</span></button></header>
+<main class="ac-main"><section class="ac-intro"><div><div class="ac-eyebrow">THE RIGHT ACCESS FOR EVERY PERSON</div><h1>Roles &amp; Access</h1><p>Decide what each role can do, then assign the people and work it applies to.</p></div><div class="ac-buttons"><button id="new-role" class="ac-button ac-primary" data-action="new-role"><span class="material-symbols-outlined" aria-hidden="true">add</span>Create role</button><button id="new-account" class="ac-button ac-primary" data-action="new-account" hidden><span class="material-symbols-outlined" aria-hidden="true">person_add</span>Add account</button></div></section>
+<section class="ac-help-grid" aria-label="How access works"><article class="ac-help"><span class="ac-step">1</span><div><h2>Define the role</h2><p>Add its name and responsibilities. Choose which modules it can view or change.</p></div></article><article class="ac-help"><span class="ac-step">2</span><div><h2>Choose record visibility</h2><p>All company records, or only assigned work. Personal staff access uses a linked employee.</p></div></article><article class="ac-help"><span class="ac-step">3</span><div><h2>Assign the person</h2><p>Create their sign-in account, choose the role, and select their outlets or stations.</p></div></article></section>
+<div id="admin-message" role="status"></div><div class="ac-tabs" role="tablist" aria-label="Access settings"><button class="ac-tab" role="tab" data-tab="roles" aria-selected="true">Roles<span class="ac-badge" id="role-count">—</span></button><button class="ac-tab" role="tab" data-tab="accounts" aria-selected="false">Accounts &amp; assigned work<span class="ac-badge" id="account-count">—</span></button><button class="ac-tab" role="tab" data-tab="audit" aria-selected="false">Change history</button><button class="ac-tab" role="tab" data-tab="activity" aria-selected="false">Activity history</button></div>
+<div class="ac-toolbar"><input id="access-search" type="search" placeholder="Search roles, people or responsibilities…" aria-label="Search access settings"><span class="ac-muted" id="module-count"></span></div><section id="access-content" aria-live="polite"><div class="ac-empty">Loading roles and assigned work…</div></section><p class="ac-footer" id="access-security"></p></main></div>
+<dialog id="role-dialog" class="ac-dialog" aria-labelledby="role-dialog-title"><div class="ac-dialog-header"><div><div class="ac-eyebrow">ROLE &amp; RESPONSIBILITIES</div><h2 id="role-dialog-title">Create a role</h2><p>View allows reading. Add/Edit change records. Delete, downloads and approvals are separate.</p></div><button class="ac-close" data-action="close" aria-label="Close role editor"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></div><form id="role-form"><div class="ac-dialog-body"><div class="ac-form-grid"><label class="ac-field">Role name<input id="role-name" required maxlength="100" placeholder="e.g. Outlet supervisor"></label><label class="ac-field">Short description<input id="role-description" maxlength="1000" placeholder="What this role is for"></label><label class="ac-field ac-full">Responsibilities<textarea id="role-responsibilities" rows="3" maxlength="5000" placeholder="Describe the work this person is responsible for, in plain language."></textarea><small>Responsibilities explain expectations. The checkboxes below enforce access.</small></label></div><div id="role-presets" class="ac-presets"><span>Start from a preset:</span><button class="ac-button" type="button" data-preset="empty">Empty role</button><button class="ac-button" type="button" data-preset="view">View only</button><button class="ac-button" type="button" data-preset="outlet">Outlet staff</button><button class="ac-button" type="button" data-preset="finance">Finance team</button><button class="ac-button" type="button" data-preset="hr">HR team</button><span>Presets change this draft only.</span></div><div class="ac-notice"><strong>Assigned work only</strong> means assigned outlets/stations for business records. Personal staff modules use the account’s linked employee. A station assignment includes every outlet at that station. Shared directories have no personal owner.</div><div id="role-visibility-tools" class="ac-visibility-tools"><label for="all-visibility">Set visibility on all supported modules</label><select id="all-visibility"><option value="assigned">Assigned work / their staff record</option><option value="all">All company records</option></select></div><div id="permission-matrix" class="ac-matrix-wrap"></div></div><footer class="ac-dialog-footer"><span class="ac-muted" id="role-draft-summary"></span><div class="ac-buttons"><button type="button" class="ac-button" data-action="close">Cancel</button><button type="submit" id="save-role" class="ac-button ac-primary">Save role &amp; permissions</button></div></footer></form></dialog>
+<dialog id="account-dialog" class="ac-dialog ac-user-dialog" aria-labelledby="account-dialog-title"><div class="ac-dialog-header"><div><div class="ac-eyebrow">SIGN-IN ACCOUNT &amp; ASSIGNED WORK</div><h2 id="account-dialog-title">Add a sign-in account</h2><p>This account signs in with its own email and password.</p></div><button class="ac-close" data-action="close" aria-label="Close account editor"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></div><form id="account-form"><div class="ac-dialog-body"><div class="ac-form-grid"><label class="ac-field">First name<input id="account-first-name" required maxlength="100" autocomplete="off"></label><label class="ac-field">Last name <small>(optional)</small><input id="account-last-name" maxlength="100" autocomplete="off"></label><label class="ac-field">Sign-in email<input id="account-email" type="email" required maxlength="250" autocomplete="off"></label><label class="ac-field">Status<select id="account-status"><option value="1">Active — can sign in</option><option value="0">Inactive — sign-in blocked</option></select></label><label class="ac-field ac-full">Access role<select id="account-role" required></select></label></div><p class="ac-notice" id="account-role-summary"></p><p class="ac-muted" id="account-responsibilities"></p><label id="password-edit-switch" class="ac-checkbox"><input type="checkbox" id="change-password">Set a new password and sign out existing sessions</label><label class="ac-field" id="password-field">Password <small>(at least 12 characters; existing passwords are kept unless you change them)</small><div class="ac-password"><input id="account-password" type="password" minlength="12" maxlength="72" autocomplete="new-password"><button type="button" class="ac-button" data-action="password-show">Show</button><button type="button" class="ac-button" data-action="password-generate">Generate</button></div></label><h3 class="ac-section-title">Their own staff record</h3><label class="ac-field">Linked employee <small>(for personal attendance, leave and payslips)</small><select id="account-employee"></select></label><h3 class="ac-section-title">Assigned business work</h3><p class="ac-notice">Choose individual outlets for narrow access. <strong>Assigning a station includes all of its outlets.</strong> All-record permissions do not need assignments.</p><div class="ac-assignment-grid"><section class="ac-assignment-box"><label for="outlet-assignment-search">Individual outlets</label><input id="outlet-assignment-search" type="search" placeholder="Find outlet or station…"><div id="outlet-assignments" class="ac-checklist"></div></section><section class="ac-assignment-box"><label for="station-assignment-search">Stations — all outlets at each station</label><input id="station-assignment-search" type="search" placeholder="Find station…"><div id="station-assignments" class="ac-checklist"></div></section></div><p id="assignment-empty-note" class="ac-notice" hidden>No assignments are selected. Assigned-only modules will show no records until you add their work or link an employee.</p></div><footer class="ac-dialog-footer"><span class="ac-muted" id="assignment-count"></span><div class="ac-buttons"><button type="button" class="ac-button" data-action="close">Cancel</button><button type="submit" id="save-account" class="ac-button ac-primary">Save account &amp; access</button></div></footer></form></dialog>
+<dialog id="audit-dialog" class="ac-dialog ac-audit-dialog" aria-labelledby="audit-title"><div class="ac-dialog-header"><div><div class="ac-eyebrow">RECORDED ACCESS CHANGE</div><h2 id="audit-title">Change details</h2></div><button class="ac-close" data-action="close" aria-label="Close change details"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></div><div id="audit-detail-body" class="ac-dialog-body"></div></dialog>
+<script src="/assets/admin-core.js"></script><script src="/assets/access.js"></script>
+<script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
+    }
+    updateThemeToggleIcons();
+  }
+
+  function updateThemeToggleIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll('.theme-icon-topbar').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    document.querySelectorAll('.theme-label-topbar').forEach(el => {
+      el.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+    document.querySelectorAll('.theme-toggle-btn .material-symbols-outlined, .dark-icon').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    const oldIcon = document.getElementById('themeIcon');
+    if (oldIcon) oldIcon.innerText = isDark ? 'dark_mode' : 'light_mode';
+    const oldLabel = document.getElementById('themeLabel');
+    if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  // Auto-highlight active route on page load & apply theme
+  (function initSidebar() {
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    updateThemeToggleIcons();
+
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (['/roles','/access','/roles-access'].includes(p)) {
+      activate('nav-access');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/customers')) {
+      activate('nav-customers');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      if (search.includes('filter=active')) {
+        activate(null, 'sublink-orders-live', 'sub-orders', 'chev-orders');
+      } else {
+        activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+      }
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/irctc-logs')) {
+      activate(null, 'sublink-irctc-logs', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      const report = new URLSearchParams(window.location.search).get('report') || '';
+      let reportLink = 'sublink-reports';
+      if (p.startsWith('/complaint-reports') || ['complaints','ratings'].includes(report)) reportLink = 'sublink-complaint-reports';
+      else if (report === 'invoices') reportLink = 'sublink-report-invoices';
+      else if (['wallet-balances','wallet-ledger','vendor-settlements','settlement-exceptions','refunds'].includes(report)) reportLink = 'sublink-report-finance';
+      else if (['compliance','menu-margins','network-health'].includes(report)) reportLink = 'sublink-report-network';
+      else if (['customers','item-sales','payment-mix','channel-performance'].includes(report)) reportLink = 'sublink-report-sales';
+      else if (['employees','attendance','leave-balances','payroll','recruitment'].includes(report)) reportLink = 'sublink-report-people';
+      else if (report && report !== 'daily-sales') reportLink = 'sublink-report-operations';
+      activate(null, reportLink, 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  })();
+</script></body></html>
+
+
+

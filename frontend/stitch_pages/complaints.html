@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OLF Customer Grievance &amp; Quality Tower</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#d9e3f6",
+            "tertiary-fixed-dim": "#d2bcff",
+            "surface-bright": "#303a49",
+            "inverse-on-surface": "#27313f",
+            "surface-container-highest": "#2c3544",
+            "surface-container-high": "#212a39",
+            "primary-fixed-dim": "#ffb68b",
+            "outline-variant": "#584235",
+            "surface-container": "#16202e",
+            "on-surface": "#d9e3f6",
+            "on-secondary-fixed": "#00210a",
+            "surface-dim": "#0a1421",
+            "primary-fixed": "#ffdbc8",
+            "on-tertiary-container": "#4600a0",
+            "error": "#ffb4ab",
+            "background": "#0a1421",
+            "on-secondary-container": "#00411a",
+            "secondary-fixed": "#6bfe91",
+            "on-primary-container": "#5c2800",
+            "on-error": "#690005",
+            "tertiary-fixed": "#eaddff",
+            "primary-container": "#ff7a00",
+            "inverse-primary": "#994700",
+            "on-tertiary-fixed-variant": "#5900c7",
+            "on-primary-fixed": "#321200",
+            "secondary-container": "#00b956",
+            "on-error-container": "#ffdad6",
+            "on-surface-variant": "#e0c0af",
+            "surface-tint": "#ffb68b",
+            "outline": "#a78b7c",
+            "secondary": "#4be178",
+            "on-tertiary-fixed": "#24005a",
+            "tertiary-container": "#b08cff",
+            "tertiary": "#d2bcff",
+            "surface": "#0a1421",
+            "on-primary": "#522300",
+            "on-primary-fixed-variant": "#753400",
+            "on-tertiary": "#3e008f",
+            "surface-container-lowest": "#050f1c",
+            "surface-container-low": "#121c2a",
+            "on-secondary-fixed-variant": "#005322",
+            "inverse-surface": "#d9e3f6",
+            "secondary-fixed-dim": "#4be178",
+            "primary": "#ffb68b",
+            "surface-variant": "#2c3544",
+            "error-container": "#93000a",
+            "on-secondary": "#003916"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "16px",
+            "xl": "32px",
+            "sm": "8px",
+            "md": "16px",
+            "lg": "24px",
+            "container-margin": "24px",
+            "base": "8px",
+            "xs": "4px"
+          },
+          "fontFamily": {
+            "body-md": ["inter"],
+            "headline-lg-mobile": ["manrope"],
+            "body-lg": ["inter"],
+            "headline-lg": ["manrope"],
+            "data-mono": ["jetbrainsMono"],
+            "label-md": ["inter"],
+            "title-md": ["manrope"],
+            "display-lg": ["manrope"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+
+<style id="global-verdana-font">
+  *, *::before, *::after {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+  .material-symbols-outlined, [class*="material-symbols"] {
+    font-family: 'Material Symbols Outlined' !important;
+  }
+</style>
+
+
+
+
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
+
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\[\#111622\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\[\#111318\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\[\#171A20\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\[\#171F30\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\[\#0B0F17\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+    /* COMPLAINTS & DRAWER RULES */
+  html.dark #complaintDrawer > div:last-child,
+  html.dark #newComplaintModal > div:last-child {
+    background-color: #0B0F17 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.light #complaintDrawer > div:last-child,
+  html.light #newComplaintModal > div:last-child {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+  html.light #complaintDrawer input,
+  html.light #complaintDrawer select,
+  html.light #complaintDrawer textarea,
+  html.light #newComplaintModal input,
+  html.light #newComplaintModal select,
+  html.light #newComplaintModal textarea {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  .badge-status-open {
+    background-color: rgba(244, 63, 94, 0.15) !important;
+    border: 1px solid rgba(244, 63, 94, 0.35) !important;
+    color: #FB7185 !important;
+  }
+  html.light .badge-status-open {
+    background-color: #FFE4E6 !important;
+    border: 1px solid #FDA4AF !important;
+    color: #BE123C !important;
+    font-weight: 700 !important;
+  }
+  .badge-status-progress {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    border: 1px solid rgba(245, 158, 11, 0.35) !important;
+    color: #FBBF24 !important;
+  }
+  html.light .badge-status-progress {
+    background-color: #FEF3C7 !important;
+    border: 1px solid #FCD34D !important;
+    color: #B45309 !important;
+    font-weight: 700 !important;
+  }
+  .badge-status-resolved {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    color: #34D399 !important;
+  }
+  html.light .badge-status-resolved {
+    background-color: #D1FAE5 !important;
+    border: 1px solid #6EE7B7 !important;
+    color: #047857 !important;
+    font-weight: 700 !important;
+  }
+  .badge-status-overdue {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    border: 1px solid rgba(239, 68, 68, 0.5) !important;
+    color: #F87171 !important;
+  }
+  html.light .badge-status-overdue {
+    background-color: #FEE2E2 !important;
+    border: 1px solid #FCA5A5 !important;
+    color: #B91C1C !important;
+    font-weight: 800 !important;
+  }
+
+  /* HIGH CONTRAST OVERDUE SLA BANNER (WCAG AAA) */
+  #overdueAlertBanner {
+    background-color: rgba(239, 68, 68, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  }
+  #overdueAlertBanner strong,
+  #overdueAlertBanner #overdueBannerText {
+    color: #FEE2E2 !important;
+    font-weight: 700 !important;
+  }
+  #overdueAlertBanner span:not(.material-symbols-outlined) {
+    color: #FECACA !important;
+  }
+  #overdueAlertBanner .material-symbols-outlined {
+    color: #F87171 !important;
+  }
+  #overdueAlertBanner button {
+    background-color: #DC2626 !important;
+    color: #FFFFFF !important;
+  }
+
+  html.light #overdueAlertBanner {
+    background-color: #FEF2F2 !important; /* Soft Red-50 */
+    border: 1px solid #FCA5A5 !important; /* Red-300 */
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.08) !important;
+  }
+  html.light #overdueAlertBanner strong,
+  html.light #overdueAlertBanner #overdueBannerText {
+    color: #991B1B !important; /* Deep Crimson Red-800 (100% Crisp & High Contrast) */
+    font-weight: 800 !important;
+  }
+  html.light #overdueAlertBanner span:not(.material-symbols-outlined) {
+    color: #7F1D1D !important; /* Rich Dark Crimson Red-900 */
+    font-weight: 600 !important;
+  }
+  html.light #overdueAlertBanner .material-symbols-outlined {
+    color: #DC2626 !important;
+  }
+  html.light #overdueAlertBanner button {
+    background-color: #DC2626 !important;
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.3) !important;
+  }
+  html.light #overdueAlertBanner button * {
+    color: #FFFFFF !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\[\#111622\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\[\#111318\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\[\#171A20\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\[\#171F30\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\[\#0B0F17\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\[\#FF7A00\],
+  html.light a.bg-\[\#FF7A00\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\[\#FF7A00\] *,
+  html.light a.bg-\[\#FF7A00\] * {
+    color: #FFFFFF !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+  html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+</style>
+
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/admin-runtime.css">
+<style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
+</head>
+<body data-admin-page="complaints" class="bg-[#07090D] text-on-background font-body-md antialiased min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
+    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF — Command Center">
+      <span class="olf-wordmark">OLF</span>
+    </a>
+    <div class="flex items-center gap-1.5">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="Provider sync has not been verified">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
+        <span class="truncate">Dashboard</span>
+      </a>
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
+        <span class="truncate">Customers</span>
+      </a>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/outlets?filter=all" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span id="sidebar-complaints-badge" class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5">
+      <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
+      </div>
+      <a href="/login" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-[245px] flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-surface-dim/80 backdrop-blur-md border-b border-white/5 flex justify-between items-center h-16 px-lg">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md">
+<span>Operations</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-semibold">Customer Grievances</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search Bar -->
+<div class="relative w-72">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="w-full bg-[#111318] border border-white/10 rounded-lg pl-10 pr-4 py-1.5 text-body-md text-on-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20" placeholder="Search PNR, Ticket, Train..." type="text"/>
+</div>
+<!-- IRCTC Sync Status Badge -->
+<div class="flex items-center gap-2 bg-[#171A20] border border-white/10 px-3 py-1.5 rounded-lg">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-data-mono text-data-mono text-secondary">Provider sync unverified</span>
+</div>
+<!-- Notifications -->
+<button class="w-10 h-10 rounded-lg bg-[#111318] border border-white/10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<!-- Profile -->
+<div class="flex items-center gap-3 pl-2 border-l border-white/10">
+        <!-- Topbar Theme Switcher -->
+<button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
+  <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
+  <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
+</button>
+        
+        
+<div class="w-9 h-9 rounded-lg bg-surface-container-high border border-white/10 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of an operations manager wearing a crisp dark blazer in a high-tech control room with multiple glowing monitors displaying railway schedules and data charts in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwk4I_h4a1UaLEo_Vrzdt2CxhHcE-vNtyiZTsMxBcQo1cUgvJCxiEjY4LtZcNITvQepzKb7pJG22TQKXyp2y7qB5HgHs1qBS6gMWxfZshxY-rDlX-NfazDV2o01qH1PreyZsoXxZSove0YmfIxrLwmFyzroX56Gwu0L49iIxTgwQlbMs7wWGv2a4vf9x-ClU_nfqWHhalKZy79nmBs4rBdPA8cnadZKoJ9l7Wy08qPY8AIIdRYFpiHDqAVdPljPrMCT7kZSuGw_iGK"/>
+</div>
+<div class="hidden xl:block">
+<div class="font-body-md font-semibold text-on-background">Admin</div>
+<div class="font-label-md text-on-surface-variant">Tier-2 Escalations</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Dashboard Content -->
+<main class="flex-1 p-6 lg:p-8 overflow-y-auto space-y-6">
+
+  <!-- PAGE HEADER & ACTION CONTROLS -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
+    <div>
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white dark:text-white light:text-slate-900">
+          Customer Grievances &amp; Quality Tower
+        </h1>
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 select-none">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00] animate-pulse"></span>
+          <span>IRCTC SLA Tower</span>
+        </span>
+      </div>
+      <p class="text-xs text-slate-400 dark:text-slate-400 light:text-slate-500 mt-1">
+        Passenger grievances, food quality inspections, vendor penalty tracking, and 24-hour SLA resolution workflow.
+      </p>
+    </div>
+
+    <!-- Quick Actions Header Buttons -->
+    <div class="flex items-center gap-2.5 flex-wrap">
+      <!-- Live Sync Timer Pill -->
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-medium select-none" title="Live Auto-Sync active">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span class="font-semibold">Live Sync</span>
+        <span class="text-[10px] text-emerald-400/80 font-mono" id="liveSyncTimerDisplay">(30s)</span>
+      </div>
+
+      <!-- Refresh Button -->
+      <button onclick="fetchComplaintsData()" id="refreshBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 shadow-sm transition-all cursor-pointer" title="Refresh Grievances Data">
+        <span class="material-symbols-outlined text-[16px]" id="refreshIcon">refresh</span>
+        <span>Refresh</span>
+      </button>
+
+      <!-- Export CSV Button -->
+      <button onclick="exportComplaintsCsv()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 shadow-sm transition-all cursor-pointer" title="Export Current List to CSV">
+        <span class="material-symbols-outlined text-[16px]">download</span>
+        <span>Export CSV</span>
+      </button>
+
+      <!-- Log New Grievance Button -->
+      <button onclick="openNewComplaintModal()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-sm transition-all cursor-pointer">
+        <span class="material-symbols-outlined text-[16px]">add_circle</span>
+        <span>Log Grievance</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOP 5 KPI TELEMETRY CARDS -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+    <!-- Total Grievances -->
+    <div onclick="setStatusFilter('')" class="kpi-card p-4 rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-sm cursor-pointer hover:border-white/20 transition-all">
+      <div class="flex items-center justify-between text-slate-400 mb-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Grievances</span>
+        <span class="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
+          <span class="material-symbols-outlined text-[18px]">receipt_long</span>
+        </span>
+      </div>
+      <div class="text-2xl font-bold font-mono text-white dark:text-white light:text-slate-900" id="kpi-total">0</div>
+      <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+        <span>All logged tickets</span>
+        <span class="text-blue-400 font-medium">IRCTC &amp; OLF</span>
+      </div>
+    </div>
+
+    <!-- Open Grievances -->
+    <div onclick="setStatusFilter('0')" class="kpi-card p-4 rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-sm cursor-pointer hover:border-rose-500/40 transition-all">
+      <div class="flex items-center justify-between text-slate-400 mb-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-rose-500 dark:text-rose-400">Open Grievances</span>
+        <span class="p-1.5 rounded-lg bg-rose-500/10 text-rose-400">
+          <span class="material-symbols-outlined text-[18px]">pending_actions</span>
+        </span>
+      </div>
+      <div class="text-2xl font-bold font-mono text-rose-500 dark:text-rose-400" id="kpi-open">0</div>
+      <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+        <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span> Action required</span>
+        <span class="text-rose-500 font-bold">Unresolved</span>
+      </div>
+    </div>
+
+    <!-- In Investigation -->
+    <div onclick="setStatusFilter('1')" class="kpi-card p-4 rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-sm cursor-pointer hover:border-amber-500/40 transition-all">
+      <div class="flex items-center justify-between text-slate-400 mb-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-amber-500 dark:text-amber-400">In Investigation</span>
+        <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">
+          <span class="material-symbols-outlined text-[18px]">soup_kitchen</span>
+        </span>
+      </div>
+      <div class="text-2xl font-bold font-mono text-amber-500 dark:text-amber-400" id="kpi-progress">0</div>
+      <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+        <span>Vendor inquiry</span>
+        <span class="text-amber-400 font-medium">In Kitchen</span>
+      </div>
+    </div>
+
+    <!-- Overdue SLA -->
+    <div onclick="setStatusFilter('overdue')" class="kpi-card p-4 rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-sm cursor-pointer hover:border-red-500/40 transition-all">
+      <div class="flex items-center justify-between text-slate-400 mb-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-red-500 dark:text-red-400">SLA Overdue</span>
+        <span class="p-1.5 rounded-lg bg-red-500/10 text-red-400">
+          <span class="material-symbols-outlined text-[18px]">alarm_on</span>
+        </span>
+      </div>
+      <div class="text-2xl font-bold font-mono text-red-500 dark:text-red-400" id="kpi-overdue">0</div>
+      <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+        <span class="flex items-center gap-1 text-red-500 font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span> Urgent</span>
+        <span class="text-red-400 font-mono">&gt;24h breached</span>
+      </div>
+    </div>
+
+    <!-- Resolved / Closed -->
+    <div onclick="setStatusFilter('2')" class="kpi-card p-4 rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-sm cursor-pointer hover:border-emerald-500/40 transition-all col-span-2 sm:col-span-1">
+      <div class="flex items-center justify-between text-slate-400 mb-2">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-500 dark:text-emerald-400">Resolved / Closed</span>
+        <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
+          <span class="material-symbols-outlined text-[18px]">task_alt</span>
+        </span>
+      </div>
+      <div class="text-2xl font-bold font-mono text-emerald-500 dark:text-emerald-400" id="kpi-resolved">0</div>
+      <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+        <span>Settled complaints</span>
+        <span class="text-emerald-500 font-mono font-bold" id="kpi-rate">0% rate</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROL COCKPIT: STATUS FILTER PILLS & ADVANCED CONTROLS -->
+  <div class="p-4 rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-sm space-y-3.5">
+    
+    <!-- Row 1: Segmented Status Pills -->
+    <div class="flex items-center justify-between flex-wrap gap-2.5 pb-2 border-b border-white/5 dark:border-white/5 light:border-slate-100">
+      <div class="flex items-center gap-1.5 flex-wrap" id="statusFilterTabs">
+        <button onclick="setStatusFilter('')" id="tab-status-all" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 bg-[#FF7A00] text-white shadow-sm cursor-pointer">
+          <span>All Grievances</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-black/25 font-mono" id="cnt-tab-all">0</span>
+        </button>
+
+        <button onclick="setStatusFilter('0')" id="tab-status-0" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:bg-white/10 cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+          <span>Open</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/10 dark:bg-white/10 light:bg-slate-200 font-mono text-rose-500 dark:text-rose-400" id="cnt-tab-open">0</span>
+        </button>
+
+        <button onclick="setStatusFilter('1')" id="tab-status-1" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:bg-white/10 cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          <span>In Progress</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/10 dark:bg-white/10 light:bg-slate-200 font-mono text-amber-500 dark:text-amber-400" id="cnt-tab-progress">0</span>
+        </button>
+
+        <button onclick="setStatusFilter('2')" id="tab-status-2" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:bg-white/10 cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Resolved / Closed</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/10 dark:bg-white/10 light:bg-slate-200 font-mono text-emerald-500 dark:text-emerald-400" id="cnt-tab-closed">0</span>
+        </button>
+
+        <button onclick="setStatusFilter('overdue')" id="tab-status-overdue" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:bg-white/10 cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+          <span>SLA Overdue</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-red-500/20 text-red-500 dark:text-red-400 font-mono font-bold" id="cnt-tab-overdue">0</span>
+        </button>
+      </div>
+
+      <!-- Quick Summary on Right -->
+      <div class="text-xs text-slate-400 flex items-center gap-2">
+        <span class="hidden sm:inline">Showing:</span>
+        <span class="font-bold text-white dark:text-white light:text-slate-900 font-mono" id="showingCount">0</span>
+        <span>grievances</span>
+      </div>
+    </div>
+
+    <!-- Row 2: Search Input & Multi-Dimension Filter Dropdowns -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center">
+      <!-- Search Input -->
+      <div class="md:col-span-5 relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+          <span class="material-symbols-outlined text-[17px]">search</span>
+        </span>
+        <input type="text" id="complaintSearch" oninput="handleSearchInput(event)" placeholder="Search Ticket #, Order ID, Customer, Train, Station, Outlet..." class="w-full bg-[#111318] dark:bg-[#111318] light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-[#FF7A00] transition-colors" />
+      </div>
+
+      <!-- Category Dropdown -->
+      <div class="md:col-span-3">
+        <select id="filterCategory" onchange="handleFilterChange()" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] transition-colors">
+          <option value="">All Categories</option>
+          <option value="FOOD_QUALITY">Food Quality / Stale / Smell</option>
+          <option value="PACKAGING">Packaging &amp; Spillage</option>
+          <option value="DELIVERY_DELAY">Delivery Delay / Train Left</option>
+          <option value="QUALITY_FOOD">Quality Food / Compliments</option>
+          <option value="TASTE_APPRECIATION">Taste Appreciation</option>
+          <option value="BEHAVIOR">Staff / Delivery Boy Behavior</option>
+          <option value="OTHER">Other Issues</option>
+        </select>
+      </div>
+
+      <!-- Rating Dropdown -->
+      <div class="md:col-span-2">
+        <select id="filterRating" onchange="handleFilterChange()" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] transition-colors">
+          <option value="">All Ratings</option>
+          <option value="1">★ 1 Star (Critical)</option>
+          <option value="2">★ 2 Stars (Poor)</option>
+          <option value="3">★ 3 Stars (Average)</option>
+          <option value="4">★ 4 Stars (Good)</option>
+          <option value="5">★ 5 Stars (Praise)</option>
+        </select>
+      </div>
+
+      <!-- Sort & Reset Controls -->
+      <div class="md:col-span-2 flex items-center gap-1.5 justify-end">
+        <select id="filterSort" onchange="handleFilterChange()" class="bg-[#111318] dark:bg-[#111318] light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 rounded-lg px-2 py-1.5 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] transition-colors flex-1">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="rating_asc">Rating: Low to High</option>
+          <option value="rating_desc">Rating: High to Low</option>
+        </select>
+
+        <button onclick="resetAllFilters()" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-slate-100 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-colors cursor-pointer" title="Reset all filters">
+          <span class="material-symbols-outlined text-[17px]">restart_alt</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERDUE SLA BANNER (IF ANY) -->
+  <div id="overdueAlertBanner" class="hidden p-3.5 rounded-xl border border-red-500/30 bg-red-500/10 dark:bg-red-500/10 light:bg-red-50 text-red-900 dark:text-red-200 light:text-red-950 flex items-center justify-between gap-3 text-xs">
+    <div class="flex items-center gap-2.5">
+      <span class="material-symbols-outlined text-red-600 dark:text-red-400 text-[22px] shrink-0">warning</span>
+      <div>
+        <strong class="font-bold text-red-900 dark:text-red-200 light:text-red-950 text-xs sm:text-sm block" id="overdueBannerText">Attention: Urgent IRCTC Grievances Breaching 24h SLA</strong>
+        <span class="text-[11px] text-red-800 dark:text-red-300 light:text-red-900 block mt-0.5 font-medium">Penalties and IRCTC escalations apply to unaddressed complaints past due date.</span>
+      </div>
+    </div>
+    <button onclick="setStatusFilter('overdue')" class="px-3.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs shrink-0 transition-colors cursor-pointer shadow-sm">
+      View Overdue (<span id="overdueBannerCount">0</span>)
+    </button>
+  </div>
+
+  <!-- ENTERPRISE DATA TABLE -->
+  <div class="rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white shadow-lg overflow-hidden">
+    <!-- Table Header Info Bar -->
+    <div class="px-4 py-3 bg-[#111622] dark:bg-[#111622] light:bg-slate-50 border-b border-white/5 dark:border-white/5 light:border-slate-200 flex items-center justify-between text-xs">
+      <div class="flex items-center gap-2 font-bold text-white dark:text-white light:text-slate-900">
+        <span class="material-symbols-outlined text-[16px] text-[#FF7A00]">list_alt</span>
+        <span>Passenger Grievance Queue</span>
+      </div>
+      <div class="text-[11px] text-slate-400 flex items-center gap-3">
+        <span class="flex items-center gap-1 text-slate-400 dark:text-slate-400 light:text-slate-600">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> IRCTC 24-48h Resolution Guarantee
+        </span>
+      </div>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs border-collapse">
+        <thead>
+          <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-400 dark:text-slate-400 light:text-slate-600 uppercase tracking-wider">
+            <th class="py-3.5 px-4 min-w-[125px]">Ticket &amp; Source</th>
+            <th class="py-3.5 px-4 min-w-[160px]">Order &amp; Train</th>
+            <th class="py-3.5 px-4 min-w-[150px]">Outlet &amp; Vendor</th>
+            <th class="py-3.5 px-4 min-w-[260px]">Grievance &amp; Category</th>
+            <th class="py-3.5 px-4 min-w-[140px]">Passenger &amp; Rating</th>
+            <th class="py-3.5 px-4 min-w-[140px]">Status &amp; SLA</th>
+            <th class="py-3.5 px-4 min-w-[110px]">Assignee</th>
+            <th class="py-3.5 px-4 min-w-[110px] text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="complaintsTableBody" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
+          <tr>
+            <td colspan="8" class="text-center py-12 text-slate-400">
+              <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF7A00]"></div>
+              <p class="mt-2 text-xs">Loading grievances from database...</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table Footer / Pagination -->
+    <div class="p-4 border-t border-white/5 dark:border-white/5 light:border-slate-200 flex items-center justify-between text-xs text-slate-400">
+      <div>
+        Page <span id="currentPageNum" class="font-bold text-white dark:text-white light:text-slate-900">1</span> of <span id="totalPagesNum">1</span>
+        (<span id="totalRecordsNum">0</span> total records)
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="changePage(-1)" id="prevPageBtn" class="px-3 py-1.5 rounded-lg bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-white dark:text-white light:text-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer">
+          Previous
+        </button>
+        <button onclick="changePage(1)" id="nextPageBtn" class="px-3 py-1.5 rounded-lg bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-white dark:text-white light:text-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div><!-- End flex-1 ml-[245px] -->
+
+<!-- SLIDE-OVER COMPLAINT RESOLUTION DRAWER -->
+<div id="complaintDrawer" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div onclick="closeComplaintDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+  
+  <!-- Sliding Panel -->
+  <div class="absolute right-0 top-0 bottom-0 w-full max-w-xl bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white border-l border-white/10 dark:border-white/10 light:border-slate-200 shadow-2xl flex flex-col z-10 transition-transform">
+    
+    <!-- Drawer Header -->
+    <div class="p-4 border-b border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between bg-[#111622] dark:bg-[#111622] light:bg-slate-50">
+      <div class="flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-[#FF7A00]/15 text-[#FF7A00] flex items-center justify-center font-bold text-xs">
+          <span class="material-symbols-outlined text-[18px]">gavel</span>
+        </span>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900" id="drawerTicketId">Ticket #CMP-11</h3>
+            <span id="drawerStatusBadge" class="badge-status-open text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Open</span>
+          </div>
+          <p class="text-[11px] text-slate-400" id="drawerSourceTime">IRCTC Grievance • 06 Nov 2026, 02:07 PM</p>
+        </div>
+      </div>
+      <button onclick="closeComplaintDrawer()" class="w-8 h-8 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+
+    <!-- Drawer Navigation Tabs -->
+    <div class="flex items-center border-b border-white/10 dark:border-white/10 light:border-slate-200 px-4 pt-1 bg-black/20 dark:bg-black/20 light:bg-slate-100 text-xs gap-3">
+      <button onclick="switchDrawerTab('details')" id="dtab-details" class="py-2.5 font-bold border-b-2 border-[#FF7A00] text-[#FF7A00] flex items-center gap-1.5 cursor-pointer">
+        <span class="material-symbols-outlined text-[15px]">info</span>
+        <span>Grievance Details</span>
+      </button>
+      <button onclick="switchDrawerTab('action')" id="dtab-action" class="py-2.5 font-semibold text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 flex items-center gap-1.5 cursor-pointer border-b-2 border-transparent">
+        <span class="material-symbols-outlined text-[15px]">edit_note</span>
+        <span>Resolution &amp; Action</span>
+      </button>
+      <button onclick="switchDrawerTab('timeline')" id="dtab-timeline" class="py-2.5 font-semibold text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 flex items-center gap-1.5 cursor-pointer border-b-2 border-transparent">
+        <span class="material-symbols-outlined text-[15px]">history</span>
+        <span>Audit Timeline</span>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="p-5 overflow-y-auto space-y-4 flex-1 text-xs">
+      
+      <!-- TAB 1: DETAILS -->
+      <div id="drawerTabDetails" class="space-y-4">
+        
+        <!-- Grievance Statement Card -->
+        <div class="p-4 rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 bg-black/20 dark:bg-black/20 light:bg-slate-50 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Passenger Statement</span>
+            <div class="flex items-center gap-1.5" id="drawerRatingContainer">
+              <span class="text-rose-500 font-bold font-mono text-sm">★ 1.0</span>
+            </div>
+          </div>
+          <p class="text-sm font-semibold text-white dark:text-white light:text-slate-900 leading-relaxed italic" id="drawerComplaintText">
+            "Curry was stale and had a foul smell upon opening box"
+          </p>
+          <div class="flex items-center gap-1.5 flex-wrap pt-1" id="drawerFeedbackTags">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">#STALE_FOOD</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">#FOUL_SMELL</span>
+          </div>
+        </div>
+
+        <!-- Railway Journey & Order Card -->
+        <div class="p-4 rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 bg-black/20 dark:bg-black/20 light:bg-slate-50 space-y-3">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px] text-[#FF7A00]">train</span>
+            <span>Railway Journey &amp; Booking</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Order ID</span>
+              <div class="flex items-center gap-1 mt-0.5">
+                <span class="font-mono font-bold text-white dark:text-white light:text-slate-900" id="drawerOrderId">2475157659</span>
+                <a href="#" id="drawerOrderLink" target="_blank" class="text-blue-400 hover:underline" title="View order in orders cockpit">
+                  <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                </a>
+              </div>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Train &amp; Station</span>
+              <span class="font-bold text-white dark:text-white light:text-slate-900 mt-0.5 block" id="drawerTrainStation">12148 • BPL</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Outlet &amp; Vendor</span>
+              <span class="font-bold text-white dark:text-white light:text-slate-900 mt-0.5 block truncate" id="drawerOutletName">JKR TASTE JUNCTION (#1359)</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 block">SLA Due By</span>
+              <span class="font-mono font-semibold text-rose-400 mt-0.5 block" id="drawerDueAt">07 Nov 2026, 02:07 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passenger Details Card -->
+        <div class="p-4 rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 bg-black/20 dark:bg-black/20 light:bg-slate-50 space-y-3">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px] text-blue-400">person</span>
+            <span>Passenger Details</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Name</span>
+              <span class="font-bold text-white dark:text-white light:text-slate-900 mt-0.5 block" id="drawerCustName">Vivek Test Passenger</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Phone / Mobile</span>
+              <span class="font-mono text-slate-300 dark:text-slate-300 light:text-slate-700 mt-0.5 block" id="drawerCustPhone">Masked by IRCTC</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Penalty Assessment Card -->
+        <div class="p-4 rounded-xl border border-white/10 dark:border-white/10 light:border-slate-200 bg-black/20 dark:bg-black/20 light:bg-slate-50 space-y-2">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-amber-400">currency_rupee</span>
+              <span>Vendor Penalty Assessment</span>
+            </span>
+            <span id="drawerPenaltyStatus" class="px-2 py-0.2 rounded-full text-[9px] font-bold bg-white/10 text-slate-300">NONE</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-400">Penalty Levied:</span>
+            <span class="font-mono font-bold text-base text-white dark:text-white light:text-slate-900" id="drawerPenaltyAmount">₹0.00</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: ACTION & RESOLUTION FORM -->
+      <div id="drawerTabAction" class="hidden space-y-4">
+        <form id="resolutionForm" onsubmit="saveComplaintResolution(event)" class="space-y-4">
+          
+          <!-- Status Selection -->
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+              Change Ticket Status <span class="text-rose-500">*</span>
+            </label>
+            <select id="actionStatus" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-2 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] font-semibold">
+              <option value="0">0: Open (Awaiting Action)</option>
+              <option value="1">1: In Progress (Vendor Investigation)</option>
+              <option value="2">2: Closed / Resolved (Completed)</option>
+            </select>
+          </div>
+
+          <!-- Assignee Selection -->
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+              Assignee / Owner
+            </label>
+            <input type="text" id="actionOwner" placeholder="e.g. Admin, Quality Manager, Station Lead..." class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-2 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]" />
+          </div>
+
+          <!-- Resolution Note -->
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+              Resolution Note &amp; Audit Explanation <span class="text-amber-500 font-normal">(Required to Close)</span>
+            </label>
+            <textarea id="actionNote" rows="4" placeholder="Detail the root cause investigation, kitchen explanation, refund / meal compensation provided to passenger, or reason for closing..." class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg p-3 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] leading-relaxed"></textarea>
+          </div>
+
+          <!-- Penalty Fields -->
+          <div class="grid grid-cols-2 gap-3 p-3.5 rounded-xl border border-white/5 bg-black/20 dark:bg-black/20 light:bg-slate-50">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                Penalty Amount (₹)
+              </label>
+              <input type="number" id="actionPenaltyAmount" min="0" step="50" placeholder="0" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-white dark:text-white light:text-slate-900 font-mono" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                Penalty Status
+              </label>
+              <select id="actionPenaltyStatus" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-white dark:text-white light:text-slate-900">
+                <option value="NONE">NONE</option>
+                <option value="PENDING_REVIEW">PENDING_REVIEW</option>
+                <option value="DEDUCTED">DEDUCTED</option>
+                <option value="WAIVED">WAIVED</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="pt-2 flex items-center justify-end gap-2.5">
+            <button type="button" onclick="closeComplaintDrawer()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-colors cursor-pointer">
+              Cancel
+            </button>
+            <button type="submit" id="btnSaveResolution" class="px-4 py-2 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md transition-all flex items-center gap-1.5 cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">save</span>
+              <span>Save Resolution</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- TAB 3: TIMELINE & AUDIT HISTORY -->
+      <div id="drawerTabTimeline" class="hidden space-y-3">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 pb-1">
+          Grievance Audit Trail &amp; Status Transitions
+        </div>
+        <div id="timelineEventsContainer" class="space-y-3">
+          <div class="text-center py-6 text-slate-400">
+            <div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-[#FF7A00]"></div>
+            <p class="mt-1 text-xs">Loading audit events...</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- LOG NEW GRIEVANCE MODAL -->
+<div id="newComplaintModal" class="fixed inset-0 z-50 hidden">
+  <div onclick="closeNewComplaintModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
+    <div class="p-4 bg-[#111622] dark:bg-[#111622] light:bg-slate-50 border-b border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#FF7A00]">add_comment</span>
+        <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900">Log New Passenger Grievance</h3>
+      </div>
+      <button onclick="closeNewComplaintModal()" class="text-slate-400 hover:text-white cursor-pointer">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <form id="newComplaintForm" onsubmit="saveNewComplaint(event)" class="p-5 space-y-3.5 overflow-y-auto text-xs">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Order ID <span class="text-rose-500">*</span></label>
+          <input type="text" id="newOrderId" required placeholder="e.g. 2475157659" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900 font-mono" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Passenger Name</label>
+          <input type="text" id="newCustName" placeholder="e.g. Rahul Sharma" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900" />
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Outlet ID</label>
+          <input type="number" id="newOutletId" placeholder="1359" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900 font-mono" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Train Number</label>
+          <input type="text" id="newTrainNo" placeholder="12148" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900 font-mono" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Station Code</label>
+          <input type="text" id="newStationCode" placeholder="BPL" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900 uppercase font-mono" />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Category <span class="text-rose-500">*</span></label>
+          <select id="newCategory" required class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900">
+            <option value="FOOD_QUALITY">FOOD_QUALITY</option>
+            <option value="PACKAGING">PACKAGING</option>
+            <option value="DELIVERY_DELAY">DELIVERY_DELAY</option>
+            <option value="QUALITY_FOOD">QUALITY_FOOD</option>
+            <option value="TASTE_APPRECIATION">TASTE_APPRECIATION</option>
+            <option value="BEHAVIOR">BEHAVIOR</option>
+            <option value="OTHER">OTHER</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Rating</label>
+          <select id="newRating" class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg px-3 py-1.5 text-xs text-white dark:text-white light:text-slate-900">
+            <option value="1.0">★ 1.0 (Critical)</option>
+            <option value="2.0">★ 2.0 (Poor)</option>
+            <option value="3.0">★ 3.0 (Average)</option>
+            <option value="4.0">★ 4.0 (Good)</option>
+            <option value="5.0">★ 5.0 (Praise)</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Grievance Description <span class="text-rose-500">*</span></label>
+        <textarea id="newComplaintText" required rows="3" placeholder="Provide full passenger feedback or grievance statement..." class="w-full bg-[#111318] dark:bg-[#111318] light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 rounded-lg p-2.5 text-xs text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]"></textarea>
+      </div>
+      <div class="pt-2 flex items-center justify-end gap-2">
+        <button type="button" onclick="closeNewComplaintModal()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-colors cursor-pointer">Cancel</button>
+        <button type="submit" id="btnSaveNewComplaint" class="px-4 py-2 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md transition-all flex items-center gap-1 cursor-pointer">
+          <span>Log Grievance</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST MESSAGE NOTIFICATION -->
+<div id="complaintsToast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-xs font-semibold">
+  <span class="material-symbols-outlined text-[18px]" id="toastIcon">check_circle</span>
+  <span id="toastMsg">Operation successful</span>
+</div>
+
+<script>
+  // =========================================================================
+  // ENTERPRISE CUSTOMER GRIEVANCE & QUALITY TOWER JAVASCRIPT
+  // =========================================================================
+
+  let allComplaints = [];
+  let overdueComplaints = [];
+  let filteredComplaints = [];
+  let currentStatusFilter = '';
+  let currentCategoryFilter = '';
+  let currentRatingFilter = '';
+  let currentSort = 'newest';
+  let searchQuery = '';
+  let currentPage = 1;
+  const PAGE_SIZE = 15;
+  let activeDrawerComplaint = null;
+  let liveSyncSeconds = 30;
+  let liveSyncTimer = null;
+
+  function showToast(msg, isError = false) {
+    const toast = document.getElementById('complaintsToast');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastIcon = document.getElementById('toastIcon');
+    if (!toast) return;
+
+    toastMsg.textContent = msg;
+    if (isError) {
+      toast.className = 'fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 pointer-events-auto px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-xs font-semibold bg-rose-600 text-white border border-rose-700';
+      toastIcon.textContent = 'error';
+    } else {
+      toast.className = 'fixed bottom-6 right-6 z-50 transform translate-y-0 opacity-100 transition-all duration-300 pointer-events-auto px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-xs font-semibold bg-emerald-600 text-white border border-emerald-700';
+      toastIcon.textContent = 'check_circle';
+    }
+
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-20', 'opacity-0');
+    }, 4000);
+  }
+
+  async function fetchComplaintsData(isSilent = false) {
+    const refreshIcon = document.getElementById('refreshIcon');
+    if (refreshIcon && !isSilent) refreshIcon.classList.add('animate-spin');
+
+    try {
+      // 1. Fetch complaints list
+      const complaintsRes = await fetch('/api/v1/complaints?limit=300', {
+        headers: { 'Accept': 'application/json', 'x-olf-request': '1' }
+      });
+      const complaintsJson = await complaintsRes.json();
+
+      // 2. Fetch overdue complaints
+      let overdueList = [];
+      try {
+        const overdueRes = await fetch('/api/v1/complaints/overdue', {
+          headers: { 'Accept': 'application/json', 'x-olf-request': '1' }
+        });
+        const overdueJson = await overdueRes.json();
+        if (overdueJson && overdueJson.status === 1) {
+          overdueList = Array.isArray(overdueJson.data?.rows) ? overdueJson.data.rows : (Array.isArray(overdueJson.data) ? overdueJson.data : []);
+        }
+      } catch (err) {
+        console.warn('Overdue check notice:', err);
+      }
+
+      if (complaintsJson && complaintsJson.status === 1) {
+        allComplaints = Array.isArray(complaintsJson.data?.rows) ? complaintsJson.data.rows : (Array.isArray(complaintsJson.data) ? complaintsJson.data : []);
+      } else {
+        console.warn('Complaints status not 1:', complaintsJson);
+      }
+
+      overdueComplaints = overdueList;
+
+      // Update KPIs & Tabs
+      updateKpisAndTabs();
+
+      // Render filtered rows
+      applyFilters();
+
+      if (!isSilent) showToast(`Loaded ${allComplaints.length} grievances successfully`);
+
+    } catch (err) {
+      console.error('Complaints fetch error:', err);
+      if (!isSilent) showToast('Failed to fetch complaints: ' + err.message, true);
+    } finally {
+      if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+    }
+  }
+
+  function isComplaintOverdue(c) {
+    const status = Number(c.status ?? 0);
+    if (status >= 2) return false; // Closed complaints are not overdue
+
+    // If present in overdueComplaints list
+    if (overdueComplaints.some(o => Number(o.comp_id) === Number(c.comp_id))) return true;
+
+    // Check due_at date if present
+    if (c.due_at) {
+      return new Date(c.due_at).getTime() < Date.now();
+    }
+
+    // Default SLA is 24 hours from created_at
+    if (c.created_at) {
+      const created = new Date(c.created_at).getTime();
+      return (Date.now() - created) > (24 * 60 * 60 * 1000);
+    }
+
+    return false;
+  }
+
+  function updateKpisAndTabs() {
+    const total = allComplaints.length;
+    const openCount = allComplaints.filter(c => Number(c.status ?? 0) === 0).length;
+    const inProgressCount = allComplaints.filter(c => Number(c.status ?? 0) === 1).length;
+    const closedCount = allComplaints.filter(c => Number(c.status ?? 0) === 2).length;
+    const overdueCount = allComplaints.filter(isComplaintOverdue).length;
+
+    // KPI Cards
+    const elTotal = document.getElementById('kpi-total');
+    const elOpen = document.getElementById('kpi-open');
+    const elProgress = document.getElementById('kpi-progress');
+    const elOverdue = document.getElementById('kpi-overdue');
+    const elResolved = document.getElementById('kpi-resolved');
+    const elRate = document.getElementById('kpi-rate');
+
+    if (elTotal) elTotal.textContent = total;
+    if (elOpen) elOpen.textContent = openCount;
+    if (elProgress) elProgress.textContent = inProgressCount;
+    if (elOverdue) elOverdue.textContent = overdueCount;
+    if (elResolved) elResolved.textContent = closedCount;
+
+    const rate = total > 0 ? Math.round((closedCount / total) * 100) : 0;
+    if (elRate) elRate.textContent = `${rate}% rate`;
+
+    // Tab badges
+    const cntTabAll = document.getElementById('cnt-tab-all');
+    const cntTabOpen = document.getElementById('cnt-tab-open');
+    const cntTabProgress = document.getElementById('cnt-tab-progress');
+    const cntTabClosed = document.getElementById('cnt-tab-closed');
+    const cntTabOverdue = document.getElementById('cnt-tab-overdue');
+
+    if (cntTabAll) cntTabAll.textContent = total;
+    if (cntTabOpen) cntTabOpen.textContent = openCount;
+    if (cntTabProgress) cntTabProgress.textContent = inProgressCount;
+    if (cntTabClosed) cntTabClosed.textContent = closedCount;
+    if (cntTabOverdue) cntTabOverdue.textContent = overdueCount;
+
+    // Overdue Alert Banner
+    const banner = document.getElementById('overdueAlertBanner');
+    const bannerCount = document.getElementById('overdueBannerCount');
+    if (banner && bannerCount) {
+      if (overdueCount > 0) {
+        banner.classList.remove('hidden');
+        bannerCount.textContent = overdueCount;
+      } else {
+        banner.classList.add('hidden');
+      }
+    }
+
+    // Sidebar badge
+    const sidebarBadge = document.getElementById('sidebar-complaints-badge');
+    if (sidebarBadge) {
+      sidebarBadge.textContent = openCount;
+      sidebarBadge.className = openCount > 0
+        ? 'px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/15'
+        : 'px-1.5 py-0.2 rounded-full text-[9px] font-bold text-slate-400 bg-slate-500/10';
+    }
+  }
+
+  function setStatusFilter(status) {
+    currentStatusFilter = status;
+    currentPage = 1;
+
+    // Update active tab button style
+    const tabs = ['all', '0', '1', '2', 'overdue'];
+    tabs.forEach(t => {
+      const btn = document.getElementById(`tab-status-${t}`);
+      if (!btn) return;
+      const isMatch = (status === '' && t === 'all') || (status === t);
+      if (isMatch) {
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 bg-[#FF7A00] text-white shadow-sm cursor-pointer';
+      } else {
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:bg-white/10 cursor-pointer';
+      }
+    });
+
+    applyFilters();
+  }
+
+  let searchDebounce = null;
+  function handleSearchInput(e) {
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => {
+      searchQuery = (e.target.value || '').trim().toLowerCase();
+      currentPage = 1;
+      applyFilters();
+    }, 200);
+  }
+
+  function handleFilterChange() {
+    currentCategoryFilter = (document.getElementById('filterCategory')?.value || '').trim();
+    currentRatingFilter = (document.getElementById('filterRating')?.value || '').trim();
+    currentSort = (document.getElementById('filterSort')?.value || 'newest').trim();
+    currentPage = 1;
+    applyFilters();
+  }
+
+  function resetAllFilters() {
+    currentStatusFilter = '';
+    currentCategoryFilter = '';
+    currentRatingFilter = '';
+    currentSort = 'newest';
+    searchQuery = '';
+    currentPage = 1;
+
+    const s = document.getElementById('complaintSearch');
+    if (s) s.value = '';
+    const cat = document.getElementById('filterCategory');
+    if (cat) cat.value = '';
+    const rat = document.getElementById('filterRating');
+    if (rat) rat.value = '';
+    const srt = document.getElementById('filterSort');
+    if (srt) srt.value = 'newest';
+
+    setStatusFilter('');
+  }
+
+  function applyFilters() {
+    filteredComplaints = allComplaints.filter(c => {
+      // 1. Status Filter
+      if (currentStatusFilter === 'overdue') {
+        if (!isComplaintOverdue(c)) return false;
+      } else if (currentStatusFilter !== '') {
+        if (String(c.status ?? 0) !== String(currentStatusFilter)) return false;
+      }
+
+      // 2. Category Filter
+      if (currentCategoryFilter && c.category !== currentCategoryFilter) {
+        return false;
+      }
+
+      // 3. Rating Filter
+      if (currentRatingFilter) {
+        const rating = Math.floor(Number(c.rating || 0));
+        if (Number(currentRatingFilter) === 5) {
+          if (rating < 5) return false;
+        } else if (rating !== Number(currentRatingFilter)) {
+          return false;
+        }
+      }
+
+      // 4. Search Filter
+      if (searchQuery) {
+        const text = [
+          c.ticket_no,
+          'CMP-' + c.comp_id,
+          c.order_id,
+          c.customer_name,
+          c.first_name,
+          c.last_name,
+          c.customer_phone,
+          c.train_number,
+          c.station_code,
+          c.outlet_name,
+          c.outlet_id,
+          c.complaint,
+          c.assigned_to,
+          Array.isArray(c.feedback_tags) ? c.feedback_tags.join(' ') : ''
+        ].filter(Boolean).join(' ').toLowerCase();
+
+        if (!text.includes(searchQuery)) return false;
+      }
+
+      return true;
+    });
+
+    // Sort
+    filteredComplaints.sort((a, b) => {
+      if (currentSort === 'newest') {
+        return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+      } else if (currentSort === 'oldest') {
+        return new Date(a.created_at || 0) - new Date(b.created_at || 0);
+      } else if (currentSort === 'rating_asc') {
+        return Number(a.rating || 0) - Number(b.rating || 0);
+      } else if (currentSort === 'rating_desc') {
+        return Number(b.rating || 0) - Number(a.rating || 0);
+      }
+      return 0;
+    });
+
+    // Update Showing count
+    const showing = document.getElementById('showingCount');
+    if (showing) showing.textContent = filteredComplaints.length;
+
+    renderTable();
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('complaintsTableBody');
+    if (!tbody) return;
+
+    if (filteredComplaints.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" class="text-center py-16 text-slate-400">
+            <span class="material-symbols-outlined text-[42px] text-slate-500 mb-2 block">inbox</span>
+            <p class="text-sm font-semibold text-slate-300 dark:text-slate-300 light:text-slate-700">No grievances match your criteria</p>
+            <p class="text-xs text-slate-500 mt-1">Try clearing search or changing the status filter.</p>
+            <button onclick="resetAllFilters()" class="mt-3 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-semibold cursor-pointer transition-colors">
+              Reset Filters
+            </button>
+          </td>
+        </tr>
+      `;
+      updatePagination(0);
+      return;
+    }
+
+    const totalPages = Math.ceil(filteredComplaints.length / PAGE_SIZE) || 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    const pageRows = filteredComplaints.slice(startIndex, startIndex + PAGE_SIZE);
+
+    tbody.innerHTML = pageRows.map(c => {
+      const ticketId = c.ticket_no || ('CMP-' + c.comp_id);
+      const isOverdue = isComplaintOverdue(c);
+      const statusNum = Number(c.status ?? 0);
+      const ratingNum = Number(c.rating || 0);
+      const source = (c.source || 'IRCTC').toUpperCase();
+      const customer = [c.customer_name, c.first_name, c.last_name].filter(Boolean).join(' ') || ('User #' + c.user_id);
+      const outlet = c.outlet_name ? `${c.outlet_name}` : `Outlet #${c.outlet_id || '-'}`;
+      
+      const createdStr = c.created_at ? new Date(c.created_at).toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      }) : '-';
+
+      // Status Badge
+      let statusBadge = '';
+      if (statusNum === 0) {
+        statusBadge = `<span class="badge-status-open inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span> Open
+        </span>`;
+      } else if (statusNum === 1) {
+        statusBadge = `<span class="badge-status-progress inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> In Progress
+        </span>`;
+      } else {
+        statusBadge = `<span class="badge-status-resolved inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Resolved
+        </span>`;
+      }
+
+      // Overdue Tag
+      const overdueTag = isOverdue ? `
+        <div class="mt-1">
+          <span class="badge-status-overdue inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[9px] font-mono font-bold tracking-wide uppercase">
+            <span class="w-1 h-1 rounded-full bg-red-500 animate-ping"></span> Overdue
+          </span>
+        </div>
+      ` : '';
+
+      // Rating Star Badge
+      let ratingBadge = '';
+      if (ratingNum > 0) {
+        const ratingClass = ratingNum <= 2 ? 'rating-badge-critical text-rose-500' : (ratingNum <= 3 ? 'rating-badge-warning text-amber-500' : 'rating-badge-good text-emerald-500');
+        ratingBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold font-mono ${ratingClass}">
+          <span>★</span><span>${ratingNum.toFixed(1)}</span>
+        </span>`;
+      } else {
+        ratingBadge = `<span class="text-slate-500 text-[11px]">-</span>`;
+      }
+
+      // Feedback Tags
+      let tagsHtml = '';
+      if (Array.isArray(c.feedback_tags) && c.feedback_tags.length) {
+        tagsHtml = `<div class="flex items-center gap-1 flex-wrap mt-1">` + 
+          c.feedback_tags.slice(0, 3).map(t => `<span class="px-1.5 py-0.2 rounded text-[9px] font-semibold bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-400 dark:text-slate-400 light:text-slate-600 border border-white/5">#${escapeHtml(t)}</span>`).join('') +
+        `</div>`;
+      }
+
+      // Category Pill
+      const cat = c.category || 'GENERAL';
+      const catColor = cat.includes('FOOD') || cat.includes('QUALITY') ? 'text-rose-400 bg-rose-500/10 border-rose-500/20' : (cat.includes('PACK') ? 'text-amber-400 bg-amber-500/10 border-amber-500/20' : 'text-blue-400 bg-blue-500/10 border-blue-500/20');
+
+      return `
+        <tr class="hover:bg-white/[0.03] dark:hover:bg-white/[0.03] light:hover:bg-slate-50 transition-colors">
+          
+          <!-- Ticket & Source -->
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono font-bold text-xs text-white dark:text-white light:text-slate-900 bg-white/5 dark:bg-white/5 light:bg-slate-100 px-2 py-0.5 rounded border border-white/10 dark:border-white/10 light:border-slate-200">${escapeHtml(ticketId)}</span>
+              <button onclick="copyToClipboard('${escapeHtml(ticketId)}', 'Ticket ID')" class="text-slate-500 hover:text-white p-0.5 cursor-pointer" title="Copy Ticket ID">
+                <span class="material-symbols-outlined text-[13px]">content_copy</span>
+              </button>
+            </div>
+            <div class="flex items-center gap-1 mt-1 text-[10px]">
+              <span class="px-1.5 py-0.2 rounded font-bold font-mono ${source === 'IRCTC' ? 'bg-sky-500/15 text-sky-400' : 'bg-[#FF7A00]/15 text-[#FF7A00]'}">${escapeHtml(source)}</span>
+              <span class="text-slate-500 dark:text-slate-400 truncate">${createdStr}</span>
+            </div>
+          </td>
+
+          <!-- Order & Train -->
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-1 font-mono font-bold text-xs text-slate-200 dark:text-slate-200 light:text-slate-800">
+              <a href="/orders?search=${c.order_id}" class="hover:text-[#FF7A00] transition-colors" title="Inspect Order">${escapeHtml(c.order_id || '-')}</a>
+              <button onclick="copyToClipboard('${escapeHtml(c.order_id || '')}', 'Order ID')" class="text-slate-500 hover:text-white p-0.5 cursor-pointer" title="Copy Order ID">
+                <span class="material-symbols-outlined text-[13px]">content_copy</span>
+              </button>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 text-[11px] text-slate-400">
+              <span class="material-symbols-outlined text-[13px] text-[#FF7A00]">train</span>
+              <span class="font-semibold text-slate-300 dark:text-slate-300 light:text-slate-700">${escapeHtml(c.train_number || 'Train')}</span>
+              <span>&bull;</span>
+              <span class="px-1.5 py-0.2 rounded bg-white/5 text-[10px] font-mono font-bold text-emerald-400">${escapeHtml(c.station_code || 'HALT')}</span>
+            </div>
+          </td>
+
+          <!-- Outlet & Vendor -->
+          <td class="py-3 px-4">
+            <div class="font-semibold text-xs text-white dark:text-white light:text-slate-900 truncate max-w-[150px]" title="${escapeHtml(outlet)}">
+              ${escapeHtml(outlet)}
+            </div>
+            <div class="text-[10px] font-mono text-slate-400 mt-0.5">
+              Outlet #${c.outlet_id || '-'}
+            </div>
+          </td>
+
+          <!-- Grievance & Category -->
+          <td class="py-3 px-4 max-w-[260px]">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="px-1.5 py-0.2 rounded text-[9px] font-bold uppercase border ${catColor}">
+                ${escapeHtml(cat)}
+              </span>
+            </div>
+            <p class="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700 leading-snug line-clamp-2" title="${escapeHtml(c.complaint || '')}">
+              ${escapeHtml(c.complaint || 'No detail provided.')}
+            </p>
+            ${tagsHtml}
+          </td>
+
+          <!-- Passenger & Rating -->
+          <td class="py-3 px-4">
+            <div class="font-semibold text-xs text-white dark:text-white light:text-slate-900 truncate max-w-[130px]">
+              ${escapeHtml(customer)}
+            </div>
+            <div class="mt-1 flex items-center gap-2">
+              ${ratingBadge}
+            </div>
+          </td>
+
+          <!-- Status & SLA -->
+          <td class="py-3 px-4">
+            ${statusBadge}
+            ${overdueTag}
+          </td>
+
+          <!-- Assignee -->
+          <td class="py-3 px-4">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/5 dark:bg-white/5 light:bg-slate-100 text-slate-300 dark:text-slate-300 light:text-slate-700 border border-white/5">
+              <span class="material-symbols-outlined text-[13px] text-slate-400">person</span>
+              <span class="truncate max-w-[80px]">${escapeHtml(c.assigned_to || 'Unassigned')}</span>
+            </span>
+          </td>
+
+          <!-- Actions -->
+          <td class="py-3 px-4 text-right">
+            <button onclick="openComplaintDrawer(${c.comp_id})" class="px-2.5 py-1.5 rounded-lg bg-[#FF7A00]/15 hover:bg-[#FF7A00] text-[#FF7A00] hover:text-white text-xs font-bold transition-all inline-flex items-center gap-1 cursor-pointer" title="View details and resolve complaint">
+              <span class="material-symbols-outlined text-[15px]">edit</span>
+              <span>Resolve</span>
+            </button>
+          </td>
+
+        </tr>
+      `;
+    }).join('');
+
+    updatePagination(totalPages);
+  }
+
+  function updatePagination(totalPages) {
+    const curEl = document.getElementById('currentPageNum');
+    const totEl = document.getElementById('totalPagesNum');
+    const recEl = document.getElementById('totalRecordsNum');
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+
+    if (curEl) curEl.textContent = currentPage;
+    if (totEl) totEl.textContent = totalPages || 1;
+    if (recEl) recEl.textContent = filteredComplaints.length;
+
+    if (prevBtn) prevBtn.disabled = currentPage <= 1;
+    if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+  }
+
+  function changePage(delta) {
+    const totalPages = Math.ceil(filteredComplaints.length / PAGE_SIZE) || 1;
+    currentPage += delta;
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    renderTable();
+  }
+
+  function copyToClipboard(text, label = 'Text') {
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(`${label} copied to clipboard!`);
+    }).catch(() => {
+      showToast('Copied: ' + text);
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  // =========================================================================
+  // DRAWER MODAL RESOLUTION LOGIC
+  // =========================================================================
+
+  function openComplaintDrawer(compId) {
+    const complaint = allComplaints.find(c => Number(c.comp_id) === Number(compId));
+    if (!complaint) return;
+    activeDrawerComplaint = complaint;
+
+    const drawer = document.getElementById('complaintDrawer');
+    if (!drawer) return;
+
+    // Header info
+    const ticketId = complaint.ticket_no || ('CMP-' + complaint.comp_id);
+    document.getElementById('drawerTicketId').textContent = `Ticket #${ticketId}`;
+
+    const createdStr = complaint.created_at ? new Date(complaint.created_at).toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    }) : '-';
+    document.getElementById('drawerSourceTime').textContent = `${(complaint.source || 'IRCTC').toUpperCase()} Grievance • ${createdStr}`;
+
+    const statusBadge = document.getElementById('drawerStatusBadge');
+    const statusNum = Number(complaint.status ?? 0);
+    if (statusBadge) {
+      if (statusNum === 0) {
+        statusBadge.textContent = 'Open';
+        statusBadge.className = 'badge-status-open text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider';
+      } else if (statusNum === 1) {
+        statusBadge.textContent = 'In Progress';
+        statusBadge.className = 'badge-status-progress text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider';
+      } else {
+        statusBadge.textContent = 'Resolved';
+        statusBadge.className = 'badge-status-resolved text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider';
+      }
+    }
+
+    // Populate Tab 1: Details
+    document.getElementById('drawerComplaintText').textContent = `"${complaint.complaint || 'No statement provided.'}"`;
+    
+    // Rating
+    const ratingNum = Number(complaint.rating || 0);
+    const ratingCont = document.getElementById('drawerRatingContainer');
+    if (ratingCont) {
+      ratingCont.innerHTML = ratingNum > 0
+        ? `<span class="text-rose-500 font-bold font-mono text-sm">★ ${ratingNum.toFixed(1)}</span>`
+        : `<span class="text-slate-400 font-mono text-xs">No rating</span>`;
+    }
+
+    // Feedback Tags
+    const tagsCont = document.getElementById('drawerFeedbackTags');
+    if (tagsCont) {
+      if (Array.isArray(complaint.feedback_tags) && complaint.feedback_tags.length) {
+        tagsCont.innerHTML = complaint.feedback_tags.map(t => `
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">#${escapeHtml(t)}</span>
+        `).join('');
+      } else {
+        tagsCont.innerHTML = `<span class="text-slate-500 text-[11px] italic">No specific issue tags attached</span>`;
+      }
+    }
+
+    // Journey & Order
+    document.getElementById('drawerOrderId').textContent = complaint.order_id || '-';
+    const orderLink = document.getElementById('drawerOrderLink');
+    if (orderLink) orderLink.href = `/orders?search=${complaint.order_id || ''}`;
+    
+    document.getElementById('drawerTrainStation').textContent = `${complaint.train_number || 'Train'} • ${complaint.station_code || 'HALT'}`;
+    document.getElementById('drawerOutletName').textContent = complaint.outlet_name ? `${complaint.outlet_name} (#${complaint.outlet_id})` : `Outlet #${complaint.outlet_id || '-'}`;
+    
+    const dueStr = complaint.due_at ? new Date(complaint.due_at).toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    }) : '24h from order';
+    document.getElementById('drawerDueAt').textContent = dueStr;
+
+    // Customer
+    const custName = [complaint.customer_name, complaint.first_name, complaint.last_name].filter(Boolean).join(' ') || ('User #' + complaint.user_id);
+    document.getElementById('drawerCustName').textContent = custName;
+    document.getElementById('drawerCustPhone').textContent = complaint.customer_phone || 'Masked by IRCTC';
+
+    // Penalty
+    document.getElementById('drawerPenaltyAmount').textContent = `₹${Number(complaint.penalty_amount || 0).toFixed(2)}`;
+    document.getElementById('drawerPenaltyStatus').textContent = (complaint.penalty_status || 'NONE').toUpperCase();
+
+    // Populate Tab 2: Action Form
+    document.getElementById('actionStatus').value = String(statusNum);
+    document.getElementById('actionOwner').value = complaint.assigned_to || '';
+    document.getElementById('actionNote').value = '';
+    document.getElementById('actionPenaltyAmount').value = Number(complaint.penalty_amount || 0) || '';
+    document.getElementById('actionPenaltyStatus').value = complaint.penalty_status || 'NONE';
+
+    // Switch to Tab 1 (Details) by default
+    switchDrawerTab('details');
+
+    drawer.classList.remove('hidden');
+
+    // Load audit history events in background
+    loadTimelineEvents(complaint.comp_id);
+  }
+
+  function closeComplaintDrawer() {
+    const drawer = document.getElementById('complaintDrawer');
+    if (drawer) drawer.classList.add('hidden');
+    activeDrawerComplaint = null;
+  }
+
+  function switchDrawerTab(tab) {
+    const tabDetails = document.getElementById('drawerTabDetails');
+    const tabAction = document.getElementById('drawerTabAction');
+    const tabTimeline = document.getElementById('drawerTabTimeline');
+
+    const btnDetails = document.getElementById('dtab-details');
+    const btnAction = document.getElementById('dtab-action');
+    const btnTimeline = document.getElementById('dtab-timeline');
+
+    [tabDetails, tabAction, tabTimeline].forEach(el => el && el.classList.add('hidden'));
+    [btnDetails, btnAction, btnTimeline].forEach(btn => {
+      if (btn) {
+        btn.className = 'py-2.5 font-semibold text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 flex items-center gap-1.5 cursor-pointer border-b-2 border-transparent';
+      }
+    });
+
+    if (tab === 'details') {
+      tabDetails?.classList.remove('hidden');
+      if (btnDetails) btnDetails.className = 'py-2.5 font-bold border-b-2 border-[#FF7A00] text-[#FF7A00] flex items-center gap-1.5 cursor-pointer';
+    } else if (tab === 'action') {
+      tabAction?.classList.remove('hidden');
+      if (btnAction) btnAction.className = 'py-2.5 font-bold border-b-2 border-[#FF7A00] text-[#FF7A00] flex items-center gap-1.5 cursor-pointer';
+    } else if (tab === 'timeline') {
+      tabTimeline?.classList.remove('hidden');
+      if (btnTimeline) btnTimeline.className = 'py-2.5 font-bold border-b-2 border-[#FF7A00] text-[#FF7A00] flex items-center gap-1.5 cursor-pointer';
+    }
+  }
+
+  async function loadTimelineEvents(compId) {
+    const container = document.getElementById('timelineEventsContainer');
+    if (!container) return;
+
+    try {
+      const res = await fetch(`/api/v1/complaint/${compId}/events`, {
+        headers: { 'Accept': 'application/json', 'x-olf-request': '1' }
+      });
+      const json = await res.json();
+      const events = Array.isArray(json.data?.rows) ? json.data.rows : [];
+
+      if (!events.length) {
+        container.innerHTML = `
+          <div class="p-4 rounded-xl border border-white/5 bg-black/10 text-center text-slate-400">
+            <span class="material-symbols-outlined text-[24px] text-slate-500 mb-1 block">history_toggle_off</span>
+            <p class="text-xs">No status change events recorded yet for this ticket.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const statusLabels = ['Open', 'In Progress', 'Closed / Resolved'];
+
+      container.innerHTML = events.map(e => {
+        const timeStr = e.created_at ? new Date(e.created_at).toLocaleString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          day: '2-digit', month: 'short', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        }) : '-';
+
+        return `
+          <div class="p-3 rounded-lg border border-white/5 bg-black/20 dark:bg-black/20 light:bg-slate-50 space-y-1">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-white dark:text-white light:text-slate-900">${escapeHtml(e.actor || 'System')}</span>
+              <span class="text-slate-400 font-mono text-[10px]">${timeStr}</span>
+            </div>
+            <div class="text-[11px] text-slate-300 dark:text-slate-300 light:text-slate-700">
+              <span class="font-semibold text-amber-400">${escapeHtml(e.action || 'STATUS_CHANGE')}</span>: 
+              ${statusLabels[e.from_status] || e.from_status} &rarr; <span class="font-bold text-emerald-400">${statusLabels[e.to_status] || e.to_status}</span>
+            </div>
+            ${e.note ? `<p class="text-xs text-slate-400 italic mt-1 bg-white/5 p-1.5 rounded">"${escapeHtml(e.note)}"</p>` : ''}
+          </div>
+        `;
+      }).join('');
+
+    } catch (err) {
+      console.warn('Events loading warning:', err);
+      container.innerHTML = `
+        <div class="p-3 rounded-xl border border-white/5 bg-black/10 text-slate-400 text-xs">
+          Audit history is currently unavailable.
+        </div>
+      `;
+    }
+  }
+
+  async function saveComplaintResolution(event) {
+    event.preventDefault();
+    if (!activeDrawerComplaint) return;
+
+    const compId = activeDrawerComplaint.comp_id;
+    const toStatus = Number(document.getElementById('actionStatus').value);
+    const owner = (document.getElementById('actionOwner').value || '').trim();
+    const note = (document.getElementById('actionNote').value || '').trim();
+    const penaltyAmt = parseFloat(document.getElementById('actionPenaltyAmount').value || '0');
+    const penaltyStatus = document.getElementById('actionPenaltyStatus').value;
+
+    if (toStatus === 2 && !note) {
+      showToast('A resolution note is required to close this complaint.', true);
+      return;
+    }
+
+    const btn = document.getElementById('btnSaveResolution');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Saving...`;
+    }
+
+    try {
+      // 1. Try PATCH transition endpoint
+      let success = false;
+      try {
+        const patchRes = await fetch(`/api/v1/complaint/${compId}/transition`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'x-olf-request': '1'
+          },
+          body: JSON.stringify({
+            status: toStatus,
+            note: note,
+            assigned_to: owner || undefined
+          })
+        });
+        const patchJson = await patchRes.json();
+        if (patchRes.ok && patchJson.status === 1) {
+          success = true;
+        }
+      } catch (patchErr) {
+        console.warn('PATCH transition failed, trying fallback PUT...', patchErr);
+      }
+
+      // 2. If PATCH didn't succeed, use PUT fallback
+      if (!success) {
+        const putPayload = {
+          status: toStatus,
+          assigned_to: owner || null,
+          penalty_amount: penaltyAmt,
+          penalty_status: penaltyStatus
+        };
+        const putRes = await fetch(`/api/v1/complaint/${compId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'x-olf-request': '1'
+          },
+          body: JSON.stringify(putPayload)
+        });
+        const putJson = await putRes.json();
+        if (!putRes.ok || putJson.status !== 1) {
+          throw new Error(putJson.info || putJson.message || 'Update failed');
+        }
+      }
+
+      showToast(`Complaint #${activeDrawerComplaint.ticket_no || ('CMP-' + compId)} updated successfully!`);
+      closeComplaintDrawer();
+      await fetchComplaintsData(true);
+
+    } catch (err) {
+      console.error('Save resolution error:', err);
+      showToast('Failed to save resolution: ' + err.message, true);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">save</span> Save Resolution`;
+      }
+    }
+  }
+
+  // =========================================================================
+  // LOG NEW GRIEVANCE MODAL
+  // =========================================================================
+
+  function openNewComplaintModal() {
+    document.getElementById('newComplaintForm')?.reset();
+    document.getElementById('newComplaintModal')?.classList.remove('hidden');
+  }
+
+  function closeNewComplaintModal() {
+    document.getElementById('newComplaintModal')?.classList.add('hidden');
+  }
+
+  async function saveNewComplaint(event) {
+    event.preventDefault();
+
+    const orderId = (document.getElementById('newOrderId').value || '').trim();
+    const custName = (document.getElementById('newCustName').value || '').trim();
+    const outletId = parseInt(document.getElementById('newOutletId').value || '0') || null;
+    const trainNo = (document.getElementById('newTrainNo').value || '').trim();
+    const stationCode = (document.getElementById('newStationCode').value || '').trim();
+    const category = document.getElementById('newCategory').value;
+    const rating = parseFloat(document.getElementById('newRating').value || '1.0');
+    const complaintText = (document.getElementById('newComplaintText').value || '').trim();
+
+    if (!orderId || !complaintText) {
+      showToast('Order ID and grievance description are required.', true);
+      return;
+    }
+
+    const btn = document.getElementById('btnSaveNewComplaint');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Saving...`;
+    }
+
+    try {
+      const payload = {
+        order_id: orderId,
+        customer_name: custName || 'Passenger',
+        outlet_id: outletId,
+        train_number: trainNo,
+        station_code: stationCode,
+        category: category,
+        rating: rating,
+        complaint: complaintText,
+        source: 'OLF_ADMIN',
+        reason: 1,
+        user_id: 1,
+        status: 0
+      };
+
+      const res = await fetch('/api/v1/complaint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'x-olf-request': '1'
+        },
+        body: JSON.stringify(payload)
+      });
+      const json = await res.json();
+
+      if (!res.ok || json.status !== 1) {
+        throw new Error(json.info || json.message || 'Failed to create grievance');
+      }
+
+      showToast('New customer grievance logged successfully!');
+      closeNewComplaintModal();
+      await fetchComplaintsData(true);
+
+    } catch (err) {
+      console.error('Log grievance error:', err);
+      showToast('Failed to log grievance: ' + err.message, true);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span>Log Grievance</span>`;
+      }
+    }
+  }
+
+  // =========================================================================
+  // EXPORT CSV
+  // =========================================================================
+
+  function exportComplaintsCsv() {
+    if (!filteredComplaints.length) {
+      showToast('No grievances to export with current filters', true);
+      return;
+    }
+
+    const headers = [
+      'Ticket No',
+      'Order ID',
+      'Source',
+      'Status',
+      'Category',
+      'Rating',
+      'Passenger Name',
+      'Train Number',
+      'Station Code',
+      'Outlet Name',
+      'Outlet ID',
+      'Complaint Statement',
+      'Assigned To',
+      'Penalty Amount',
+      'Penalty Status',
+      'Created At',
+      'Due At'
+    ];
+
+    const statusLabels = ['Open', 'In Progress', 'Resolved'];
+
+    const rows = filteredComplaints.map(c => [
+      c.ticket_no || ('CMP-' + c.comp_id),
+      c.order_id || '',
+      c.source || 'IRCTC',
+      statusLabels[Number(c.status ?? 0)] || c.status,
+      c.category || '',
+      c.rating || '',
+      [c.customer_name, c.first_name, c.last_name].filter(Boolean).join(' ') || ('User #' + c.user_id),
+      c.train_number || '',
+      c.station_code || '',
+      c.outlet_name || '',
+      c.outlet_id || '',
+      (c.complaint || '').replace(/"/g, '""'),
+      c.assigned_to || '',
+      c.penalty_amount || '0.00',
+      c.penalty_status || 'NONE',
+      c.created_at || '',
+      c.due_at || ''
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(r => r.map(cell => `"${String(cell ?? '').replace(/"/g, '""')}"`).join(','))
+    ].join('\r\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
+    link.setAttribute('href', url);
+    link.setAttribute('download', `OLF_Grievances_${today}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    showToast(`Exported ${filteredComplaints.length} records to CSV`);
+  }
+
+  // =========================================================================
+  // LIVE AUTO-SYNC (30 SECONDS INTERVAL)
+  // =========================================================================
+
+  function startLiveSync() {
+    clearInterval(liveSyncTimer);
+    liveSyncSeconds = 30;
+
+    liveSyncTimer = setInterval(() => {
+      liveSyncSeconds -= 1;
+      const display = document.getElementById('liveSyncTimerDisplay');
+      if (display) display.textContent = `(${liveSyncSeconds}s)`;
+
+      if (liveSyncSeconds <= 0) {
+        liveSyncSeconds = 30;
+        fetchComplaintsData(true);
+      }
+    }, 1000);
+  }
+
+  // Initial Boot
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchComplaintsData();
+    startLiveSync();
+
+    // Check if URL has filter query
+    const urlParams = new URLSearchParams(window.location.search);
+    const filter = urlParams.get('filter') || urlParams.get('status');
+    if (filter) {
+      setStatusFilter(filter);
+    }
+  });
+
+</script>
+
+<script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
+    }
+    updateThemeToggleIcons();
+  }
+
+  function updateThemeToggleIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll('.theme-icon-topbar').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    document.querySelectorAll('.theme-label-topbar').forEach(el => {
+      el.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+    document.querySelectorAll('.theme-toggle-btn .material-symbols-outlined, .dark-icon').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    const oldIcon = document.getElementById('themeIcon');
+    if (oldIcon) oldIcon.innerText = isDark ? 'dark_mode' : 'light_mode';
+    const oldLabel = document.getElementById('themeLabel');
+    if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  // Auto-highlight active route on page load & apply theme
+  (function initSidebar() {
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    updateThemeToggleIcons();
+
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (['/roles','/access','/roles-access'].includes(p)) {
+      activate('nav-access');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/customers')) {
+      activate('nav-customers');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      if (search.includes('filter=active')) {
+        activate(null, 'sublink-orders-live', 'sub-orders', 'chev-orders');
+      } else {
+        activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+      }
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/irctc-logs')) {
+      activate(null, 'sublink-irctc-logs', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      const report = new URLSearchParams(window.location.search).get('report') || '';
+      let reportLink = 'sublink-reports';
+      if (p.startsWith('/complaint-reports') || ['complaints','ratings'].includes(report)) reportLink = 'sublink-complaint-reports';
+      else if (report === 'invoices') reportLink = 'sublink-report-invoices';
+      else if (['wallet-balances','wallet-ledger','vendor-settlements','settlement-exceptions','refunds'].includes(report)) reportLink = 'sublink-report-finance';
+      else if (['compliance','menu-margins','network-health'].includes(report)) reportLink = 'sublink-report-network';
+      else if (['customers','item-sales','payment-mix','channel-performance'].includes(report)) reportLink = 'sublink-report-sales';
+      else if (['employees','attendance','leave-balances','payroll','recruitment'].includes(report)) reportLink = 'sublink-report-people';
+      else if (report && report !== 'daily-sales') reportLink = 'sublink-report-operations';
+      activate(null, reportLink, 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  })();
+</script></body></html>
+
+

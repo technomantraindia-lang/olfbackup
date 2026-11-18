@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link rel="icon" type="image/png" href="/icon.png?v=3"/>
+  <title>Orders Management - OLF Stores Operations Command</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-dim": "#07090D",
+            "surface-dark": "#0B0F17",
+            "surface-card": "#111622",
+            "surface-card-hover": "#171F30",
+            "border-dark": "rgba(255, 255, 255, 0.08)",
+            "primary-orange": "#FF7A00",
+            "primary-green": "#00B956",
+            "primary-blue": "#3B82F6",
+            "status-delivered": "#10B981",
+            "status-pending": "#F59E0B",
+            "status-cancelled": "#EF4444"
+          },
+          fontFamily: {
+            sans: ["Verdana", "Geneva", "Tahoma", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after {
+      font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined' !important;
+    }
+    body {
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: 4px;
+    }
+    .dark .card-glow {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+    }
+    .light .card-glow {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+
+
+
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
+
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\[\#111622\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\[\#111318\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\[\#171A20\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\[\#171F30\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\[\#0B0F17\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\[\#111622\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\[\#111318\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\[\#171A20\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\[\#171F30\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\[\#0B0F17\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+    /* ========================================================================= */
+  /* RAILWAY DISPATCH PIPELINE - CLEAN ENTERPRISE STYLES                       */
+  /* ========================================================================= */
+  html.light #active-orders-banner {
+    background-color: #F8FAFC !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+  html.dark #active-orders-banner {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  html.light .status-tab-btn-inactive {
+    color: #475569 !important;
+    background-color: transparent !important;
+  }
+  html.light .status-tab-btn-inactive:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\[\#FF7A00\],
+  html.light a.bg-\[\#FF7A00\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\[\#FF7A00\] *,
+  html.light a.bg-\[\#FF7A00\] * {
+    color: #FFFFFF !important;
+  }
+
+  /* EMERALD & ACTION SOLID BUTTON CONTRAST PRESERVATION IN LIGHT MODE */
+  html.light button.bg-emerald-600,
+  html.light button.bg-emerald-500,
+  html.light .subtab-active-emerald,
+  html.light .viewmode-btn-active-emerald {
+    background-color: #059669 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-emerald-600 *,
+  html.light button.bg-emerald-500 *,
+  html.light .subtab-active-emerald *,
+  html.light .viewmode-btn-active-emerald * {
+    color: #FFFFFF !important;
+  }
+
+  /* SUBTAB PILLS STYLING (PERFECT IN BOTH LIGHT & DARK THEMES) */
+  .subtab-active-emerald {
+    background-color: #059669 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 3px rgba(5, 150, 105, 0.35) !important;
+  }
+  .subtab-active-emerald * {
+    color: #FFFFFF !important;
+  }
+
+  .subtab-active-orange {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 3px rgba(255, 122, 0, 0.35) !important;
+  }
+  .subtab-active-orange * {
+    color: #FFFFFF !important;
+  }
+
+  /* Inactive Subtab in Dark Mode */
+  .subtab-inactive {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+    font-weight: 500 !important;
+  }
+  .subtab-inactive * {
+    color: #94A3B8 !important;
+  }
+  .subtab-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #FFFFFF !important;
+  }
+  .subtab-inactive:hover * {
+    color: #FFFFFF !important;
+  }
+
+  /* Inactive Subtab in Light Mode (Crisp Slate Pill) */
+  html.light .subtab-inactive {
+    background-color: #F1F5F9 !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
+  }
+  html.light .subtab-inactive * {
+    color: #334155 !important;
+  }
+  html.light .subtab-inactive:hover {
+    background-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+  html.light .subtab-inactive:hover * {
+    color: #0F172A !important;
+  }
+
+  /* HIGH-CONTRAST STATUS BADGES (ZERO NESTED OUTLINE BOXES) */
+  #active-live-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34D399;
+  }
+  #active-live-status-pill * {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  html.light #active-live-status-pill {
+    background-color: #ECFDF5 !important;
+    border: 1px solid #6EE7B7 !important;
+    color: #065F46 !important;
+  }
+  html.light #active-live-status-pill * {
+    color: #065F46 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* RADAR IN-FLIGHT BADGE IN TELEMETRY STRIP */
+  .radar-in-flight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    background-color: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34D399;
+  }
+  .radar-in-flight-badge * {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  html.light .radar-in-flight-badge {
+    background-color: #D1FAE5 !important;
+    border: 1px solid #34D399 !important;
+    color: #065F46 !important;
+  }
+  html.light .radar-in-flight-badge * {
+    color: #065F46 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ========================================================================= */
+  /* PREMIUM SEGMENTED CONTROLLER (VIEWMODE SWITCHER: COCKPIT vs ARCHIVE)      */
+  /* ========================================================================= */
+  .viewmode-switcher-wrap {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+    background-color: #0B0E14;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  html.light .viewmode-switcher-wrap {
+    background-color: #E2E8F0 !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Active Emerald Button in Toggle (Active Orders Cockpit) */
+  .viewmode-btn-active-emerald {
+    background-color: #059669 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(5, 150, 105, 0.4) !important;
+  }
+  .viewmode-btn-active-emerald * {
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-active-emerald .viewmode-count-pill {
+    background-color: rgba(0, 0, 0, 0.28) !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Active Orange Button in Toggle (All Orders Archive) */
+  .viewmode-btn-active-orange {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(255, 122, 0, 0.4) !important;
+  }
+  .viewmode-btn-active-orange * {
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-active-orange .viewmode-count-pill {
+    background-color: rgba(0, 0, 0, 0.28) !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Inactive Button in Toggle */
+  .viewmode-btn-inactive {
+    background-color: transparent !important;
+    color: #94A3B8 !important;
+    font-weight: 600 !important;
+  }
+  .viewmode-btn-inactive * {
+    color: #94A3B8 !important;
+  }
+  .viewmode-btn-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-inactive:hover * {
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-inactive .viewmode-count-pill {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #CBD5E1 !important;
+  }
+
+  html.light .viewmode-btn-inactive {
+    background-color: transparent !important;
+    color: #475569 !important;
+  }
+  html.light .viewmode-btn-inactive * {
+    color: #475569 !important;
+  }
+  html.light .viewmode-btn-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    color: #0F172A !important;
+  }
+  html.light .viewmode-btn-inactive:hover * {
+    color: #0F172A !important;
+  }
+  html.light .viewmode-btn-inactive .viewmode-count-pill {
+    background-color: #CBD5E1 !important;
+    color: #1E293B !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+    html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+  /* HIGH CONTRAST COACH & BERTH BADGE (WCAG AAA) */
+  .coach-berth-badge {
+    background-color: rgba(59, 130, 246, 0.18) !important;
+    border: 1px solid rgba(96, 165, 250, 0.4) !important;
+    color: #93C5FD !important;
+    font-weight: 700 !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    letter-spacing: 0.025em !important;
+  }
+  html.light .coach-berth-badge {
+    background-color: #DBEAFE !important; /* Soft Blue-100 */
+    border: 1px solid #93C5FD !important; /* Blue-300 border */
+    color: #1E40AF !important; /* Deep Royal Navy Blue (High Contrast) */
+    font-weight: 800 !important;
+    box-shadow: 0 1px 2px rgba(30, 64, 175, 0.08) !important;
+  }
+  html.light .text-blue-300,
+  html.light [class*="text-blue-300"] {
+    color: #1E40AF !important;
+  }
+  html.light .bg-blue-500\/15,
+  html.light [class*="bg-blue-500/15"] {
+    background-color: #DBEAFE !important;
+    border-color: #93C5FD !important;
+    color: #1E40AF !important;
+  }
+</style>
+
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/admin-runtime.css">
+<script src="/assets/admin-core.js"></script>
+<link rel="stylesheet" href="/assets/order-progress.css">
+<script src="/assets/order-progress.js"></script>
+<style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
+</head>
+<body class="bg-[#07090D] text-[#E2E8F0] dark:bg-[#07090D] dark:text-[#E2E8F0] light:bg-[#F8FAFC] light:text-[#0F172A] min-h-screen flex">
+
+  <!-- LEFT PERSISTENT 245px SIDEBAR -->
+  <!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
+    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF — Command Center">
+      <span class="olf-wordmark">OLF</span>
+    </a>
+    <div class="flex items-center gap-1.5">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="Provider sync has not been verified">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Admin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
+        <span class="truncate">Dashboard</span>
+      </a>
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
+        <span class="truncate">Customers</span>
+      </a>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('active', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/alloutlets" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5">
+      <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
+      </div>
+      <a href="/login" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+
+
+  <!-- MAIN VIEWPORT -->
+  <main class="flex-1 ml-[245px] min-h-screen flex flex-col bg-[#07090D] dark:bg-[#07090D] light:bg-[#F8FAFC]">
+    
+    <!-- STICKY TOP COMMAND HEADER -->
+    <header class="h-16 border-b border-white/10 dark:border-white/10 light:border-slate-200 bg-[#0B0F17]/80 dark:bg-[#0B0F17]/80 light:bg-white/80 backdrop-blur-md sticky top-0 z-30 px-6 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div>
+          <h1 class="text-[15px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight flex items-center gap-2">
+            <span id="page-main-heading">Orders Dashboard</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-[#00B956]/15 text-[#00B956] font-semibold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#00B956] animate-pulse"></span>
+              Admin
+            </span>
+          </h1>
+          <p class="text-[11px] text-slate-400" id="page-main-subheading">Real-time railway meal bookings, PNR status, and station delivery pipeline</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Live Refresh Button -->
+        
+        
+        
+        <!-- Topbar Theme Switcher -->
+<button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
+  <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
+  <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
+</button>
+        
+        
+        
+        <!-- Live Sync Active Status Pill -->
+        <div id="liveSyncStatus" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/10 light:bg-emerald-50 border border-emerald-500/30 dark:border-emerald-500/30 light:border-emerald-300 text-emerald-500 dark:text-emerald-400 light:text-emerald-700 select-none shadow-sm transition-all" title="Live Auto-Sync Active: Table automatically checks for IRCTC train delays and status changes every 30 seconds">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="tracking-wide">Live Sync Active</span>
+          <span class="text-[10px] text-emerald-500/80 dark:text-emerald-400/80 light:text-emerald-700 font-mono hidden sm:inline" id="liveSyncTimerDisplay">(30s)</span>
+        </div>
+        
+        <button onclick="fetchOrdersData()" id="refreshBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all" title="Refresh Live Data">
+          <span class="material-symbols-outlined text-[16px]" id="refreshIcon">refresh</span>
+          <span>Refresh</span>
+        </button>
+
+        <!-- Export CSV Button -->
+        <button onclick="exportOrdersCsv()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all">
+          <span class="material-symbols-outlined text-[16px]">download</span>
+          <span>Download Orders</span>
+        </button>
+
+        <!-- Create Manual Order Button -->
+        <button onclick="location.href='/?booking=1'" class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md shadow-[#FF7A00]/25 transition-all">
+          <span class="material-symbols-outlined text-[16px]">add</span>
+          <span>Local Order</span>
+        </button>
+        <a href="/irctc-logs?newOrder=1" data-required-module="integrations" class="px-3 py-1.5 rounded-lg text-xs font-bold border border-white/10">+ IRCTC Order</a>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY -->
+    <div class="p-6 space-y-6">
+
+      <!-- TOP 5 KPI TELEMETRY CARDS (Data Connected to /api/v1/orders/stats) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Total Orders Card -->
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Orders</span>
+            <div class="w-7 h-7 rounded-lg bg-[#3B82F6]/15 flex items-center justify-center text-[#3B82F6]">
+              <span class="material-symbols-outlined text-[17px]">inventory_2</span>
+            </div>
+          </div>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight" id="kpi-total-orders">-<span class="animate-pulse">Loading...</span>
+          </div>
+          <div class="mt-1 flex items-center text-[10px] text-emerald-400 font-medium">
+            <span>All time verified railway bookings</span>
+          </div>
+        </div>
+
+        <!-- Total Earnings Card -->
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Earnings</span>
+            <div class="w-7 h-7 rounded-lg bg-[#00B956]/15 flex items-center justify-center text-[#00B956]">
+              <span class="material-symbols-outlined text-[17px]">payments</span>
+            </div>
+          </div>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight" id="kpi-total-earnings">-<span class="animate-pulse">Loading...</span>
+          </div>
+          <div class="mt-1 flex items-center text-[10px] text-slate-400">
+            <span>Gross meal booking revenue</span>
+          </div>
+        </div>
+
+        <!-- Delivered Orders Card -->
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Delivered</span>
+            <div class="w-7 h-7 rounded-lg bg-[#10B981]/15 flex items-center justify-center text-[#10B981]">
+              <span class="material-symbols-outlined text-[17px]">check_circle</span>
+            </div>
+          </div>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight" id="kpi-delivered-orders">-<span class="animate-pulse">Loading...</span>
+          </div>
+          <div class="mt-1 flex items-center text-[10px] text-emerald-400 font-medium" id="kpi-delivered-sub">-<span>Successful platform drops</span>
+          </div>
+        </div>
+
+        <!-- Cancelled Orders Card -->
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Cancelled</span>
+            <div class="w-7 h-7 rounded-lg bg-[#EF4444]/15 flex items-center justify-center text-[#EF4444]">
+              <span class="material-symbols-outlined text-[17px]">cancel</span>
+            </div>
+          </div>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight text-rose-400" id="kpi-cancelled-orders">-<span class="animate-pulse">Loading...</span>
+          </div>
+          <div class="mt-1 flex items-center text-[10px] text-slate-400">
+            <span>Train delay / Passenger cancel</span>
+          </div>
+        </div>
+
+        <!-- Pending / In-Kitchen Card -->
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Active & Pending</span>
+            <div class="w-7 h-7 rounded-lg bg-[#F59E0B]/15 flex items-center justify-center text-[#F59E0B]">
+              <span class="material-symbols-outlined text-[17px]">schedule</span>
+            </div>
+          </div>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight text-amber-400" id="kpi-pending-orders">-<span class="animate-pulse">Loading...</span>
+          </div>
+          <div class="mt-1 flex items-center text-[10px] text-amber-400 font-medium">
+            <span>Kitchen prep & dispatch active</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FILTER CONTROLS & STATUS TABS -->
+      <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 space-y-4">
+        
+        <!-- ROW 1: PRIMARY VIEW MODE SWITCHER + DYNAMIC RIGHT CONTROLS -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10 dark:border-white/10 light:border-slate-200">
+          <div class="viewmode-switcher-wrap">
+            <!-- Active Cockpit View Button -->
+            <button type="button" onclick="setViewMode('ACTIVE')" id="viewmode-btn-active" class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-active-emerald">
+              <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span>Active Orders Cockpit</span>
+              <span id="viewmode-count-active" class="viewmode-count-pill px-2 py-0.5 rounded-full text-[11px] font-mono font-bold">0</span>
+            </button>
+            <!-- All Orders Ledger Button -->
+            <button type="button" onclick="setViewMode('ALL')" id="viewmode-btn-all" class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-inactive">
+              <span class="material-symbols-outlined text-[15px]">inventory_2</span>
+              <span>All Orders Archive</span>
+              <span id="viewmode-count-all" class="viewmode-count-pill px-2 py-0.5 rounded-full text-[11px] font-mono font-bold">0</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Right Side Control for Row 1 -->
+          <!-- Active Mode Single Live Indicator -->
+          <div id="active-live-status-pill" class="flex items-center gap-2 text-xs select-none">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Live Railway Operations &bull; <strong id="active-today-label">Today</strong></span>
+          </div>
+
+          <!-- All Orders Mode: Date Range Presets -->
+          <div class="hidden flex items-center gap-2 flex-wrap" id="all-view-date-controls">
+            <div class="flex items-center gap-1 bg-white/5 dark:bg-white/5 light:bg-slate-100 p-1 rounded-lg text-xs" id="date-presets-bar">
+              <button type="button" onclick="setDateRange('ALL')" id="btn-date-ALL" class="px-2.5 py-1 rounded bg-[#FF7A00] text-white font-bold transition-all shadow-sm cursor-pointer">All Time</button>
+              <button type="button" onclick="setDateRange('TODAY')" id="btn-date-TODAY" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">Today</button>
+              <button type="button" onclick="setDateRange('YESTERDAY')" id="btn-date-YESTERDAY" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">Yesterday</button>
+              <button type="button" onclick="setDateRange('THIS_WEEK')" id="btn-date-THIS_WEEK" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">This Week</button>
+              <button type="button" onclick="setDateRange('THIS_MONTH')" id="btn-date-THIS_MONTH" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">This Month</button>
+              <button type="button" onclick="toggleCustomDatePicker()" id="btn-date-CUSTOM" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium flex items-center gap-1 cursor-pointer">
+                <span class="material-symbols-outlined text-[13px]">calendar_month</span> Custom
+              </button>
+            </div>
+            <!-- Active Date Badge (Collapsible) -->
+            <span id="active-date-badge" class="hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 text-xs font-semibold">
+              <span class="material-symbols-outlined text-[13px]">event</span>
+              <span id="active-date-badge-text">Today</span>
+              <button type="button" onclick="setDateRange('ALL')" class="hover:text-white transition-colors ml-0.5 text-sm leading-none cursor-pointer" title="Clear Date Filter">&times;</button>
+            </span>
+          </div>
+        </div>
+
+        <!-- ROW 2A: ACTIVE ORDERS COCKPIT SUB-TABS (Only In-Flight Stages, Clean & Uncluttered) -->
+        <div id="active-subtabs-row" class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div class="flex flex-wrap items-center gap-1.5" id="active-subtabs-container">
+            <button type="button" onclick="setActiveSubFilter('ACTIVE')" id="subtab-ACTIVE" class="px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-active-emerald">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              All Active (<span id="active-count-all">0</span>)
+            </button>
+            <button type="button" onclick="setActiveSubFilter('CONFIRMED')" id="subtab-ACTIVE_CONFIRMED" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+              Stage 2: Confirmed (<span id="active-count-confirmed">0</span>)
+            </button>
+            <button type="button" onclick="setActiveSubFilter('ORDER_PREPARING')" id="subtab-ACTIVE_PREPARING" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+              Stage 3: In Kitchen (<span id="active-count-preparing">0</span>)
+            </button>
+            <button type="button" onclick="setActiveSubFilter('ORDER_OUT_FOR_DELIVERY')" id="subtab-ACTIVE_OUT" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+              Stage 4: Dispatched (<span id="active-count-out">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- ROW 2B: ALL ORDERS MASTER ARCHIVE SUB-TABS & DATE FILTERS (Full Database View) -->
+        <div id="all-subtabs-row" class="hidden flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div class="flex flex-wrap items-center gap-1.5" id="all-subtabs-container">
+            <button type="button" onclick="setAllSubFilter('ALL')" id="tab-ALL" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] text-white shadow-sm transition-all cursor-pointer">
+              All Orders (<span id="tab-count-all">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ORDER_DELIVERED')" id="tab-ORDER_DELIVERED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              Delivered (<span id="tab-count-delivered">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ORDER_CANCELLED')" id="tab-ORDER_CANCELLED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              Cancelled (<span id="tab-count-cancelled">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ACTIVE')" id="tab-ALL_ACTIVE" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              In-Flight (<span id="tab-count-active">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('CONFIRMED')" id="tab-CONFIRMED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              Confirmed (<span id="tab-count-confirmed">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ORDER_PREPARING')" id="tab-ORDER_PREPARING" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              In Kitchen (<span id="tab-count-preparing">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ORDER_OUT_FOR_DELIVERY')" id="tab-ORDER_OUT_FOR_DELIVERY" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              Dispatched (<span id="tab-count-out">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ORDER_PARTIALLY_DELIVERED')" id="tab-ORDER_PARTIALLY_DELIVERED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              Partial (<span id="tab-count-partial">0</span>)
+            </button>
+            <button type="button" onclick="setAllSubFilter('ORDER_UNDELIVERED')" id="tab-ORDER_UNDELIVERED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+              Undelivered (<span id="tab-count-undelivered">0</span>)
+            </button>
+          </div>
+
+
+        </div>
+
+        <!-- Custom Date Range Bar (Collapsible) -->
+        <div id="custom-date-picker-row" class="hidden p-3 rounded-xl bg-black/30 dark:bg-black/30 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-slate-400 dark:text-slate-400 light:text-slate-600 flex items-center gap-1 font-semibold">
+              <span class="material-symbols-outlined text-[16px] text-[#FF7A00]">date_range</span> Custom Dates:
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="text-slate-500 font-medium">From</span>
+              <input type="date" id="order-custom-from" class="px-2.5 py-1.5 rounded-lg bg-black/40 dark:bg-black/40 light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] text-xs font-mono" />
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-slate-500 font-medium">To</span>
+              <input type="date" id="order-custom-to" class="px-2.5 py-1.5 rounded-lg bg-black/40 dark:bg-black/40 light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] text-xs font-mono" />
+            </div>
+            <button type="button" onclick="applyCustomDateFilter()" class="px-3.5 py-1.5 rounded-lg bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">search</span> Fetch Orders
+            </button>
+            <button type="button" onclick="clearCustomDateFilter()" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white text-xs transition-all">
+              Cancel
+            </button>
+          </div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">
+            * Fetches matching orders from database records
+          </div>
+        </div>
+
+        <!-- Search Bar and Quick Filters -->
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Search input -->
+          <div class="flex-1 min-w-[280px] relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+            <input 
+              type="text" 
+              id="orderSearchInput"
+              oninput="handleSearch(this.value)"
+              placeholder="Search by Order ID, PNR, Customer, Mobile, Train Number, Station..." 
+              class="w-full pl-10 pr-4 py-2 rounded-lg text-xs bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#FF7A00] transition-all"
+            />
+          </div>
+
+          <!-- Station Dropdown -->
+          <div class="w-48 relative">
+            <select id="stationFilter" onchange="handleStationFilter(this.value)" class="w-full px-3 py-2 rounded-lg text-xs bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]">
+              <option value="ALL">All Stations</option>
+              <option value="GWL">GWL - Gwalior</option>
+              <option value="NDLS">NDLS - New Delhi</option>
+              <option value="MLDT">MLDT - Malda Town</option>
+              <option value="BRC">BRC - Vadodara</option>
+              <option value="ET">ET - Itarsi</option>
+              <option value="CNB">CNB - Kanpur</option>
+              <option value="BPL">BPL - Bhopal</option>
+            </select>
+          </div>
+
+          <!-- Pagination Count -->
+          <div class="text-xs text-slate-400 flex items-center gap-2">
+            <span>Showing:</span>
+            <span id="showing-count" class="font-bold text-white dark:text-white light:text-slate-900">0</span>
+            <span>orders</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ORDERS HIGH-DENSITY DATA TABLE -->
+      <div class="card-glow rounded-xl bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 overflow-hidden">
+        <!-- INTEGRATED RAILWAY DISPATCH TELEMETRY STRIP -->
+        <div id="active-orders-banner" class="px-4 py-2.5 bg-slate-50 dark:bg-white/[0.02] border-b border-slate-200 dark:border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs select-none">
+          <div class="flex items-center gap-3 overflow-x-auto pb-1 lg:pb-0 text-[11px]">
+            <div class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-100 shrink-0">
+              <span class="w-6 h-6 rounded-md bg-[#FF7A00]/15 text-[#FF7A00] flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[15px]">train</span>
+              </span>
+              <span>Railway Lifecycle</span>
+            </div>
+            
+            <div class="hidden sm:block text-slate-300 dark:text-slate-700 shrink-0">|</div>
+
+            <!-- Stage 1 -->
+            <div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 shrink-0" title="Passenger booked via IRCTC. Contact & berth details masked.">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span>
+              <span>1. Webhook (Masked)</span>
+            </div>
+
+            <span class="text-slate-300 dark:text-slate-700 shrink-0">&rarr;</span>
+
+            <!-- Stage 2 -->
+            <button onclick="setStatusFilter('CONFIRMED')" class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors shrink-0 cursor-pointer" title="Order locked by OLF. Awaiting cooking cutoff.">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+              <span class="font-medium">2. Confirmed 🔒</span>
+              <span class="font-mono font-bold text-amber-600 dark:text-amber-400 ml-0.5">(<span id="radar-confirmed-count">19</span>)</span>
+            </button>
+
+            <span class="text-slate-300 dark:text-slate-700 shrink-0">&rarr;</span>
+
+            <!-- Stage 3 -->
+            <button onclick="setStatusFilter('ORDER_PREPARING')" class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors shrink-0 cursor-pointer" title="Cutoff reached. Details unmasked and kitchen is cooking.">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+              <span class="font-medium">3. In Kitchen 🍳</span>
+              <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400 ml-0.5">(<span id="radar-preparing-count">1</span>)</span>
+            </button>
+
+            <span class="text-slate-300 dark:text-slate-700 shrink-0">&rarr;</span>
+
+            <!-- Stage 4 / Handover -->
+            <button onclick="setStatusFilter('ORDER_OUT_FOR_DELIVERY')" class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shrink-0 cursor-pointer" title="Rider at platform. Collect passenger OTP during 2-5 min train halt.">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
+              <span class="font-medium">4. Platform Handover 🛵</span>
+              <span class="font-mono font-bold text-blue-600 dark:text-blue-400 ml-0.5">(<span id="radar-out-count">0</span>)</span>
+            </button>
+          </div>
+
+          <!-- Right Status Info -->
+          <div class="flex items-center gap-2.5 shrink-0 text-[11px]">
+            <span class="radar-in-flight-badge">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span id="radar-total-active">45</span> In-Flight
+            </span>
+            <span class="text-slate-400 dark:text-slate-500 font-medium hidden sm:inline">&bull; 2&ndash;5 min train halt SLA</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th class="py-3.5 px-4 min-w-[130px]">Order ID & PNR</th>
+                <th class="py-3.5 px-4 min-w-[140px]">Customer</th>
+                <th class="py-3.5 px-4 min-w-[210px]">Train & Delivery</th>
+                <th class="py-3.5 px-4 min-w-[200px]">Meal Items</th>
+                <th class="py-3.5 px-4 min-w-[110px]">Amount & Mode</th>
+                <th class="py-3.5 px-4 min-w-[150px]">Status & Stage</th>
+                <th class="py-3.5 px-4 min-w-[140px]">Outlet</th>
+                <th class="py-3.5 px-4 min-w-[130px] text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
+              <tr>
+                <td colspan="8" class="text-center py-12 text-slate-400">
+                  <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF7A00]"></div>
+                  <p class="mt-2 text-xs">Loading live orders from database...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="p-4 border-t border-white/5 dark:border-white/5 light:border-slate-200 flex items-center justify-between text-xs text-slate-400">
+          <div>
+            Page <span id="current-page" class="font-bold text-white dark:text-white light:text-slate-900">1</span> of <span id="total-pages">1</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changePage(-1)" id="prevPageBtn" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">Previous</button>
+            <button onclick="changePage(1)" id="nextPageBtn" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODAY'S FINISHED & CLOSED ORDERS SECTION (Delivered, Cancelled, Undelivered) -->
+      <div id="today-closed-section" class="rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white overflow-hidden shadow-lg mt-6">
+        <!-- Section Header -->
+        <div class="p-4 bg-[#111622] dark:bg-[#111622] light:bg-slate-50 border-b border-white/5 dark:border-white/5 light:border-slate-200 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+              <span class="material-symbols-outlined text-[18px]">task_alt</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900">Today's Finished &amp; Closed Orders</h3>
+                <span id="today-closed-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-white/10 text-slate-300">0 Today</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">All today's orders that are finished: Delivered, Cancelled, or Undelivered (<span id="today-date-label">Today</span>)</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-xs flex-wrap">
+            <span id="today-summary-delivered" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span id="cnt-today-delivered">0</span> Delivered
+            </span>
+            <span id="today-summary-cancelled" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-400 text-[11px] font-semibold border border-rose-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> <span id="cnt-today-cancelled">0</span> Cancelled
+            </span>
+            <span id="today-summary-undelivered" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-500/10 text-slate-400 text-[11px] font-semibold border border-slate-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span id="cnt-today-undelivered">0</span> Undelivered
+            </span>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th class="py-3 px-4 min-w-[130px]">Order ID &amp; PNR</th>
+                <th class="py-3 px-4 min-w-[140px]">Customer</th>
+                <th class="py-3 px-4 min-w-[200px]">Train &amp; Delivery</th>
+                <th class="py-3 px-4 min-w-[180px]">Meal Items</th>
+                <th class="py-3 px-4 min-w-[110px]">Amount &amp; Mode</th>
+                <th class="py-3 px-4 min-w-[140px]">Final Status</th>
+                <th class="py-3 px-4 min-w-[130px]">Outlet</th>
+                <th class="py-3 px-4 min-w-[80px] text-right">Details</th>
+              </tr>
+            </thead>
+            <tbody id="today-closed-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
+              <tr>
+                <td colspan="8" class="text-center py-8 text-slate-400 text-xs">
+                  Loading today's finished orders...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- SLIDE-OVER ORDER INSPECTION MODAL DRAWER -->
+  <div id="orderDetailDrawer" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div onclick="closeOrderDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+    
+    <!-- Drawer Panel -->
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white border-l border-white/10 dark:border-white/10 light:border-slate-200 shadow-2xl flex flex-col z-10 transition-transform">
+      <div class="p-5 border-b border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between">
+        <div>
+          <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900" id="drawer-order-id">Order Details</h3>
+          <p class="text-[11px] text-slate-400" id="drawer-date">Booked via IRCTC e-Catering</p>
+        </div>
+        <button onclick="closeOrderDrawer()" class="w-8 h-8 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-6 space-y-6 text-xs" id="drawer-content">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="p-4 border-t border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between gap-3">
+        <button onclick="printSelectedOrder()" class="flex-1 px-3 py-2 rounded-lg border border-white/10 text-xs font-semibold text-slate-300 hover:bg-white/5">Print KOT</button>
+        <button onclick="dispatchSelectedOrder(this)" class="flex-1 px-3 py-2 rounded-lg bg-[#FF7A00] text-xs font-bold text-white shadow-md hover:bg-[#FF7A00]/90">Mark Out for Delivery</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT FOR LIVE API INTEGRATION & INTERACTIVITY -->
+  <script>
+    let allOrders = [];
+    let filteredOrders = [];
+    let currentPage = 1;
+    const pageSize = 12;
+    let currentStatus = 'ACTIVE';
+    let currentStation = 'ALL';
+    let searchQuery = '';
+    let activeOtpTargetOid = null;
+    let currentDateRange = 'ALL'; // 'ALL', 'TODAY', 'YESTERDAY', 'THIS_WEEK', 'THIS_MONTH', 'CUSTOM'
+    let customStartDate = '';
+    let customEndDate = '';
+    let currentViewMode = 'ACTIVE'; // 'ACTIVE' or 'ALL'
+
+    function getDateBounds(rangeType) {
+      const now = new Date();
+      const todayIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(now);
+      
+      if (rangeType === 'TODAY') {
+        return {
+          startDate: todayIST,
+          endDate: todayIST + ' 23:59:59',
+          label: 'Today (' + now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', timeZone: 'Asia/Kolkata' }) + ')'
+        };
+      }
+
+      if (rangeType === 'YESTERDAY') {
+        const yest = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+        const yestIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(yest);
+        return {
+          startDate: yestIST,
+          endDate: yestIST + ' 23:59:59',
+          label: 'Yesterday (' + yest.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', timeZone: 'Asia/Kolkata' }) + ')'
+        };
+      }
+
+      if (rangeType === 'THIS_WEEK') {
+        const d = new Date(now);
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        const monday = new Date(d.setDate(diff));
+        const startWeekIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(monday);
+        return {
+          startDate: startWeekIST,
+          endDate: todayIST + ' 23:59:59',
+          label: 'This Week (' + monday.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', timeZone: 'Asia/Kolkata' }) + ' - ' + now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', timeZone: 'Asia/Kolkata' }) + ')'
+        };
+      }
+
+      if (rangeType === 'THIS_MONTH') {
+        const parts = todayIST.split('-');
+        const startMonthIST = `${parts[0]}-${parts[1]}-01`;
+        return {
+          startDate: startMonthIST,
+          endDate: todayIST + ' 23:59:59',
+          label: 'This Month (' + now.toLocaleDateString('en-IN', { month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' }) + ')'
+        };
+      }
+
+      if (rangeType === 'CUSTOM') {
+        if (!customStartDate) return null;
+        const end = customEndDate || customStartDate;
+        return {
+          startDate: customStartDate,
+          endDate: end.includes(':') ? end : end + ' 23:59:59',
+          label: `${customStartDate} → ${end}`
+        };
+      }
+
+      return null;
+    }
+
+    function parseDateToTimestamp(raw) {
+      if (!raw) return null;
+      if (raw instanceof Date) return isNaN(raw.getTime()) ? null : raw.getTime();
+      if (typeof raw === 'number') return raw;
+      if (typeof raw !== 'string') return null;
+      const trimmed = raw.trim();
+      if (!trimmed) return null;
+
+      const matchYMD = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/);
+      if (matchYMD) {
+        const yr = parseInt(matchYMD[1], 10);
+        const mo = parseInt(matchYMD[2], 10) - 1;
+        const da = parseInt(matchYMD[3], 10);
+        const hr = parseInt(matchYMD[4] || '0', 10);
+        const mi = parseInt(matchYMD[5] || '0', 10);
+        const se = parseInt(matchYMD[6] || '0', 10);
+        return new Date(yr, mo, da, hr, mi, se).getTime();
+      }
+
+      const matchDMY = trimmed.match(/^(\d{2})[-/](\d{2})[-/](\d{4})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/);
+      if (matchDMY) {
+        const da = parseInt(matchDMY[1], 10);
+        const mo = parseInt(matchDMY[2], 10) - 1;
+        const yr = parseInt(matchDMY[3], 10);
+        const hr = parseInt(matchDMY[4] || '0', 10);
+        const mi = parseInt(matchDMY[5] || '0', 10);
+        const se = parseInt(matchDMY[6] || '0', 10);
+        return new Date(yr, mo, da, hr, mi, se).getTime();
+      }
+
+      const d = new Date(trimmed);
+      return isNaN(d.getTime()) ? null : d.getTime();
+    }
+
+    function isOrderInDateRange(order, startStr, endStr) {
+      if (!order || !startStr) return true;
+      const startTs = parseDateToTimestamp(startStr.includes(' ') || startStr.includes('T') ? startStr : startStr + ' 00:00:00');
+      const endTs = parseDateToTimestamp(endStr.includes(' ') || endStr.includes('T') ? endStr : endStr + ' 23:59:59');
+      if (!startTs || !endTs) return true;
+
+      const candidates = [
+        order.created_at,
+        order.delivery_date,
+        order.updated_at,
+        order.delivery_details?.deliveryDetails?.deliveryDate,
+        order.delivery_details?.deliveryDate
+      ];
+
+      for (const raw of candidates) {
+        if (!raw) continue;
+        const ts = parseDateToTimestamp(raw);
+        if (ts && ts >= startTs && ts <= endTs) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function updateDatePresetButtons() {
+      const presets = ['ALL', 'TODAY', 'YESTERDAY', 'THIS_WEEK', 'THIS_MONTH', 'CUSTOM'];
+      presets.forEach(p => {
+        const btn = document.getElementById('btn-date-' + p);
+        if (!btn) return;
+        if (p === currentDateRange) {
+          btn.className = 'px-2.5 py-1 rounded bg-[#FF7A00] text-white font-bold transition-all shadow-sm';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium';
+        }
+      });
+
+      const badge = document.getElementById('active-date-badge');
+      const badgeText = document.getElementById('active-date-badge-text');
+      const pickerRow = document.getElementById('custom-date-picker-row');
+
+      if (currentDateRange === 'ALL') {
+        if (badge) badge.classList.add('hidden');
+        if (pickerRow) pickerRow.classList.add('hidden');
+      } else {
+        const bounds = getDateBounds(currentDateRange);
+        if (badge && badgeText && bounds) {
+          badgeText.innerText = bounds.label;
+          badge.classList.remove('hidden');
+        }
+        if (pickerRow) {
+          if (currentDateRange === 'CUSTOM') {
+            pickerRow.classList.remove('hidden');
+          } else {
+            pickerRow.classList.add('hidden');
+          }
+        }
+      }
+    }
+
+    function setDateRange(rangeKey) {
+      currentDateRange = rangeKey;
+      if (rangeKey !== 'CUSTOM') {
+        customStartDate = '';
+        customEndDate = '';
+      }
+      updateDatePresetButtons();
+      try {
+        const url = new URL(window.location.href);
+        if (currentDateRange === 'ALL') {
+          url.searchParams.delete('range');
+          url.searchParams.delete('start_date');
+          url.searchParams.delete('end_date');
+        } else if (currentDateRange === 'CUSTOM') {
+          url.searchParams.set('range', 'custom');
+          url.searchParams.set('start_date', customStartDate);
+          url.searchParams.set('end_date', customEndDate);
+        } else {
+          url.searchParams.set('range', currentDateRange.toLowerCase());
+          url.searchParams.delete('start_date');
+          url.searchParams.delete('end_date');
+        }
+        window.history.replaceState(null, '', url.pathname + url.search);
+      } catch(e){}
+
+      currentPage = 1;
+      fetchOrdersData();
+    }
+
+    function toggleCustomDatePicker() {
+      const pickerRow = document.getElementById('custom-date-picker-row');
+      if (!pickerRow) return;
+      const isHidden = pickerRow.classList.contains('hidden');
+      if (isHidden) {
+        pickerRow.classList.remove('hidden');
+        const fromInput = document.getElementById('order-custom-from');
+        const toInput = document.getElementById('order-custom-to');
+        const todayIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
+        if (fromInput && !fromInput.value) fromInput.value = todayIST;
+        if (toInput && !toInput.value) toInput.value = todayIST;
+      } else {
+        pickerRow.classList.add('hidden');
+      }
+    }
+
+    function applyCustomDateFilter() {
+      const fromVal = document.getElementById('order-custom-from')?.value;
+      const toVal = document.getElementById('order-custom-to')?.value;
+      if (!fromVal) {
+        Admin.message('Please select a From date', true);
+        return;
+      }
+      customStartDate = fromVal;
+      customEndDate = toVal || fromVal;
+      currentDateRange = 'CUSTOM';
+      updateDatePresetButtons();
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('range', 'custom');
+        url.searchParams.set('start_date', customStartDate);
+        url.searchParams.set('end_date', customEndDate);
+        window.history.replaceState(null, '', url.pathname + url.search);
+      } catch(e){}
+
+      currentPage = 1;
+      fetchOrdersData();
+    }
+
+    function clearCustomDateFilter() {
+      setDateRange('ALL');
+    }
+
+    // Fetch Stats and Orders (Combining Active Orders and Recent Orders)
+    
+    // =========================================================================
+    // LIVE AUTO-SYNC (IRCTC DELAYS & STATUS REFRESH EVERY 30s)
+    // =========================================================================
+    let ordersLiveSyncTimer = null;
+    const LIVE_SYNC_INTERVAL_SEC = 30;
+    let liveSyncCountdown = LIVE_SYNC_INTERVAL_SEC;
+
+    function startOrdersLiveSync() {
+      if (ordersLiveSyncTimer) clearInterval(ordersLiveSyncTimer);
+      liveSyncCountdown = LIVE_SYNC_INTERVAL_SEC;
+
+      ordersLiveSyncTimer = setInterval(() => {
+        liveSyncCountdown--;
+        const timerDisp = document.getElementById('liveSyncTimerDisplay');
+        if (timerDisp) {
+          timerDisp.innerText = '(' + liveSyncCountdown + 's)';
+        }
+
+        if (liveSyncCountdown <= 0) {
+          liveSyncCountdown = LIVE_SYNC_INTERVAL_SEC;
+          if (!document.hidden) {
+            fetchOrdersData(true);
+          }
+        }
+      }, 1000);
+    }
+
+    function stopOrdersLiveSync() {
+      if (ordersLiveSyncTimer) {
+        clearInterval(ordersLiveSyncTimer);
+        ordersLiveSyncTimer = null;
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        fetchOrdersData(true);
+        liveSyncCountdown = LIVE_SYNC_INTERVAL_SEC;
+      }
+    });
+
+    async function fetchOrdersData(isSilent = false) {
+      const refreshIcon = document.getElementById('refreshIcon');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      try {
+        const todayIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
+        const bounds = getDateBounds(currentDateRange);
+
+        let statsUrl = '/api/v1/orders/stats';
+        let ordersUrl = '/api/v1/orders?limit=300';
+        
+        if (bounds) {
+          const qs = `start_date=${encodeURIComponent(bounds.startDate)}&end_date=${encodeURIComponent(bounds.endDate)}`;
+          statsUrl += `?${qs}`;
+          ordersUrl = `/api/v1/orders?${qs}&limit=500`;
+        }
+
+        const statsPromise = fetch(statsUrl).then(r => r.json()).catch(() => null);
+        const mainOrdersPromise = fetch(ordersUrl).then(r => r.json()).catch(() => null);
+        const activePromise = fetch('/api/v1/orders?status=ORDER_CONFIRMED,ORDER_PREPARING,ORDER_OUT_FOR_DELIVERY&limit=100').then(r => r.json()).catch(() => null);
+        const todayPromise = fetch(`/api/v1/orders?start_date=${todayIST}&limit=200`).then(r => r.json()).catch(() => null);
+
+        const [statsJson, mainJson, activeJson, todayJson] = await Promise.all([statsPromise, mainOrdersPromise, activePromise, todayPromise]);
+
+        if (statsJson && statsJson.status === 1) {
+          renderStats(statsJson.data);
+          updateTabCounts(statsJson.data);
+        }
+
+        const ordersMap = new Map();
+        if (mainJson && mainJson.data?.rows) {
+          mainJson.data.rows.forEach(r => ordersMap.set(String(r.oid), r));
+        }
+        if (activeJson && activeJson.data?.rows) {
+          activeJson.data.rows.forEach(r => {
+            if (!ordersMap.has(String(r.oid))) ordersMap.set(String(r.oid), r);
+          });
+        }
+        if (todayJson && todayJson.data?.rows) {
+          todayJson.data.rows.forEach(r => {
+            if (!ordersMap.has(String(r.oid))) ordersMap.set(String(r.oid), r);
+          });
+        }
+
+        allOrders = Array.from(ordersMap.values());
+        if (statsJson && statsJson.data) {
+          updateTabCounts(statsJson.data);
+        } else {
+          updateTabCounts(null);
+        }
+        applyFilters();
+      } catch (err) {
+        console.error('Orders fetch error:', err);
+        if (!isSilent) Admin.message('Error fetching orders: ' + err.message, true);
+        applyFilters();
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      }
+    }
+
+    function renderStats(stats) {
+      document.getElementById('kpi-total-orders').innerText = Number(stats.totalOrders || 0).toLocaleString();
+      document.getElementById('kpi-total-earnings').innerText = '₹' + Number(stats.totalEarnings || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+      document.getElementById('kpi-delivered-orders').innerText = Number(stats.delivered || 0).toLocaleString();
+      document.getElementById('kpi-cancelled-orders').innerText = Number(stats.cancelled || 0).toLocaleString();
+      document.getElementById('kpi-pending-orders').innerText = Number(stats.pending || 0).toLocaleString();
+
+      if (document.getElementById('sidebar-order-count')) {
+        const sBadge = document.getElementById('sidebar-order-badge') || document.getElementById('sidebar-order-count');
+        if (sBadge) sBadge.innerText = Number(stats.totalOrders || 0).toLocaleString();
+      }
+    }
+
+    function updateTabCounts(statsData) {
+      let cActive = 0, cConfirmed = 0, cPrep = 0, cOut = 0, cDel = 0, cPart = 0, cUndel = 0, cCanc = 0;
+      let totalAll = statsData?.totalOrders || allOrders.length;
+
+      if (statsData?.statusBreakdown && Array.isArray(statsData.statusBreakdown)) {
+        statsData.statusBreakdown.forEach(s => {
+          const cnt = Number(s.count || 0);
+          if (s.status === 'ORDER_CONFIRMED') cConfirmed = cnt;
+          else if (s.status === 'ORDER_PREPARING') cPrep = cnt;
+          else if (s.status === 'ORDER_OUT_FOR_DELIVERY') cOut = cnt;
+          else if (s.status === 'ORDER_DELIVERED') cDel = cnt;
+          else if (s.status === 'ORDER_PARTIALLY_DELIVERED') cPart = cnt;
+          else if (s.status === 'ORDER_UNDELIVERED') cUndel = cnt;
+          else if (s.status === 'ORDER_CANCELLED') cCanc = cnt;
+        });
+        cActive = cConfirmed + cPrep + cOut;
+      } else {
+        allOrders.forEach(o => {
+          const key = OrderProgress.describe(o.status).key;
+          if (key === 'ORDER_CONFIRMED') cConfirmed++;
+          else if (key === 'ORDER_PREPARING') cPrep++;
+          else if (key === 'ORDER_OUT_FOR_DELIVERY') cOut++;
+          else if (key === 'ORDER_DELIVERED' || key === 'COMPLETED') cDel++;
+          else if (key === 'ORDER_PARTIALLY_DELIVERED') cPart++;
+          else if (key === 'ORDER_UNDELIVERED') cUndel++;
+          else if (key === 'ORDER_CANCELLED' || key === 'CANCELLED') cCanc++;
+          if (!['ORDER_DELIVERED', 'COMPLETED', 'ORDER_CANCELLED', 'CANCELLED', 'ORDER_UNDELIVERED'].includes(key)) cActive++;
+        });
+      }
+
+      const setT = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = Number(val).toLocaleString(); };
+      setT('viewmode-count-active', cActive);
+      setT('viewmode-count-all', totalAll);
+      setT('active-count-all', cActive);
+      setT('active-count-confirmed', cConfirmed);
+      setT('active-count-preparing', cPrep);
+      setT('active-count-out', cOut);
+
+      setT('tab-count-active', cActive);
+      setT('tab-count-all', totalAll);
+      setT('tab-count-confirmed', cConfirmed);
+      setT('tab-count-preparing', cPrep);
+      setT('tab-count-out', cOut);
+      setT('tab-count-delivered', cDel);
+      setT('tab-count-partial', cPart);
+      setT('tab-count-undelivered', cUndel);
+      setT('tab-count-cancelled', cCanc);
+
+      setT('radar-confirmed-count', cConfirmed);
+      setT('radar-preparing-count', cPrep);
+      setT('radar-out-count', cOut);
+      setT('radar-total-active', cActive);
+      const activeBadge = document.querySelector('#sublink-orders-live span.font-mono');
+      if (activeBadge) activeBadge.innerText = Number(cActive).toLocaleString();
+    }
+
+    function setActiveSubFilter(status) {
+      currentStatus = status;
+      const subtabs = [
+        { id: 'subtab-ACTIVE', key: 'ACTIVE' },
+        { id: 'subtab-ACTIVE_CONFIRMED', key: 'CONFIRMED' },
+        { id: 'subtab-ACTIVE_PREPARING', key: 'ORDER_PREPARING' },
+        { id: 'subtab-ACTIVE_OUT', key: 'ORDER_OUT_FOR_DELIVERY' }
+      ];
+      subtabs.forEach(t => {
+        const el = document.getElementById(t.id);
+        if (!el) return;
+        if (t.key === status) {
+          el.className = 'px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-active-emerald';
+        } else {
+          el.className = 'px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-inactive';
+        }
+      });
+      currentPage = 1;
+      applyFilters();
+    }
+
+    function setAllSubFilter(status) {
+      currentStatus = status;
+      const subtabs = [
+        { id: 'tab-ALL', key: 'ALL' },
+        { id: 'tab-ORDER_DELIVERED', key: 'ORDER_DELIVERED' },
+        { id: 'tab-ORDER_CANCELLED', key: 'ORDER_CANCELLED' },
+        { id: 'tab-ALL_ACTIVE', key: 'ACTIVE' },
+        { id: 'tab-CONFIRMED', key: 'CONFIRMED' },
+        { id: 'tab-ORDER_PREPARING', key: 'ORDER_PREPARING' },
+        { id: 'tab-ORDER_OUT_FOR_DELIVERY', key: 'ORDER_OUT_FOR_DELIVERY' },
+        { id: 'tab-ORDER_PARTIALLY_DELIVERED', key: 'ORDER_PARTIALLY_DELIVERED' },
+        { id: 'tab-ORDER_UNDELIVERED', key: 'ORDER_UNDELIVERED' }
+      ];
+      subtabs.forEach(t => {
+        const el = document.getElementById(t.id);
+        if (!el) return;
+        if (t.key === status) {
+          el.className = 'px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-active-orange';
+        } else {
+          el.className = 'px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-inactive';
+        }
+      });
+      currentPage = 1;
+      applyFilters();
+    }
+
+    function setStatusFilter(status) {
+      if (currentViewMode === 'ACTIVE') {
+        setActiveSubFilter(status);
+      } else {
+        setAllSubFilter(status);
+      }
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      if (mode === 'ACTIVE') {
+        currentStatus = 'ACTIVE';
+        currentDateRange = 'ALL';
+        setActiveSubFilter('ACTIVE');
+      } else {
+        currentStatus = 'ALL';
+        setAllSubFilter('ALL');
+      }
+      renderViewModeUI();
+      updateSidebarActiveLink();
+      try {
+        const url = new URL(window.location.href);
+        if (mode === 'ACTIVE') {
+          url.searchParams.set('filter', 'active');
+          url.searchParams.delete('range');
+          url.searchParams.delete('start_date');
+          url.searchParams.delete('end_date');
+        } else {
+          url.searchParams.delete('filter');
+        }
+        window.history.replaceState(null, '', url.pathname + url.search);
+      } catch(e){}
+      currentPage = 1;
+      applyFilters();
+      if (mode === 'ALL' && currentDateRange !== 'ALL') {
+        fetchOrdersData();
+      }
+    }
+
+    function renderViewModeUI() {
+      const btnActive = document.getElementById('viewmode-btn-active');
+      const btnAll = document.getElementById('viewmode-btn-all');
+      const activePill = document.getElementById('active-live-status-pill');
+      const allDateControls = document.getElementById('all-view-date-controls');
+      const activeRow = document.getElementById('active-subtabs-row');
+      const allRow = document.getElementById('all-subtabs-row');
+      const banner = document.getElementById('active-orders-banner');
+      const todayClosedSection = document.getElementById('today-closed-section');
+      const todayLabel = document.getElementById('active-today-label');
+      const heading = document.getElementById('page-main-heading');
+      const subheading = document.getElementById('page-main-subheading');
+
+      if (todayLabel) {
+        todayLabel.innerText = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+      }
+
+      if (currentViewMode === 'ACTIVE') {
+        if (heading) heading.innerText = 'Active Orders Cockpit';
+        if (subheading) subheading.innerText = 'Real-time railway meal bookings, train halt countdown, and station platform delivery';
+        if (btnActive) {
+          btnActive.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-active-emerald';
+        }
+        if (btnAll) {
+          btnAll.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-inactive';
+        }
+        if (activePill) activePill.classList.remove('hidden');
+        if (allDateControls) allDateControls.classList.add('hidden');
+        if (activeRow) activeRow.classList.remove('hidden');
+        if (allRow) allRow.classList.add('hidden');
+        if (banner) banner.classList.remove('hidden');
+        if (todayClosedSection) todayClosedSection.classList.remove('hidden');
+      } else {
+        if (heading) heading.innerText = 'All Orders Master Archive';
+        if (subheading) subheading.innerText = 'Complete historical records, date-range search, and full railway meal booking audit';
+        if (btnActive) {
+          btnActive.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-inactive';
+        }
+        if (btnAll) {
+          btnAll.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-active-orange';
+        }
+        if (activePill) activePill.classList.add('hidden');
+        if (allDateControls) allDateControls.classList.remove('hidden');
+        if (activeRow) activeRow.classList.add('hidden');
+        if (allRow) allRow.classList.remove('hidden');
+        if (banner) banner.classList.add('hidden');
+        if (todayClosedSection) todayClosedSection.classList.add('hidden');
+      }
+    }
+
+    function updateSidebarActiveLink() {
+      const liveLink = document.getElementById('sublink-orders-live');
+      const allLink = document.getElementById('sublink-orders');
+      if (liveLink && allLink) {
+        if (currentViewMode === 'ACTIVE') {
+          liveLink.classList.add('active');
+          allLink.classList.remove('active');
+        } else {
+          allLink.classList.add('active');
+          liveLink.classList.remove('active');
+        }
+      }
+    }
+
+    function handleSearch(val) {
+      searchQuery = (val || '').toLowerCase().trim();
+      currentPage = 1;
+      applyFilters();
+    }
+
+    function handleStationFilter(val) {
+      currentStation = val;
+      currentPage = 1;
+      applyFilters();
+    }
+
+    async function advanceOrderStatus(oid, newStatus, comment) {
+      try {
+        const res = await fetch(`/api/v1/order/${oid}`, {
+          method: 'PUT',
+          headers: { 
+            'Content-Type': 'application/json',
+            'x-olf-request': '1'
+          },
+          body: JSON.stringify({ 
+            status: newStatus,
+            comment: comment || `Updated via railway operations panel to ${newStatus}`
+          })
+        });
+        const json = await res.json();
+        if (!res.ok || json.status !== 1) throw new Error(json.info || 'Could not update order status');
+
+        Admin.message(`Order #${oid} ${newStatus === 'ORDER_DELIVERED' ? 'delivered successfully and removed from Active Orders' : 'status advanced to ' + newStatus.replace(/^ORDER_/, '')}`);
+        
+        // Update local object
+        const target = allOrders.find(o => String(o.oid) === String(oid));
+        if (target) {
+          target.status = newStatus;
+          target.updated_at = new Date().toISOString();
+        }
+        
+        // Instantly re-filter & update tab counters without waiting for network
+        applyFilters();
+        updateTabCounts(null);
+        
+        fetchOrdersData(true);
+
+        if (document.getElementById('orderDetailDrawer') && !document.getElementById('orderDetailDrawer').classList.contains('hidden')) {
+          openOrderDrawer(oid);
+        }
+      } catch (err) {
+        Admin.message('Failed to advance order: ' + err.message, true);
+      }
+    }
+
+    function openOtpModal(oid) {
+      activeOtpTargetOid = oid;
+      const order = allOrders.find(o => String(o.oid) === String(oid));
+      const modal = document.getElementById('otpModal');
+      const orderIdSpan = document.getElementById('modal-otp-order-id');
+      const trainSpan = document.getElementById('modal-otp-train-info');
+      const input = document.getElementById('modal-otp-input');
+
+      if (orderIdSpan) orderIdSpan.innerText = 'Order #' + oid;
+      if (trainSpan && order) {
+        const del = (order.delivery_details && order.delivery_details.deliveryDetails) || {};
+        trainSpan.innerText = `Train ${del.trainNo || ''} ${del.trainName || ''} • Coach ${del.coach || 'B1'} / Berth ${del.berth || '42'}`;
+      }
+      if (input) { input.value = ''; input.focus(); }
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeOtpModal() {
+      activeOtpTargetOid = null;
+      const modal = document.getElementById('otpModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    async function confirmDeliveryWithOtp() {
+      const input = document.getElementById('modal-otp-input');
+      const otp = (input?.value || '').trim();
+      if (!otp) {
+        Admin.message('Please enter the 4-digit passenger OTP', true);
+        return;
+      }
+      if (!activeOtpTargetOid) return;
+      
+      const oid = activeOtpTargetOid;
+      closeOtpModal();
+      await advanceOrderStatus(oid, 'ORDER_DELIVERED', `Passenger OTP verified: ${otp} at berth handover`);
+    }
+
+    function applyFilters() {
+      const bounds = currentDateRange !== 'ALL' ? getDateBounds(currentDateRange) : null;
+      filteredOrders = allOrders.filter(order => {
+        const key = OrderProgress.describe(order.status).key;
+
+        // View Mode & Status Filter
+        if (currentViewMode === 'ACTIVE') {
+          // Strictly ONLY show in-flight orders (Confirmed, Preparing, Dispatched)
+          // Exclude ORDER_PENDING, ORDER_DELIVERED, COMPLETED, CANCELLED, UNDELIVERED
+          const IN_FLIGHT_KEYS = ['ORDER_CONFIRMED', 'ORDER_PREPARING', 'ORDER_OUT_FOR_DELIVERY'];
+          if (!IN_FLIGHT_KEYS.includes(key)) return false;
+
+          if (currentStatus === 'CONFIRMED' && key !== 'ORDER_CONFIRMED') return false;
+          if (currentStatus === 'ORDER_PREPARING' && key !== 'ORDER_PREPARING') return false;
+          if (currentStatus === 'ORDER_OUT_FOR_DELIVERY' && key !== 'ORDER_OUT_FOR_DELIVERY') return false;
+        } else {
+          // All Orders View
+          if (currentStatus !== 'ALL') {
+            if (currentStatus === 'ACTIVE') {
+              if (['ORDER_DELIVERED', 'COMPLETED', 'ORDER_CANCELLED', 'CANCELLED', 'ORDER_UNDELIVERED'].includes(key)) return false;
+            } else {
+              const actual = ({COMPLETED:'ORDER_DELIVERED', CANCELLED:'ORDER_CANCELLED'})[key] || key;
+              const wanted = currentStatus === 'CONFIRMED' ? 'ORDER_CONFIRMED' : currentStatus;
+              if (actual !== wanted) return false;
+            }
+          }
+
+          // Date Range filter (only applies in All Orders Archive)
+          if (currentDateRange !== 'ALL' && bounds) {
+            if (!isOrderInDateRange(order, bounds.startDate, bounds.endDate)) {
+              return false;
+            }
+          }
+        }
+
+        // Station filter
+        if (currentStation !== 'ALL') {
+          const stCode = (order.station_code || (order.delivery_details && order.delivery_details.deliveryDetails && order.delivery_details.deliveryDetails.stationCode) || '').toUpperCase();
+          if (stCode !== currentStation) return false;
+        }
+
+        // Search Query filter
+        if (searchQuery) {
+          const oid = String(order.oid || '').toLowerCase();
+          const pnr = String((order.delivery_details && order.delivery_details.deliveryDetails && order.delivery_details.deliveryDetails.pnr) || '').toLowerCase();
+          const customerName = String((order.customer_info && order.customer_info.customerDetails && order.customer_info.customerDetails.fullName) || '').toLowerCase();
+          const customerPhone = String((order.customer_info && order.customer_info.customerDetails && order.customer_info.customerDetails.mobile) || '').toLowerCase();
+          const trainName = String((order.delivery_details && order.delivery_details.deliveryDetails && order.delivery_details.deliveryDetails.trainName) || '').toLowerCase();
+          const trainNo = String((order.delivery_details && order.delivery_details.deliveryDetails && order.delivery_details.deliveryDetails.trainNo) || '').toLowerCase();
+          const outlet = String(order.outlet_name || '').toLowerCase();
+
+          const matches = oid.includes(searchQuery) ||
+                          pnr.includes(searchQuery) ||
+                          customerName.includes(searchQuery) ||
+                          customerPhone.includes(searchQuery) ||
+                          trainName.includes(searchQuery) ||
+                          trainNo.includes(searchQuery) ||
+                          outlet.includes(searchQuery);
+          if (!matches) return false;
+        }
+
+        return true;
+      });
+
+      document.getElementById('showing-count').innerText = filteredOrders.length;
+      renderTable();
+      renderTodayClosedOrders();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('orders-table-body');
+      if (!filteredOrders.length) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center py-12 text-slate-400"><span class="material-symbols-outlined text-[36px] text-slate-600 block mb-2">shopping_bag</span>No matching orders found</td></tr>';
+        document.getElementById('current-page').innerText = 1;
+        document.getElementById('total-pages').innerText = 1;
+        document.getElementById('prevPageBtn').disabled = true;
+        document.getElementById('nextPageBtn').disabled = true;
+        return;
+      }
+
+      const totalPages = Math.ceil(filteredOrders.length / pageSize) || 1;
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      const pageRows = filteredOrders.slice(start, end);
+
+      document.getElementById('current-page').innerText = currentPage;
+      document.getElementById('total-pages').innerText = totalPages;
+      document.getElementById('prevPageBtn').disabled = currentPage <= 1;
+      document.getElementById('nextPageBtn').disabled = currentPage >= totalPages;
+
+      let html = '';
+      pageRows.forEach((row) => {
+        const delDetails = (row.delivery_details && row.delivery_details.deliveryDetails) || {};
+        const custDetails = (row.customer_info && row.customer_info.customerDetails) || {};
+        const itemsList = (row.menu_items && row.menu_items.items) || [];
+
+        // Items display
+        const firstItem = itemsList[0] || {};
+        const itemsDisplay = itemsList.length > 0 
+          ? `${firstItem.name || 'Item'} ${firstItem.quantity ? 'x' + firstItem.quantity : ''} ${itemsList.length > 1 ? '<span class="text-slate-500 font-medium">+' + (itemsList.length - 1) + ' more</span>' : ''}`
+          : 'Custom Meal';
+
+        const isVeg = firstItem.isVegetarian === 1;
+        const statusKey = OrderProgress.describe(row.status).key;
+        const statusBadge = OrderProgress.render(row.status, row.oid, false, row.delivery_date, row.created_at, row.updated_at);
+
+        // Amount & Mode
+        const modeBadge = row.mode === 'PRE_PAID' 
+          ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-bold ml-1.5 border border-emerald-500/30">PREPAID</span>'
+          : '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-bold ml-1.5 border border-amber-500/30">COD</span>';
+
+        const totalPrice = firstItem.SellingPrice ? '₹' + firstItem.SellingPrice : '₹335.00';
+
+        // Check if passenger mobile is masked or cutoff pending
+        const hasMobile = Boolean(custDetails.mobile && !custDetails.mobile.includes('***'));
+
+        // Customer details block
+        const customerBlock = `
+          <div class="font-semibold text-slate-900 dark:text-white text-xs">${custDetails.fullName || 'Passenger'}</div>
+          <div class="mt-0.5">
+            ${hasMobile ? `
+              <a href="tel:${custDetails.mobile}" onclick="event.stopPropagation()" class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1 font-medium">
+                <span class="material-symbols-outlined text-[13px]">phone</span> ${custDetails.mobile}
+              </a>
+            ` : `
+              <span class="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20" title="Passenger contact unmasks at 1-2h cutoff">
+                <span class="material-symbols-outlined text-[11px]">lock</span> Masked (Cutoff)
+              </span>
+            `}
+          </div>
+        `;
+
+        // Live IRCTC ETA Check
+        const eta = (delDetails.eta || (row.delivery_details && row.delivery_details.eta)) || null;
+        const isLate = eta && eta.status === 'RUNNING_LATE' && Number(eta.delayInMinutes || 0) > 0;
+
+        // Train & Delivery Block (Sleek single-line train name + coach badge)
+        const trainNum = delDetails.trainNo || delDetails.trainNumber || '';
+        const trainNm = delDetails.trainName || 'Express';
+        const trainBlock = `
+          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 whitespace-nowrap">
+            ${trainNum ? `<span class="px-1.5 py-0.5 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[11px] font-bold shrink-0">${trainNum}</span>` : ''}
+            <span class="truncate font-semibold text-xs text-slate-800 dark:text-slate-100 max-w-[160px]" title="${trainNm}">${trainNm}</span>
+          </div>
+          <div class="mt-1 flex items-center gap-2 flex-wrap">
+            <span class="coach-berth-badge px-2 py-0.5 rounded text-[11px]">
+              Coach ${delDetails.coach || 'B1'} &bull; Berth ${delDetails.berth || '42'}
+            </span>
+            <span class="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
+              ${row.station_name || delDetails.station || 'Station'} <strong class="text-amber-500 dark:text-amber-400 font-mono font-bold">(${row.station_code || delDetails.stationCode || 'STN'})</strong>
+            </span>
+            ${isLate ? `
+              <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-mono whitespace-nowrap">
+                <span class="material-symbols-outlined text-[11px]">warning</span> Late by ${eta.delayInMinutes}m (${eta.scheduledArrival} &rarr; ${eta.estimatedArrival}) &bull; PF ${eta.platformNumber || '1'}
+              </span>
+            ` : ''}
+          </div>
+        `;
+
+        // Polish Status Badges - clean railway status pills without SLA noise
+        let statusBadgeHtml = '';
+        if (statusKey === 'ORDER_CONFIRMED') {
+          statusBadgeHtml = `
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Confirmed
+              </span>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Stage 2 &bull; Order Locked</div>
+            </div>
+          `;
+        } else if (statusKey === 'ORDER_PREPARING') {
+          statusBadgeHtml = `
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-700 dark:text-blue-400 border border-blue-500/30">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> In Kitchen
+              </span>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Stage 3 &bull; Cooking</div>
+            </div>
+          `;
+        } else if (statusKey === 'ORDER_OUT_FOR_DELIVERY') {
+          statusBadgeHtml = `
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-500/15 text-purple-700 dark:text-purple-400 border border-purple-500/30">
+                <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span> Dispatched
+              </span>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Platform Handover &bull; OTP</div>
+            </div>
+          `;
+        } else if (statusKey === 'ORDER_DELIVERED' || statusKey === 'COMPLETED') {
+          statusBadgeHtml = `
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                <span class="material-symbols-outlined text-[13px]">check_circle</span> Delivered
+              </span>
+              <div class="text-[10px] text-emerald-600 dark:text-emerald-500 font-medium">Handover Verified</div>
+            </div>
+          `;
+        } else if (statusKey === 'ORDER_CANCELLED' || statusKey === 'CANCELLED') {
+          statusBadgeHtml = `
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/30">
+                <span class="material-symbols-outlined text-[13px]">cancel</span> Cancelled
+              </span>
+              <div class="text-[10px] text-rose-500 font-medium">Order Cancelled</div>
+            </div>
+          `;
+        } else {
+          statusBadgeHtml = `
+            <div class="space-y-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-500/15 text-slate-700 dark:text-slate-400 border border-slate-500/30">
+                ${row.status || 'Active'}
+              </span>
+            </div>
+          `;
+        }
+
+        // Actions column with direct Railway lifecycle buttons
+        let actionButtons = '';
+        if (statusKey === 'ORDER_CONFIRMED') {
+          actionButtons = `
+            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_PREPARING')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-sm flex items-center gap-1 transition-all" title="Cutoff Reached: Send to Kitchen for Cooking">
+              <span class="material-symbols-outlined text-[13px]">skillet</span> Cook
+            </button>
+          `;
+        } else if (statusKey === 'ORDER_PREPARING') {
+          actionButtons = `
+            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_OUT_FOR_DELIVERY')" class="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] shadow-sm flex items-center gap-1 transition-all" title="Food Packed: Dispatch Rider to Station Platform">
+              <span class="material-symbols-outlined text-[13px]">moped</span> Dispatch
+            </button>
+          `;
+        } else if (statusKey === 'ORDER_OUT_FOR_DELIVERY') {
+          actionButtons = `
+            <button onclick="openOtpModal('${row.oid}')" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-[#FF7A00] hover:brightness-110 text-white font-bold text-[11px] shadow-sm flex items-center gap-1 transition-all" title="Train Halt: Collect Delivery OTP from Passenger">
+              <span class="material-symbols-outlined text-[13px]">pin</span> Verify OTP
+            </button>
+          `;
+        } else if (statusKey === 'ORDER_DELIVERED' || statusKey === 'COMPLETED') {
+          actionButtons = `
+            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1 px-1.5 py-0.5">
+              <span class="material-symbols-outlined text-[13px]">check_circle</span> Delivered
+            </span>
+          `;
+        }
+
+        html += `
+          <tr class="${isLate ? 'bg-amber-500/10 dark:bg-amber-950/25 hover:bg-amber-500/15 dark:hover:bg-amber-950/35 border-l-4 border-l-amber-500 transition-colors cursor-pointer group' : 'hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group'}" onclick="openOrderDrawer('${row.oid}')">
+            <!-- Order ID & PNR -->
+            <td class="py-3 px-4 min-w-[130px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span>#${row.oid}</span>
+                ${isLate ? '<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 whitespace-nowrap animate-pulse">⚠️ DELAYED</span>' : ''}
+              </div>
+              <div class="text-[10px] font-sans text-slate-500 font-normal flex items-center gap-1 mt-0.5">
+                <span>PNR:</span> <strong class="text-slate-700 dark:text-slate-300 font-mono">${delDetails.pnr || '---'}</strong>
+              </div>
+            </td>
+
+            <!-- Customer -->
+            <td class="py-3 px-4 min-w-[140px]">
+              ${customerBlock}
+            </td>
+
+            <!-- Train & Delivery -->
+            <td class="py-3 px-4 min-w-[210px]">
+              ${trainBlock}
+            </td>
+
+            <!-- Items -->
+            <td class="py-3 px-4 min-w-[200px]">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full ${isVeg ? 'bg-emerald-500 ring-2 ring-emerald-500/20' : 'bg-rose-500 ring-2 ring-rose-500/20'} shrink-0" title="${isVeg ? 'Vegetarian' : 'Non-Vegetarian'}"></span>
+                <span class="truncate max-w-[200px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
+              </div>
+            </td>
+
+            <!-- Amount -->
+            <td class="py-3 px-4 min-w-[110px] font-mono font-semibold text-slate-900 dark:text-white">
+              <div class="text-xs">${totalPrice}</div>
+              <div class="mt-0.5">${modeBadge}</div>
+            </td>
+
+            <!-- Status -->
+            <td class="py-3 px-4 min-w-[150px]">
+              ${statusBadgeHtml}
+            </td>
+
+            <!-- Outlet -->
+            <td class="py-3 px-4 min-w-[140px] text-slate-700 dark:text-slate-300">
+              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[140px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
+              <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-0.5 mt-0.5">
+                <span class="material-symbols-outlined text-[12px]">verified</span> IRCTC Outlet
+              </div>
+            </td>
+
+            <!-- Actions -->
+            <td class="py-3 px-4 min-w-[130px] text-right" onclick="event.stopPropagation()">
+              <div class="flex items-center justify-end gap-1.5">
+                ${actionButtons}
+                <button onclick="openOrderDrawer('${row.oid}')" class="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors" title="View Order Details">
+                  <span class="material-symbols-outlined text-[18px]">visibility</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    function changePage(delta) {
+      currentPage += delta;
+      renderTable();
+    }
+
+    function isOrderOfToday(order) {
+      if (!order) return false;
+      const todayIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date()); // 'YYYY-MM-DD'
+      const candidates = [
+        order.delivery_date,
+        order.created_at,
+        order.updated_at,
+        order.delivery_details?.deliveryDetails?.deliveryDate,
+        order.delivery_details?.deliveryDate
+      ];
+
+      for (const raw of candidates) {
+        if (!raw) continue;
+        if (typeof raw === 'string') {
+          const matchYMD = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+          if (matchYMD && matchYMD[0] === todayIST) return true;
+          const matchDMY = raw.match(/^(\d{2})[-/](\d{2})[-/](\d{4})/);
+          if (matchDMY) {
+            const formatted = `${matchDMY[3]}-${matchDMY[2]}-${matchDMY[1]}`;
+            if (formatted === todayIST) return true;
+          }
+        }
+        try {
+          const d = new Date(raw);
+          if (!isNaN(d.getTime())) {
+            const dIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(d);
+            if (dIST === todayIST) return true;
+          }
+        } catch (e) {}
+      }
+      return false;
+    }
+
+    function renderTodayClosedOrders() {
+      const section = document.getElementById('today-closed-section');
+      if (!section) return;
+      if (currentViewMode !== 'ACTIVE') {
+        section.classList.add('hidden');
+        return;
+      } else {
+        section.classList.remove('hidden');
+      }
+
+      const tbody = document.getElementById('today-closed-table-body');
+      if (!tbody) return;
+
+      const dateLabel = document.getElementById('today-date-label');
+      if (dateLabel) {
+        dateLabel.innerText = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+      }
+
+      const CLOSED_KEYS = ['ORDER_DELIVERED', 'COMPLETED', 'ORDER_CANCELLED', 'CANCELLED', 'ORDER_UNDELIVERED', 'ORDER_PARTIALLY_DELIVERED'];
+      
+      const todayClosed = allOrders.filter(o => {
+        const key = OrderProgress.describe(o.status).key;
+        return CLOSED_KEYS.includes(key) && isOrderOfToday(o);
+      });
+
+      // Sort newest finished first
+      todayClosed.sort((a, b) => {
+        const tA = new Date(a.updated_at || a.delivery_date || a.created_at || 0).getTime();
+        const tB = new Date(b.updated_at || b.delivery_date || b.created_at || 0).getTime();
+        return tB - tA;
+      });
+
+      let cDel = 0, cCanc = 0, cUndel = 0;
+      todayClosed.forEach(o => {
+        const key = OrderProgress.describe(o.status).key;
+        if (['ORDER_DELIVERED', 'COMPLETED'].includes(key)) cDel++;
+        else if (['ORDER_CANCELLED', 'CANCELLED'].includes(key)) cCanc++;
+        else if (['ORDER_UNDELIVERED', 'ORDER_PARTIALLY_DELIVERED'].includes(key)) cUndel++;
+      });
+
+      const badge = document.getElementById('today-closed-badge');
+      if (badge) badge.innerText = `${todayClosed.length} Today`;
+      const elDel = document.getElementById('cnt-today-delivered');
+      if (elDel) elDel.innerText = cDel;
+      const elCanc = document.getElementById('cnt-today-cancelled');
+      if (elCanc) elCanc.innerText = cCanc;
+      const elUndel = document.getElementById('cnt-today-undelivered');
+      if (elUndel) elUndel.innerText = cUndel;
+
+      if (!todayClosed.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="text-center py-10 text-slate-400">
+              <span class="material-symbols-outlined text-[28px] text-slate-600 block mb-1">inventory_2</span>
+              <span class="text-xs font-semibold text-slate-300 dark:text-slate-300 light:text-slate-700">No finished or closed orders for today yet.</span>
+              <p class="text-[11px] text-slate-500 mt-0.5">Orders completed, delivered, or cancelled today will automatically appear here.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = todayClosed.map(row => {
+        const delDetails = (row.delivery_details && row.delivery_details.deliveryDetails) || {};
+        const custDetails = (row.customer_info && row.customer_info.customerDetails) || {};
+        const itemsList = (row.menu_items && row.menu_items.items) || [];
+        const firstItem = itemsList[0] || {};
+        const itemsDisplay = itemsList.length > 0 
+          ? `${Admin.esc(firstItem.name || 'Item')} ${firstItem.quantity ? 'x' + firstItem.quantity : ''} ${itemsList.length > 1 ? '<span class="text-slate-500 font-medium">+' + (itemsList.length - 1) + ' more</span>' : ''}`
+          : 'Custom Meal';
+
+        const statusKey = OrderProgress.describe(row.status).key;
+        let finalStatusHtml = '';
+        if (statusKey === 'ORDER_DELIVERED' || statusKey === 'COMPLETED') {
+          finalStatusHtml = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30"><span class="material-symbols-outlined text-[13px]">check_circle</span> Delivered</span>';
+        } else if (statusKey === 'ORDER_CANCELLED' || statusKey === 'CANCELLED') {
+          finalStatusHtml = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30"><span class="material-symbols-outlined text-[13px]">cancel</span> Cancelled</span>';
+        } else if (statusKey === 'ORDER_UNDELIVERED') {
+          finalStatusHtml = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30"><span class="material-symbols-outlined text-[13px]">warning</span> Undelivered</span>';
+        } else {
+          finalStatusHtml = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30">${statusKey.replace(/^ORDER_/, '')}</span>`;
+        }
+
+        const modeBadge = row.mode === 'PRE_PAID' 
+          ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold ml-1 border border-emerald-500/30">PREPAID</span>'
+          : '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold ml-1 border border-amber-500/30">COD</span>';
+
+        const totalPrice = firstItem.SellingPrice ? '₹' + firstItem.SellingPrice : (row.amount ? '₹' + row.amount : '₹335.00');
+        const trainNum = delDetails.trainNo || delDetails.trainNumber || '';
+        const trainNm = delDetails.trainName || 'Express';
+
+        return `
+          <tr class="hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group" onclick="openOrderDrawer('${row.oid}')">
+            <td class="py-3 px-4 min-w-[130px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+              <div>#${row.oid}</div>
+              <div class="text-[10px] font-sans text-slate-500 font-normal mt-0.5">
+                PNR: <strong class="text-slate-700 dark:text-slate-300 font-mono">${Admin.esc(delDetails.pnr || '---')}</strong>
+              </div>
+            </td>
+            <td class="py-3 px-4 min-w-[140px]">
+              <div class="font-semibold text-slate-900 dark:text-slate-200 text-xs">${Admin.esc(custDetails.fullName || 'Passenger')}</div>
+              <div class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">${Admin.esc(custDetails.mobile || '---')}</div>
+            </td>
+            <td class="py-3 px-4 min-w-[200px]">
+              <div class="font-bold text-slate-900 dark:text-slate-200 text-xs flex items-center gap-1.5">
+                ${trainNum ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[10px]">${trainNum}</span>` : ''}
+                <span class="truncate">${Admin.esc(trainNm)}</span>
+              </div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                Coach ${Admin.esc(delDetails.coach || 'B1')}, Berth ${Admin.esc(delDetails.berth || '42')} &bull; <strong class="text-amber-500 dark:text-amber-400 font-mono">${Admin.esc(row.station_code || delDetails.stationCode || 'STN')}</strong>
+              </div>
+            </td>
+            <td class="py-3 px-4 min-w-[180px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
+            <td class="py-3 px-4 min-w-[110px] font-mono text-xs">
+              <span class="font-bold text-slate-900 dark:text-white">${totalPrice}</span>
+              ${modeBadge}
+            </td>
+            <td class="py-3 px-4 min-w-[140px]">${finalStatusHtml}</td>
+            <td class="py-3 px-4 min-w-[130px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[150px]">
+              <div class="font-medium truncate">${Admin.esc(row.outlet_name || 'Outlet #' + row.outlet_id)}</div>
+              <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">${Admin.esc(row.station_name || delDetails.station || '')}</div>
+            </td>
+            <td class="py-3 px-4 min-w-[80px] text-right" onclick="event.stopPropagation()">
+              <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors" title="View Order Inspection">
+                <span class="material-symbols-outlined text-[18px]">visibility</span>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Slide-over Order Details with 3-Stage IRCTC Railway Lifecycle
+    function openOrderDrawer(oid) {
+      const order = allOrders.find(o => String(o.oid) === String(oid));
+      if (!order) return;
+
+      const del = (order.delivery_details && order.delivery_details.deliveryDetails) || {};
+      const cust = (order.customer_info && order.customer_info.customerDetails) || {};
+      const items = (order.menu_items && order.menu_items.items) || [];
+      const statusKey = OrderProgress.describe(order.status).key;
+
+      document.getElementById('drawer-order-id').innerText = 'Order #' + order.oid;
+      document.getElementById('drawer-date').innerText = 'Delivery Date: ' + (order.delivery_date || order.created_at || 'Today');
+
+      let itemsHtml = '';
+      items.forEach(it => {
+        itemsHtml += `
+          <div class="flex items-center justify-between py-2 border-b border-white/5">
+            <div>
+              <div class="font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full ${it.isVegetarian ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                ${it.name || 'Dish'}
+              </div>
+              <div class="text-[11px] text-slate-400">Qty: ${it.quantity || 1} • ${it.description || ''}</div>
+            </div>
+            <div class="font-mono font-bold text-white">₹${it.SellingPrice || '150'}</div>
+          </div>
+        `;
+      });
+
+      // Quick railway action box inside drawer
+      let quickActionBox = '';
+      if (statusKey === 'ORDER_CONFIRMED') {
+        quickActionBox = `
+          <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-3">
+            <div>
+              <div class="font-bold text-amber-400 text-xs flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">lock</span> Stage 2: Confirmed &amp; Locked
+              </div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Cutoff reached? Signal kitchen to start hot food cooking:</div>
+            </div>
+            <button onclick="advanceOrderStatus('${order.oid}', 'ORDER_PREPARING')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow flex items-center gap-1.5 shrink-0 transition-all">
+              <span class="material-symbols-outlined text-[15px]">skillet</span> Start Cooking
+            </button>
+          </div>
+        `;
+      } else if (statusKey === 'ORDER_PREPARING') {
+        quickActionBox = `
+          <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3">
+            <div>
+              <div class="font-bold text-emerald-400 text-xs flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">skillet</span> Stage 3: Meal Cooking in Kitchen
+              </div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Train approaching (20-30 min). Dispatch rider to station platform:</div>
+            </div>
+            <button onclick="advanceOrderStatus('${order.oid}', 'ORDER_OUT_FOR_DELIVERY')" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow flex items-center gap-1.5 shrink-0 transition-all">
+              <span class="material-symbols-outlined text-[15px]">moped</span> Send to Platform
+            </button>
+          </div>
+        `;
+      } else if (statusKey === 'ORDER_OUT_FOR_DELIVERY') {
+        quickActionBox = `
+          <div class="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="font-bold text-blue-400 text-xs flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">moped</span> Train Halt Handover (2-5 min)
+              </div>
+              <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">OTP Handover Required</span>
+            </div>
+            <div class="text-[11px] text-slate-300">Rider is at platform at Coach ${del.coach || 'B1'}. Collect 4-digit OTP:</div>
+            <div class="flex items-center gap-2 pt-1">
+              <input type="text" id="drawer-otp-input" placeholder="Enter Passenger OTP" maxlength="6" class="flex-1 px-3 py-1.5 rounded-lg bg-black/40 border border-emerald-500/50 text-white font-mono text-center text-sm tracking-widest focus:outline-none focus:border-emerald-400" />
+              <button onclick="const o = document.getElementById('drawer-otp-input')?.value; if(o){advanceOrderStatus('${order.oid}', 'ORDER_DELIVERED', 'Passenger OTP verified: ' + o);}else{Admin.message('Enter OTP', true);}" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow transition-all shrink-0">
+                Verify &amp; Deliver
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (statusKey === 'ORDER_DELIVERED' || statusKey === 'COMPLETED') {
+        quickActionBox = `
+          <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-emerald-400 text-[22px]">check_circle</span>
+              <div>
+                <div class="font-bold text-emerald-400 text-xs">Order Handover Completed</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Delivered to passenger coach &amp; OTP verified</div>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">DELIVERED</span>
+          </div>
+        `;
+      } else if (statusKey === 'ORDER_CANCELLED' || statusKey === 'CANCELLED') {
+        quickActionBox = `
+          <div class="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-rose-400 text-[22px]">cancel</span>
+              <div>
+                <div class="font-bold text-rose-400 text-xs">Order Cancelled</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Order was cancelled before fulfillment</div>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">CANCELLED</span>
+          </div>
+        `;
+      }
+
+      // 3-Stage IRCTC Railway Lifecycle Visual Stepper
+      const railwayLifecycleStepper = `
+        <div class="p-4 rounded-xl bg-black/30 border border-white/10 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="text-[10px] uppercase font-bold text-amber-400 tracking-wider flex items-center gap-1">
+              <span class="material-symbols-outlined text-[13px]">train</span> IRCTC 3-Stage Railway Lifecycle
+            </div>
+            <span class="text-[10px] font-mono text-slate-400">Strict SLA Tracking</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-[10px]">
+            <div class="p-2 rounded-lg bg-white/5 border ${statusKey === 'ORDER_CONFIRMED' || statusKey === 'ORDER_PREPARING' || statusKey === 'ORDER_OUT_FOR_DELIVERY' || statusKey === 'ORDER_DELIVERED' ? 'border-emerald-500/40 text-emerald-300' : 'border-white/10 text-slate-500'}">
+              <div class="font-bold">Stage 1: Webhook 🔔</div>
+              <div class="text-[9px] text-slate-400 mt-0.5">Order Received</div>
+            </div>
+            <div class="p-2 rounded-lg bg-white/5 border ${statusKey === 'ORDER_CONFIRMED' || statusKey === 'ORDER_PREPARING' || statusKey === 'ORDER_OUT_FOR_DELIVERY' || statusKey === 'ORDER_DELIVERED' ? 'border-emerald-500/40 text-emerald-300' : 'border-white/10 text-slate-500'}">
+              <div class="font-bold">Stage 2: Locked 🔒</div>
+              <div class="text-[9px] text-slate-400 mt-0.5">Vendor Locked</div>
+            </div>
+            <div class="p-2 rounded-lg bg-white/5 border ${statusKey === 'ORDER_PREPARING' || statusKey === 'ORDER_OUT_FOR_DELIVERY' || statusKey === 'ORDER_DELIVERED' ? 'border-emerald-500/40 text-emerald-300' : 'border-white/10 text-slate-500'}">
+              <div class="font-bold">Stage 3: Cook 🟢</div>
+              <div class="text-[9px] text-slate-400 mt-0.5">Cutoff Unmasked</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('drawer-content').innerHTML = `
+        ${OrderProgress.render(order.status, order.oid, true, order.delivery_date, order.created_at, order.updated_at)}
+
+        ${quickActionBox}
+
+        ${railwayLifecycleStepper}
+
+        <!-- Passenger Box -->
+        <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+          <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Passenger Information</div>
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-sm">${cust.fullName || 'Passenger'}</span>
+            ${cust.mobile ? `
+              <a href="tel:${cust.mobile}" class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-bold flex items-center gap-1 border border-emerald-500/30">
+                <span class="material-symbols-outlined text-[13px]">call</span> Call Passenger
+              </a>
+            ` : `
+              <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 font-bold border border-amber-500/30">Masked until cutoff</span>
+            `}
+          </div>
+          <div class="text-slate-400 font-mono text-[11px]">Phone: ${cust.mobile || '—'} • Email: ${cust.email || '—'}</div>
+        </div>
+
+        ${(del.eta && del.eta.status === 'RUNNING_LATE') ? `
+          <!-- IRCTC Live ETA Alert Banner -->
+          <div class="p-3.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-800 dark:text-amber-300 space-y-1 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="flex items-center gap-1.5 text-amber-700 dark:text-amber-400">
+                <span class="material-symbols-outlined text-[16px] text-rose-500">warning</span>
+                IRCTC Live ETA Telemetry: Train Running Late
+              </span>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-600 dark:text-rose-400 font-mono font-bold">+${del.eta.delayInMinutes} MINS LATE</span>
+            </div>
+            <div class="text-[11px] flex items-center justify-between pt-1">
+              <span>Scheduled: <strong class="font-mono">${del.eta.scheduledArrival}</strong> &rarr; Estimated Arrival: <strong class="font-mono text-rose-600 dark:text-rose-400 font-bold">${del.eta.estimatedArrival}</strong></span>
+              <span>Platform: <strong class="font-mono font-bold">${del.eta.platformNumber || '1'}</strong></span>
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Train & PNR Box -->
+        <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+          <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Train &amp; Berth Logistics</div>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div>
+              <span class="text-slate-400 text-[10px] block">Train</span>
+              <span class="font-bold text-white">${del.trainNo || 'Train'} - ${del.trainName || ''}</span>
+            </div>
+            <div>
+              <span class="text-slate-400 text-[10px] block">PNR Number</span>
+              <span class="font-bold text-amber-400 font-mono tracking-wider">${del.pnr || 'XXXXXXXXXX'}</span>
+            </div>
+            <div>
+              <span class="text-slate-400 text-[10px] block">Coach &amp; Berth</span>
+              <span class="coach-berth-badge px-2.5 py-1 rounded-md text-xs inline-block mt-0.5 shadow-sm">
+                Coach ${del.coach || 'B1'} &bull; Berth ${del.berth || '42'}
+              </span>
+            </div>
+            <div>
+              <span class="text-slate-400 text-[10px] block">Delivery Station</span>
+              <span class="font-bold text-white">${order.station_name || del.station || ''} (${order.station_code || del.stationCode || ''})</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meal Items Breakdown -->
+        <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+          <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Meal Items Breakdown</div>
+          <div>${itemsHtml || '<p class="text-slate-400">Meal details confirmed</p>'}</div>
+          <div class="flex items-center justify-between pt-2 text-xs font-bold text-white">
+            <span>Payment Mode:</span>
+            <span class="text-[#FF7A00]">${order.mode || 'CASH_ON_DELIVERY'}</span>
+          </div>
+        </div>
+
+        <!-- Outlet Info (Clickable Link to Outlet Cockpit) -->
+        <div onclick="${order.outlet_id ? `window.location.href='/outlet/' + ${order.outlet_id};` : `Admin.message('Outlet profile not available');`}" class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#FF7A00] hover:bg-white/[0.08] dark:hover:bg-white/[0.06] transition-all space-y-2 text-xs cursor-pointer group shadow-sm" title="Click to open Outlet Cockpit #${order.outlet_id || ''}">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Fulfillment Kitchen</span>
+              ${order.outlet_id ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/15 border border-[#FF7A00]/30 text-[#FF7A00] font-mono text-[10px] font-bold">#${order.outlet_id}</span>` : ''}
+            </div>
+            <span class="text-[11px] text-[#FF7A00] font-bold flex items-center gap-0.5 group-hover:underline">
+              <span>Outlet Cockpit</span>
+              <span class="material-symbols-outlined text-[14px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+            </span>
+          </div>
+          <div>
+            <div class="font-bold text-white text-xs sm:text-sm group-hover:text-[#FF7A00] transition-colors flex items-center gap-1.5">
+              <span>${order.outlet_name || 'Kitchen Partner'}</span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-0.5">FSSAI: ${order.fssai || 'Verified'} &bull; Phone: ${order.phone || '—'}</div>
+            ${order.address ? `<div class="text-[11px] text-slate-400 mt-0.5">${order.address}</div>` : ''}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('orderDetailDrawer').classList.remove('hidden');
+    }
+
+    function closeOrderDrawer() {
+      document.getElementById('orderDetailDrawer').classList.add('hidden');
+    }
+
+    function exportOrdersCsv() {
+      if (!filteredOrders.length) {
+        Admin.message('No orders to export');
+        return;
+      }
+      let csv = 'Order ID,Customer Name,Phone,Train,Coach,Berth,Station,Amount,Status,Booked From\n';
+      filteredOrders.forEach(o => {
+        const del = (o.delivery_details && o.delivery_details.deliveryDetails) || {};
+        const cust = (o.customer_info && o.customer_info.customerDetails) || {};
+        csv += `"${o.oid}","${cust.fullName || ''}","${cust.mobile || ''}","${del.trainNo || ''}","${del.coach || ''}","${del.berth || ''}","${o.station_code || ''}","${o.mode || ''}","${o.status || ''}","${o.booked_from || ''}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'olf_orders_export.csv');
+      a.click();
+    }
+
+    // Theme initializer & Safe Global Fallbacks
+    function initTheme() {
+      const saved = localStorage.getItem('olf_theme') || 'dark';
+      const html = document.documentElement;
+      if (saved === 'light') {
+        html.classList.remove('dark');
+        html.classList.add('light');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+      }
+      if (typeof updateThemeToggleIcons === 'function') updateThemeToggleIcons();
+    }
+    window.initTheme = initTheme;
+
+    window.Admin = window.Admin || {
+      message: (msg, isErr) => {
+        console.log('[Admin ' + (isErr ? 'Error' : 'Info') + ']:', msg);
+      }
+    };
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      const params = new URLSearchParams(window.location.search);
+      const filterParam = (params.get('filter') || '').toLowerCase();
+
+      // Check URL date range parameters
+      const dateRangeParam = (params.get('range') || params.get('date') || '').toUpperCase();
+      if (['TODAY', 'YESTERDAY', 'THIS_WEEK', 'THIS_MONTH'].includes(dateRangeParam)) {
+        currentDateRange = dateRangeParam;
+      }
+      const sDate = params.get('start_date');
+      const eDate = params.get('end_date');
+      if (sDate) {
+        currentDateRange = 'CUSTOM';
+        customStartDate = sDate;
+        customEndDate = eDate || sDate;
+      }
+
+      if (filterParam === 'all' || (!filterParam && (dateRangeParam || sDate))) {
+        setViewMode('ALL');
+        setAllSubFilter('ALL');
+      } else if (filterParam === 'confirmed') {
+        setViewMode('ACTIVE');
+        setActiveSubFilter('CONFIRMED');
+      } else if (filterParam === 'preparing') {
+        setViewMode('ACTIVE');
+        setActiveSubFilter('ORDER_PREPARING');
+      } else if (filterParam === 'out') {
+        setViewMode('ACTIVE');
+        setActiveSubFilter('ORDER_OUT_FOR_DELIVERY');
+      } else if (['delivered', 'cancelled', 'partial', 'undelivered'].includes(filterParam)) {
+        setViewMode('ALL');
+        const map = { delivered: 'ORDER_DELIVERED', cancelled: 'ORDER_CANCELLED', partial: 'ORDER_PARTIALLY_DELIVERED', undelivered: 'ORDER_UNDELIVERED' };
+        setAllSubFilter(map[filterParam] || 'ALL');
+      } else if (filterParam === 'active') {
+        setViewMode('ACTIVE');
+        setActiveSubFilter('ACTIVE');
+      } else {
+        // Navigating directly to /orders without filter -> All Orders Archive
+        setViewMode('ALL');
+        setAllSubFilter('ALL');
+      }
+
+      updateDatePresetButtons();
+      renderViewModeUI();
+      updateSidebarActiveLink();
+
+      fetchOrdersData();
+      startOrdersLiveSync();
+    });
+  </script>
+
+
+
+
+
+
+
+<script src="/assets/admin-existing.js"></script>
+<script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
+    }
+    updateThemeToggleIcons();
+  }
+
+  function updateThemeToggleIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll('.theme-icon-topbar').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    document.querySelectorAll('.theme-label-topbar').forEach(el => {
+      el.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+    document.querySelectorAll('.theme-toggle-btn .material-symbols-outlined, .dark-icon').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    const oldIcon = document.getElementById('themeIcon');
+    if (oldIcon) oldIcon.innerText = isDark ? 'dark_mode' : 'light_mode';
+    const oldLabel = document.getElementById('themeLabel');
+    if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  // Auto-highlight active route on page load & apply theme
+  (function initSidebar() {
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    updateThemeToggleIcons();
+
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (['/roles','/access','/roles-access'].includes(p)) {
+      activate('nav-access');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/customers')) {
+      activate('nav-customers');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      if (search.includes('filter=active')) {
+        activate(null, 'sublink-orders-live', 'sub-orders', 'chev-orders');
+      } else {
+        activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+      }
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/irctc-logs')) {
+      activate(null, 'sublink-irctc-logs', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      const report = new URLSearchParams(window.location.search).get('report') || '';
+      let reportLink = 'sublink-reports';
+      if (p.startsWith('/complaint-reports') || ['complaints','ratings'].includes(report)) reportLink = 'sublink-complaint-reports';
+      else if (report === 'invoices') reportLink = 'sublink-report-invoices';
+      else if (['wallet-balances','wallet-ledger','vendor-settlements','settlement-exceptions','refunds'].includes(report)) reportLink = 'sublink-report-finance';
+      else if (['compliance','menu-margins','network-health'].includes(report)) reportLink = 'sublink-report-network';
+      else if (['customers','item-sales','payment-mix','channel-performance'].includes(report)) reportLink = 'sublink-report-sales';
+      else if (['employees','attendance','leave-balances','payroll','recruitment'].includes(report)) reportLink = 'sublink-report-people';
+      else if (report && report !== 'daily-sales') reportLink = 'sublink-report-operations';
+      activate(null, reportLink, 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  })();
+</script>
+
+  <!-- OTP VERIFICATION MODAL FOR HANDOVER -->
+  <div id="otpModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#111622] dark:bg-[#111622] light:bg-white border border-emerald-500/40 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10 dark:border-white/10 light:border-slate-200">
+        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+          <span class="material-symbols-outlined text-[20px]">pin</span>
+          <span>Passenger Delivery OTP</span>
+        </div>
+        <button onclick="closeOtpModal()" class="text-slate-400 hover:text-white">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <div>
+        <span id="modal-otp-order-id" class="text-xs font-mono font-bold text-amber-400 block">Order #</span>
+        <span id="modal-otp-train-info" class="text-[11px] font-mono text-slate-300 block mt-0.5">Train Delivery</span>
+      </div>
+      <p class="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">
+        Train stops for only <strong>2 to 5 minutes</strong>. Collect the 4-digit OTP from passenger at coach door to confirm handover:
+      </p>
+      <div class="space-y-2">
+        <input type="text" id="modal-otp-input" placeholder="e.g. 4821" maxlength="6" class="w-full px-4 py-2.5 rounded-xl bg-black/50 dark:bg-black/50 light:bg-slate-50 border border-emerald-500/60 text-white dark:text-white light:text-slate-900 font-mono text-center text-xl tracking-widest focus:outline-none focus:border-emerald-400" />
+      </div>
+      <div class="flex items-center gap-2 pt-2">
+        <button type="button" onclick="closeOtpModal()" class="flex-1 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold">Cancel</button>
+        <button type="button" onclick="confirmDeliveryWithOtp()" class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-md transition-all">Verify &amp; Deliver</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+

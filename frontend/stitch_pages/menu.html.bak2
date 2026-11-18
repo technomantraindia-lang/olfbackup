@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link rel="icon" type="image/png" href="/icon.png?v=3"/>
+  <title>Menu Management & Dish Studio - OLF Stores</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#ff7a00",
+            "primary-hover": "#ea580c",
+            "primary-container": "#ff7a00",
+            "on-surface": "#d9e3f6",
+            "on-surface-variant": "#94a3b8",
+            "surface": "#0a1421",
+            "surface-container": "#16202e",
+            "surface-container-high": "#212a39",
+            "surface-container-highest": "#2c3544",
+            "secondary": "#10b981",
+            "secondary-container": "#059669",
+            "error": "#ef4444"
+          },
+          fontFamily: {
+            "sans": ["Verdana", "Geneva", "Tahoma", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined' !important;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      background-color: #07090D;
+      color: #d9e3f6;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a1421; }
+    ::-webkit-scrollbar-thumb { background: #2c3544; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #584235; }
+
+    /* LIGHT MODE OVERRIDES */
+    html.light body { background-color: #F8FAFC !important; color: #0F172A !important; }
+    html.light aside { background-color: #FFFFFF !important; border-color: #E2E8F0 !important; box-shadow: 2px 0 8px rgba(0,0,0,0.02); }
+    html.light header { background-color: rgba(255, 255, 255, 0.95) !important; border-color: #E2E8F0 !important; }
+    html.light .bg-\[\#0B0F17\], html.light .bg-\[\#07090D\] { background-color: #FFFFFF !important; }
+    html.light .bg-\[\#111318\] { background-color: #F8FAFC !important; border-color: #E2E8F0 !important; }
+    html.light .bg-\[\#171A20\] { background-color: #FFFFFF !important; border-color: #E2E8F0 !important; box-shadow: 0 1px 3px rgba(15,23,42,0.05); }
+    html.light .border-white\/5, html.light .border-white\/10, html.light .border-white\/\[0\.08\] { border-color: #E2E8F0 !important; }
+    html.light .text-on-surface { color: #0F172A !important; }
+    html.light .text-on-surface-variant { color: #64748B !important; }
+    html.light .sidebar-container { background-color: #FFFFFF !important; border-right: 1px solid #E2E8F0 !important; }
+    html.light .sidebar-item { color: #334155 !important; }
+    html.light .sidebar-item:hover { background-color: #F8FAFC !important; color: #0F172A !important; }
+    html.light .sidebar-item.active { background-color: #FFF7ED !important; color: #C2410C !important; }
+    html.light .sidebar-item.active .sidebar-icon { color: #EA580C !important; }
+    html.light .modal-card { background-color: #FFFFFF !important; color: #0F172A !important; border-color: #E2E8F0 !important; }
+    html.light .card-box { background-color: #F8FAFC !important; border-color: #E2E8F0 !important; }
+    html.light table tbody tr:hover { background-color: #F1F5F9 !important; }
+    html.light table thead { background-color: #F8FAFC !important; color: #475569 !important; }
+  </style>
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
+
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
+
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\[\#111622\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\[\#111318\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\[\#171A20\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\[\#171F30\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\[\#0B0F17\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\[\#111622\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\[\#111318\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\[\#171A20\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\[\#171F30\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\[\#0B0F17\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\[\#FF7A00\],
+  html.light a.bg-\[\#FF7A00\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\[\#FF7A00\] *,
+  html.light a.bg-\[\#FF7A00\] * {
+    color: #FFFFFF !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+  html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+</style>
+</head>
+
+<body class="bg-[#07090D] text-on-surface antialiased selection:bg-primary-container selection:text-white">
+
+<!-- MASTER CANONICAL SIDEBAR (245px) -->
+<aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
+    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF Stores — Command Center">
+      <img src="/assets/logo-CciIFwFm.png" alt="OLF Stores" class="h-8 max-w-[145px] object-contain transition-transform group-hover:scale-[1.02]" onerror="this.onerror=null; this.src='/olf-icon.png';" />
+    </a>
+    <div class="flex items-center gap-1.5">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="IRCTC Real-time Sync Active">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Live</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
+        <span class="truncate">Dashboard</span>
+      </a>
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">86</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+          <a href="/orders" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">86</span>
+          </a>
+          <a href="/allque" id="sublink-queries" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Customer Queries</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">308</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">308</span>
+          </a>
+          <a href="/outlets?filter=all" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">1,075</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">980</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">43</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">15</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations (308)</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 6. Menu Management -->
+      <a href="/menu" id="nav-menu" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">restaurant_menu</span>
+        <span class="truncate">Menu Catalog</span>
+      </a>
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">12</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">3</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Reports &amp; Analytics</span>
+          </a>
+          <a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Complaint Feedback</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-medium sidebar-health-text">IRCTC Live</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">99.8% Sync</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5">
+      <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div class="text-xs font-semibold truncate sidebar-user-name">Super Admin</div>
+        <div class="text-[10px] truncate sidebar-user-role">superadmin@olfstores.com</div>
+      </div>
+      <a href="/login" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="ml-[245px] min-h-screen flex flex-col">
+
+  <!-- TOPBAR HEADER -->
+  <header class="sticky top-0 z-40 bg-[#0B0F17]/95 backdrop-blur-md border-b border-white/5 px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <button onclick="goBackToOutlet()" class="p-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1 text-xs font-medium" title="Back to Outlet">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        <span class="hidden sm:inline">Outlet</span>
+      </button>
+      <div class="h-4 w-[1px] bg-white/10"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-xs text-slate-400">OLF Stores</span>
+        <span class="text-xs text-slate-600">/</span>
+        <a href="/outlets" class="text-xs text-slate-400 hover:text-[#FF7A00]">Outlets</a>
+        <span class="text-xs text-slate-600">/</span>
+        <span class="text-xs font-bold text-[#FF7A00] flex items-center gap-1.5">
+          <span class="px-1.5 py-0.5 rounded bg-[#FF7A00]/15 border border-[#FF7A00]/30 font-mono text-[11px]" id="header-outlet-id">#---</span>
+          <span id="header-outlet-name">Loading Menu...</span>
+        </span>
+      </div>
+
+      <!-- Quick Outlet Switcher -->
+      <div class="relative ml-1">
+        <button onclick="toggleOutletSwitcher()" class="px-2 py-1 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-[11px] font-medium flex items-center gap-1 transition-colors" title="Switch Outlet Menu">
+          <span class="material-symbols-outlined text-[14px] text-[#FF7A00]">swap_horiz</span>
+          <span class="hidden sm:inline">Switch Outlet</span>
+        </button>
+        <div id="outlet-switcher-popover" class="hidden absolute left-0 top-full mt-1.5 w-72 bg-[#111318] border border-white/10 rounded-xl shadow-2xl p-2.5 z-50">
+          <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Enter Outlet ID or Pick</div>
+          <div class="flex items-center gap-1.5 mb-2">
+            <input type="number" id="quick-outlet-input" placeholder="e.g. 1312, 1075..." class="flex-1 bg-[#171A20] border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white outline-none focus:border-[#FF7A00]" onkeydown="if(event.key==='Enter') switchOutletFromInput()" />
+            <button onclick="switchOutletFromInput()" class="px-2.5 py-1 bg-[#FF7A00] hover:bg-[#ea580c] text-white rounded-lg text-xs font-semibold">Go</button>
+          </div>
+          <div class="text-[9.5px] text-slate-500 font-semibold mb-1">Quick Outlets:</div>
+          <div class="space-y-1 max-h-40 overflow-y-auto" id="quick-outlet-list">
+            <button onclick="switchOutlet(1312)" class="w-full text-left px-2 py-1 rounded hover:bg-white/5 text-xs text-slate-300 hover:text-white flex items-center justify-between">
+              <span class="truncate">#1312 - Ram Krishna Pure Veg</span>
+              <span class="font-mono text-[10px] text-slate-500">GWL</span>
+            </button>
+            <button onclick="switchOutlet(2823)" class="w-full text-left px-2 py-1 rounded hover:bg-white/5 text-xs text-slate-300 hover:text-white flex items-center justify-between">
+              <span class="truncate">#2823 - Ram Krishna Master</span>
+              <span class="font-mono text-[10px] text-slate-500">GWL</span>
+            </button>
+            <button onclick="switchOutlet(2364)" class="w-full text-left px-2 py-1 rounded hover:bg-white/5 text-xs text-slate-300 hover:text-white flex items-center justify-between">
+              <span class="truncate">#2364 - Taj Hotel</span>
+              <span class="font-mono text-[10px] text-slate-500">BSL</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="flex items-center gap-2.5">
+      <!-- Add Item -->
+      <button onclick="openAddDishModal()" class="bg-[#FF7A00] hover:bg-[#ea580c] text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
+        <span class="material-symbols-outlined text-[16px]">add_circle</span>
+        <span>+ Add Item</span>
+      </button>
+
+      <!-- Bulk Margin -->
+      <button onclick="openMarginModal()" class="bg-[#171A20] hover:bg-white/10 border border-white/10 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[16px] text-emerald-400">percent</span>
+        <span>Apply Margin (%)</span>
+      </button>
+
+      <!-- Push All to IRCTC -->
+      <button onclick="pushAllDishesToIRCTC()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
+        <span class="material-symbols-outlined text-[16px]">cloud_upload</span>
+        <span class="hidden md:inline">Push to IRCTC</span>
+      </button>
+
+      <!-- Export CSV -->
+      <button onclick="exportMenuCSV()" class="border border-white/10 hover:border-white/20 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1" title="Export Menu CSV">
+        <span class="material-symbols-outlined text-[16px]">download</span>
+      </button>
+
+      <!-- Theme Switcher -->
+      <button onclick="toggleTheme()" class="p-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white transition-colors" title="Toggle Theme">
+        <span class="material-symbols-outlined text-[18px]">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- BODY AREA -->
+  <div class="p-6 space-y-6 flex-1">
+
+    <!-- OUTLET HERO BANNER -->
+    <div class="bg-[#171A20] rounded-2xl border border-white/[0.08] p-5 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/5">
+        <div class="flex items-start gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center text-orange-500 flex-shrink-0">
+            <span class="material-symbols-outlined text-2xl">restaurant</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <h1 class="text-xl font-bold text-white tracking-tight" id="hero-outlet-name">Loading Menu...</h1>
+              <span class="px-2 py-0.5 rounded-md bg-[#FF7A00]/20 border border-[#FF7A00]/40 text-[#FF7A00] font-mono text-xs font-bold" id="hero-outlet-badge">#---</span>
+              <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-300 font-mono text-xs font-semibold" id="hero-station-badge">Station ---</span>
+              <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="hero-status-pill">Active on IRCTC</span>
+              </span>
+            </div>
+            <p class="text-xs text-on-surface-variant">Live Dining Menu Studio. Manage base prices, vendor costs, dish categories, vegetarian flags, and real-time meal availability.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="/pendingmenu/1312" id="hero-pending-link" class="bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all">
+            <span class="material-symbols-outlined text-[16px]">hourglass_top</span>
+            <span>Pending Approvals</span>
+          </a>
+          <a href="/outorders/1312" id="hero-orders-link" class="bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all">
+            <span class="material-symbols-outlined text-[16px]">shopping_bag</span>
+            <span>Live Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 5-Column High-Density Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-4">
+        <div class="p-3 rounded-xl bg-[#111318] border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Total Dishes</div>
+            <div class="text-lg font-bold text-white mt-0.5" id="stat-total-dishes">0</div>
+          </div>
+          <span class="material-symbols-outlined text-[#FF7A00] opacity-80 text-xl">menu_book</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#111318] border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider">Active on IRCTC</div>
+            <div class="text-lg font-bold text-emerald-400 mt-0.5" id="stat-active-dishes">0</div>
+          </div>
+          <span class="material-symbols-outlined text-emerald-400 opacity-80 text-xl">check_circle</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#111318] border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-semibold text-rose-400 uppercase tracking-wider">Sold Out / Off</div>
+            <div class="text-lg font-bold text-rose-400 mt-0.5" id="stat-inactive-dishes">0</div>
+          </div>
+          <span class="material-symbols-outlined text-rose-400 opacity-80 text-xl">block</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#111318] border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider">Pure Vegetarian</div>
+            <div class="text-lg font-bold text-emerald-400 mt-0.5" id="stat-veg-dishes">0</div>
+          </div>
+          <span class="material-symbols-outlined text-emerald-400 opacity-80 text-xl">eco</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#111318] border border-white/5 flex items-center justify-between col-span-2 sm:col-span-1">
+          <div>
+            <div class="text-[10px] font-semibold text-sky-400 uppercase tracking-wider">Avg Selling Price</div>
+            <div class="text-lg font-bold text-sky-400 mt-0.5" id="stat-avg-price">₹0</div>
+          </div>
+          <span class="material-symbols-outlined text-sky-400 opacity-80 text-xl">payments</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTER TOOLBAR -->
+    <div class="bg-[#171A20] rounded-xl border border-white/[0.08] p-3 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 shadow-sm">
+      <!-- Search Input -->
+      <div class="relative flex-1 max-w-md">
+        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+        <input type="text" id="menu-search" oninput="applyFilters()" placeholder="Search dish name, ID (#3567), or ingredients..." class="w-full bg-[#111318] border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-xs text-on-surface placeholder:text-slate-500 focus:outline-none focus:border-[#FF7A00]" />
+      </div>
+
+      <!-- Filters -->
+      <div class="flex items-center gap-2 flex-wrap text-xs">
+        <!-- Status Tabs -->
+        <div class="flex items-center bg-[#111318] p-0.5 rounded-lg border border-white/10">
+          <button onclick="setStatusFilter('all')" id="tab-st-all" class="px-2.5 py-1 rounded-md font-semibold text-white bg-[#FF7A00]">All</button>
+          <button onclick="setStatusFilter('active')" id="tab-st-active" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white">Active</button>
+          <button onclick="setStatusFilter('inactive')" id="tab-st-inactive" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white">Inactive</button>
+        </div>
+
+        <!-- Veg/Non-Veg -->
+        <div class="flex items-center bg-[#111318] p-0.5 rounded-lg border border-white/10">
+          <button onclick="setVegFilter('all')" id="tab-veg-all" class="px-2.5 py-1 rounded-md font-semibold text-white bg-[#FF7A00]">All Food</button>
+          <button onclick="setVegFilter('veg')" id="tab-veg-veg" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white">Pure Veg</button>
+          <button onclick="setVegFilter('nonveg')" id="tab-veg-nonveg" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white">Non-Veg</button>
+        </div>
+
+        <!-- Cuisine Select -->
+        <select id="cuisine-filter" onchange="applyFilters()" class="bg-[#111318] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 outline-none">
+          <option value="all">All Cuisines</option>
+        </select>
+
+        <!-- Category Select -->
+        <select id="category-filter" onchange="applyFilters()" class="bg-[#111318] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 outline-none">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- DISHES TABLE -->
+    <div class="bg-[#171A20] rounded-xl border border-white/[0.08] overflow-hidden shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-[#111318] text-slate-400 font-semibold border-b border-white/5 uppercase tracking-wider text-[10px]">
+            <tr>
+              <th class="px-4 py-3">Item ID</th>
+              <th class="px-4 py-3 min-w-[260px]">Dish Details</th>
+              <th class="px-4 py-3">Vendor Price (₹)</th>
+              <th class="px-4 py-3">Base Price (₹)</th>
+              <th class="px-4 py-3">Tax (5%)</th>
+              <th class="px-4 py-3">Selling Price (₹)</th>
+              <th class="px-4 py-3">Hours</th>
+              <th class="px-4 py-3 text-center">Live Toggle</th>
+              <th class="px-4 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="dishes-tbody" class="divide-y divide-white/5">
+            <tr>
+              <td colspan="9" class="px-4 py-12 text-center text-slate-400">
+                <div class="flex flex-col items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-3xl animate-spin text-[#FF7A00]">progress_activity</span>
+                  <span>Fetching outlet menu dishes from database...</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ZERO STATE -->
+    <div id="zero-state" class="hidden bg-[#171A20] rounded-xl border border-white/[0.08] p-12 text-center text-slate-400 space-y-3">
+      <span class="material-symbols-outlined text-4xl text-[#FF7A00]">restaurant_menu</span>
+      <h3 class="text-base font-bold text-white">No dishes found matching filters</h3>
+      <p class="text-xs text-slate-400 max-w-sm mx-auto">Try clearing search filters or add a new menu item to this outlet.</p>
+      <button onclick="resetFilters()" class="text-xs font-semibold text-[#FF7A00] hover:underline">Reset Filters</button>
+    </div>
+
+  </div>
+</main>
+
+
+<!-- ========================================================================= -->
+<!-- MODAL: EDIT / ADD MENU DISH ITEM                                          -->
+<!-- ========================================================================= -->
+<div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/75 backdrop-blur-sm" onclick="closeDishModal()"></div>
+  <div class="modal-card relative w-full max-w-xl bg-[#171A20] border border-white/10 rounded-2xl p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+    
+    <div class="flex items-center justify-between pb-3 border-b border-white/10">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#FF7A00]" id="modal-dish-icon">edit_note</span>
+        <h3 class="font-bold text-white text-base" id="modal-dish-title">Edit Menu Item</h3>
+      </div>
+      <button onclick="closeDishModal()" class="text-slate-400 hover:text-white">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+
+    <form id="dish-form" onsubmit="handleDishSubmit(event)" class="space-y-4 text-xs">
+      <input type="hidden" id="form-item-id" />
+
+      <!-- Dish Name -->
+      <div class="space-y-1">
+        <label class="text-[11px] font-bold text-slate-300">Item Name*</label>
+        <input type="text" id="form-name" required placeholder="e.g., Paneer Butter Masala, Veg Biryani..." class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-[#FF7A00]" />
+      </div>
+
+      <!-- Description -->
+      <div class="space-y-1">
+        <label class="text-[11px] font-bold text-slate-300">Description / Portion*</label>
+        <textarea id="form-desc" required rows="2" placeholder="e.g., 250gm fresh cottage cheese in rich tomato butter gravy, serves 1-2" class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-[#FF7A00]"></textarea>
+      </div>
+
+      <!-- Food Classification -->
+      <div class="grid grid-cols-2 gap-3 p-3 bg-[#111318] rounded-xl border border-white/5">
+        <div>
+          <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1.5">Dietary Classification</label>
+          <div class="flex items-center gap-3">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="dietType" value="1" id="radio-veg" checked class="text-emerald-500 focus:ring-0" />
+              <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-2.5 h-2.5 border border-emerald-500 rounded-sm flex items-center justify-center p-0.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span></span>
+                <span>Pure Veg</span>
+              </span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="dietType" value="0" id="radio-nonveg" class="text-rose-500 focus:ring-0" />
+              <span class="text-rose-400 font-semibold flex items-center gap-1">
+                <span class="w-2.5 h-2.5 border border-rose-500 rounded-sm flex items-center justify-center p-0.5"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span></span>
+                <span>Non-Veg</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1.5">Bulk Orders Only?</label>
+          <label class="flex items-center gap-2 cursor-pointer mt-1">
+            <input type="checkbox" id="form-bulk-only" class="text-[#FF7A00] focus:ring-0 rounded" />
+            <span class="text-slate-300">Available for Bulk only</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Cuisine & Food Type -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-300">Cuisine*</label>
+          <select id="form-cuisine" required class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-white outline-none">
+            <!-- Dynamic Cuisines -->
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-300">Food Category / Type*</label>
+          <select id="form-food-type" required class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-white outline-none">
+            <!-- Dynamic Categories -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Pricing Formula & Margins -->
+      <div class="p-3 bg-[#111318] rounded-xl border border-white/5 space-y-3">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Pricing Calculation</span>
+        
+        <div class="grid grid-cols-3 gap-2.5">
+          <div class="space-y-1">
+            <label class="text-[10px] text-slate-400 block">Vendor Price (₹)*</label>
+            <input type="number" id="form-vendor-price" step="0.5" min="1" required oninput="recalcPricingFromVendor()" class="w-full bg-[#171A20] border border-white/10 rounded-lg p-2 font-mono text-white text-xs" />
+          </div>
+
+          <div class="space-y-1">
+            <label class="text-[10px] text-slate-400 block">Margin % (Auto-Calc)</label>
+            <input type="number" id="form-margin-pct" step="0.5" placeholder="e.g. 40" oninput="recalcPricingFromMargin()" class="w-full bg-[#171A20] border border-white/10 rounded-lg p-2 font-mono text-amber-400 text-xs" />
+          </div>
+
+          <div class="space-y-1">
+            <label class="text-[10px] text-slate-400 block">Base Price (₹)*</label>
+            <input type="number" id="form-base-price" step="0.5" min="1" required oninput="recalcPricingFromBase()" class="w-full bg-[#171A20] border border-white/10 rounded-lg p-2 font-mono text-[#FF7A00] font-bold text-xs" />
+          </div>
+        </div>
+
+        <!-- Calculated Summary Strip -->
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[#171A20] border border-white/5 text-[11px]">
+          <div>
+            <span class="text-slate-400">Tax (5% GST): </span>
+            <span class="font-mono font-semibold text-slate-200" id="form-calc-tax">₹0.00</span>
+          </div>
+          <div>
+            <span class="text-slate-400">Final Selling Price: </span>
+            <span class="font-mono font-bold text-emerald-400 text-sm" id="form-calc-selling">₹0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timings -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-300">Opening Time*</label>
+          <input type="time" id="form-opening-time" required class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-white font-mono" />
+        </div>
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-300">Closing Time*</label>
+          <input type="time" id="form-closing-time" required class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-white font-mono" />
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 pt-3 border-t border-white/10">
+        <button type="button" onclick="closeDishModal()" class="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 py-2 rounded-xl text-xs font-semibold">Cancel</button>
+        <button type="submit" id="form-submit-btn" class="flex-1 bg-[#FF7A00] hover:bg-[#ea580c] text-white py-2 rounded-xl text-xs font-semibold transition-all">Save Changes</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<!-- ========================================================================= -->
+<!-- MODAL: BULK APPLY MARGIN                                                  -->
+<!-- ========================================================================= -->
+<div id="marginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/75 backdrop-blur-sm" onclick="closeMarginModal()"></div>
+  <div class="modal-card relative w-full max-w-sm bg-[#171A20] border border-white/10 rounded-2xl p-5 space-y-4 shadow-2xl">
+    <div class="flex items-center justify-between pb-2 border-b border-white/10">
+      <h3 class="font-bold text-white text-sm flex items-center gap-2">
+        <span class="material-symbols-outlined text-emerald-400">percent</span>
+        <span>Bulk Apply Margin (%)</span>
+      </h3>
+      <button onclick="closeMarginModal()" class="text-slate-400 hover:text-white">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+      </button>
+    </div>
+    <div class="text-xs space-y-1.5 text-slate-400">
+      <p>This will recalculate the Base Price for <strong class="text-white">ALL dishes</strong> in this outlet as:</p>
+      <div class="p-2 bg-[#111318] rounded font-mono text-[11px] text-emerald-400">Base Price = Vendor Price × (1 + Margin%)</div>
+    </div>
+    <div class="space-y-1">
+      <label class="text-[11px] font-bold text-slate-300">Margin Percentage (%)</label>
+      <input type="number" id="bulk-margin-input" step="1" min="1" max="200" placeholder="e.g. 40" class="w-full bg-[#111318] border border-white/10 rounded-lg p-2 text-sm font-mono text-white focus:outline-none focus:border-[#FF7A00]" />
+    </div>
+    <div class="flex items-center gap-2 pt-2">
+      <button onclick="closeMarginModal()" class="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 py-2 rounded-xl text-xs font-semibold">Cancel</button>
+      <button onclick="submitBulkMargin()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-xs font-semibold">Apply to All</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================================================================= -->
+<!-- MODAL: DELETE DISH CONFIRMATION                                           -->
+<!-- ========================================================================= -->
+<div id="deleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/75 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
+  <div class="modal-card relative w-full max-w-sm bg-[#171A20] border border-white/10 rounded-2xl p-5 space-y-4 shadow-2xl text-center">
+    <div class="w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mx-auto">
+      <span class="material-symbols-outlined text-2xl">delete_forever</span>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-white text-sm">Delete Menu Item?</h3>
+      <p class="text-xs text-slate-400" id="delete-item-msg">Are you sure you want to delete this dish from the menu?</p>
+    </div>
+    <div class="flex items-center gap-2 pt-2">
+      <button onclick="closeDeleteModal()" class="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 py-2 rounded-xl text-xs font-semibold">Cancel</button>
+      <button onclick="confirmDeleteDish()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white py-2 rounded-xl text-xs font-semibold">Delete Item</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-[#171A20] text-white border border-white/15 px-4 py-2.5 rounded-xl text-xs shadow-2xl flex items-center gap-2.5 transition-all">
+  <span class="material-symbols-outlined text-[#FF7A00] text-sm" id="toast-icon">check_circle</span>
+  <span id="toast-msg">Operation completed</span>
+</div>
+
+
+<!-- LOGIC SCRIPT -->
+<script>
+  let currentOutletId = 1312;
+  let currentStationCode = 'GWL';
+  let outletDetails = null;
+  let allDishes = [];
+  let filteredDishes = [];
+  let itemToDeleteId = null;
+  let isEditing = false;
+  let currentStatusTab = 'all';
+  let currentVegTab = 'all';
+
+  // Master Cuisines & Food Categories list from legacy app
+  const CUISINES = [
+    'NORTH_INDIAN', 'SOUTH_INDIAN', 'CHINESE', 'INDIAN_CHINESE', 'PUNJABI', 'MUGHALAI', 
+    'BENGALI', 'JAIN_FOOD', 'AWADHI', 'MAHARASHTRIAN', 'GUJARATI', 'CONTINENTAL', 'FAST_FOOD'
+  ];
+
+  const FOOD_TYPES = [
+    'MAINS_GRAVY', 'MAINS', 'BREADS', 'THALI', 'COMBO', 'BIRYANI', 'SNACKS', 
+    'STARTERS', 'BREAKFAST', 'BEVERAGE', 'DESSERTS', 'SOUP', 'PIZZA', 'BURGER', 'SALADS'
+  ];
+
+  
+  // CANONICAL SIDEBAR ENGINE
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    window.location.href = '/outlets?filter=' + filterType;
+  }
+
+  function initSidebar() {
+    let savedTheme = localStorage.getItem('olf_theme') || localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (p.startsWith('/menu') || p.startsWith('/pendingmenu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/orders')) {
+      activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/invoices')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    initTheme();
+    initSidebar();
+    populateSelectOptions();
+    resolveOutletFromUrl();
+    await fetchOutletDetails();
+    await fetchMenuDishes();
+  });
+
+  // 1. Resolve Outlet ID
+  function resolveOutletFromUrl() {
+    const path = window.location.pathname;
+    const parts = path.split('/').filter(Boolean);
+    
+    // e.g. /menu/1312
+    if (parts[0] === 'menu' && parts[1] && !isNaN(parseInt(parts[1]))) {
+      currentOutletId = parseInt(parts[1]);
+    } else {
+      const params = new URLSearchParams(window.location.search);
+      const qId = params.get('outlet_id') || params.get('id');
+      if (qId && !isNaN(parseInt(qId))) currentOutletId = parseInt(qId);
+    }
+
+    document.getElementById('header-outlet-id').innerText = '#' + currentOutletId;
+    document.getElementById('hero-outlet-badge').innerText = '#' + currentOutletId;
+    document.getElementById('hero-pending-link').href = '/pendingmenu/' + currentOutletId;
+    document.getElementById('hero-orders-link').href = '/outorders/' + currentOutletId;
+  }
+
+  // 2. Populate Cuisines and Categories
+  function populateSelectOptions() {
+    const filterCuisine = document.getElementById('cuisine-filter');
+    const formCuisine = document.getElementById('form-cuisine');
+    CUISINES.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.innerText = c.replace(/_/g, ' ');
+      filterCuisine.appendChild(opt.cloneNode(true));
+      formCuisine.appendChild(opt);
+    });
+
+    const filterCategory = document.getElementById('category-filter');
+    const formCategory = document.getElementById('form-food-type');
+    FOOD_TYPES.forEach(f => {
+      const opt = document.createElement('option');
+      opt.value = f;
+      opt.innerText = f.replace(/_/g, ' ');
+      filterCategory.appendChild(opt.cloneNode(true));
+      formCategory.appendChild(opt);
+    });
+  }
+
+  // 3. Fetch Outlet Metadata
+  async function fetchOutletDetails() {
+    try {
+      const res = await fetch('/api/v1/restraunts?outlet_id=' + currentOutletId);
+      const json = await res.json();
+      if (json && json.data && json.data.rows && json.data.rows[0]) {
+        outletDetails = json.data.rows[0];
+        currentStationCode = outletDetails.station_code || 'GWL';
+        document.getElementById('header-outlet-name').innerText = outletDetails.outlet_name || 'Outlet Menu';
+        document.getElementById('hero-outlet-name').innerText = outletDetails.outlet_name || 'Outlet Menu';
+        document.getElementById('hero-station-badge').innerText = 'Station ' + currentStationCode;
+      }
+    } catch (e) {
+      console.warn('Failed to fetch outlet details:', e);
+    }
+  }
+
+  // 4. Fetch Dishes for Outlet
+  async function fetchMenuDishes() {
+    const tbody = document.getElementById('dishes-tbody');
+    try {
+      const res = await fetch('/api/v1/dishes?outlet_id=' + currentOutletId + '&limit=all');
+      const json = await res.json();
+      if (json && json.data && Array.isArray(json.data.rows)) {
+        allDishes = json.data.rows;
+      } else {
+        allDishes = [];
+      }
+      applyFilters();
+      updateMetrics();
+    } catch (err) {
+      console.error('Error fetching dishes:', err);
+      tbody.innerHTML = '<tr><td colspan="9" class="px-4 py-8 text-center text-rose-400">Failed to load menu dishes: ' + err.message + '</td></tr>';
+    }
+  }
+
+  // 5. Update Real-time Metric Counters
+  function updateMetrics() {
+    const total = allDishes.length;
+    let active = 0, inactive = 0, veg = 0, sumPrice = 0;
+
+    allDishes.forEach(d => {
+      if (d.status === 1) active++;
+      else inactive++;
+
+      if (d.is_vegeterian === 1) veg++;
+
+      const bp = parseFloat(d.base_price) || 0;
+      const tax = parseFloat(d.tax) || (bp * 0.05);
+      sumPrice += (bp + tax);
+    });
+
+    const avg = total > 0 ? (sumPrice / total).toFixed(0) : 0;
+
+    document.getElementById('stat-total-dishes').innerText = total;
+    document.getElementById('stat-active-dishes').innerText = active;
+    document.getElementById('stat-inactive-dishes').innerText = inactive;
+    document.getElementById('stat-veg-dishes').innerText = veg;
+    document.getElementById('stat-avg-price').innerText = '₹' + avg;
+  }
+
+  // 6. Search & Filters
+  function setStatusFilter(st) {
+    currentStatusTab = st;
+    ['all', 'active', 'inactive'].forEach(t => {
+      const btn = document.getElementById('tab-st-' + t);
+      if (t === st) {
+        btn.className = 'px-2.5 py-1 rounded-md font-semibold text-white bg-[#FF7A00]';
+      } else {
+        btn.className = 'px-2.5 py-1 rounded-md text-slate-400 hover:text-white';
+      }
+    });
+    applyFilters();
+  }
+
+  function setVegFilter(v) {
+    currentVegTab = v;
+    ['all', 'veg', 'nonveg'].forEach(t => {
+      const btn = document.getElementById('tab-veg-' + t);
+      if (t === v) {
+        btn.className = 'px-2.5 py-1 rounded-md font-semibold text-white bg-[#FF7A00]';
+      } else {
+        btn.className = 'px-2.5 py-1 rounded-md text-slate-400 hover:text-white';
+      }
+    });
+    applyFilters();
+  }
+
+  function resetFilters() {
+    document.getElementById('menu-search').value = '';
+    document.getElementById('cuisine-filter').value = 'all';
+    document.getElementById('category-filter').value = 'all';
+    setStatusFilter('all');
+    setVegFilter('all');
+  }
+
+  function applyFilters() {
+    const q = (document.getElementById('menu-search')?.value || '').toLowerCase().trim();
+    const selCuisine = document.getElementById('cuisine-filter')?.value || 'all';
+    const selCat = document.getElementById('category-filter')?.value || 'all';
+
+    filteredDishes = allDishes.filter(d => {
+      // Status filter
+      if (currentStatusTab === 'active' && d.status !== 1) return false;
+      if (currentStatusTab === 'inactive' && d.status === 1) return false;
+
+      // Veg filter
+      if (currentVegTab === 'veg' && d.is_vegeterian !== 1) return false;
+      if (currentVegTab === 'nonveg' && d.is_vegeterian === 1) return false;
+
+      // Cuisine filter
+      if (selCuisine !== 'all' && (d.cuisine || '').toUpperCase() !== selCuisine) return false;
+
+      // Category filter
+      if (selCat !== 'all' && (d.food_type || '').toUpperCase() !== selCat) return false;
+
+      // Search
+      if (q) {
+        const str = [
+          d.item_name,
+          d.item_id,
+          d.description,
+          d.cuisine,
+          d.food_type
+        ].join(' ').toLowerCase();
+        if (!str.includes(q)) return false;
+      }
+
+      return true;
+    });
+
+    renderDishesTable();
+  }
+
+  // 7. Render Dishes Table with Full Editing Controls
+  function renderDishesTable() {
+    const tbody = document.getElementById('dishes-tbody');
+    const zeroState = document.getElementById('zero-state');
+
+    if (filteredDishes.length === 0) {
+      tbody.innerHTML = '';
+      zeroState.classList.remove('hidden');
+      return;
+    }
+
+    zeroState.classList.add('hidden');
+
+    tbody.innerHTML = filteredDishes.map(d => {
+      const id = d.item_id;
+      const name = d.item_name || 'Unnamed Dish';
+      const desc = d.description || '';
+      const isVeg = d.is_vegeterian === 1;
+      const vp = parseFloat(d.vendor_price) || 0;
+      const bp = parseFloat(d.base_price) || 0;
+      const tax = parseFloat(d.tax) || (bp * 0.05);
+      const sp = (bp + tax);
+      const hours = (d.opening_time || '10:00') + ' - ' + (d.closing_time || '23:00');
+      const isActive = d.status === 1;
+      const cuisineTag = (d.cuisine || 'INDIAN').replace(/_/g, ' ');
+      const typeTag = (d.food_type || 'MAINS').replace(/_/g, ' ');
+
+      // Veg Icon
+      const dietIcon = isVeg 
+        ? '<span class="w-3.5 h-3.5 border border-emerald-500 rounded-sm flex items-center justify-center p-0.5" title="Pure Vegetarian"><span class="w-2 h-2 rounded-full bg-emerald-500"></span></span>'
+        : '<span class="w-3.5 h-3.5 border border-rose-500 rounded-sm flex items-center justify-center p-0.5" title="Non-Vegetarian"><span class="w-2 h-2 rounded-full bg-rose-500"></span></span>';
+
+      return `
+        <tr class="hover:bg-white/[0.02] transition-colors group">
+          
+          <!-- ITEM ID -->
+          <td class="px-4 py-3 align-middle font-mono font-bold text-[#FF7A00] text-xs">
+            #${id}
+          </td>
+
+          <!-- DISH DETAILS -->
+          <td class="px-4 py-3 align-middle min-w-[260px]">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                ${dietIcon}
+                <span onclick="openEditDishModal(${id})" class="font-bold text-white text-xs hover:text-[#FF7A00] cursor-pointer transition-colors" title="Click to edit">${name}</span>
+              </div>
+              <div class="text-[11px] text-slate-400 line-clamp-1">${desc || '<span class="italic text-slate-500">No description</span>'}</div>
+              <div class="flex items-center gap-1.5 text-[9.5px]">
+                <span class="px-1.5 py-0.2 rounded bg-white/5 border border-white/10 text-slate-300 font-semibold">${cuisineTag}</span>
+                <span class="px-1.5 py-0.2 rounded bg-white/5 border border-white/10 text-slate-300">${typeTag}</span>
+              </div>
+            </div>
+          </td>
+
+          <!-- VENDOR PRICE -->
+          <td class="px-4 py-3 align-middle font-mono text-slate-300">
+            <div class="flex items-center gap-1">
+              <span>₹${vp.toFixed(2)}</span>
+              <button onclick="openEditDishModal(${id})" class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-white p-0.5" title="Edit Price">
+                <span class="material-symbols-outlined text-[13px]">edit</span>
+              </button>
+            </div>
+          </td>
+
+          <!-- BASE PRICE -->
+          <td class="px-4 py-3 align-middle font-mono font-semibold text-[#FF7A00]">
+            <div class="flex items-center gap-1">
+              <span>₹${bp.toFixed(2)}</span>
+              <button onclick="openEditDishModal(${id})" class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-white p-0.5" title="Edit Price">
+                <span class="material-symbols-outlined text-[13px]">edit</span>
+              </button>
+            </div>
+          </td>
+
+          <!-- TAX (5%) -->
+          <td class="px-4 py-3 align-middle font-mono text-slate-400 text-[11px]">
+            ₹${tax.toFixed(2)}
+          </td>
+
+          <!-- FINAL SELLING PRICE -->
+          <td class="px-4 py-3 align-middle font-mono font-bold text-emerald-400 text-sm">
+            ₹${sp.toFixed(2)}
+          </td>
+
+          <!-- HOURS -->
+          <td class="px-4 py-3 align-middle font-mono text-slate-400 text-[11px]">
+            ${hours}
+          </td>
+
+          <!-- LIVE TOGGLE (INSTANT STATUS EDIT) -->
+          <td class="px-4 py-3 align-middle text-center">
+            <button onclick="toggleDishActiveStatus(${id}, ${!isActive})" class="relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isActive ? 'bg-emerald-500' : 'bg-white/20'}" title="${isActive ? 'Active on IRCTC - Click to Deactivate' : 'Sold Out - Click to Activate'}">
+              <span class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isActive ? 'translate-x-4' : 'translate-x-0'}"></span>
+            </button>
+            <div class="text-[9px] mt-0.5 font-bold ${isActive ? 'text-emerald-400' : 'text-slate-500'}">${isActive ? 'Active' : 'Off'}</div>
+          </td>
+
+          <!-- ACTIONS -->
+          <td class="px-4 py-3 align-middle text-right">
+            <div class="flex items-center justify-end gap-1.5">
+              <button onclick="openEditDishModal(${id})" class="p-1.5 rounded-lg bg-[#111318] hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 flex items-center gap-1 text-xs font-semibold" title="Edit Complete Dish">
+                <span class="material-symbols-outlined text-[14px]">edit</span>
+                <span>Edit</span>
+              </button>
+              <button onclick="openDeleteDishModal(${id})" class="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20" title="Delete Dish">
+                <span class="material-symbols-outlined text-[14px]">delete</span>
+              </button>
+            </div>
+          </td>
+
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // 8. Toggle Dish Active/Inactive Status (Instant PUT to DB)
+  async function toggleDishActiveStatus(itemId, newActive) {
+    const dish = allDishes.find(d => d.item_id === itemId);
+    if (!dish) return;
+
+    try {
+      showToast('Updating dish status...');
+      const res = await fetch('/api/v1/dish/' + itemId, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newActive ? 1 : 0 })
+      });
+      const data = await res.json();
+      
+      dish.status = newActive ? 1 : 0;
+      applyFilters();
+      updateMetrics();
+      showToast(`Item #${itemId} is now ${newActive ? 'Active & In Stock' : 'Marked Sold Out'}`);
+    } catch (e) {
+      showToast('Error updating status: ' + e.message, true);
+    }
+  }
+
+  // 9. Pricing Recalculation Helpers
+  function recalcPricingFromVendor() {
+    const vp = parseFloat(document.getElementById('form-vendor-price').value) || 0;
+    const margin = parseFloat(document.getElementById('form-margin-pct').value) || 0;
+    if (margin > 0) {
+      const bp = vp * (1 + margin / 100);
+      document.getElementById('form-base-price').value = bp.toFixed(2);
+      updateTaxAndSelling(bp);
+    } else {
+      const currentBp = parseFloat(document.getElementById('form-base-price').value) || vp;
+      updateTaxAndSelling(currentBp);
+    }
+  }
+
+  function recalcPricingFromMargin() {
+    const vp = parseFloat(document.getElementById('form-vendor-price').value) || 0;
+    const margin = parseFloat(document.getElementById('form-margin-pct').value) || 0;
+    if (vp > 0 && margin > 0) {
+      const bp = vp * (1 + margin / 100);
+      document.getElementById('form-base-price').value = bp.toFixed(2);
+      updateTaxAndSelling(bp);
+    }
+  }
+
+  function recalcPricingFromBase() {
+    const bp = parseFloat(document.getElementById('form-base-price').value) || 0;
+    const vp = parseFloat(document.getElementById('form-vendor-price').value) || 0;
+    if (vp > 0 && bp > vp) {
+      const margin = ((bp - vp) / vp) * 100;
+      document.getElementById('form-margin-pct').value = margin.toFixed(1);
+    }
+    updateTaxAndSelling(bp);
+  }
+
+  function updateTaxAndSelling(bp) {
+    const tax = bp * 0.05;
+    const selling = bp + tax;
+    document.getElementById('form-calc-tax').innerText = '₹' + tax.toFixed(2);
+    document.getElementById('form-calc-selling').innerText = '₹' + selling.toFixed(2);
+  }
+
+  // 10. Open Add Dish Modal
+  function openAddDishModal() {
+    isEditing = false;
+    document.getElementById('modal-dish-icon').innerText = 'add_circle';
+    document.getElementById('modal-dish-title').innerText = 'Add New Menu Item';
+    document.getElementById('form-submit-btn').innerText = 'Create Menu Item';
+    document.getElementById('form-item-id').value = '';
+
+    document.getElementById('form-name').value = '';
+    document.getElementById('form-desc').value = '';
+    document.getElementById('radio-veg').checked = true;
+    document.getElementById('form-bulk-only').checked = false;
+    document.getElementById('form-vendor-price').value = '100';
+    document.getElementById('form-margin-pct').value = '40';
+    document.getElementById('form-base-price').value = '140';
+    document.getElementById('form-opening-time').value = '08:00';
+    document.getElementById('form-closing-time').value = '23:00';
+
+    updateTaxAndSelling(140);
+    document.getElementById('dishModal').classList.remove('hidden');
+  }
+
+  // 11. Open Edit Dish Modal
+  function openEditDishModal(id) {
+    const d = allDishes.find(x => x.item_id === id);
+    if (!d) return;
+
+    isEditing = true;
+    document.getElementById('modal-dish-icon').innerText = 'edit_note';
+    document.getElementById('modal-dish-title').innerText = 'Edit Menu Item - #' + id;
+    document.getElementById('form-submit-btn').innerText = 'Save Changes';
+    document.getElementById('form-item-id').value = id;
+
+    document.getElementById('form-name').value = d.item_name || '';
+    document.getElementById('form-desc').value = d.description || '';
+    
+    if (d.is_vegeterian === 1) {
+      document.getElementById('radio-veg').checked = true;
+    } else {
+      document.getElementById('radio-nonveg').checked = true;
+    }
+
+    document.getElementById('form-bulk-only').checked = !!d.bulk_only;
+
+    if (d.cuisine) document.getElementById('form-cuisine').value = d.cuisine.toUpperCase();
+    if (d.food_type) document.getElementById('form-food-type').value = d.food_type.toUpperCase();
+
+    const vp = parseFloat(d.vendor_price) || 0;
+    const bp = parseFloat(d.base_price) || 0;
+    document.getElementById('form-vendor-price').value = vp;
+    document.getElementById('form-base-price').value = bp;
+
+    if (vp > 0 && bp > vp) {
+      document.getElementById('form-margin-pct').value = (((bp - vp) / vp) * 100).toFixed(1);
+    } else {
+      document.getElementById('form-margin-pct').value = '';
+    }
+
+    document.getElementById('form-opening-time').value = d.opening_time || '10:00';
+    document.getElementById('form-closing-time').value = d.closing_time || '23:00';
+
+    updateTaxAndSelling(bp);
+    document.getElementById('dishModal').classList.remove('hidden');
+  }
+
+  function closeDishModal() {
+    document.getElementById('dishModal').classList.add('hidden');
+  }
+
+  // 12. Submit Dish Form (Create or Update)
+  async function handleDishSubmit(e) {
+    e.preventDefault();
+    const itemId = document.getElementById('form-item-id').value;
+    const name = document.getElementById('form-name').value.trim();
+    const desc = document.getElementById('form-desc').value.trim();
+    const isVeg = document.getElementById('radio-veg').checked ? 1 : 0;
+    const bulkOnly = document.getElementById('form-bulk-only').checked ? 1 : null;
+    const cuisine = document.getElementById('form-cuisine').value;
+    const foodType = document.getElementById('form-food-type').value;
+    const vp = parseFloat(document.getElementById('form-vendor-price').value) || 0;
+    const bp = parseFloat(document.getElementById('form-base-price').value) || 0;
+    const tax = bp * 0.05;
+    const openTime = document.getElementById('form-opening-time').value || '10:00';
+    const closeTime = document.getElementById('form-closing-time').value || '23:00';
+
+    const payload = {
+      outlet_id: currentOutletId,
+      station_code: currentStationCode,
+      item_name: name,
+      description: desc,
+      is_vegeterian: isVeg,
+      bulk_only: bulkOnly,
+      cuisine: cuisine,
+      food_type: foodType,
+      vendor_price: vp,
+      base_price: bp,
+      tax: tax,
+      opening_time: openTime,
+      closing_time: closeTime
+    };
+
+    try {
+      showToast('Saving dish changes...');
+      if (isEditing && itemId) {
+        // PUT /api/v1/dish/:id
+        const res = await fetch('/api/v1/dish/' + itemId, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const d = await res.json();
+        showToast(`Dish #${itemId} updated successfully!`);
+      } else {
+        // POST /api/v1/dish
+        const res = await fetch('/api/v1/dish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const d = await res.json();
+        showToast('New menu dish created successfully!');
+      }
+
+      closeDishModal();
+      await fetchMenuDishes();
+    } catch (err) {
+      showToast('Failed to save dish: ' + err.message, true);
+    }
+  }
+
+  // 13. Bulk Margin Modal
+  function openMarginModal() {
+    document.getElementById('bulk-margin-input').value = '35';
+    document.getElementById('marginModal').classList.remove('hidden');
+  }
+
+  function closeMarginModal() {
+    document.getElementById('marginModal').classList.add('hidden');
+  }
+
+  async function submitBulkMargin() {
+    const margin = parseFloat(document.getElementById('bulk-margin-input').value);
+    if (isNaN(margin) || margin <= 0) {
+      showToast('Please enter a valid margin percentage', true);
+      return;
+    }
+
+    try {
+      showToast('Applying bulk margin of ' + margin + '% to all dishes...');
+      const res = await fetch('/api/v1/dishes/bulk-update-price', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          outlet_id: currentOutletId,
+          margin_percentage: margin
+        })
+      });
+      const data = await res.json();
+      closeMarginModal();
+      showToast(`Bulk margin of ${margin}% applied to all dishes!`);
+      await fetchMenuDishes();
+    } catch (e) {
+      showToast('Error applying margin: ' + e.message, true);
+    }
+  }
+
+  // 14. Delete Dish
+  function openDeleteDishModal(id) {
+    const d = allDishes.find(x => x.item_id === id);
+    if (!d) return;
+    itemToDeleteId = id;
+    document.getElementById('delete-item-msg').innerText = `Are you sure you want to delete "${d.item_name}" (#${id})?`;
+    document.getElementById('deleteModal').classList.remove('hidden');
+  }
+
+  function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+    itemToDeleteId = null;
+  }
+
+  async function confirmDeleteDish() {
+    if (!itemToDeleteId) return;
+    try {
+      showToast('Deleting menu item...');
+      const res = await fetch('/api/v1/dish/' + itemToDeleteId, {
+        method: 'DELETE'
+      });
+      closeDeleteModal();
+      showToast('Dish #' + itemToDeleteId + ' deleted from menu.');
+      await fetchMenuDishes();
+    } catch (e) {
+      showToast('Error deleting dish: ' + e.message, true);
+    }
+  }
+
+  // 15. Push All to IRCTC
+  async function pushAllDishesToIRCTC() {
+    if (!confirm('Push all active dishes for outlet #' + currentOutletId + ' on station ' + currentStationCode + ' to IRCTC?')) return;
+
+    try {
+      showToast('Broadcasting full menu push to IRCTC...');
+      const res = await fetch('/api/v1/dish/push-all/' + currentStationCode + '/' + currentOutletId, {
+        method: 'POST'
+      });
+      const d = await res.json();
+      showToast('Full menu successfully synchronized with IRCTC!');
+    } catch (e) {
+      showToast('IRCTC push error: ' + e.message, true);
+    }
+  }
+
+  // 16. Export Menu CSV
+  function exportMenuCSV() {
+    if (allDishes.length === 0) {
+      showToast('No dishes to export', true);
+      return;
+    }
+
+    const headers = ['Item ID', 'Item Name', 'Description', 'Cuisine', 'Food Type', 'Vegetarian', 'Vendor Price', 'Base Price', 'Tax (5%)', 'Selling Price', 'Status', 'Opening Time', 'Closing Time'];
+    const rows = allDishes.map(d => {
+      const bp = parseFloat(d.base_price) || 0;
+      const tax = parseFloat(d.tax) || (bp * 0.05);
+      return [
+        d.item_id,
+        '"' + (d.item_name || '').replace(/"/g, '""') + '"',
+        '"' + (d.description || '').replace(/"/g, '""') + '"',
+        d.cuisine || '',
+        d.food_type || '',
+        d.is_vegeterian === 1 ? 'YES' : 'NO',
+        d.vendor_price || 0,
+        bp,
+        tax.toFixed(2),
+        (bp + tax).toFixed(2),
+        d.status === 1 ? 'ACTIVE' : 'INACTIVE',
+        d.opening_time || '',
+        d.closing_time || ''
+      ];
+    });
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'OLF_Menu_Outlet_' + currentOutletId + '.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    showToast('Exported menu CSV for outlet #' + currentOutletId);
+  }
+
+  // Outlet Switcher Helpers
+  function toggleOutletSwitcher() {
+    const p = document.getElementById('outlet-switcher-popover');
+    if (p) p.classList.toggle('hidden');
+  }
+
+  function switchOutletFromInput() {
+    const val = parseInt(document.getElementById('quick-outlet-input').value);
+    if (!isNaN(val) && val > 0) {
+      switchOutlet(val);
+    }
+  }
+
+  function switchOutlet(outletId) {
+    window.location.href = '/menu/' + outletId;
+  }
+
+  // 17. Navigation helper
+  function goBackToOutlet() {
+    if (currentStationCode) {
+      window.location.href = '/outlet/' + currentStationCode;
+    } else {
+      window.location.href = '/outlets';
+    }
+  }
+
+  // 18. Toast
+  function showToast(msg, isError = false) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+    const toastIcon = document.getElementById('toast-icon');
+
+    toastMsg.innerText = msg;
+    toastIcon.innerText = isError ? 'error' : 'check_circle';
+    toastIcon.className = isError ? 'material-symbols-outlined text-rose-400 text-sm' : 'material-symbols-outlined text-[#FF7A00] text-sm';
+
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3500);
+  }
+
+  // 19. Theme
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.classList.contains('dark');
+    if (isDark) {
+      html.classList.remove('dark');
+      html.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.classList.remove('light');
+      html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  function initTheme() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const html = document.documentElement;
+    if (saved === 'light') {
+      html.classList.remove('dark');
+      html.classList.add('light');
+    } else {
+      html.classList.remove('light');
+      html.classList.add('dark');
+    }
+  }
+</script>
+
+<script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
+    }
+    updateThemeToggleIcons();
+  }
+
+  function updateThemeToggleIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll('.theme-icon-topbar').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    document.querySelectorAll('.theme-label-topbar').forEach(el => {
+      el.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+    document.querySelectorAll('.theme-toggle-btn .material-symbols-outlined, .dark-icon').forEach(el => {
+      el.innerText = isDark ? 'dark_mode' : 'light_mode';
+    });
+    const oldIcon = document.getElementById('themeIcon');
+    if (oldIcon) oldIcon.innerText = isDark ? 'dark_mode' : 'light_mode';
+    const oldLabel = document.getElementById('themeLabel');
+    if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
+  }
+
+  // Auto-highlight active route on page load & apply theme
+  (function initSidebar() {
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    updateThemeToggleIcons();
+
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+    } else if (p.startsWith('/allque')) {
+      activate(null, 'sublink-queries', 'sub-orders', 'chev-orders');
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlets') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      activate(null, 'sublink-reports', 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+  })();
+</script>
+</body>
+</html>
