@@ -1170,7 +1170,7 @@
           </div>
         </div>
 
-        <!-- ROW 2A: ACTIVE ORDERS COCKPIT SUB-TABS (Only In-Flight Stages, Clean & Uncluttered) -->
+        <!-- ROW 2A: ACTIVE ORDERS COCKPIT SUB-TABS (All Active Operations: Confirmed, In Kitchen, Dispatched, Partial Delivery) -->
         <div id="active-subtabs-row" class="flex flex-wrap items-center justify-between gap-3 pb-1">
           <div class="flex flex-wrap items-center gap-1.5" id="active-subtabs-container">
             <button type="button" onclick="setActiveSubFilter('ACTIVE')" id="subtab-ACTIVE" class="px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-active-emerald">
@@ -1185,6 +1185,9 @@
             </button>
             <button type="button" onclick="setActiveSubFilter('ORDER_OUT_FOR_DELIVERY')" id="subtab-ACTIVE_OUT" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
               Stage 4: Dispatched (<span id="active-count-out">0</span>)
+            </button>
+            <button type="button" onclick="setActiveSubFilter('ORDER_PARTIALLY_DELIVERED')" id="subtab-ACTIVE_PARTIAL" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+              Partial Delivery (<span id="active-count-partial">0</span>)
             </button>
           </div>
         </div>
@@ -1770,7 +1773,7 @@
 
         const statsPromise = fetch(statsUrl).then(r => r.json()).catch(() => null);
         const mainOrdersPromise = fetch(ordersUrl).then(r => r.json()).catch(() => null);
-        const activePromise = fetch('/api/v1/orders?status=ORDER_CONFIRMED,ORDER_PREPARING,ORDER_OUT_FOR_DELIVERY&limit=100').then(r => r.json()).catch(() => null);
+        const activePromise = fetch('/api/v1/orders?status=ORDER_CONFIRMED,ORDER_PREPARING,ORDER_OUT_FOR_DELIVERY,ORDER_PARTIALLY_DELIVERED&limit=200').then(r => r.json()).catch(() => null);
         const todayPromise = fetch(`/api/v1/orders?start_date=${todayIST}&limit=200`).then(r => r.json()).catch(() => null);
 
         const [statsJson, mainJson, activeJson, todayJson] = await Promise.all([statsPromise, mainOrdersPromise, activePromise, todayPromise]);
@@ -1839,7 +1842,7 @@
           else if (s.status === 'ORDER_UNDELIVERED') cUndel = cnt;
           else if (s.status === 'ORDER_CANCELLED') cCanc = cnt;
         });
-        cActive = cConfirmed + cPrep + cOut;
+        cActive = cConfirmed + cPrep + cOut + cPart;
       } else {
         allOrders.forEach(o => {
           const key = OrderProgress.describe(o.status).key;
@@ -1861,6 +1864,7 @@
       setT('active-count-confirmed', cConfirmed);
       setT('active-count-preparing', cPrep);
       setT('active-count-out', cOut);
+      setT('active-count-partial', cPart);
 
       setT('tab-count-active', cActive);
       setT('tab-count-all', totalAll);
@@ -1886,7 +1890,8 @@
         { id: 'subtab-ACTIVE', key: 'ACTIVE' },
         { id: 'subtab-ACTIVE_CONFIRMED', key: 'CONFIRMED' },
         { id: 'subtab-ACTIVE_PREPARING', key: 'ORDER_PREPARING' },
-        { id: 'subtab-ACTIVE_OUT', key: 'ORDER_OUT_FOR_DELIVERY' }
+        { id: 'subtab-ACTIVE_OUT', key: 'ORDER_OUT_FOR_DELIVERY' },
+        { id: 'subtab-ACTIVE_PARTIAL', key: 'ORDER_PARTIALLY_DELIVERED' }
       ];
       subtabs.forEach(t => {
         const el = document.getElementById(t.id);
@@ -2125,14 +2130,14 @@
 
         // View Mode & Status Filter
         if (currentViewMode === 'ACTIVE') {
-          // Strictly ONLY show in-flight orders (Confirmed, Preparing, Dispatched)
-          // Exclude ORDER_PENDING, ORDER_DELIVERED, COMPLETED, CANCELLED, UNDELIVERED
-          const IN_FLIGHT_KEYS = ['ORDER_CONFIRMED', 'ORDER_PREPARING', 'ORDER_OUT_FOR_DELIVERY'];
+          // Show all active & in-flight operations (Confirmed, Preparing, Dispatched, Partially Delivered)
+          const IN_FLIGHT_KEYS = ['ORDER_CONFIRMED', 'ORDER_PREPARING', 'ORDER_OUT_FOR_DELIVERY', 'ORDER_PARTIALLY_DELIVERED'];
           if (!IN_FLIGHT_KEYS.includes(key)) return false;
 
           if (currentStatus === 'CONFIRMED' && key !== 'ORDER_CONFIRMED') return false;
           if (currentStatus === 'ORDER_PREPARING' && key !== 'ORDER_PREPARING') return false;
           if (currentStatus === 'ORDER_OUT_FOR_DELIVERY' && key !== 'ORDER_OUT_FOR_DELIVERY') return false;
+          if (currentStatus === 'ORDER_PARTIALLY_DELIVERED' && key !== 'ORDER_PARTIALLY_DELIVERED') return false;
         } else {
           // All Orders View
           if (currentStatus !== 'ALL') {
@@ -2904,9 +2909,12 @@
       } else if (filterParam === 'out') {
         setViewMode('ACTIVE');
         setActiveSubFilter('ORDER_OUT_FOR_DELIVERY');
-      } else if (['delivered', 'cancelled', 'partial', 'undelivered'].includes(filterParam)) {
+      } else if (filterParam === 'partial') {
+        setViewMode('ACTIVE');
+        setActiveSubFilter('ORDER_PARTIALLY_DELIVERED');
+      } else if (['delivered', 'cancelled', 'undelivered'].includes(filterParam)) {
         setViewMode('ALL');
-        const map = { delivered: 'ORDER_DELIVERED', cancelled: 'ORDER_CANCELLED', partial: 'ORDER_PARTIALLY_DELIVERED', undelivered: 'ORDER_UNDELIVERED' };
+        const map = { delivered: 'ORDER_DELIVERED', cancelled: 'ORDER_CANCELLED', undelivered: 'ORDER_UNDELIVERED' };
         setAllSubFilter(map[filterParam] || 'ALL');
       } else if (filterParam === 'active') {
         setViewMode('ACTIVE');
