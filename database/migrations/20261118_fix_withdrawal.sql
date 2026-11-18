@@ -65,3 +65,7 @@ BEGIN
   RETURN v_balance;
 END;
 $function$;
+
+-- 6. Ensure reviewed_by is VARCHAR(255) so admin names (e.g. 'System Administrator') can be saved
+ALTER TABLE payments.withdrawal_requests 
+  ALTER COLUMN reviewed_by TYPE varchar(255) USING reviewed_by::varchar;

@@ -250,7 +250,7 @@ export class WithdrawalController extends MasterController {
       return res.status(Constants.HTTP_OK).json(resModel);
     } catch (error: any) {
       resModel.status = Constants.ERROR;
-      resModel.info = `catch: ${error.message}`;
+      resModel.info = error.message || "An unexpected error occurred while fetching withdrawal requests.";
       this.logger.error(JSON.stringify(resModel), `${this.constructor.name} : fetchRequests`);
       return res.status(Constants.HTTP_INTERNAL_SERVER_ERROR).json(resModel);
     }
@@ -365,7 +365,7 @@ export class WithdrawalController extends MasterController {
       return res.status(Constants.HTTP_OK).json(resModel);
     } catch (error: any) {
       resModel.status = Constants.ERROR;
-      resModel.info = `catch: ${error.message}`;
+      resModel.info = error.message || "An unexpected error occurred while updating withdrawal request status.";
       this.logger.error(JSON.stringify(resModel), `${this.constructor.name} : updateRequestStatus`);
       return res.status(Constants.HTTP_INTERNAL_SERVER_ERROR).json(resModel);
     }
