@@ -95,6 +95,49 @@
     min-width: 245px !important;
     max-width: 245px !important;
     box-sizing: border-box !important;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  main.main-viewport {
+    margin-left: 245px !important;
+    width: calc(100vw - 245px) !important;
+    max-width: calc(100vw - 245px) !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    transition: margin-left 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  body.sidebar-collapsed .sidebar-container {
+    transform: translateX(-100%) !important;
+  }
+
+  body.sidebar-collapsed main.main-viewport {
+    margin-left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  @media (max-width: 1023px) {
+    .sidebar-container {
+      transform: translateX(-100%);
+      z-index: 60 !important;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+    }
+    body.sidebar-mobile-open .sidebar-container {
+      transform: translateX(0) !important;
+    }
+    main.main-viewport {
+      margin-left: 0 !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+    }
+    #sidebarMobileBackdrop {
+      display: none;
+    }
+    body.sidebar-mobile-open #sidebarMobileBackdrop {
+      display: block !important;
+    }
   }
 
   /* ========================================================================= */
@@ -724,7 +767,10 @@
 <script src="/assets/order-progress.js"></script>
 <style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
 </head>
-<body class="bg-[#07090D] text-[#E2E8F0] dark:bg-[#07090D] dark:text-[#E2E8F0] light:bg-[#F8FAFC] light:text-[#0F172A] min-h-screen flex">
+<body class="bg-[#07090D] text-[#E2E8F0] dark:bg-[#07090D] dark:text-[#E2E8F0] light:bg-[#F8FAFC] light:text-[#0F172A] min-h-screen overflow-x-hidden">
+
+  <!-- Mobile Backdrop for Collapsible Sidebar -->
+  <div id="sidebarMobileBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-50 hidden transition-opacity"></div>
 
   <!-- LEFT PERSISTENT 245px SIDEBAR -->
   <!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
@@ -980,11 +1026,15 @@
 
 
   <!-- MAIN VIEWPORT -->
-  <main class="flex-1 ml-[245px] min-h-screen flex flex-col bg-[#07090D] dark:bg-[#07090D] light:bg-[#F8FAFC]">
+  <main class="main-viewport flex-1 min-h-screen flex flex-col bg-[#07090D] dark:bg-[#07090D] light:bg-[#F8FAFC]">
     
-    <!-- STICKY TOP COMMAND HEADER -->
-    <header class="h-16 border-b border-white/10 dark:border-white/10 light:border-slate-200 bg-[#0B0F17]/80 dark:bg-[#0B0F17]/80 light:bg-white/80 backdrop-blur-md sticky top-0 z-30 px-6 flex items-center justify-between">
-      <div class="flex items-center gap-4">
+    <!-- STICKY TOP COMMAND HEADER (FULLY RESPONSIVE) -->
+    <header class="min-h-16 py-2.5 px-4 sm:px-6 border-b border-white/10 dark:border-white/10 light:border-slate-200 bg-[#0B0F17]/90 dark:bg-[#0B0F17]/90 light:bg-white/90 backdrop-blur-md sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <!-- Sidebar Collapse / Expand Toggle Button -->
+        <button type="button" onclick="toggleSidebar()" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-slate-100 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all flex items-center justify-center cursor-pointer shrink-0" title="Toggle Sidebar (Expand View)">
+          <span class="material-symbols-outlined text-[19px]">menu</span>
+        </button>
         <div>
           <h1 class="text-[15px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight flex items-center gap-2">
             <span id="page-main-heading">Orders Dashboard</span>
@@ -997,19 +1047,13 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <!-- Live Refresh Button -->
-        
-        
-        
+      <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
         <!-- Topbar Theme Switcher -->
-<button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
-  <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
-  <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
-</button>
-        
-        
-        
+        <button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
+          <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
+          <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
+        </button>
+
         <!-- Live Sync Active Status Pill -->
         <div id="liveSyncStatus" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/10 light:bg-emerald-50 border border-emerald-500/30 dark:border-emerald-500/30 light:border-emerald-300 text-emerald-500 dark:text-emerald-400 light:text-emerald-700 select-none shadow-sm transition-all" title="Live Auto-Sync Active: Table automatically checks for IRCTC train delays and status changes every 30 seconds">
           <span class="relative flex h-2 w-2">
@@ -1020,31 +1064,31 @@
           <span class="text-[10px] text-emerald-500/80 dark:text-emerald-400/80 light:text-emerald-700 font-mono hidden sm:inline" id="liveSyncTimerDisplay">(30s)</span>
         </div>
         
-        <button onclick="fetchOrdersData()" id="refreshBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all" title="Refresh Live Data">
+        <button onclick="fetchOrdersData()" id="refreshBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all cursor-pointer" title="Refresh Live Data">
           <span class="material-symbols-outlined text-[16px]" id="refreshIcon">refresh</span>
           <span>Refresh</span>
         </button>
 
         <!-- Export CSV Button -->
-        <button onclick="exportOrdersCsv()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all">
+        <button onclick="exportOrdersCsv()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">download</span>
           <span>Download Orders</span>
         </button>
 
         <!-- Create Manual Order Button -->
-        <button onclick="location.href='/?booking=1'" class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md shadow-[#FF7A00]/25 transition-all">
+        <button onclick="location.href='/?booking=1'" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md shadow-[#FF7A00]/25 transition-all cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">add</span>
           <span>Local Order</span>
         </button>
-        <a href="/irctc-logs?newOrder=1" data-required-module="integrations" class="px-3 py-1.5 rounded-lg text-xs font-bold border border-white/10">+ IRCTC Order</a>
+        <a href="/irctc-logs?newOrder=1" data-required-module="integrations" class="px-3 py-1.5 rounded-lg text-xs font-bold border border-white/10 hover:bg-white/5 transition-all">+ IRCTC Order</a>
       </div>
     </header>
 
-    <!-- CONTENT BODY -->
-    <div class="p-6 space-y-6">
+    <!-- CONTENT BODY (RESPONSIVE PADDING) -->
+    <div class="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-full">
 
-      <!-- TOP 5 KPI TELEMETRY CARDS (Data Connected to /api/v1/orders/stats) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <!-- TOP 5 KPI TELEMETRY CARDS (Data Connected to /api/v1/orders/stats - RESPONSIVE GRID) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4">
         
         <!-- Total Orders Card -->
         <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
@@ -1349,18 +1393,18 @@
           </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto w-full">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <th class="py-3.5 px-4 min-w-[130px]">Order ID & PNR</th>
-                <th class="py-3.5 px-4 min-w-[140px]">Customer</th>
-                <th class="py-3.5 px-4 min-w-[210px]">Train & Delivery</th>
-                <th class="py-3.5 px-4 min-w-[200px]">Meal Items</th>
-                <th class="py-3.5 px-4 min-w-[110px]">Amount & Mode</th>
-                <th class="py-3.5 px-4 min-w-[150px]">Status & Stage</th>
-                <th class="py-3.5 px-4 min-w-[140px]">Outlet</th>
-                <th class="py-3.5 px-4 min-w-[130px] text-right">Actions</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[120px]">Order ID &amp; PNR</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[130px]">Customer</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[185px]">Train &amp; Delivery</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[175px]">Meal Items</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[105px]">Amount &amp; Mode</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[135px]">Status &amp; Stage</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[125px]">Outlet</th>
+                <th class="py-3 px-3 sm:px-4 min-w-[115px] text-right">Actions</th>
               </tr>
             </thead>
             <tbody id="orders-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
@@ -1416,18 +1460,18 @@
         </div>
 
         <!-- Table -->
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto w-full">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <th class="py-3 px-4 min-w-[130px]">Order ID &amp; PNR</th>
-                <th class="py-3 px-4 min-w-[140px]">Customer</th>
-                <th class="py-3 px-4 min-w-[200px]">Train &amp; Delivery</th>
-                <th class="py-3 px-4 min-w-[180px]">Meal Items</th>
-                <th class="py-3 px-4 min-w-[110px]">Amount &amp; Mode</th>
-                <th class="py-3 px-4 min-w-[140px]">Final Status</th>
-                <th class="py-3 px-4 min-w-[130px]">Outlet</th>
-                <th class="py-3 px-4 min-w-[80px] text-right">Details</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[120px]">Order ID &amp; PNR</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[130px]">Customer</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[185px]">Train &amp; Delivery</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[170px]">Meal Items</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[105px]">Amount &amp; Mode</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[130px]">Final Status</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[120px]">Outlet</th>
+                <th class="py-2.5 px-3 sm:px-4 min-w-[75px] text-right">Details</th>
               </tr>
             </thead>
             <tbody id="today-closed-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
@@ -2370,7 +2414,7 @@
         html += `
           <tr class="${isLate ? 'bg-amber-500/10 dark:bg-amber-950/25 hover:bg-amber-500/15 dark:hover:bg-amber-950/35 border-l-4 border-l-amber-500 transition-colors cursor-pointer group' : 'hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group'}" onclick="openOrderDrawer('${row.oid}')">
             <!-- Order ID & PNR -->
-            <td class="py-3 px-4 min-w-[130px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[120px] font-mono font-bold text-[#FF7A00] group-hover:underline">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span>#${row.oid}</span>
                 ${isLate ? '<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 whitespace-nowrap animate-pulse">⚠️ DELAYED</span>' : ''}
@@ -2381,44 +2425,44 @@
             </td>
 
             <!-- Customer -->
-            <td class="py-3 px-4 min-w-[140px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[130px]">
               ${customerBlock}
             </td>
 
             <!-- Train & Delivery -->
-            <td class="py-3 px-4 min-w-[210px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[185px]">
               ${trainBlock}
             </td>
 
             <!-- Items -->
-            <td class="py-3 px-4 min-w-[200px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[175px]">
               <div class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full ${isVeg ? 'bg-emerald-500 ring-2 ring-emerald-500/20' : 'bg-rose-500 ring-2 ring-rose-500/20'} shrink-0" title="${isVeg ? 'Vegetarian' : 'Non-Vegetarian'}"></span>
-                <span class="truncate max-w-[200px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
+                <span class="truncate max-w-[175px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
               </div>
             </td>
 
             <!-- Amount -->
-            <td class="py-3 px-4 min-w-[110px] font-mono font-semibold text-slate-900 dark:text-white">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[105px] font-mono font-semibold text-slate-900 dark:text-white">
               <div class="text-xs">${totalPrice}</div>
               <div class="mt-0.5">${modeBadge}</div>
             </td>
 
             <!-- Status -->
-            <td class="py-3 px-4 min-w-[150px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[135px]">
               ${statusBadgeHtml}
             </td>
 
             <!-- Outlet -->
-            <td class="py-3 px-4 min-w-[140px] text-slate-700 dark:text-slate-300">
-              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[140px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
+            <td class="py-2.5 px-3 sm:px-4 min-w-[125px] text-slate-700 dark:text-slate-300">
+              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[125px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
               <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-0.5 mt-0.5">
                 <span class="material-symbols-outlined text-[12px]">verified</span> IRCTC Outlet
               </div>
             </td>
 
             <!-- Actions -->
-            <td class="py-3 px-4 min-w-[130px] text-right" onclick="event.stopPropagation()">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[115px] text-right" onclick="event.stopPropagation()">
               <div class="flex items-center justify-end gap-1.5">
                 ${actionButtons}
                 <button onclick="openOrderDrawer('${row.oid}')" class="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors" title="View Order Details">
@@ -2564,17 +2608,17 @@
 
         return `
           <tr class="hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group" onclick="openOrderDrawer('${row.oid}')">
-            <td class="py-3 px-4 min-w-[130px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[120px] font-mono font-bold text-[#FF7A00] group-hover:underline">
               <div>#${row.oid}</div>
               <div class="text-[10px] font-sans text-slate-500 font-normal mt-0.5">
                 PNR: <strong class="text-slate-700 dark:text-slate-300 font-mono">${Admin.esc(delDetails.pnr || '---')}</strong>
               </div>
             </td>
-            <td class="py-3 px-4 min-w-[140px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[130px]">
               <div class="font-semibold text-slate-900 dark:text-slate-200 text-xs">${Admin.esc(custDetails.fullName || 'Passenger')}</div>
               <div class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">${Admin.esc(custDetails.mobile || '---')}</div>
             </td>
-            <td class="py-3 px-4 min-w-[200px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[185px]">
               <div class="font-bold text-slate-900 dark:text-slate-200 text-xs flex items-center gap-1.5">
                 ${trainNum ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[10px]">${trainNum}</span>` : ''}
                 <span class="truncate">${Admin.esc(trainNm)}</span>
@@ -2583,17 +2627,17 @@
                 Coach ${Admin.esc(delDetails.coach || 'B1')}, Berth ${Admin.esc(delDetails.berth || '42')} &bull; <strong class="text-amber-500 dark:text-amber-400 font-mono">${Admin.esc(row.station_code || delDetails.stationCode || 'STN')}</strong>
               </div>
             </td>
-            <td class="py-3 px-4 min-w-[180px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
-            <td class="py-3 px-4 min-w-[110px] font-mono text-xs">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[170px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
+            <td class="py-2.5 px-3 sm:px-4 min-w-[105px] font-mono text-xs">
               <span class="font-bold text-slate-900 dark:text-white">${totalPrice}</span>
               ${modeBadge}
             </td>
-            <td class="py-3 px-4 min-w-[140px]">${finalStatusHtml}</td>
-            <td class="py-3 px-4 min-w-[130px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[150px]">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[130px]">${finalStatusHtml}</td>
+            <td class="py-2.5 px-3 sm:px-4 min-w-[120px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[140px]">
               <div class="font-medium truncate">${Admin.esc(row.outlet_name || 'Outlet #' + row.outlet_id)}</div>
               <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">${Admin.esc(row.station_name || delDetails.station || '')}</div>
             </td>
-            <td class="py-3 px-4 min-w-[80px] text-right" onclick="event.stopPropagation()">
+            <td class="py-2.5 px-3 sm:px-4 min-w-[75px] text-right" onclick="event.stopPropagation()">
               <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors" title="View Order Inspection">
                 <span class="material-symbols-outlined text-[18px]">visibility</span>
               </button>
@@ -3099,6 +3143,24 @@
     } else if (p.startsWith('/settings')) {
       activate('nav-settings');
     }
+
+    // Responsive Sidebar Toggle
+    window.toggleSidebar = function() {
+      if (window.innerWidth < 1024) {
+        document.body.classList.toggle('sidebar-mobile-open');
+      } else {
+        document.body.classList.toggle('sidebar-collapsed');
+        try {
+          localStorage.setItem('olf_sidebar_collapsed', document.body.classList.contains('sidebar-collapsed') ? '1' : '0');
+        } catch (e) {}
+      }
+    };
+
+    try {
+      if (localStorage.getItem('olf_sidebar_collapsed') === '1' && window.innerWidth >= 1024) {
+        document.body.classList.add('sidebar-collapsed');
+      }
+    } catch (e) {}
   })();
 </script>
 
