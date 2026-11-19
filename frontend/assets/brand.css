@@ -1,3 +1,152 @@
 /* Shared text wordmark, matching the orange OLF reference. */
 .olf-wordmark{display:inline-block;font-family:Arial,Helvetica,sans-serif!important;font-size:28px!important;font-weight:700!important;line-height:1.15!important;letter-spacing:1px;background:linear-gradient(100deg,#ff8b32 0%,#f07859 100%);background-clip:text;-webkit-background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;white-space:nowrap}
 @media(forced-colors:active){.olf-wordmark{background:none;color:CanvasText!important;-webkit-text-fill-color:CanvasText}}
+
+/* ========================================================================= */
+/* UNIVERSAL 64px SLIM ICON RAIL COLLAPSED SIDEBAR (ACROSS ALL OLF PAGES)    */
+/* ========================================================================= */
+aside.sidebar-container {
+  width: 245px !important;
+  min-width: 245px !important;
+  max-width: 245px !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+  transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+main,
+.main-viewport,
+.ml-\[245px\],
+.pl-\[245px\],
+.ml-64,
+.ac-shell,
+.dv2-main,
+.rp-shell,
+.vendors-shell {
+  transition: margin-left 0.22s cubic-bezier(0.4, 0, 0.2, 1), width 0.22s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.22s cubic-bezier(0.4, 0, 0.2, 1), padding-left 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.sidebar-collapsed aside.sidebar-container {
+  width: 64px !important;
+  min-width: 64px !important;
+  max-width: 64px !important;
+  transform: none !important;
+}
+
+body.sidebar-collapsed main,
+body.sidebar-collapsed .main-viewport,
+body.sidebar-collapsed [class*="ml-[245px]"],
+body.sidebar-collapsed [class*="pl-[245px]"],
+body.sidebar-collapsed .ml-64,
+body.sidebar-collapsed .ac-shell,
+body.sidebar-collapsed .dv2-main,
+body.sidebar-collapsed .rp-shell,
+body.sidebar-collapsed .vendors-shell {
+  margin-left: 64px !important;
+  padding-left: 0 !important;
+  width: calc(100% - 64px) !important;
+  max-width: calc(100% - 64px) !important;
+}
+
+/* Hide labels, chevrons, badges, submenus, and text in collapsed mode */
+body.sidebar-collapsed .sidebar-brand-full,
+body.sidebar-collapsed .theme-toggle-btn,
+body.sidebar-collapsed .sidebar-admin-pill,
+body.sidebar-collapsed .sidebar-section-label,
+body.sidebar-collapsed .sidebar-item span.truncate,
+body.sidebar-collapsed .sidebar-chevron,
+body.sidebar-collapsed .sidebar-badge-orange,
+body.sidebar-collapsed .submenu-container,
+body.sidebar-collapsed .sidebar-health-card,
+body.sidebar-collapsed .sidebar-user-name,
+body.sidebar-collapsed .sidebar-user-role,
+body.sidebar-collapsed #olf-signout-btn {
+  display: none !important;
+}
+
+/* Hide extra tags/badges inside sidebar items in collapsed mode */
+body.sidebar-collapsed .sidebar-item > span:not(.sidebar-icon) {
+  display: none !important;
+}
+body.sidebar-collapsed .sidebar-item > div:last-child:not(:first-child) {
+  display: none !important;
+}
+
+/* Show mini logo in collapsed mode */
+body.sidebar-collapsed .sidebar-brand-mini {
+  display: flex !important;
+}
+
+/* Compact header in collapsed mode */
+body.sidebar-collapsed .sidebar-header-row {
+  padding: 0.6rem 0.25rem !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+body.sidebar-collapsed .sidebar-header-actions {
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+body.sidebar-collapsed #sidebarCollapseIcon {
+  transform: rotate(180deg);
+}
+
+/* Center each item in the 64px rail */
+body.sidebar-collapsed .sidebar-item {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  width: 44px !important;
+  height: 42px !important;
+  margin: 5px auto !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+body.sidebar-collapsed .sidebar-item > div:first-child {
+  justify-content: center !important;
+  gap: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+body.sidebar-collapsed .sidebar-item .sidebar-icon {
+  font-size: 21px !important;
+  margin: 0 !important;
+}
+
+/* Active item in collapsed icon rail */
+body.sidebar-collapsed .sidebar-item.active {
+  background-color: #FF7A00 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4) !important;
+}
+
+body.sidebar-collapsed .sidebar-item.active .sidebar-icon {
+  color: #FFFFFF !important;
+}
+
+/* Subtle hover for inactive rail items */
+body.sidebar-collapsed .sidebar-item:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #FF7A00 !important;
+}
+
+body.sidebar-collapsed .sidebar-item:not(.active):hover .sidebar-icon {
+  color: #FF7A00 !important;
+}
+
+/* Centered profile avatar at rail bottom */
+body.sidebar-collapsed .sidebar-profile-footer {
+  justify-content: center !important;
+  padding: 0.5rem 0 !important;
+}

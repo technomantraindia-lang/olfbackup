@@ -112,3 +112,58 @@
   }catch{document.documentElement.classList.add('olf-auth-ready');document.body.innerHTML='<main style="font:15px Verdana;padding:48px;line-height:1.8"><h1>Unable to verify your sign-in</h1><p>Reload this page or <a href="/login">sign in again</a>.</p></main>';settle(null);}
  })();
 })();
+
+
+// Universal Sidebar Collapse & Expand Engine (All Admin Pages)
+(function initGlobalSidebarEngine() {
+  function syncCollapseState() {
+    try {
+      const saved = localStorage.getItem('olf_sidebar_collapsed');
+      if (saved === '1' || (saved === null && window.innerWidth >= 768 && window.innerWidth < 1280)) {
+        document.body.classList.add('sidebar-collapsed');
+      } else if (saved === '0') {
+        document.body.classList.remove('sidebar-collapsed');
+      }
+    } catch (_) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncCollapseState);
+  } else {
+    syncCollapseState();
+  }
+
+  window.toggleSidebar = function() {
+    if (window.innerWidth < 768) {
+      document.body.classList.toggle('sidebar-mobile-open');
+    } else {
+      const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+      try {
+        localStorage.setItem('olf_sidebar_collapsed', isCollapsed ? '1' : '0');
+      } catch (_) {}
+    }
+  };
+
+  window.toggleSubmenu = function(id, chevId) {
+    if (document.body.classList.contains('sidebar-collapsed')) {
+      if (typeof window.toggleSidebar === 'function') {
+        window.toggleSidebar();
+      } else {
+        document.body.classList.remove('sidebar-collapsed');
+      }
+      const grp = document.getElementById(id);
+      if (grp) grp.classList.remove('hidden');
+      const chev = document.getElementById(chevId);
+      if (chev) chev.classList.add('rotate-180');
+      return;
+    }
+    const grp = document.getElementById(id);
+    const chev = document.getElementById(chevId);
+    if (!grp) return;
+    const isHidden = grp.classList.toggle('hidden');
+    if (chev) {
+      if (isHidden) chev.classList.remove('rotate-180');
+      else chev.classList.add('rotate-180');
+    }
+  };
+})();

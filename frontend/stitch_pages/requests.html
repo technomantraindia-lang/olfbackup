@@ -191,123 +191,268 @@
       color: #FFFFFF !important;
     }
   </style>
+  <link rel="stylesheet" href="/assets/brand.css?v=20261022">
+  <script src="/assets/access-session.js"></script>
 </head>
 <body class="min-h-screen font-sans flex flex-col antialiased">
 
 <!-- SIDEBAR -->
-<aside class="fixed inset-y-0 left-0 z-40 w-64 sidebar-bg border-r flex flex-col select-none transition-all">
-  <!-- Brand Header -->
-  <div class="h-16 flex items-center justify-between px-4 border-b border-white/5 dark:border-white/5 light:border-slate-200">
-    <a href="/dashboard" class="flex items-center gap-2.5">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-600 to-orange-500 flex items-center justify-center text-white font-black text-base shadow-md shadow-orange-500/20">
-        O
-      </div>
-      <div>
-        <span class="text-sm font-extrabold tracking-tight text-white dark:text-white light:text-slate-900">OLF Stores</span>
-        <span class="block text-[10px] text-orange-500 font-mono tracking-wider font-semibold">FINANCE DESK</span>
-      </div>
+<aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
+  <!-- Official OLF Stores Brand Header -->
+  <div class="px-3.5 py-3 flex items-center justify-between border-b sidebar-border sidebar-header-row">
+    <a href="/" class="flex items-center gap-2 group py-0.5 sidebar-brand-full" title="OLF — Command Center">
+      <span class="olf-wordmark font-black text-lg text-[#FF7A00]">OLF</span>
     </a>
+    <a href="/" class="hidden items-center justify-center w-8 h-8 rounded-lg bg-[#FF7A00]/15 border border-[#FF7A00]/30 text-[#FF7A00] font-black text-base sidebar-brand-mini" title="OLF — Command Center">
+      O
+    </a>
+    <div class="flex items-center gap-1.5 sidebar-header-actions">
+      <!-- Dark/Light Theme Switcher button -->
+      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+      </button>
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none sidebar-admin-pill" title="Provider sync has not been verified">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Admin</span>
+      </div>
+      <button type="button" onclick="toggleSidebar()" id="sidebarCollapseBtn" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 bg-white/5 hover:bg-[#FF7A00]/20 hover:border-[#FF7A00]/40 text-slate-400 hover:text-[#FF7A00] transition-all flex items-center justify-center cursor-pointer shrink-0" title="Collapse / Expand Sidebar Menu">
+        <span class="material-symbols-outlined text-[18px]" id="sidebarCollapseIcon">keyboard_double_arrow_left</span>
+      </button>
+    </div>
   </div>
 
-  <!-- Navigation Links -->
-  <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-6 text-xs">
-    <!-- SECTION 1: CORE OPERATIONS -->
-    <div class="space-y-1">
-      <div class="px-2 pb-1 text-[10px] font-bold tracking-wider uppercase text-slate-400">Core Operations</div>
-      <a href="/dashboard" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">dashboard</span>
+  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- SECTION 1: OPERATIONS & DISPATCH -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
+
+      <!-- 1. Dashboard -->
+      <a href="/" id="nav-dashboard" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Dashboard">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">grid_view</span>
         <span class="truncate">Dashboard</span>
       </a>
-      <a href="/orders" id="nav-orders" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
-        <span class="truncate">Orders</span>
-      </a>
-      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
+
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Orders">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Customers">
         <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
         <span class="truncate">Customers</span>
       </a>
-      <a href="/outlets" id="nav-outlets" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
-        <span class="truncate">Outlets</span>
-      </a>
-      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-2 rounded-lg font-medium transition-colors">
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Outlets">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('active', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/alloutlets" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Vendors & Brands">
         <div class="flex items-center gap-2.5">
           <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
           <span class="truncate">Vendors &amp; Brands</span>
         </div>
-        <span class="px-1.5 py-0.2 rounded text-[10px] font-bold sidebar-badge-orange">Hub</span>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
       </a>
-      <a href="/trains" id="nav-trains" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
-        <span class="truncate">Railway Operations</span>
-      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Railway Operations">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <!-- SECTION 2: FINANCE & COMMERCE -->
-    <div class="space-y-1">
-      <div class="px-2 pb-1 text-[10px] font-bold tracking-wider uppercase text-slate-400">Finance &amp; Wallets</div>
-      <!-- ACTIVE: Withdrawal Requests -->
-      <a href="/requests" id="nav-requests" class="sidebar-item active flex items-center justify-between px-2.5 py-2 rounded-lg font-medium transition-colors">
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors active" title="Withdrawal Requests">
         <div class="flex items-center gap-2.5">
-          <span class="material-symbols-outlined text-[18px] sidebar-icon text-orange-500">account_balance_wallet</span>
-          <span class="truncate font-semibold">Withdrawal Requests</span>
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
         </div>
-        <span id="sidebar-pending-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-600 text-white">-</span>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
       </a>
-      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Invoices & Payouts">
         <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
         <span class="truncate">Invoices &amp; Payouts</span>
       </a>
-      <a href="/wallet" id="nav-wallet" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">paid</span>
-        <span class="truncate">Wallet Ledger</span>
-      </a>
     </div>
 
-    <!-- SECTION 3: MANAGEMENT & HR -->
-    <div class="space-y-1">
-      <div class="px-2 pb-1 text-[10px] font-bold tracking-wider uppercase text-slate-400">Management &amp; HR</div>
-      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-2 rounded-lg font-medium transition-colors">
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Human Resources">
         <div class="flex items-center gap-2.5">
           <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
           <span class="truncate">Human Resources</span>
         </div>
-        <span class="text-[9.5px] font-semibold text-slate-400 px-1.5 py-0.2 rounded bg-white/5">HR</span>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
       </a>
-      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span>
-        <span class="truncate">Roles &amp; Access</span>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Roles & Access"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Complaints">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
       </a>
-      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
-        <span class="truncate">Complaints</span>
-      </a>
-      <a href="/reports" id="nav-reports" class="sidebar-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium transition-colors">
-        <span class="material-symbols-outlined text-[18px] sidebar-icon">monitoring</span>
-        <span class="truncate">Reports</span>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Reports">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Settings & Roles">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
       </a>
     </div>
   </nav>
 
-  <!-- Sidebar Footer Profile -->
-  <div class="p-3 border-t border-white/5 dark:border-white/5 light:border-slate-200">
-    <div class="flex items-center gap-2.5 px-1">
-      <div class="w-8 h-8 rounded-full bg-orange-600 text-white font-bold text-xs flex items-center justify-center">
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5 sidebar-profile-footer">
+      <div class="w-8 h-8 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-sm" title="System Administrator">
         SA
       </div>
       <div class="min-w-0 flex-1 leading-tight">
-        <div class="text-xs font-semibold truncate text-white dark:text-white light:text-slate-900">System Admin</div>
-        <div class="text-[10px] text-slate-400 font-mono">admin@olfstores.com</div>
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
       </div>
-      <button onclick="toggleTheme()" class="p-1.5 rounded-lg text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 hover:bg-white/5 transition-colors cursor-pointer" title="Toggle Dark/Light Mode">
-        <span class="material-symbols-outlined text-[18px] theme-icon">dark_mode</span>
-      </button>
+      <a href="/login" id="olf-signout-btn" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
     </div>
   </div>
 </aside>
 
 <!-- MAIN CONTENT WRAPPER -->
-<div class="ml-64 flex-1 flex flex-col min-h-screen">
+<div class="ml-[245px] flex-1 flex flex-col min-h-screen">
   <!-- Top Bar -->
   <header class="h-16 border-b border-white/5 dark:border-white/5 light:border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30 bg-[#07090D]/80 dark:bg-[#07090D]/80 light:bg-white/95 backdrop-blur-md">
     <div class="flex items-center gap-3">

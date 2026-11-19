@@ -547,24 +547,30 @@
   <!-- CANONICAL OLF SIDEBAR (245px) -->
   <aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
   <!-- Official OLF Stores Brand Header -->
-  <div class="px-4 py-3 flex items-center justify-between border-b sidebar-border">
-    <a href="/" class="flex items-center gap-2 group py-0.5" title="OLF — Command Center">
-      <span class="olf-wordmark">OLF</span>
-    </a>
-    <div class="flex items-center gap-1.5">
-      <!-- Dark/Light Theme Switcher button -->
-      <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
-        <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
-      </button>
-      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="Provider sync has not been verified">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>Admin</span>
+    <div class="px-3.5 py-3 flex items-center justify-between border-b sidebar-border sidebar-header-row">
+      <a href="/" class="flex items-center gap-2 group py-0.5 sidebar-brand-full" title="OLF — Command Center">
+        <span class="olf-wordmark font-black text-lg text-[#FF7A00]">OLF</span>
+      </a>
+      <a href="/" class="hidden items-center justify-center w-8 h-8 rounded-lg bg-[#FF7A00]/15 border border-[#FF7A00]/30 text-[#FF7A00] font-black text-base sidebar-brand-mini" title="OLF — Command Center">
+        O
+      </a>
+      <div class="flex items-center gap-1.5 sidebar-header-actions">
+        <!-- Dark/Light Theme Switcher button -->
+        <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
+          <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
+        </button>
+        <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none sidebar-admin-pill" title="Provider sync has not been verified">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Admin</span>
+        </div>
+        <button type="button" onclick="toggleSidebar()" id="sidebarCollapseBtn" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 bg-white/5 hover:bg-[#FF7A00]/20 hover:border-[#FF7A00]/40 text-slate-400 hover:text-[#FF7A00] transition-all flex items-center justify-center cursor-pointer shrink-0" title="Collapse / Expand Sidebar Menu">
+          <span class="material-symbols-outlined text-[18px]" id="sidebarCollapseIcon">keyboard_double_arrow_left</span>
+        </button>
       </div>
     </div>
-  </div>
 
-  <!-- Navigation Scroll Area with ALL Real OLF Elements -->
-  <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
+    <!-- Navigation Scroll Area with ALL Real OLF Elements -->
+    <nav class="flex-1 overflow-y-auto px-2 py-2 space-y-3 text-xs" id="sidebar-nav">
     <!-- SECTION 1: OPERATIONS & DISPATCH -->
     <div class="space-y-0.5">
       <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Core Operations</div>
@@ -778,7 +784,7 @@
     </div>
 
     <!-- Minimal User Profile -->
-    <div class="flex items-center gap-2 px-1 pt-0.5">
+    <div class="flex items-center gap-2 px-1 pt-0.5 sidebar-profile-footer">
       <div class="w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0">
         SA
       </div>
