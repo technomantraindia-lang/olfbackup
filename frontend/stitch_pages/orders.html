@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <link rel="icon" type="image/png" href="/icon.png?v=3" />
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link rel="icon" type="image/png" href="/icon.png?v=3"/>
   <title>Orders Management - OLF Stores Operations Command</title>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
     tailwind.config = {
@@ -35,38 +33,29 @@
     }
   </script>
   <style>
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       font-family: Verdana, Geneva, Tahoma, sans-serif !important;
     }
-
     .material-symbols-outlined {
       font-family: 'Material Symbols Outlined' !important;
     }
-
     body {
       transition: background-color 0.2s ease, color 0.2s ease;
     }
-
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
-
     ::-webkit-scrollbar-track {
       background: transparent;
     }
-
     ::-webkit-scrollbar-thumb {
       background: rgba(148, 163, 184, 0.2);
       border-radius: 4px;
     }
-
     .dark .card-glow {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
     }
-
     .light .card-glow {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
     }
@@ -74,1000 +63,973 @@
 
 
 
-  <style id="master-sidebar-styles">
-    /* ========================================================================= */
-    /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
-    /* ========================================================================= */
+<style id="master-sidebar-styles">
+  /* ========================================================================= */
+  /* UNIVERSAL THEME & TYPOGRAPHY SYSTEM (100% UNIFIED DARK & LIGHT)           */
+  /* ========================================================================= */
 
-    /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
-    body,
-    button,
-    input,
-    select,
-    textarea,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    a,
-    label,
-    td,
-    th,
-    div,
-    span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
-      font-family: Verdana, Geneva, Tahoma, sans-serif !important;
-    }
+  /* 1. VERDANA TYPOGRAPHY (EXCLUDING ICONS) */
+  body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, label, td, th, div, span:not(.material-symbols-outlined):not([class*="material-symbols"]):not([class*="material-icons"]) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  }
 
-    .material-symbols-outlined,
-    [class*="material-symbols"],
-    [class*="material-icons"] {
-      font-family: 'Material Symbols Outlined', 'Material Icons' !important;
-      font-weight: normal !important;
-      font-style: normal !important;
-      font-size: 18px;
-      line-height: 1;
-      letter-spacing: normal;
-      text-transform: none;
-      display: inline-block;
-      white-space: nowrap;
-      word-wrap: normal;
-      direction: ltr;
-      -webkit-font-feature-settings: 'liga' 1;
-      font-feature-settings: 'liga' 1;
-      -webkit-font-smoothing: antialiased;
-    }
+  .material-symbols-outlined, [class*="material-symbols"], [class*="material-icons"] {
+    font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga' 1;
+    font-feature-settings: 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* ========================================================================= */
-    /* RESPONSIVE COLLAPSIBLE SIDEBAR: 245px EXPANDED / 64px SLIM ICON RAIL      */
-    /* ========================================================================= */
+  .sidebar-container {
+    width: 245px !important;
+    min-width: 245px !important;
+    max-width: 245px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  main.main-viewport {
+    margin-left: 245px !important;
+    width: calc(100% - 245px) !important;
+    max-width: calc(100% - 245px) !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    transition: margin-left 0.22s cubic-bezier(0.4, 0, 0.2, 1), width 0.22s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  /* ========================================================================= */
+  /* COLLAPSED 64px SLIM ICON RAIL (ICONS STAY VISIBLE ON LEFT - EXACT DESIGN) */
+  /* ========================================================================= */
+  body.sidebar-collapsed .sidebar-container {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+    transform: none !important;
+  }
+
+  body.sidebar-collapsed main.main-viewport {
+    margin-left: 64px !important;
+    width: calc(100% - 64px) !important;
+    max-width: calc(100% - 64px) !important;
+  }
+
+  /* Hide labels, chevrons, badges, submenus, and text in collapsed mode */
+  body.sidebar-collapsed .sidebar-brand-full,
+  body.sidebar-collapsed .theme-toggle-btn,
+  body.sidebar-collapsed .sidebar-admin-pill,
+  body.sidebar-collapsed .sidebar-section-label,
+  body.sidebar-collapsed .sidebar-item span.truncate,
+  body.sidebar-collapsed .sidebar-chevron,
+  body.sidebar-collapsed .sidebar-badge-orange,
+  body.sidebar-collapsed .submenu-container,
+  body.sidebar-collapsed .sidebar-health-card,
+  body.sidebar-collapsed .sidebar-user-name,
+  body.sidebar-collapsed .sidebar-user-role,
+  body.sidebar-collapsed #olf-signout-btn {
+    display: none !important;
+  }
+
+  /* Hide extra tags/badges inside sidebar items in collapsed mode */
+  body.sidebar-collapsed .sidebar-item > span:not(.sidebar-icon) {
+    display: none !important;
+  }
+  body.sidebar-collapsed .sidebar-item > div:last-child:not(:first-child) {
+    display: none !important;
+  }
+
+  /* Show mini logo in collapsed mode */
+  body.sidebar-collapsed .sidebar-brand-mini {
+    display: flex !important;
+  }
+
+  /* Compact header in collapsed mode */
+  body.sidebar-collapsed .sidebar-header-row {
+    padding: 0.6rem 0.25rem !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  body.sidebar-collapsed .sidebar-header-actions {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  body.sidebar-collapsed #sidebarCollapseIcon {
+    transform: rotate(180deg);
+  }
+
+  /* Center each item in the 64px rail */
+  body.sidebar-collapsed .sidebar-item {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    width: 44px !important;
+    height: 42px !important;
+    margin: 5px auto !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  body.sidebar-collapsed .sidebar-item > div:first-child {
+    justify-content: center !important;
+    gap: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  body.sidebar-collapsed .sidebar-item .sidebar-icon {
+    font-size: 21px !important;
+    margin: 0 !important;
+  }
+
+  /* Active item in collapsed icon rail (Matches media_1795080208395_5dbf8e73.png) */
+  body.sidebar-collapsed .sidebar-item.active {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4) !important;
+  }
+
+  body.sidebar-collapsed .sidebar-item.active .sidebar-icon {
+    color: #FFFFFF !important;
+  }
+
+  /* Subtle hover for inactive rail items */
+  body.sidebar-collapsed .sidebar-item:not(.active):hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #FF7A00 !important;
+  }
+
+  body.sidebar-collapsed .sidebar-item:not(.active):hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+
+  /* Centered profile avatar at rail bottom */
+  body.sidebar-collapsed .sidebar-profile-footer {
+    justify-content: center !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  /* Mobile Offcanvas (< 768px) */
+  @media (max-width: 767px) {
     .sidebar-container {
+      transform: translateX(-100%) !important;
+      z-index: 60 !important;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+    }
+    body.sidebar-mobile-open .sidebar-container {
+      transform: translateX(0) !important;
       width: 245px !important;
       min-width: 245px !important;
-      max-width: 245px !important;
-      box-sizing: border-box !important;
-      overflow-x: hidden !important;
-      transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
-
     main.main-viewport {
-      margin-left: 245px !important;
-      width: calc(100% - 245px) !important;
-      max-width: calc(100% - 245px) !important;
-      min-width: 0 !important;
-      box-sizing: border-box !important;
-      overflow-x: hidden !important;
-      transition: margin-left 0.22s cubic-bezier(0.4, 0, 0.2, 1), width 0.22s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      margin-left: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
-
-    /* COLLAPSED 64px SLIM ICON RAIL (ICONS STAY VISIBLE ON LEFT) */
-    body.sidebar-collapsed .sidebar-container {
-      width: 64px !important;
-      min-width: 64px !important;
-      max-width: 64px !important;
-      transform: none !important;
+    #sidebarMobileBackdrop {
+      display: none;
     }
-
-    body.sidebar-collapsed main.main-viewport {
-      margin-left: 64px !important;
-      width: calc(100% - 64px) !important;
-      max-width: calc(100% - 64px) !important;
+    body.sidebar-mobile-open #sidebarMobileBackdrop {
+      display: block !important;
     }
-
-    /* Header in 64px Rail */
-    body.sidebar-collapsed .sidebar-header-box {
-      padding: 0.75rem 0.25rem !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    /* Hide labels, text, badges, submenus in 64px Rail */
-    body.sidebar-collapsed .olf-wordmark-wrap,
-    body.sidebar-collapsed .theme-toggle-btn,
-    body.sidebar-collapsed .sidebar-admin-pill,
-    body.sidebar-collapsed .sidebar-section-label,
-    body.sidebar-collapsed .sidebar-item span.truncate,
-    body.sidebar-collapsed .sidebar-item .sidebar-chevron,
-    body.sidebar-collapsed .sidebar-item .sidebar-badge-orange,
-    body.sidebar-collapsed .sidebar-item span[class*="text-[9.5px]"],
-    body.sidebar-collapsed .submenu-container,
-    body.sidebar-collapsed .sidebar-health-card,
-    body.sidebar-collapsed .sidebar-user-info,
-    body.sidebar-collapsed #olf-signout-btn {
-      display: none !important;
-    }
-
-    /* Center navigation items and icons in 64px Rail */
-    body.sidebar-collapsed .sidebar-item {
-      justify-content: center !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      width: 44px !important;
-      height: 40px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      border-radius: 8px !important;
-    }
-
-    body.sidebar-collapsed .sidebar-item .sidebar-icon {
-      font-size: 20px !important;
-      margin: 0 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-
-    /* Rotate collapse icon to point right >> to indicate expand */
-    #sidebarCollapseIcon {
-      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      display: inline-block !important;
-    }
-
-    body.sidebar-collapsed #sidebarCollapseIcon {
-      transform: rotate(180deg) !important;
-    }
-
-    /* Footer avatar in 64px Rail */
-    body.sidebar-collapsed .sidebar-footer-box {
-      padding: 0.75rem 0.25rem !important;
-    }
-
-    body.sidebar-collapsed .sidebar-user-strip {
-      justify-content: center !important;
-      padding: 0 !important;
-    }
-
-    body.sidebar-collapsed .sidebar-user-avatar {
-      margin: 0 auto !important;
-    }
-
-    /* STICKY ACTIONS COLUMN (PINNED TO RIGHT, NEVER CUT OFF) */
-    .table-sticky-actions th:last-child,
-    .table-sticky-actions td:last-child {
-      position: sticky !important;
-      right: 0 !important;
-      z-index: 10 !important;
-    }
-
-    .table-sticky-actions th:last-child {
-      z-index: 20 !important;
-    }
-
-    html.dark .table-sticky-actions td:last-child {
-      background-color: #111622 !important;
-      box-shadow: -6px 0 16px -2px rgba(0, 0, 0, 0.6) !important;
-    }
-
-    html.dark .table-sticky-actions tr:hover td:last-child {
-      background-color: #1a2234 !important;
-    }
-
-    html.dark .table-sticky-actions th:last-child {
-      background-color: #0b0f17 !important;
-      box-shadow: -6px 0 16px -2px rgba(0, 0, 0, 0.6) !important;
-    }
-
-    html.dark .table-sticky-actions tr[class*="amber"] td:last-child {
-      background-color: #1e1910 !important;
-    }
-
-    html.dark .table-sticky-actions tr[class*="amber"]:hover td:last-child {
-      background-color: #2a2215 !important;
-    }
-
-    html.light .table-sticky-actions td:last-child {
-      background-color: #ffffff !important;
-      box-shadow: -6px 0 14px -2px rgba(0, 0, 0, 0.1) !important;
-    }
-
-    html.light .table-sticky-actions tr:hover td:last-child {
-      background-color: #f1f5f9 !important;
-    }
-
-    html.light .table-sticky-actions th:last-child {
-      background-color: #f8fafc !important;
-      box-shadow: -6px 0 14px -2px rgba(0, 0, 0, 0.1) !important;
-    }
-
-    html.light .table-sticky-actions tr[class*="amber"] td:last-child {
-      background-color: #fffbeb !important;
-    }
-
-    html.light .table-sticky-actions tr[class*="amber"]:hover td:last-child {
-      background-color: #fef3c7 !important;
-    }
-
-    /* MOBILE BREAKPOINT (< 768px ONLY) */
-    @media (max-width: 767px) {
-      .sidebar-container {
-        transform: translateX(-100%) !important;
-        z-index: 60 !important;
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5) !important;
-      }
-
-      body.sidebar-mobile-open .sidebar-container {
-        transform: translateX(0) !important;
-      }
-
-      main.main-viewport {
-        margin-left: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-      }
-
-      #sidebarMobileBackdrop {
-        display: none;
-      }
-
-      body.sidebar-mobile-open #sidebarMobileBackdrop {
-        display: block !important;
-      }
-    }
-
-      /* ========================================================================= */
-      /* 2. DARK MODE RULES (DEFAULT)                                              */
-      /* ========================================================================= */
-      html.dark,
-      html.dark body {
-        background-color: #07090D !important;
-        color: #F1F5F9 !important;
-      }
-
-      html.dark main,
-      html.dark .main-container,
-      html.dark [class*="ml-[245px]"] {
-        background-color: #07090D !important;
-        color: #F1F5F9 !important;
-      }
-
-      html.dark .sidebar-container {
-        background-color: #0B0F17 !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
-      }
-
-      html.dark .sidebar-border {
-        border-color: rgba(255, 255, 255, 0.05) !important;
-      }
-
-      html.dark .sidebar-section-label {
-        color: #64748B !important;
-      }
-
-      html.dark .sidebar-item {
-        color: #94A3B8 !important;
-      }
-
-      html.dark .sidebar-item .sidebar-icon,
-      html.dark .sidebar-item .sidebar-chevron {
-        color: #64748B !important;
-      }
-
-      html.dark .sidebar-item:hover {
-        background-color: #141A26 !important;
-        color: #FFFFFF !important;
-      }
-
-      html.dark .sidebar-item:hover .sidebar-icon {
-        color: #FF7A00 !important;
-      }
-
-      html.dark .sidebar-item.active {
-        background-color: rgba(255, 122, 0, 0.12) !important;
-        color: #FFFFFF !important;
-      }
-
-      html.dark .sidebar-item.active .sidebar-icon {
-        color: #FF7A00 !important;
-      }
-
-      html.dark .sidebar-badge-orange {
-        background-color: rgba(255, 122, 0, 0.2) !important;
-        color: #FF9433 !important;
-      }
-
-      html.dark .submenu-container {
-        border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
-        margin-left: 18px !important;
-      }
-
-      html.dark .submenu-link {
-        color: #8899A6 !important;
-      }
-
-      html.dark .submenu-link:hover {
-        color: #FFFFFF !important;
-        background-color: #141A26 !important;
-      }
-
-      html.dark .submenu-link.active {
-        color: #FF7A00 !important;
-        background-color: rgba(255, 122, 0, 0.1) !important;
-        font-weight: 600 !important;
-      }
-
-      html.dark .sidebar-health-card {
-        background-color: #121824 !important;
-        border: 1px solid rgba(255, 255, 255, 0.05) !important;
-      }
-
-      html.dark .sidebar-health-text {
-        color: #94A3B8 !important;
-      }
-
-      html.dark .sidebar-user-name {
-        color: #FFFFFF !important;
-      }
-
-      html.dark .sidebar-user-role {
-        color: #64748B !important;
-      }
-
-      html.dark header,
-      html.dark .header-bar,
-      html.dark [class*="sticky top-0"] {
-        background-color: rgba(11, 15, 23, 0.95) !important;
-        border-color: rgba(255, 255, 255, 0.08) !important;
-      }
-
-      html.dark .card-glow,
-      html.dark .kpi-card,
-      html.dark .table-container,
-      html.dark .station-card,
-      html.dark .bg-\[\#111622\],
-      html.dark [class*="bg-[#111622]"],
-      html.dark .bg-\[\#111318\],
-      html.dark [class*="bg-[#111318]"],
-      html.dark .bg-\[\#171A20\],
-      html.dark [class*="bg-[#171A20]"],
-      html.dark .bg-\[\#171F30\],
-      html.dark [class*="bg-[#171F30]"],
-      html.dark .bg-\[\#0B0F17\],
-      html.dark [class*="bg-[#0B0F17]"] {
-        background-color: #111622 !important;
-        border-color: rgba(255, 255, 255, 0.08) !important;
-        color: #F1F5F9 !important;
-      }
-
-      html.dark table thead tr,
-      html.dark .table-header,
-      html.dark [class*="bg-black/30"] {
-        background-color: rgba(0, 0, 0, 0.35) !important;
-        border-color: rgba(255, 255, 255, 0.08) !important;
-        color: #94A3B8 !important;
-      }
-
-      html.dark table tbody tr:hover {
-        background-color: rgba(255, 255, 255, 0.04) !important;
-      }
-
-      html.dark table tbody td {
-        border-color: rgba(255, 255, 255, 0.05) !important;
-      }
-
-      html.dark input,
-      html.dark select,
-      html.dark textarea,
-      html.dark .search-input {
-        background-color: #171A20 !important;
-        border-color: rgba(255, 255, 255, 0.12) !important;
-        color: #F1F5F9 !important;
-      }
-
-      html.dark .theme-toggle-topbar {
-        background-color: rgba(255, 255, 255, 0.06) !important;
-        border-color: rgba(255, 255, 255, 0.12) !important;
-        color: #E2E8F0 !important;
-      }
-
-      html.dark .theme-toggle-topbar:hover {
-        background-color: rgba(255, 255, 255, 0.12) !important;
-      }
-
-      html.dark #orderDetailDrawer>div:last-child {
-        background-color: #0B0F17 !important;
-        border-left-color: rgba(255, 255, 255, 0.08) !important;
-      }
-
-      /* ========================================================================= */
-      /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
-      /* ========================================================================= */
-      html.light,
-      html.light body {
-        background-color: #F8FAFC !important;
-        color: #0F172A !important;
-      }
-
-      html.light main,
-      html.light .main-container,
-      html.light [class*="ml-[245px]"] {
-        background-color: #F8FAFC !important;
-        color: #0F172A !important;
-      }
-
-      html.light .sidebar-container {
-        background-color: #FFFFFF !important;
-        border-right: 1px solid #E2E8F0 !important;
-        box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
-      }
-
-      html.light .sidebar-border {
-        border-color: #F1F5F9 !important;
-      }
-
-      html.light .sidebar-section-label {
-        color: #94A3B8 !important;
-      }
-
-      html.light .sidebar-item {
-        color: #334155 !important;
-      }
-
-      html.light .sidebar-item .sidebar-icon,
-      html.light .sidebar-item .sidebar-chevron {
-        color: #64748B !important;
-      }
-
-      html.light .sidebar-item:hover {
-        background-color: #F8FAFC !important;
-        color: #0F172A !important;
-      }
-
-      html.light .sidebar-item:hover .sidebar-icon {
-        color: #EA580C !important;
-      }
-
-      html.light .sidebar-item.active {
-        background-color: #FFF7ED !important;
-        color: #C2410C !important;
-      }
-
-      html.light .sidebar-item.active .sidebar-icon {
-        color: #EA580C !important;
-      }
-
-      html.light .sidebar-badge-orange {
-        background-color: #FFEDD5 !important;
-        color: #C2410C !important;
-      }
-
-      html.light .submenu-container {
-        border-left: 1px dashed #E2E8F0 !important;
-        margin-left: 18px !important;
-      }
-
-      html.light .submenu-link {
-        color: #64748B !important;
-      }
-
-      html.light .submenu-link:hover {
-        color: #0F172A !important;
-        background-color: #F1F5F9 !important;
-      }
-
-      html.light .submenu-link.active {
-        color: #EA580C !important;
-        background-color: #FFF7ED !important;
-        font-weight: 600 !important;
-      }
-
-      html.light .sidebar-health-card {
-        background-color: #F8FAFC !important;
-        border: 1px solid #E2E8F0 !important;
-      }
-
-      html.light .sidebar-health-text {
-        color: #475569 !important;
-      }
-
-      html.light .sidebar-user-name {
-        color: #0F172A !important;
-      }
-
-      html.light .sidebar-user-role {
-        color: #64748B !important;
-      }
-
-      html.light header,
-      html.light .header-bar,
-      html.light [class*="sticky top-0"] {
-        background-color: rgba(255, 255, 255, 0.98) !important;
-        border-color: #E2E8F0 !important;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
-      }
-
-      /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
-      html.light .card-glow,
-      html.light .kpi-card,
-      html.light .table-container,
-      html.light .station-card,
-      html.light .bg-\[\#111622\],
-      html.light [class*="bg-[#111622]"],
-      html.light .bg-\[\#111318\],
-      html.light [class*="bg-[#111318]"],
-      html.light .bg-\[\#171A20\],
-      html.light [class*="bg-[#171A20]"],
-      html.light .bg-\[\#171F30\],
-      html.light [class*="bg-[#171F30]"],
-      html.light .bg-\[\#0B0F17\],
-      html.light [class*="bg-[#0B0F17]"] {
-        background-color: #FFFFFF !important;
-        border-color: #E2E8F0 !important;
-        color: #0F172A !important;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-      }
-
-      /* LIGHT MODE TABLE STYLES */
-      html.light table thead tr,
-      html.light .table-header,
-      html.light [class*="bg-black/30"] {
-        background-color: #F8FAFC !important;
-        border-color: #E2E8F0 !important;
-        color: #64748B !important;
-      }
-
-      html.light table tbody tr:hover {
-        background-color: #F8FAFC !important;
-      }
-
-      html.light table tbody td {
-        border-color: #F1F5F9 !important;
-        color: #1E293B !important;
-      }
-
-      /* ========================================================================= */
-      /* RAILWAY DISPATCH PIPELINE - CLEAN ENTERPRISE STYLES                       */
-      /* ========================================================================= */
-      html.light #active-orders-banner {
-        background-color: #F8FAFC !important;
-        border-bottom: 1px solid #E2E8F0 !important;
-      }
-
-      html.dark #active-orders-banner {
-        background-color: rgba(255, 255, 255, 0.02) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-      }
-
-      html.light .status-tab-btn-inactive {
-        color: #475569 !important;
-        background-color: transparent !important;
-      }
-
-      html.light .status-tab-btn-inactive:hover {
-        color: #0F172A !important;
-        background-color: #F1F5F9 !important;
-      }
-
-      /* LIGHT MODE INPUTS & SELECTS */
-      /* LIGHT MODE INPUTS & SELECTS */
-      html.light input[type="text"],
-      html.light input[type="number"],
-      html.light select,
-      html.light textarea,
-      html.light .search-input,
-      html.light [class*="bg-black/20"] {
-        background-color: #FFFFFF !important;
-        border-color: #CBD5E1 !important;
-        color: #0F172A !important;
-      }
-
-      html.light input::placeholder {
-        color: #94A3B8 !important;
-      }
-
-      html.light input:focus,
-      html.light select:focus {
-        border-color: #FF7A00 !important;
-      }
-
-      /* LIGHT MODE TEXT CONTRAST OVERRIDES */
-      html.light .text-white,
-      html.light .text-slate-100,
-      html.light .text-slate-200,
-      html.light [class*="text-[#E2E8F0]"],
-      html.light [class*="text-[#F1F5F9]"] {
-        color: #0F172A !important;
-      }
-
-      html.light .text-slate-300,
-      html.light .text-slate-400 {
-        color: #64748B !important;
-      }
-
-      /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
-      html.light [class*="border-white"],
-      html.light [class*="divide-white"]> :not([hidden])~ :not([hidden]) {
-        border-color: #E2E8F0 !important;
-      }
-
-      html.light [class*="bg-white/5"],
-      html.light [class*="bg-white/10"],
-      html.light [class*="bg-white/[0.02]"] {
-        background-color: #F1F5F9 !important;
-        border-color: #E2E8F0 !important;
-        color: #334155 !important;
-      }
-
-      /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
-      html.light .theme-toggle-topbar {
-        background-color: #F8FAFC !important;
-        border-color: #CBD5E1 !important;
-        color: #0F172A !important;
-      }
-
-      html.light .theme-toggle-topbar:hover {
-        background-color: #F1F5F9 !important;
-      }
-
-      /* LIGHT MODE DRAWER */
-      html.light #orderDetailDrawer>div:last-child {
-        background-color: #FFFFFF !important;
-        border-left-color: #E2E8F0 !important;
-        color: #0F172A !important;
-      }
-
-      /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
-      html.light button.bg-\[\#FF7A00\],
-      html.light a.bg-\[\#FF7A00\],
-      html.light .btn-primary {
-        background-color: #FF7A00 !important;
-        color: #FFFFFF !important;
-      }
-
-      html.light button.bg-\[\#FF7A00\] *,
-      html.light a.bg-\[\#FF7A00\] * {
-        color: #FFFFFF !important;
-      }
-
-      /* EMERALD & ACTION SOLID BUTTON CONTRAST PRESERVATION IN LIGHT MODE */
-      html.light button.bg-emerald-600,
-      html.light button.bg-emerald-500,
-      html.light .subtab-active-emerald,
-      html.light .viewmode-btn-active-emerald {
-        background-color: #059669 !important;
-        color: #FFFFFF !important;
-      }
-
-      html.light button.bg-emerald-600 *,
-      html.light button.bg-emerald-500 *,
-      html.light .subtab-active-emerald *,
-      html.light .viewmode-btn-active-emerald * {
-        color: #FFFFFF !important;
-      }
-
-      /* SUBTAB PILLS STYLING (PERFECT IN BOTH LIGHT & DARK THEMES) */
-      .subtab-active-emerald {
-        background-color: #059669 !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        box-shadow: 0 1px 3px rgba(5, 150, 105, 0.35) !important;
-      }
-
-      .subtab-active-emerald * {
-        color: #FFFFFF !important;
-      }
-
-      .subtab-active-orange {
-        background-color: #FF7A00 !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        box-shadow: 0 1px 3px rgba(255, 122, 0, 0.35) !important;
-      }
-
-      .subtab-active-orange * {
-        color: #FFFFFF !important;
-      }
-
-      /* Inactive Subtab in Dark Mode */
-      .subtab-inactive {
-        background-color: rgba(255, 255, 255, 0.04) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        color: #94A3B8 !important;
-        font-weight: 500 !important;
-      }
-
-      .subtab-inactive * {
-        color: #94A3B8 !important;
-      }
-
-      .subtab-inactive:hover {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: #FFFFFF !important;
-      }
-
-      .subtab-inactive:hover * {
-        color: #FFFFFF !important;
-      }
-
-      /* Inactive Subtab in Light Mode (Crisp Slate Pill) */
-      html.light .subtab-inactive {
-        background-color: #F1F5F9 !important;
-        border: 1px solid #CBD5E1 !important;
-        color: #334155 !important;
-        font-weight: 600 !important;
-      }
-
-      html.light .subtab-inactive * {
-        color: #334155 !important;
-      }
-
-      html.light .subtab-inactive:hover {
-        background-color: #E2E8F0 !important;
-        color: #0F172A !important;
-      }
-
-      html.light .subtab-inactive:hover * {
-        color: #0F172A !important;
-      }
-
-      /* HIGH-CONTRAST STATUS BADGES (ZERO NESTED OUTLINE BOXES) */
-      #active-live-status-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 14px;
-        border-radius: 10px;
-        font-size: 11px;
-        font-weight: 600;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        background-color: rgba(16, 185, 129, 0.1);
-        color: #34D399;
-      }
-
-      #active-live-status-pill * {
-        border: none !important;
-        box-shadow: none !important;
-        background: transparent !important;
-      }
-
-      html.light #active-live-status-pill {
-        background-color: #ECFDF5 !important;
-        border: 1px solid #6EE7B7 !important;
-        color: #065F46 !important;
-      }
-
-      html.light #active-live-status-pill * {
-        color: #065F46 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      /* RADAR IN-FLIGHT BADGE IN TELEMETRY STRIP */
-      .radar-in-flight-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 3px 10px;
-        border-radius: 9999px;
-        font-size: 11px;
-        font-weight: 700;
-        font-family: ui-monospace, SFMono-Regular, monospace;
-        background-color: rgba(16, 185, 129, 0.12);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        color: #34D399;
-      }
-
-      .radar-in-flight-badge * {
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.light .radar-in-flight-badge {
-        background-color: #D1FAE5 !important;
-        border: 1px solid #34D399 !important;
-        color: #065F46 !important;
-      }
-
-      html.light .radar-in-flight-badge * {
-        color: #065F46 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      /* ========================================================================= */
-      /* PREMIUM SEGMENTED CONTROLLER (VIEWMODE SWITCHER: COCKPIT vs ARCHIVE)      */
-      /* ========================================================================= */
-      .viewmode-switcher-wrap {
-        display: inline-flex;
-        align-items: center;
-        padding: 4px;
-        border-radius: 12px;
-        gap: 4px;
-        background-color: #0B0E14;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
-      }
-
-      html.light .viewmode-switcher-wrap {
-        background-color: #E2E8F0 !important;
-        border: 1px solid #CBD5E1 !important;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-      }
-
-      /* Active Emerald Button in Toggle (Active Orders Cockpit) */
-      .viewmode-btn-active-emerald {
-        background-color: #059669 !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        box-shadow: 0 1px 4px rgba(5, 150, 105, 0.4) !important;
-      }
-
-      .viewmode-btn-active-emerald * {
-        color: #FFFFFF !important;
-      }
-
-      .viewmode-btn-active-emerald .viewmode-count-pill {
-        background-color: rgba(0, 0, 0, 0.28) !important;
-        color: #FFFFFF !important;
-      }
-
-      /* Active Orange Button in Toggle (All Orders Archive) */
-      .viewmode-btn-active-orange {
-        background-color: #FF7A00 !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        box-shadow: 0 1px 4px rgba(255, 122, 0, 0.4) !important;
-      }
-
-      .viewmode-btn-active-orange * {
-        color: #FFFFFF !important;
-      }
-
-      .viewmode-btn-active-orange .viewmode-count-pill {
-        background-color: rgba(0, 0, 0, 0.28) !important;
-        color: #FFFFFF !important;
-      }
-
-      /* Inactive Button in Toggle */
-      .viewmode-btn-inactive {
-        background-color: transparent !important;
-        color: #94A3B8 !important;
-        font-weight: 600 !important;
-      }
-
-      .viewmode-btn-inactive * {
-        color: #94A3B8 !important;
-      }
-
-      .viewmode-btn-inactive:hover {
-        background-color: rgba(255, 255, 255, 0.08) !important;
-        color: #FFFFFF !important;
-      }
-
-      .viewmode-btn-inactive:hover * {
-        color: #FFFFFF !important;
-      }
-
-      .viewmode-btn-inactive .viewmode-count-pill {
-        background-color: rgba(255, 255, 255, 0.12) !important;
-        color: #CBD5E1 !important;
-      }
-
-      html.light .viewmode-btn-inactive {
-        background-color: transparent !important;
-        color: #475569 !important;
-      }
-
-      html.light .viewmode-btn-inactive * {
-        color: #475569 !important;
-      }
-
-      html.light .viewmode-btn-inactive:hover {
-        background-color: rgba(255, 255, 255, 0.8) !important;
-        color: #0F172A !important;
-      }
-
-      html.light .viewmode-btn-inactive:hover * {
-        color: #0F172A !important;
-      }
-
-      html.light .viewmode-btn-inactive .viewmode-count-pill {
-        background-color: #CBD5E1 !important;
-        color: #1E293B !important;
-      }
-
-      html.light .text-emerald-400 {
-        color: #059669 !important;
-      }
-
-      html.light .text-amber-400 {
-        color: #D97706 !important;
-      }
-
-      html.light .text-blue-400 {
-        color: #2563EB !important;
-      }
-
-      html.light .text-rose-400 {
-        color: #E11D48 !important;
-      }
-
-      /* HIGH CONTRAST COACH & BERTH BADGE (WCAG AAA) */
-      .coach-berth-badge {
-        background-color: rgba(59, 130, 246, 0.18) !important;
-        border: 1px solid rgba(96, 165, 250, 0.4) !important;
-        color: #93C5FD !important;
-        font-weight: 700 !important;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        letter-spacing: 0.025em !important;
-      }
-
-      html.light .coach-berth-badge {
-        background-color: #DBEAFE !important;
-        /* Soft Blue-100 */
-        border: 1px solid #93C5FD !important;
-        /* Blue-300 border */
-        color: #1E40AF !important;
-        /* Deep Royal Navy Blue (High Contrast) */
-        font-weight: 800 !important;
-        box-shadow: 0 1px 2px rgba(30, 64, 175, 0.08) !important;
-      }
-
-      html.light .text-blue-300,
-      html.light [class*="text-blue-300"] {
-        color: #1E40AF !important;
-      }
-
-      html.light .bg-blue-500\/15,
-      html.light [class*="bg-blue-500/15"] {
-        background-color: #DBEAFE !important;
-        border-color: #93C5FD !important;
-        color: #1E40AF !important;
-      }
-  </style>
+  }
+
+  /* ========================================================================= */
+  /* PINNED / STICKY TABLE COLUMNS & DISTINCT SCROLLBAR                        */
+  /* ========================================================================= */
+  .table-sticky-left {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 15 !important;
+    background-color: #111622 !important;
+  }
+  .table-sticky-right {
+    position: sticky !important;
+    right: 0 !important;
+    z-index: 15 !important;
+    background-color: #111622 !important;
+  }
+  th.table-sticky-left, th.table-sticky-right {
+    z-index: 25 !important;
+  }
+  html.light .table-sticky-left {
+    background-color: #FFFFFF !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+  html.light tr:hover .table-sticky-left {
+    background-color: #F8FAFC !important;
+  }
+  html.light th.table-sticky-left {
+    background-color: #F1F5F9 !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+  html.light .table-sticky-right {
+    background-color: #FFFFFF !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+  html.light tr:hover .table-sticky-right {
+    background-color: #F8FAFC !important;
+  }
+  html.light th.table-sticky-right {
+    background-color: #F1F5F9 !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  html.dark .table-sticky-left {
+    background-color: #111622 !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark tr:hover .table-sticky-left {
+    background-color: #171F30 !important;
+  }
+  html.dark th.table-sticky-left {
+    background-color: #0E131E !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark .table-sticky-right {
+    background-color: #111622 !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark tr:hover .table-sticky-right {
+    background-color: #171F30 !important;
+  }
+  html.dark th.table-sticky-right {
+    background-color: #0E131E !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Support delayed/late row background on sticky cells */
+  html.light tr.is-late-row .table-sticky-left,
+  html.light tr.is-late-row .table-sticky-right {
+    background-color: #FEF3C7 !important;
+  }
+  html.light tr.is-late-row:hover .table-sticky-left,
+  html.light tr.is-late-row:hover .table-sticky-right {
+    background-color: #FDE68A !important;
+  }
+  html.dark tr.is-late-row .table-sticky-left,
+  html.dark tr.is-late-row .table-sticky-right {
+    background-color: #241A08 !important;
+  }
+  html.dark tr.is-late-row:hover .table-sticky-left,
+  html.dark tr.is-late-row:hover .table-sticky-right {
+    background-color: #33230A !important;
+  }
+
+  /* Match Today's Closed Section Card Background */
+  html.dark #today-closed-section .table-sticky-left,
+  html.dark #today-closed-section .table-sticky-right {
+    background-color: #0B0F17 !important;
+  }
+  html.dark #today-closed-section tr:hover .table-sticky-left,
+  html.dark #today-closed-section tr:hover .table-sticky-right {
+    background-color: #171F30 !important;
+  }
+
+  /* High-Contrast Smooth Horizontal Scrollbar */
+  .custom-table-scroll {
+    overflow-x: auto !important;
+    scrollbar-width: thin !important;
+  }
+  .custom-table-scroll::-webkit-scrollbar {
+    height: 9px !important;
+  }
+  html.light .custom-table-scroll::-webkit-scrollbar-track {
+    background: #F1F5F9 !important;
+    border-radius: 4px;
+  }
+  html.light .custom-table-scroll::-webkit-scrollbar-thumb {
+    background: #94A3B8 !important;
+    border-radius: 4px;
+  }
+  html.light .custom-table-scroll::-webkit-scrollbar-thumb:hover {
+    background: #64748B !important;
+  }
+  html.dark .custom-table-scroll::-webkit-scrollbar-track {
+    background: #0B0F17 !important;
+    border-radius: 4px;
+  }
+  html.dark .custom-table-scroll::-webkit-scrollbar-thumb {
+    background: #334155 !important;
+    border-radius: 4px;
+  }
+  html.dark .custom-table-scroll::-webkit-scrollbar-thumb:hover {
+    background: #475569 !important;
+  }
+
+  /* ========================================================================= */
+  /* 2. DARK MODE RULES (DEFAULT)                                              */
+  /* ========================================================================= */
+  html.dark, html.dark body {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark main,
+  html.dark .main-container,
+  html.dark [class*="ml-[245px]"] {
+    background-color: #07090D !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .sidebar-container {
+    background-color: #0B0F17 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  html.dark .sidebar-border {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-section-label {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-item .sidebar-icon,
+  html.dark .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.dark .sidebar-item:hover {
+    background-color: #141A26 !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item:hover .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-item.active {
+    background-color: rgba(255, 122, 0, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-item.active .sidebar-icon {
+    color: #FF7A00 !important;
+  }
+  html.dark .sidebar-badge-orange {
+    background-color: rgba(255, 122, 0, 0.2) !important;
+    color: #FF9433 !important;
+  }
+  html.dark .submenu-container {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    margin-left: 18px !important;
+  }
+  html.dark .submenu-link {
+    color: #8899A6 !important;
+  }
+  html.dark .submenu-link:hover {
+    color: #FFFFFF !important;
+    background-color: #141A26 !important;
+  }
+  html.dark .submenu-link.active {
+    color: #FF7A00 !important;
+    background-color: rgba(255, 122, 0, 0.1) !important;
+    font-weight: 600 !important;
+  }
+  html.dark .sidebar-health-card {
+    background-color: #121824 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .sidebar-health-text {
+    color: #94A3B8 !important;
+  }
+  html.dark .sidebar-user-name {
+    color: #FFFFFF !important;
+  }
+  html.dark .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.dark header, 
+  html.dark .header-bar,
+  html.dark [class*="sticky top-0"] {
+    background-color: rgba(11, 15, 23, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .card-glow,
+  html.dark .kpi-card,
+  html.dark .table-container,
+  html.dark .station-card,
+  html.dark .bg-\[\#111622\],
+  html.dark [class*="bg-[#111622]"],
+  html.dark .bg-\[\#111318\],
+  html.dark [class*="bg-[#111318]"],
+  html.dark .bg-\[\#171A20\],
+  html.dark [class*="bg-[#171A20]"],
+  html.dark .bg-\[\#171F30\],
+  html.dark [class*="bg-[#171F30]"],
+  html.dark .bg-\[\#0B0F17\],
+  html.dark [class*="bg-[#0B0F17]"] {
+    background-color: #111622 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark table thead tr,
+  html.dark .table-header,
+  html.dark [class*="bg-black/30"] {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+  }
+  html.dark table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
+  html.dark table tbody td {
+    border-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  html.dark .search-input {
+    background-color: #171A20 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+  }
+  html.dark .theme-toggle-topbar {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #E2E8F0 !important;
+  }
+  html.dark .theme-toggle-topbar:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark #orderDetailDrawer > div:last-child {
+    background-color: #0B0F17 !important;
+    border-left-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* ========================================================================= */
+  /* 3. LIGHT MODE RULES (100% UNIFIED, ZERO MIXED STATES)                     */
+  /* ========================================================================= */
+  html.light, html.light body {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light main,
+  html.light .main-container,
+  html.light [class*="ml-[245px]"] {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-container {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.03) !important;
+  }
+  html.light .sidebar-border {
+    border-color: #F1F5F9 !important;
+  }
+  html.light .sidebar-section-label {
+    color: #94A3B8 !important;
+  }
+  html.light .sidebar-item {
+    color: #334155 !important;
+  }
+  html.light .sidebar-item .sidebar-icon,
+  html.light .sidebar-item .sidebar-chevron {
+    color: #64748B !important;
+  }
+  html.light .sidebar-item:hover {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+  html.light .sidebar-item:hover .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-item.active {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+  }
+  html.light .sidebar-item.active .sidebar-icon {
+    color: #EA580C !important;
+  }
+  html.light .sidebar-badge-orange {
+    background-color: #FFEDD5 !important;
+    color: #C2410C !important;
+  }
+  html.light .submenu-container {
+    border-left: 1px dashed #E2E8F0 !important;
+    margin-left: 18px !important;
+  }
+  html.light .submenu-link {
+    color: #64748B !important;
+  }
+  html.light .submenu-link:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+  html.light .submenu-link.active {
+    color: #EA580C !important;
+    background-color: #FFF7ED !important;
+    font-weight: 600 !important;
+  }
+  html.light .sidebar-health-card {
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+  }
+  html.light .sidebar-health-text {
+    color: #475569 !important;
+  }
+  html.light .sidebar-user-name {
+    color: #0F172A !important;
+  }
+  html.light .sidebar-user-role {
+    color: #64748B !important;
+  }
+  html.light header, 
+  html.light .header-bar,
+  html.light [class*="sticky top-0"] {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  /* LIGHT MODE CARDS, CONTAINERS, KPI TILES & TABLES */
+  html.light .card-glow,
+  html.light .kpi-card,
+  html.light .table-container,
+  html.light .station-card,
+  html.light .bg-\[\#111622\],
+  html.light [class*="bg-[#111622]"],
+  html.light .bg-\[\#111318\],
+  html.light [class*="bg-[#111318]"],
+  html.light .bg-\[\#171A20\],
+  html.light [class*="bg-[#171A20]"],
+  html.light .bg-\[\#171F30\],
+  html.light [class*="bg-[#171F30]"],
+  html.light .bg-\[\#0B0F17\],
+  html.light [class*="bg-[#0B0F17]"] {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* LIGHT MODE TABLE STYLES */
+  html.light table thead tr,
+  html.light .table-header,
+  html.light [class*="bg-black/30"] {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+    color: #64748B !important;
+  }
+  html.light table tbody tr:hover {
+    background-color: #F8FAFC !important;
+  }
+  html.light table tbody td {
+    border-color: #F1F5F9 !important;
+    color: #1E293B !important;
+  }
+
+    /* ========================================================================= */
+  /* RAILWAY DISPATCH PIPELINE - CLEAN ENTERPRISE STYLES                       */
+  /* ========================================================================= */
+  html.light #active-orders-banner {
+    background-color: #F8FAFC !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+  html.dark #active-orders-banner {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  html.light .status-tab-btn-inactive {
+    color: #475569 !important;
+    background-color: transparent !important;
+  }
+  html.light .status-tab-btn-inactive:hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE INPUTS & SELECTS */
+  /* LIGHT MODE INPUTS & SELECTS */
+  html.light input[type="text"],
+  html.light input[type="number"],
+  html.light select,
+  html.light textarea,
+  html.light .search-input,
+  html.light [class*="bg-black/20"] {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light input::placeholder {
+    color: #94A3B8 !important;
+  }
+  html.light input:focus,
+  html.light select:focus {
+    border-color: #FF7A00 !important;
+  }
+
+  /* LIGHT MODE TEXT CONTRAST OVERRIDES */
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light [class*="text-[#E2E8F0]"],
+  html.light [class*="text-[#F1F5F9]"] {
+    color: #0F172A !important;
+  }
+  html.light .text-slate-300,
+  html.light .text-slate-400 {
+    color: #64748B !important;
+  }
+
+  /* LIGHT MODE BORDERS AND SUBTLE BACKGROUNDS (SAFE ATTRIBUTE SELECTORS) */
+  html.light [class*="border-white"],
+  html.light [class*="divide-white"] > :not([hidden]) ~ :not([hidden]) {
+    border-color: #E2E8F0 !important;
+  }
+  html.light [class*="bg-white/5"],
+  html.light [class*="bg-white/10"],
+  html.light [class*="bg-white/[0.02]"] {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+    color: #334155 !important;
+  }
+
+  /* LIGHT MODE TOPBAR THEME TOGGLE BUTTON */
+  html.light .theme-toggle-topbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+  }
+  html.light .theme-toggle-topbar:hover {
+    background-color: #F1F5F9 !important;
+  }
+
+  /* LIGHT MODE DRAWER */
+  html.light #orderDetailDrawer > div:last-child {
+    background-color: #FFFFFF !important;
+    border-left-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+
+  /* PRESERVE PRIMARY BRAND ACTIONS & BADGES (TARGET SPECIFIC BUTTONS/LINKS ONLY, NEVER WILDCARD ALL) */
+  html.light button.bg-\[\#FF7A00\],
+  html.light a.bg-\[\#FF7A00\],
+  html.light .btn-primary {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-\[\#FF7A00\] *,
+  html.light a.bg-\[\#FF7A00\] * {
+    color: #FFFFFF !important;
+  }
+
+  /* EMERALD & ACTION SOLID BUTTON CONTRAST PRESERVATION IN LIGHT MODE */
+  html.light button.bg-emerald-600,
+  html.light button.bg-emerald-500,
+  html.light .subtab-active-emerald,
+  html.light .viewmode-btn-active-emerald {
+    background-color: #059669 !important;
+    color: #FFFFFF !important;
+  }
+  html.light button.bg-emerald-600 *,
+  html.light button.bg-emerald-500 *,
+  html.light .subtab-active-emerald *,
+  html.light .viewmode-btn-active-emerald * {
+    color: #FFFFFF !important;
+  }
+
+  /* SUBTAB PILLS STYLING (PERFECT IN BOTH LIGHT & DARK THEMES) */
+  .subtab-active-emerald {
+    background-color: #059669 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 3px rgba(5, 150, 105, 0.35) !important;
+  }
+  .subtab-active-emerald * {
+    color: #FFFFFF !important;
+  }
+
+  .subtab-active-orange {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 3px rgba(255, 122, 0, 0.35) !important;
+  }
+  .subtab-active-orange * {
+    color: #FFFFFF !important;
+  }
+
+  /* Inactive Subtab in Dark Mode */
+  .subtab-inactive {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #94A3B8 !important;
+    font-weight: 500 !important;
+  }
+  .subtab-inactive * {
+    color: #94A3B8 !important;
+  }
+  .subtab-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #FFFFFF !important;
+  }
+  .subtab-inactive:hover * {
+    color: #FFFFFF !important;
+  }
+
+  /* Inactive Subtab in Light Mode (Crisp Slate Pill) */
+  html.light .subtab-inactive {
+    background-color: #F1F5F9 !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
+  }
+  html.light .subtab-inactive * {
+    color: #334155 !important;
+  }
+  html.light .subtab-inactive:hover {
+    background-color: #E2E8F0 !important;
+    color: #0F172A !important;
+  }
+  html.light .subtab-inactive:hover * {
+    color: #0F172A !important;
+  }
+
+  /* HIGH-CONTRAST STATUS BADGES (ZERO NESTED OUTLINE BOXES) */
+  #active-live-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34D399;
+  }
+  #active-live-status-pill * {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  html.light #active-live-status-pill {
+    background-color: #ECFDF5 !important;
+    border: 1px solid #6EE7B7 !important;
+    color: #065F46 !important;
+  }
+  html.light #active-live-status-pill * {
+    color: #065F46 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* RADAR IN-FLIGHT BADGE IN TELEMETRY STRIP */
+  .radar-in-flight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    background-color: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34D399;
+  }
+  .radar-in-flight-badge * {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  html.light .radar-in-flight-badge {
+    background-color: #D1FAE5 !important;
+    border: 1px solid #34D399 !important;
+    color: #065F46 !important;
+  }
+  html.light .radar-in-flight-badge * {
+    color: #065F46 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ========================================================================= */
+  /* PREMIUM SEGMENTED CONTROLLER (VIEWMODE SWITCHER: COCKPIT vs ARCHIVE)      */
+  /* ========================================================================= */
+  .viewmode-switcher-wrap {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+    background-color: #0B0E14;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  html.light .viewmode-switcher-wrap {
+    background-color: #E2E8F0 !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Active Emerald Button in Toggle (Active Orders Cockpit) */
+  .viewmode-btn-active-emerald {
+    background-color: #059669 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(5, 150, 105, 0.4) !important;
+  }
+  .viewmode-btn-active-emerald * {
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-active-emerald .viewmode-count-pill {
+    background-color: rgba(0, 0, 0, 0.28) !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Active Orange Button in Toggle (All Orders Archive) */
+  .viewmode-btn-active-orange {
+    background-color: #FF7A00 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(255, 122, 0, 0.4) !important;
+  }
+  .viewmode-btn-active-orange * {
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-active-orange .viewmode-count-pill {
+    background-color: rgba(0, 0, 0, 0.28) !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Inactive Button in Toggle */
+  .viewmode-btn-inactive {
+    background-color: transparent !important;
+    color: #94A3B8 !important;
+    font-weight: 600 !important;
+  }
+  .viewmode-btn-inactive * {
+    color: #94A3B8 !important;
+  }
+  .viewmode-btn-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-inactive:hover * {
+    color: #FFFFFF !important;
+  }
+  .viewmode-btn-inactive .viewmode-count-pill {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #CBD5E1 !important;
+  }
+
+  html.light .viewmode-btn-inactive {
+    background-color: transparent !important;
+    color: #475569 !important;
+  }
+  html.light .viewmode-btn-inactive * {
+    color: #475569 !important;
+  }
+  html.light .viewmode-btn-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    color: #0F172A !important;
+  }
+  html.light .viewmode-btn-inactive:hover * {
+    color: #0F172A !important;
+  }
+  html.light .viewmode-btn-inactive .viewmode-count-pill {
+    background-color: #CBD5E1 !important;
+    color: #1E293B !important;
+  }
+  html.light .text-emerald-400 {
+    color: #059669 !important;
+  }
+  html.light .text-amber-400 {
+    color: #D97706 !important;
+  }
+  html.light .text-blue-400 {
+    color: #2563EB !important;
+  }
+    html.light .text-rose-400 {
+    color: #E11D48 !important;
+  }
+  /* HIGH CONTRAST COACH & BERTH BADGE (WCAG AAA) */
+  .coach-berth-badge {
+    background-color: rgba(59, 130, 246, 0.18) !important;
+    border: 1px solid rgba(96, 165, 250, 0.4) !important;
+    color: #93C5FD !important;
+    font-weight: 700 !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    letter-spacing: 0.025em !important;
+  }
+  html.light .coach-berth-badge {
+    background-color: #DBEAFE !important; /* Soft Blue-100 */
+    border: 1px solid #93C5FD !important; /* Blue-300 border */
+    color: #1E40AF !important; /* Deep Royal Navy Blue (High Contrast) */
+    font-weight: 800 !important;
+    box-shadow: 0 1px 2px rgba(30, 64, 175, 0.08) !important;
+  }
+  html.light .text-blue-300,
+  html.light [class*="text-blue-300"] {
+    color: #1E40AF !important;
+  }
+  html.light .bg-blue-500\/15,
+  html.light [class*="bg-blue-500/15"] {
+    background-color: #DBEAFE !important;
+    border-color: #93C5FD !important;
+    color: #1E40AF !important;
+  }
+</style>
 
 
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/assets/admin-runtime.css">
-  <script src="/assets/admin-core.js"></script>
-  <link rel="stylesheet" href="/assets/order-progress.css">
-  <script src="/assets/order-progress.js"></script>
-  <style id="access-loading-guard">
-    html:not(.olf-auth-ready) body {
-      visibility: hidden
-    }
-  </style>
-  <script src="/assets/access-session.js"></script>
-  <link rel="stylesheet" href="/assets/brand.css?v=20261022">
+<link rel="stylesheet" href="/assets/admin-runtime.css">
+<script src="/assets/admin-core.js"></script>
+<link rel="stylesheet" href="/assets/order-progress.css">
+<script src="/assets/order-progress.js"></script>
+<style id="access-loading-guard">html:not(.olf-auth-ready) body{visibility:hidden}</style><script src="/assets/access-session.js"></script><link rel="stylesheet" href="/assets/brand.css?v=20261022">
 </head>
-
-<body
-  class="bg-[#07090D] text-[#E2E8F0] dark:bg-[#07090D] dark:text-[#E2E8F0] light:bg-[#F8FAFC] light:text-[#0F172A] min-h-screen overflow-x-hidden">
+<body class="bg-[#07090D] text-[#E2E8F0] dark:bg-[#07090D] dark:text-[#E2E8F0] light:bg-[#F8FAFC] light:text-[#0F172A] min-h-screen overflow-x-hidden">
 
   <!-- Mobile Backdrop for Collapsible Sidebar -->
-  <div id="sidebarMobileBackdrop" onclick="toggleSidebar()"
-    class="fixed inset-0 bg-black/60 z-50 hidden transition-opacity"></div>
+  <div id="sidebarMobileBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-50 hidden transition-opacity"></div>
 
   <!-- LEFT PERSISTENT 245px SIDEBAR -->
   <!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
+<!-- MASTER OLF CANONICAL SIDEBAR (245px) -->
 <aside class="sidebar-container fixed left-0 top-0 h-full w-[245px] flex flex-col z-50 transition-colors duration-200 select-none bg-[#0B0F17] dark:bg-[#0B0F17] border-r border-white/5 dark:border-white/5">
   <!-- Official OLF Stores Brand Header -->
-  <div class="px-3.5 py-3 flex items-center justify-between border-b sidebar-border sidebar-header-box">
-    <a href="/" class="flex items-center gap-2 group py-0.5 olf-wordmark-wrap" title="OLF — Command Center">
-      <span class="olf-wordmark">OLF</span>
+  <div class="px-3.5 py-3 flex items-center justify-between border-b sidebar-border sidebar-header-row">
+    <a href="/" class="flex items-center gap-2 group py-0.5 sidebar-brand-full" title="OLF — Command Center">
+      <span class="olf-wordmark font-black text-lg text-[#FF7A00]">OLF</span>
+    </a>
+    <a href="/" class="hidden items-center justify-center w-8 h-8 rounded-lg bg-[#FF7A00]/15 border border-[#FF7A00]/30 text-[#FF7A00] font-black text-base sidebar-brand-mini" title="OLF — Command Center">
+      O
     </a>
     <div class="flex items-center gap-1.5 sidebar-header-actions">
       <!-- Dark/Light Theme Switcher button -->
       <button type="button" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg border border-white/10 dark:border-white/10 text-slate-400 hover:text-[#FF7A00] transition-colors" title="Toggle Dark/Light Mode">
         <span class="material-symbols-outlined text-[16px] dark-icon">dark_mode</span>
       </button>
-      <div class="sidebar-admin-pill flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none" title="OLF Administrator">
+      <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 select-none sidebar-admin-pill" title="Provider sync has not been verified">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
         <span>Admin</span>
       </div>
-      <!-- Dedicated Collapse Button on Sidebar -->
-      <button type="button" onclick="toggleSidebar()" id="sidebarCollapseBtn" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 bg-white/5 hover:bg-[#FF7A00]/20 hover:border-[#FF7A00]/40 text-slate-400 hover:text-[#FF7A00] transition-all flex items-center justify-center cursor-pointer shrink-0" title="Collapse Sidebar Menu">
+      <button type="button" onclick="toggleSidebar()" id="sidebarCollapseBtn" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 bg-white/5 hover:bg-[#FF7A00]/20 hover:border-[#FF7A00]/40 text-slate-400 hover:text-[#FF7A00] transition-all flex items-center justify-center cursor-pointer shrink-0" title="Collapse / Expand Sidebar Menu">
         <span class="material-symbols-outlined text-[18px]" id="sidebarCollapseIcon">keyboard_double_arrow_left</span>
       </button>
     </div>
@@ -1085,355 +1047,282 @@
         <span class="truncate">Dashboard</span>
       </a>
 
-          <!-- 2. Orders (with Submenu) -->
-          <div class="nav-group">
-            <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')"
-              class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Orders">
-              <div class="flex items-center gap-2.5">
-                <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
-                <span class="truncate">Orders</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange"
-                  id="sidebar-order-badge">-</span>
-                <span id="chev-orders"
-                  class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
-              </div>
-            </button>
-            <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
-              <a href="/orders?filter=active" id="sublink-orders-live"
-                class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span>Active Orders</span>
-                </div>
-                <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
-              </a>
-              <a href="/orders" id="sublink-orders"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
-                <span>All Orders</span>
-              </a>
-            </div>
+      <!-- 2. Orders (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-orders', 'chev-orders')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Orders">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt_long</span>
+            <span class="truncate">Orders</span>
           </div>
-
-          <a href="/customers" id="nav-customers"
-            class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Customers">
-            <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
-            <span class="truncate">Customers</span>
-          </a>
-
-          <!-- 3. Outlets (with Submenu) -->
-          <div class="nav-group">
-            <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')"
-              class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Outlets">
-              <div class="flex items-center gap-2.5">
-                <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
-                <span class="truncate">Outlets</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
-                <span id="chev-outlets"
-                  class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
-              </div>
-            </button>
-            <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
-              <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('active', event)"
-                class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
-                  <span>Outlets Directory</span>
-                </div>
-                <span class="text-[9px] font-mono opacity-80">-</span>
-              </a>
-              <a href="/alloutlets" id="sublink-alloutlets" onclick="handleOutletNav('all', event)"
-                class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
-                  <span>All Outlets</span>
-                </div>
-                <span class="text-[9px] font-mono opacity-80">-</span>
-              </a>
-              <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)"
-                class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
-                  <span>Prepaid Outlets</span>
-                </div>
-                <span class="text-[9px] font-mono opacity-80">-</span>
-              </a>
-              <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)"
-                class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                  <span>Inactive Outlets</span>
-                </div>
-                <span class="text-[9px] font-mono text-rose-500">-</span>
-              </a>
-              <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)"
-                class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Pending Outlets</span>
-                </div>
-                <span class="text-[9px] font-mono text-amber-500">-</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- 4. Vendors & Partners -->
-          <a href="/vendors" id="nav-vendors"
-            class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Vendors & Partners">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
-              <span class="truncate">Vendors &amp; Brands</span>
-            </div>
-            <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
-          </a>
-
-          <!-- 5. Railway Operations (with Submenu) -->
-          <div class="nav-group">
-            <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')"
-              class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Railway Operations">
-              <div class="flex items-center gap-2.5">
-                <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
-                <span class="truncate">Railway Operations</span>
-              </div>
-              <span id="chev-stations"
-                class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
-            </button>
-            <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
-              <a href="/stations" id="sublink-stations"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
-                <span>All Stations</span>
-              </a>
-              <a href="/trains" id="sublink-trains"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
-                <span>Trains &amp; Routes</span>
-              </a>
-              <a href="/irctc-logs" id="sublink-irctc-logs"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
-                <span>IRCTC Sync Logs</span>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- SECTION 2: FINANCE & COMMERCE -->
-        <div class="space-y-0.5">
-          <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp;
-            Wallets</div>
-
-          <!-- 7. Withdrawal Requests -->
-          <a href="/requests" id="nav-requests"
-            class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Withdrawal Requests">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
-              <span class="truncate">Withdrawal Requests</span>
-            </div>
-            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
-          </a>
-
-          <!-- 8. Invoices -->
-          <a href="/invoices" id="nav-invoices"
-            class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Invoices & Payouts">
-            <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
-            <span class="truncate">Invoices &amp; Payouts</span>
-          </a>
-        </div>
-
-        <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
-        <div class="space-y-0.5">
-          <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management
-            &amp;
-            HR</div>
-
-          <!-- 9. Human Resources (HR) -->
-          <a href="/hr" id="nav-hr"
-            class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Human Resources">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
-              <span class="truncate">Human Resources</span>
-            </div>
-            <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
-          </a>
-
-          <a href="/roles" id="nav-access"
-            class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Roles & Access"><span
-              class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span
-              class="truncate">Roles &amp; Access</span></a>
-          <!-- 10. Complaints -->
-          <a href="/complaints" id="nav-complaints"
-            class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Complaints">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
-              <span class="truncate">Complaints</span>
-            </div>
-            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
-          </a>
-
-          <!-- 11. Reports (with Submenu) -->
-          <div class="nav-group">
-            <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')"
-              class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Reports">
-              <div class="flex items-center gap-2.5">
-                <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
-                <span class="truncate">Reports</span>
-              </div>
-              <span id="chev-reports"
-                class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
-            </button>
-            <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
-              <a href="/reports" id="sublink-reports"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
-              <a href="/reports?report=order-exceptions" id="sublink-report-operations"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
-              <a href="/reports?report=wallet-balances" id="sublink-report-finance"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp;
-                  Settlements</span></a>
-              <a href="/reports?report=invoices" id="sublink-report-invoices"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp;
-                  Outstanding</span></a>
-              <a href="/reports?report=compliance" id="sublink-report-network"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp;
-                  Compliance</span></a>
-              <a href="/reports?report=customers" id="sublink-report-sales"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
-              <a href="/complaint-reports" id="sublink-complaint-reports"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp;
-                  Complaints</span></a>
-              <a href="/reports?report=employees" id="sublink-report-people"
-                class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span
-                  class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
-            </div>
-          </div>
-
-          <!-- 12. System Settings -->
-          <a href="/settings" id="nav-settings"
-            class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Settings & Roles">
-            <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
-            <span class="truncate">Settings &amp; Roles</span>
-          </a>
-        </div>
-      </nav>
-
-      <!-- Sidebar Footer: Minimal User Strip -->
-      <div class="p-3 border-t sidebar-border space-y-2 sidebar-footer-box">
-        <!-- Clean Minimal Sync Indicator -->
-        <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
           <div class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange" id="sidebar-order-badge">-</span>
+            <span id="chev-orders" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
           </div>
-          <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
-        </div>
-
-        <!-- Minimal User Profile -->
-        <div class="flex items-center gap-2 px-1 pt-0.5 sidebar-user-strip">
-          <div
-            class="sidebar-user-avatar w-7 h-7 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0"
-            title="System Administrator">
-            SA
-          </div>
-          <div class="min-w-0 flex-1 leading-tight sidebar-user-info">
-            <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
-            <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role">admin@olfstores.com</div>
-          </div>
-          <a href="/login" id="olf-signout-btn" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors"
-            title="Sign Out">
-            <span class="material-symbols-outlined text-[16px]">logout</span>
+        </button>
+        <div id="sub-orders" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/orders?filter=active" id="sublink-orders-live" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span>Active Orders</span>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 dark:text-emerald-400">-</span>
+          </a>
+          <a href="/orders" id="sublink-orders" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Orders</span>
           </a>
         </div>
       </div>
-    </aside>
+
+      <a href="/customers" id="nav-customers" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Customers">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">group</span>
+        <span class="truncate">Customers</span>
+      </a>
+
+      <!-- 3. Outlets (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-outlets', 'chev-outlets')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Outlets">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">storefront</span>
+            <span class="truncate">Outlets</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+            <span id="chev-outlets" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+          </div>
+        </button>
+        <div id="sub-outlets" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/outlets" id="sublink-outlets" onclick="handleOutletNav('active', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF7A00]"></span>
+              <span>Outlets Directory</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/alloutlets" id="sublink-alloutlets" onclick="handleOutletNav('all', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>All Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/prepaidoutlets" id="sublink-prepaid" onclick="handleOutletNav('prepaid', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+              <span>Prepaid Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono opacity-80">-</span>
+          </a>
+          <a href="/inactiveoutlets" id="sublink-inactive" onclick="handleOutletNav('inactive', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+              <span>Inactive Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-rose-500">-</span>
+          </a>
+          <a href="/pendingoutlets" id="sublink-pending" onclick="handleOutletNav('pending', event)" class="submenu-link flex items-center justify-between px-2 py-1 rounded text-[11px] transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              <span>Pending Outlets</span>
+            </div>
+            <span class="text-[9px] font-mono text-amber-500">-</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Vendors & Partners -->
+      <a href="/vendors" id="nav-vendors" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Vendors & Brands">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">store</span>
+          <span class="truncate">Vendors &amp; Brands</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">Hub</span>
+      </a>
+
+      <!-- 5. Railway Operations (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-stations', 'chev-stations')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Railway Operations">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">train</span>
+            <span class="truncate">Railway Operations</span>
+          </div>
+          <span id="chev-stations" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-stations" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+          <a href="/stations" id="sublink-stations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>All Stations</span>
+          </a>
+          <a href="/trains" id="sublink-trains" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>Trains &amp; Routes</span>
+          </a>
+          <a href="/irctc-logs" id="sublink-irctc-logs" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+            <span>IRCTC Sync Logs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: FINANCE & COMMERCE -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Finance &amp; Wallets</div>
+
+      <!-- 7. Withdrawal Requests -->
+      <a href="/requests" id="nav-requests" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Withdrawal Requests">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">account_balance_wallet</span>
+          <span class="truncate">Withdrawal Requests</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold sidebar-badge-orange">-</span>
+      </a>
+
+      <!-- 8. Invoices -->
+      <a href="/invoices" id="nav-invoices" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Invoices & Payouts">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">receipt</span>
+        <span class="truncate">Invoices &amp; Payouts</span>
+      </a>
+    </div>
+
+    <!-- SECTION 3: MANAGEMENT, HR & SUPPORT -->
+    <div class="space-y-0.5">
+      <div class="px-2.5 pb-1 text-[9.5px] font-bold tracking-wider uppercase sidebar-section-label">Management &amp; HR</div>
+
+      <!-- 9. Human Resources (HR) -->
+      <a href="/hr" id="nav-hr" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Human Resources">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">badge</span>
+          <span class="truncate">Human Resources</span>
+        </div>
+        <span class="text-[9.5px] font-semibold text-[#FF7A00] px-1.5 py-0.2 rounded bg-[#FF7A00]/10">HR</span>
+      </a>
+
+      <a href="/roles" id="nav-access" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Roles & Access"><span class="material-symbols-outlined text-[18px] sidebar-icon">admin_panel_settings</span><span class="truncate">Roles &amp; Access</span></a>
+      <!-- 10. Complaints -->
+      <a href="/complaints" id="nav-complaints" class="sidebar-item flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Complaints">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[18px] sidebar-icon">report_problem</span>
+          <span class="truncate">Complaints</span>
+        </div>
+        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-bold text-rose-500 bg-rose-500/10">-</span>
+      </a>
+
+      <!-- 11. Reports (with Submenu) -->
+      <div class="nav-group">
+        <button type="button" onclick="toggleSubmenu('sub-reports', 'chev-reports')" class="sidebar-item w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Reports">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] sidebar-icon">insights</span>
+            <span class="truncate">Reports</span>
+          </div>
+          <span id="chev-reports" class="material-symbols-outlined text-[15px] sidebar-chevron transition-transform duration-200">expand_more</span>
+        </button>
+        <div id="sub-reports" class="submenu-container hidden pl-6 pr-1 py-1 space-y-0.5">
+<a href="/reports" id="sublink-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Business Overview</span></a>
+<a href="/reports?report=order-exceptions" id="sublink-report-operations" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Operations</span></a>
+<a href="/reports?report=wallet-balances" id="sublink-report-finance" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Finance &amp; Settlements</span></a>
+<a href="/reports?report=invoices" id="sublink-report-invoices" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Invoices &amp; Outstanding</span></a>
+<a href="/reports?report=compliance" id="sublink-report-network" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Network &amp; Compliance</span></a>
+<a href="/reports?report=customers" id="sublink-report-sales" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Sales &amp; Customers</span></a>
+<a href="/complaint-reports" id="sublink-complaint-reports" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>Quality &amp; Complaints</span></a>
+<a href="/reports?report=employees" id="sublink-report-people" class="submenu-link flex items-center gap-2 px-2 py-1 rounded text-[11px] transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span><span>People &amp; Payroll</span></a>
+</div>
+      </div>
+
+      <!-- 12. System Settings -->
+      <a href="/settings" id="nav-settings" class="sidebar-item flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg font-medium transition-colors" title="Settings & Roles">
+        <span class="material-symbols-outlined text-[18px] sidebar-icon">settings</span>
+        <span class="truncate">Settings &amp; Roles</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer: Minimal User Strip -->
+  <div class="p-3 border-t sidebar-border space-y-2">
+    <!-- Clean Minimal Sync Indicator -->
+    <div class="px-2.5 py-1 rounded-md sidebar-health-card flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="olf-account-role" class="font-medium sidebar-health-text">Account</span>
+      </div>
+      <span class="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Sync unverified</span>
+    </div>
+
+    <!-- Minimal User Profile -->
+    <div class="flex items-center gap-2 px-1 pt-0.5 sidebar-profile-footer">
+      <div class="w-8 h-8 rounded-full bg-[#FF7A00] text-white font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-sm" title="System Administrator">
+        SA
+      </div>
+      <div class="min-w-0 flex-1 leading-tight">
+        <div id="olf-account-name" class="text-xs font-semibold truncate sidebar-user-name">Signed-in account</div>
+        <div id="olf-account-email" class="text-[10px] truncate sidebar-user-role"></div>
+      </div>
+      <a href="/login" id="olf-signout-btn" class="p-1 rounded text-slate-400 hover:text-rose-500 transition-colors" title="Sign Out">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
 
 
 
   <!-- MAIN VIEWPORT -->
   <main class="main-viewport flex-1 min-h-screen flex flex-col bg-[#07090D] dark:bg-[#07090D] light:bg-[#F8FAFC]">
-
+    
     <!-- STICKY TOP COMMAND HEADER (FULLY RESPONSIVE) -->
-    <header
-      class="min-h-16 py-2.5 px-4 sm:px-6 border-b border-white/10 dark:border-white/10 light:border-slate-200 bg-[#0B0F17]/90 dark:bg-[#0B0F17]/90 light:bg-white/90 backdrop-blur-md sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3">
+    <header class="min-h-16 py-2.5 px-4 sm:px-6 border-b border-white/10 dark:border-white/10 light:border-slate-200 bg-[#0B0F17]/90 dark:bg-[#0B0F17]/90 light:bg-white/90 backdrop-blur-md sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <!-- Sidebar Collapse / Expand Toggle Button -->
-        <button type="button" onclick="toggleSidebar()"
-          class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-slate-100 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all flex items-center justify-center cursor-pointer shrink-0"
-          title="Toggle Sidebar (Expand View)">
+        <button type="button" onclick="toggleSidebar()" class="p-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-slate-100 text-slate-400 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all flex items-center justify-center cursor-pointer shrink-0" title="Toggle Sidebar (Expand View)">
           <span class="material-symbols-outlined text-[19px]">menu</span>
         </button>
         <div>
-          <h1
-            class="text-[15px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight flex items-center gap-2">
+          <h1 class="text-[15px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight flex items-center gap-2">
             <span id="page-main-heading">Orders Dashboard</span>
-            <span
-              class="text-xs px-2 py-0.5 rounded-full bg-[#00B956]/15 text-[#00B956] font-semibold flex items-center gap-1">
+            <span class="text-xs px-2 py-0.5 rounded-full bg-[#00B956]/15 text-[#00B956] font-semibold flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-[#00B956] animate-pulse"></span>
               Admin
             </span>
           </h1>
-          <p class="text-[11px] text-slate-400" id="page-main-subheading">Real-time railway meal bookings, PNR status,
-            and station delivery pipeline</p>
+          <p class="text-[11px] text-slate-400" id="page-main-subheading">Real-time railway meal bookings, PNR status, and station delivery pipeline</p>
         </div>
       </div>
 
       <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
         <!-- Topbar Theme Switcher -->
-        <button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar"
-          class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none"
-          title="Toggle Theme (Dark / Light)">
+        <button type="button" onclick="toggleTheme()" id="btn-theme-toggle-topbar" class="theme-toggle-topbar flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 dark:border-white/10 light:border-slate-300 bg-white/5 dark:bg-white/5 light:bg-slate-100 hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all font-medium text-xs cursor-pointer select-none" title="Toggle Theme (Dark / Light)">
           <span class="material-symbols-outlined text-[16px] text-amber-500 theme-icon-topbar">dark_mode</span>
           <span class="theme-label-topbar font-semibold text-[11px]">Dark Mode</span>
         </button>
 
         <!-- Live Sync Active Status Pill -->
-        <div id="liveSyncStatus"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/10 light:bg-emerald-50 border border-emerald-500/30 dark:border-emerald-500/30 light:border-emerald-300 text-emerald-500 dark:text-emerald-400 light:text-emerald-700 select-none shadow-sm transition-all"
-          title="Live Auto-Sync Active: Table automatically checks for IRCTC train delays and status changes every 30 seconds">
+        <div id="liveSyncStatus" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/10 light:bg-emerald-50 border border-emerald-500/30 dark:border-emerald-500/30 light:border-emerald-300 text-emerald-500 dark:text-emerald-400 light:text-emerald-700 select-none shadow-sm transition-all" title="Live Auto-Sync Active: Table automatically checks for IRCTC train delays and status changes every 30 seconds">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
           <span class="tracking-wide">Live Sync Active</span>
-          <span
-            class="text-[10px] text-emerald-500/80 dark:text-emerald-400/80 light:text-emerald-700 font-mono hidden sm:inline"
-            id="liveSyncTimerDisplay">(30s)</span>
+          <span class="text-[10px] text-emerald-500/80 dark:text-emerald-400/80 light:text-emerald-700 font-mono hidden sm:inline" id="liveSyncTimerDisplay">(30s)</span>
         </div>
-
-        <button onclick="fetchOrdersData()" id="refreshBtn"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all cursor-pointer"
-          title="Refresh Live Data">
+        
+        <button onclick="fetchOrdersData()" id="refreshBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all cursor-pointer" title="Refresh Live Data">
           <span class="material-symbols-outlined text-[16px]" id="refreshIcon">refresh</span>
           <span>Refresh</span>
         </button>
 
         <!-- Export CSV Button -->
-        <button onclick="exportOrdersCsv()"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all cursor-pointer">
+        <button onclick="exportOrdersCsv()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 dark:border-white/10 light:border-slate-200 bg-white/5 dark:bg-white/5 light:bg-white hover:bg-white/10 text-slate-300 dark:text-slate-300 light:text-slate-700 transition-all cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">download</span>
           <span>Download Orders</span>
         </button>
 
         <!-- Create Manual Order Button -->
-        <button onclick="location.href='/?booking=1'"
-          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md shadow-[#FF7A00]/25 transition-all cursor-pointer">
+        <button onclick="location.href='/?booking=1'" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white shadow-md shadow-[#FF7A00]/25 transition-all cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">add</span>
           <span>Local Order</span>
         </button>
-        <a href="/irctc-logs?newOrder=1" data-required-module="integrations"
-          class="px-3 py-1.5 rounded-lg text-xs font-bold border border-white/10 hover:bg-white/5 transition-all">+
-          IRCTC Order</a>
+        <a href="/irctc-logs?newOrder=1" data-required-module="integrations" class="px-3 py-1.5 rounded-lg text-xs font-bold border border-white/10 hover:bg-white/5 transition-all">+ IRCTC Order</a>
       </div>
     </header>
 
@@ -1442,18 +1331,16 @@
 
       <!-- TOP 5 KPI TELEMETRY CARDS (Data Connected to /api/v1/orders/stats - RESPONSIVE GRID) -->
       <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4">
-
+        
         <!-- Total Orders Card -->
-        <div
-          class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
           <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Orders</span>
             <div class="w-7 h-7 rounded-lg bg-[#3B82F6]/15 flex items-center justify-center text-[#3B82F6]">
               <span class="material-symbols-outlined text-[17px]">inventory_2</span>
             </div>
           </div>
-          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight"
-            id="kpi-total-orders">-<span class="animate-pulse">Loading...</span>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight" id="kpi-total-orders">-<span class="animate-pulse">Loading...</span>
           </div>
           <div class="mt-1 flex items-center text-[10px] text-emerald-400 font-medium">
             <span>All time verified railway bookings</span>
@@ -1461,16 +1348,14 @@
         </div>
 
         <!-- Total Earnings Card -->
-        <div
-          class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
           <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Earnings</span>
             <div class="w-7 h-7 rounded-lg bg-[#00B956]/15 flex items-center justify-center text-[#00B956]">
               <span class="material-symbols-outlined text-[17px]">payments</span>
             </div>
           </div>
-          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight"
-            id="kpi-total-earnings">-<span class="animate-pulse">Loading...</span>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight" id="kpi-total-earnings">-<span class="animate-pulse">Loading...</span>
           </div>
           <div class="mt-1 flex items-center text-[10px] text-slate-400">
             <span>Gross meal booking revenue</span>
@@ -1478,34 +1363,28 @@
         </div>
 
         <!-- Delivered Orders Card -->
-        <div
-          class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
           <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Delivered</span>
             <div class="w-7 h-7 rounded-lg bg-[#10B981]/15 flex items-center justify-center text-[#10B981]">
               <span class="material-symbols-outlined text-[17px]">check_circle</span>
             </div>
           </div>
-          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight"
-            id="kpi-delivered-orders">-<span class="animate-pulse">Loading...</span>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight" id="kpi-delivered-orders">-<span class="animate-pulse">Loading...</span>
           </div>
-          <div class="mt-1 flex items-center text-[10px] text-emerald-400 font-medium" id="kpi-delivered-sub">
-            -<span>Successful platform drops</span>
+          <div class="mt-1 flex items-center text-[10px] text-emerald-400 font-medium" id="kpi-delivered-sub">-<span>Successful platform drops</span>
           </div>
         </div>
 
         <!-- Cancelled Orders Card -->
-        <div
-          class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
           <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Cancelled</span>
             <div class="w-7 h-7 rounded-lg bg-[#EF4444]/15 flex items-center justify-center text-[#EF4444]">
               <span class="material-symbols-outlined text-[17px]">cancel</span>
             </div>
           </div>
-          <div
-            class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight text-rose-400"
-            id="kpi-cancelled-orders">-<span class="animate-pulse">Loading...</span>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight text-rose-400" id="kpi-cancelled-orders">-<span class="animate-pulse">Loading...</span>
           </div>
           <div class="mt-1 flex items-center text-[10px] text-slate-400">
             <span>Train delay / Passenger cancel</span>
@@ -1513,17 +1392,14 @@
         </div>
 
         <!-- Pending / In-Kitchen Card -->
-        <div
-          class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
+        <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 relative overflow-hidden">
           <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Active & Pending</span>
             <div class="w-7 h-7 rounded-lg bg-[#F59E0B]/15 flex items-center justify-center text-[#F59E0B]">
               <span class="material-symbols-outlined text-[17px]">schedule</span>
             </div>
           </div>
-          <div
-            class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight text-amber-400"
-            id="kpi-pending-orders">-<span class="animate-pulse">Loading...</span>
+          <div class="text-[22px] font-bold text-white dark:text-white light:text-slate-900 tracking-tight text-amber-400" id="kpi-pending-orders">-<span class="animate-pulse">Loading...</span>
           </div>
           <div class="mt-1 flex items-center text-[10px] text-amber-400 font-medium">
             <span>Kitchen prep & dispatch active</span>
@@ -1533,28 +1409,22 @@
       </div>
 
       <!-- FILTER CONTROLS & STATUS TABS -->
-      <div
-        class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 space-y-4">
-
+      <div class="card-glow rounded-xl p-4 bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 space-y-4">
+        
         <!-- ROW 1: PRIMARY VIEW MODE SWITCHER + DYNAMIC RIGHT CONTROLS -->
-        <div
-          class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10 dark:border-white/10 light:border-slate-200">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10 dark:border-white/10 light:border-slate-200">
           <div class="viewmode-switcher-wrap">
             <!-- Active Cockpit View Button -->
-            <button type="button" onclick="setViewMode('ACTIVE')" id="viewmode-btn-active"
-              class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-active-emerald">
+            <button type="button" onclick="setViewMode('ACTIVE')" id="viewmode-btn-active" class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-active-emerald">
               <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
               <span>Active Orders Cockpit</span>
-              <span id="viewmode-count-active"
-                class="viewmode-count-pill px-2 py-0.5 rounded-full text-[11px] font-mono font-bold">0</span>
+              <span id="viewmode-count-active" class="viewmode-count-pill px-2 py-0.5 rounded-full text-[11px] font-mono font-bold">0</span>
             </button>
             <!-- All Orders Ledger Button -->
-            <button type="button" onclick="setViewMode('ALL')" id="viewmode-btn-all"
-              class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-inactive">
+            <button type="button" onclick="setViewMode('ALL')" id="viewmode-btn-all" class="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all cursor-pointer viewmode-btn-inactive">
               <span class="material-symbols-outlined text-[15px]">inventory_2</span>
               <span>All Orders Archive</span>
-              <span id="viewmode-count-all"
-                class="viewmode-count-pill px-2 py-0.5 rounded-full text-[11px] font-mono font-bold">0</span>
+              <span id="viewmode-count-all" class="viewmode-count-pill px-2 py-0.5 rounded-full text-[11px] font-mono font-bold">0</span>
             </button>
           </div>
 
@@ -1567,34 +1437,21 @@
 
           <!-- All Orders Mode: Date Range Presets -->
           <div class="hidden flex items-center gap-2 flex-wrap" id="all-view-date-controls">
-            <div class="flex items-center gap-1 bg-white/5 dark:bg-white/5 light:bg-slate-100 p-1 rounded-lg text-xs"
-              id="date-presets-bar">
-              <button type="button" onclick="setDateRange('ALL')" id="btn-date-ALL"
-                class="px-2.5 py-1 rounded bg-[#FF7A00] text-white font-bold transition-all shadow-sm cursor-pointer">All
-                Time</button>
-              <button type="button" onclick="setDateRange('TODAY')" id="btn-date-TODAY"
-                class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">Today</button>
-              <button type="button" onclick="setDateRange('YESTERDAY')" id="btn-date-YESTERDAY"
-                class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">Yesterday</button>
-              <button type="button" onclick="setDateRange('THIS_WEEK')" id="btn-date-THIS_WEEK"
-                class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">This
-                Week</button>
-              <button type="button" onclick="setDateRange('THIS_MONTH')" id="btn-date-THIS_MONTH"
-                class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">This
-                Month</button>
-              <button type="button" onclick="toggleCustomDatePicker()" id="btn-date-CUSTOM"
-                class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium flex items-center gap-1 cursor-pointer">
+            <div class="flex items-center gap-1 bg-white/5 dark:bg-white/5 light:bg-slate-100 p-1 rounded-lg text-xs" id="date-presets-bar">
+              <button type="button" onclick="setDateRange('ALL')" id="btn-date-ALL" class="px-2.5 py-1 rounded bg-[#FF7A00] text-white font-bold transition-all shadow-sm cursor-pointer">All Time</button>
+              <button type="button" onclick="setDateRange('TODAY')" id="btn-date-TODAY" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">Today</button>
+              <button type="button" onclick="setDateRange('YESTERDAY')" id="btn-date-YESTERDAY" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">Yesterday</button>
+              <button type="button" onclick="setDateRange('THIS_WEEK')" id="btn-date-THIS_WEEK" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">This Week</button>
+              <button type="button" onclick="setDateRange('THIS_MONTH')" id="btn-date-THIS_MONTH" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium cursor-pointer">This Month</button>
+              <button type="button" onclick="toggleCustomDatePicker()" id="btn-date-CUSTOM" class="px-2.5 py-1 rounded text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-all font-medium flex items-center gap-1 cursor-pointer">
                 <span class="material-symbols-outlined text-[13px]">calendar_month</span> Custom
               </button>
             </div>
             <!-- Active Date Badge (Collapsible) -->
-            <span id="active-date-badge"
-              class="hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 text-xs font-semibold">
+            <span id="active-date-badge" class="hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 text-xs font-semibold">
               <span class="material-symbols-outlined text-[13px]">event</span>
               <span id="active-date-badge-text">Today</span>
-              <button type="button" onclick="setDateRange('ALL')"
-                class="hover:text-white transition-colors ml-0.5 text-sm leading-none cursor-pointer"
-                title="Clear Date Filter">&times;</button>
+              <button type="button" onclick="setDateRange('ALL')" class="hover:text-white transition-colors ml-0.5 text-sm leading-none cursor-pointer" title="Clear Date Filter">&times;</button>
             </span>
           </div>
         </div>
@@ -1602,25 +1459,20 @@
         <!-- ROW 2A: ACTIVE ORDERS COCKPIT SUB-TABS (All Active Operations: Confirmed, In Kitchen, Dispatched, Partial Delivery) -->
         <div id="active-subtabs-row" class="flex flex-wrap items-center justify-between gap-3 pb-1">
           <div class="flex flex-wrap items-center gap-1.5" id="active-subtabs-container">
-            <button type="button" onclick="setActiveSubFilter('ACTIVE')" id="subtab-ACTIVE"
-              class="px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-active-emerald">
+            <button type="button" onclick="setActiveSubFilter('ACTIVE')" id="subtab-ACTIVE" class="px-3.5 py-1.5 rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer subtab-active-emerald">
               <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
               All Active (<span id="active-count-all">0</span>)
             </button>
-            <button type="button" onclick="setActiveSubFilter('CONFIRMED')" id="subtab-ACTIVE_CONFIRMED"
-              class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+            <button type="button" onclick="setActiveSubFilter('CONFIRMED')" id="subtab-ACTIVE_CONFIRMED" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
               Stage 2: Confirmed (<span id="active-count-confirmed">0</span>)
             </button>
-            <button type="button" onclick="setActiveSubFilter('ORDER_PREPARING')" id="subtab-ACTIVE_PREPARING"
-              class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+            <button type="button" onclick="setActiveSubFilter('ORDER_PREPARING')" id="subtab-ACTIVE_PREPARING" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
               Stage 3: In Kitchen (<span id="active-count-preparing">0</span>)
             </button>
-            <button type="button" onclick="setActiveSubFilter('ORDER_OUT_FOR_DELIVERY')" id="subtab-ACTIVE_OUT"
-              class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+            <button type="button" onclick="setActiveSubFilter('ORDER_OUT_FOR_DELIVERY')" id="subtab-ACTIVE_OUT" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
               Stage 4: Dispatched (<span id="active-count-out">0</span>)
             </button>
-            <button type="button" onclick="setActiveSubFilter('ORDER_PARTIALLY_DELIVERED')" id="subtab-ACTIVE_PARTIAL"
-              class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
+            <button type="button" onclick="setActiveSubFilter('ORDER_PARTIALLY_DELIVERED')" id="subtab-ACTIVE_PARTIAL" class="px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer subtab-inactive">
               Partial Delivery (<span id="active-count-partial">0</span>)
             </button>
           </div>
@@ -1629,41 +1481,31 @@
         <!-- ROW 2B: ALL ORDERS MASTER ARCHIVE SUB-TABS & DATE FILTERS (Full Database View) -->
         <div id="all-subtabs-row" class="hidden flex flex-wrap items-center justify-between gap-3 pb-1">
           <div class="flex flex-wrap items-center gap-1.5" id="all-subtabs-container">
-            <button type="button" onclick="setAllSubFilter('ALL')" id="tab-ALL"
-              class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] text-white shadow-sm transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ALL')" id="tab-ALL" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#FF7A00] text-white shadow-sm transition-all cursor-pointer">
               All Orders (<span id="tab-count-all">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ORDER_DELIVERED')" id="tab-ORDER_DELIVERED"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ORDER_DELIVERED')" id="tab-ORDER_DELIVERED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               Delivered (<span id="tab-count-delivered">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ORDER_CANCELLED')" id="tab-ORDER_CANCELLED"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ORDER_CANCELLED')" id="tab-ORDER_CANCELLED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               Cancelled (<span id="tab-count-cancelled">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ACTIVE')" id="tab-ALL_ACTIVE"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ACTIVE')" id="tab-ALL_ACTIVE" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               In-Flight (<span id="tab-count-active">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('CONFIRMED')" id="tab-CONFIRMED"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('CONFIRMED')" id="tab-CONFIRMED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               Confirmed (<span id="tab-count-confirmed">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ORDER_PREPARING')" id="tab-ORDER_PREPARING"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ORDER_PREPARING')" id="tab-ORDER_PREPARING" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               In Kitchen (<span id="tab-count-preparing">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ORDER_OUT_FOR_DELIVERY')" id="tab-ORDER_OUT_FOR_DELIVERY"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ORDER_OUT_FOR_DELIVERY')" id="tab-ORDER_OUT_FOR_DELIVERY" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               Dispatched (<span id="tab-count-out">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ORDER_PARTIALLY_DELIVERED')"
-              id="tab-ORDER_PARTIALLY_DELIVERED"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ORDER_PARTIALLY_DELIVERED')" id="tab-ORDER_PARTIALLY_DELIVERED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               Partial (<span id="tab-count-partial">0</span>)
             </button>
-            <button type="button" onclick="setAllSubFilter('ORDER_UNDELIVERED')" id="tab-ORDER_UNDELIVERED"
-              class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
+            <button type="button" onclick="setAllSubFilter('ORDER_UNDELIVERED')" id="tab-ORDER_UNDELIVERED" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-300 light:text-slate-600 hover:bg-white/5 transition-all cursor-pointer">
               Undelivered (<span id="tab-count-undelivered">0</span>)
             </button>
           </div>
@@ -1672,28 +1514,23 @@
         </div>
 
         <!-- Custom Date Range Bar (Collapsible) -->
-        <div id="custom-date-picker-row"
-          class="hidden p-3 rounded-xl bg-black/30 dark:bg-black/30 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div id="custom-date-picker-row" class="hidden p-3 rounded-xl bg-black/30 dark:bg-black/30 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div class="flex items-center gap-2 flex-wrap">
             <span class="text-slate-400 dark:text-slate-400 light:text-slate-600 flex items-center gap-1 font-semibold">
               <span class="material-symbols-outlined text-[16px] text-[#FF7A00]">date_range</span> Custom Dates:
             </span>
             <div class="flex items-center gap-1.5">
               <span class="text-slate-500 font-medium">From</span>
-              <input type="date" id="order-custom-from"
-                class="px-2.5 py-1.5 rounded-lg bg-black/40 dark:bg-black/40 light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] text-xs font-mono" />
+              <input type="date" id="order-custom-from" class="px-2.5 py-1.5 rounded-lg bg-black/40 dark:bg-black/40 light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] text-xs font-mono" />
             </div>
             <div class="flex items-center gap-1.5">
               <span class="text-slate-500 font-medium">To</span>
-              <input type="date" id="order-custom-to"
-                class="px-2.5 py-1.5 rounded-lg bg-black/40 dark:bg-black/40 light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] text-xs font-mono" />
+              <input type="date" id="order-custom-to" class="px-2.5 py-1.5 rounded-lg bg-black/40 dark:bg-black/40 light:bg-white border border-white/15 dark:border-white/15 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00] text-xs font-mono" />
             </div>
-            <button type="button" onclick="applyCustomDateFilter()"
-              class="px-3.5 py-1.5 rounded-lg bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1">
+            <button type="button" onclick="applyCustomDateFilter()" class="px-3.5 py-1.5 rounded-lg bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1">
               <span class="material-symbols-outlined text-[14px]">search</span> Fetch Orders
             </button>
-            <button type="button" onclick="clearCustomDateFilter()"
-              class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white text-xs transition-all">
+            <button type="button" onclick="clearCustomDateFilter()" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white text-xs transition-all">
               Cancel
             </button>
           </div>
@@ -1706,17 +1543,19 @@
         <div class="flex flex-wrap items-center gap-3">
           <!-- Search input -->
           <div class="flex-1 min-w-[280px] relative">
-            <span
-              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
-            <input type="text" id="orderSearchInput" oninput="handleSearch(this.value)"
-              placeholder="Search by Order ID, PNR, Customer, Mobile, Train Number, Station..."
-              class="w-full pl-10 pr-4 py-2 rounded-lg text-xs bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#FF7A00] transition-all" />
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+            <input 
+              type="text" 
+              id="orderSearchInput"
+              oninput="handleSearch(this.value)"
+              placeholder="Search by Order ID, PNR, Customer, Mobile, Train Number, Station..." 
+              class="w-full pl-10 pr-4 py-2 rounded-lg text-xs bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#FF7A00] transition-all"
+            />
           </div>
 
           <!-- Station Dropdown -->
           <div class="w-48 relative">
-            <select id="stationFilter" onchange="handleStationFilter(this.value)"
-              class="w-full px-3 py-2 rounded-lg text-xs bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]">
+            <select id="stationFilter" onchange="handleStationFilter(this.value)" class="w-full px-3 py-2 rounded-lg text-xs bg-black/20 dark:bg-black/20 light:bg-slate-50 border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-900 focus:outline-none focus:border-[#FF7A00]">
               <option value="ALL">All Stations</option>
               <option value="GWL">GWL - Gwalior</option>
               <option value="NDLS">NDLS - New Delhi</option>
@@ -1739,24 +1578,21 @@
       </div>
 
       <!-- ORDERS HIGH-DENSITY DATA TABLE -->
-      <div
-        class="card-glow rounded-xl bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 overflow-hidden">
+      <div class="card-glow rounded-xl bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 overflow-hidden">
         <!-- INTEGRATED RAILWAY DISPATCH TELEMETRY STRIP -->
-        <div id="active-orders-banner"
-          class="px-4 py-2.5 bg-slate-50 dark:bg-white/[0.02] border-b border-slate-200 dark:border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs select-none">
-          <div class="flex items-center gap-3 overflow-x-auto pb-1 lg:pb-0 text-[11px]">
+        <div id="active-orders-banner" class="px-4 py-2.5 bg-slate-50 dark:bg-white/[0.02] border-b border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-2.5 text-xs select-none">
+          <div class="flex items-center gap-3 overflow-x-auto pb-1 lg:pb-0 text-[11px] flex-wrap sm:flex-nowrap">
             <div class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-100 shrink-0">
               <span class="w-6 h-6 rounded-md bg-[#FF7A00]/15 text-[#FF7A00] flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-[15px]">train</span>
               </span>
               <span>Railway Lifecycle</span>
             </div>
-
+            
             <div class="hidden sm:block text-slate-300 dark:text-slate-700 shrink-0">|</div>
 
             <!-- Stage 1 -->
-            <div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 shrink-0"
-              title="Passenger booked via IRCTC. Contact & berth details masked.">
+            <div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 shrink-0" title="Passenger booked via IRCTC. Contact & berth details masked.">
               <span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span>
               <span>1. Webhook (Masked)</span>
             </div>
@@ -1764,64 +1600,53 @@
             <span class="text-slate-300 dark:text-slate-700 shrink-0">&rarr;</span>
 
             <!-- Stage 2 -->
-            <button onclick="setStatusFilter('CONFIRMED')"
-              class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors shrink-0 cursor-pointer"
-              title="Order locked by OLF. Awaiting cooking cutoff.">
+            <button onclick="setStatusFilter('CONFIRMED')" class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors shrink-0 cursor-pointer" title="Order locked by OLF. Awaiting cooking cutoff.">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
               <span class="font-medium">2. Confirmed 🔒</span>
-              <span class="font-mono font-bold text-amber-600 dark:text-amber-400 ml-0.5">(<span
-                  id="radar-confirmed-count">19</span>)</span>
+              <span class="font-mono font-bold text-amber-600 dark:text-amber-400 ml-0.5">(<span id="radar-confirmed-count">19</span>)</span>
             </button>
 
             <span class="text-slate-300 dark:text-slate-700 shrink-0">&rarr;</span>
 
             <!-- Stage 3 -->
-            <button onclick="setStatusFilter('ORDER_PREPARING')"
-              class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors shrink-0 cursor-pointer"
-              title="Cutoff reached. Details unmasked and kitchen is cooking.">
+            <button onclick="setStatusFilter('ORDER_PREPARING')" class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors shrink-0 cursor-pointer" title="Cutoff reached. Details unmasked and kitchen is cooking.">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
               <span class="font-medium">3. In Kitchen 🍳</span>
-              <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400 ml-0.5">(<span
-                  id="radar-preparing-count">1</span>)</span>
+              <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400 ml-0.5">(<span id="radar-preparing-count">1</span>)</span>
             </button>
 
             <span class="text-slate-300 dark:text-slate-700 shrink-0">&rarr;</span>
 
             <!-- Stage 4 / Handover -->
-            <button onclick="setStatusFilter('ORDER_OUT_FOR_DELIVERY')"
-              class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shrink-0 cursor-pointer"
-              title="Rider at platform. Collect passenger OTP during 2-5 min train halt.">
+            <button onclick="setStatusFilter('ORDER_OUT_FOR_DELIVERY')" class="flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shrink-0 cursor-pointer" title="Rider at platform. Collect passenger OTP during 2-5 min train halt.">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
               <span class="font-medium">4. Platform Handover 🛵</span>
-              <span class="font-mono font-bold text-blue-600 dark:text-blue-400 ml-0.5">(<span
-                  id="radar-out-count">0</span>)</span>
+              <span class="font-mono font-bold text-blue-600 dark:text-blue-400 ml-0.5">(<span id="radar-out-count">0</span>)</span>
             </button>
           </div>
 
           <!-- Right Status Info -->
-          <div class="flex items-center gap-2.5 shrink-0 text-[11px]">
+          <div class="flex items-center gap-2.5 shrink-0 text-[11px] ml-auto">
             <span class="radar-in-flight-badge">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
               <span id="radar-total-active">45</span> In-Flight
             </span>
-            <span class="text-slate-400 dark:text-slate-500 font-medium hidden sm:inline">&bull; 2&ndash;5 min train
-              halt SLA</span>
+            <span class="text-slate-400 dark:text-slate-500 font-medium hidden sm:inline">&bull; 2&ndash;5 min train halt SLA</span>
           </div>
         </div>
 
-        <div class="overflow-x-auto w-full">
-          <table class="w-full text-left text-xs border-collapse table-sticky-actions">
+        <div class="custom-table-scroll w-full">
+          <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr
-                class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px]">Order ID &amp; PNR</th>
+              <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px] table-sticky-left">Order ID &amp; PNR</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Customer</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[155px]">Train &amp; Delivery</th>
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[140px]">Meal Items</th>
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[95px]">Amount &amp; Mode</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[145px]">Meal Items</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[90px]">Amount &amp; Mode</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[120px]">Status &amp; Stage</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Outlet</th>
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[95px] text-right">Actions</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px] text-right table-sticky-right">Actions</th>
               </tr>
             </thead>
             <tbody id="orders-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
@@ -1836,81 +1661,62 @@
         </div>
 
         <!-- Pagination Controls -->
-        <div
-          class="p-4 border-t border-white/5 dark:border-white/5 light:border-slate-200 flex items-center justify-between text-xs text-slate-400">
+        <div class="p-4 border-t border-white/5 dark:border-white/5 light:border-slate-200 flex items-center justify-between text-xs text-slate-400">
           <div>
-            Page <span id="current-page" class="font-bold text-white dark:text-white light:text-slate-900">1</span> of
-            <span id="total-pages">1</span>
+            Page <span id="current-page" class="font-bold text-white dark:text-white light:text-slate-900">1</span> of <span id="total-pages">1</span>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="changePage(-1)" id="prevPageBtn"
-              class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">Previous</button>
-            <button onclick="changePage(1)" id="nextPageBtn"
-              class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">Next</button>
+            <button onclick="changePage(-1)" id="prevPageBtn" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">Previous</button>
+            <button onclick="changePage(1)" id="nextPageBtn" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">Next</button>
           </div>
         </div>
       </div>
 
       <!-- TODAY'S FINISHED & CLOSED ORDERS SECTION (Delivered, Cancelled, Undelivered) -->
-      <div id="today-closed-section"
-        class="rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white overflow-hidden shadow-lg mt-6">
+      <div id="today-closed-section" class="rounded-xl border border-white/5 dark:border-white/5 light:border-slate-200 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white overflow-hidden shadow-lg mt-6">
         <!-- Section Header -->
-        <div
-          class="p-4 bg-[#111622] dark:bg-[#111622] light:bg-slate-50 border-b border-white/5 dark:border-white/5 light:border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="p-4 bg-[#111622] dark:bg-[#111622] light:bg-slate-50 border-b border-white/5 dark:border-white/5 light:border-slate-200 flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
-            <div
-              class="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
               <span class="material-symbols-outlined text-[18px]">task_alt</span>
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900">Today's Finished &amp;
-                  Closed Orders</h3>
-                <span id="today-closed-badge"
-                  class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-white/10 text-slate-300">0
-                  Today</span>
+                <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900">Today's Finished &amp; Closed Orders</h3>
+                <span id="today-closed-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-white/10 text-slate-300">0 Today</span>
               </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">All today's orders that are finished: Delivered, Cancelled,
-                or Undelivered (<span id="today-date-label">Today</span>)</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">All today's orders that are finished: Delivered, Cancelled, or Undelivered (<span id="today-date-label">Today</span>)</p>
             </div>
           </div>
           <div class="flex items-center gap-2 text-xs flex-wrap">
-            <span id="today-summary-delivered"
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span id="cnt-today-delivered">0</span>
-              Delivered
+            <span id="today-summary-delivered" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span id="cnt-today-delivered">0</span> Delivered
             </span>
-            <span id="today-summary-cancelled"
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-400 text-[11px] font-semibold border border-rose-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> <span id="cnt-today-cancelled">0</span>
-              Cancelled
+            <span id="today-summary-cancelled" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-400 text-[11px] font-semibold border border-rose-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> <span id="cnt-today-cancelled">0</span> Cancelled
             </span>
-            <span id="today-summary-undelivered"
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-500/10 text-slate-400 text-[11px] font-semibold border border-slate-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span id="cnt-today-undelivered">0</span>
-              Undelivered
+            <span id="today-summary-undelivered" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-500/10 text-slate-400 text-[11px] font-semibold border border-slate-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span id="cnt-today-undelivered">0</span> Undelivered
             </span>
           </div>
         </div>
 
         <!-- Table -->
-        <div class="overflow-x-auto w-full">
-          <table class="w-full text-left text-xs border-collapse table-sticky-actions">
+        <div class="custom-table-scroll w-full">
+          <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr
-                class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px]">Order ID &amp; PNR</th>
+              <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px] table-sticky-left">Order ID &amp; PNR</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Customer</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[155px]">Train &amp; Delivery</th>
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[140px]">Meal Items</th>
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[95px]">Amount &amp; Mode</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[145px]">Meal Items</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[90px]">Amount &amp; Mode</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[115px]">Final Status</th>
                 <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Outlet</th>
-                <th class="py-2.5 px-2.5 sm:px-3 min-w-[80px] text-right">Details</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[75px] text-right table-sticky-right">Details</th>
               </tr>
             </thead>
-            <tbody id="today-closed-table-body"
-              class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
+            <tbody id="today-closed-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
               <tr>
                 <td colspan="8" class="text-center py-8 text-slate-400 text-xs">
                   Loading today's finished orders...
@@ -1929,19 +1735,15 @@
   <div id="orderDetailDrawer" class="fixed inset-0 z-50 hidden">
     <!-- Backdrop -->
     <div onclick="closeOrderDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
-
+    
     <!-- Drawer Panel -->
-    <div
-      class="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white border-l border-white/10 dark:border-white/10 light:border-slate-200 shadow-2xl flex flex-col z-10 transition-transform">
-      <div
-        class="p-5 border-b border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between">
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white border-l border-white/10 dark:border-white/10 light:border-slate-200 shadow-2xl flex flex-col z-10 transition-transform">
+      <div class="p-5 border-b border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900" id="drawer-order-id">Order
-            Details</h3>
+          <h3 class="text-sm font-bold text-white dark:text-white light:text-slate-900" id="drawer-order-id">Order Details</h3>
           <p class="text-[11px] text-slate-400" id="drawer-date">Booked via IRCTC e-Catering</p>
         </div>
-        <button onclick="closeOrderDrawer()"
-          class="w-8 h-8 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center">
+        <button onclick="closeOrderDrawer()" class="w-8 h-8 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center">
           <span class="material-symbols-outlined text-[20px]">close</span>
         </button>
       </div>
@@ -1950,14 +1752,9 @@
         <!-- Injected via JavaScript -->
       </div>
 
-      <div
-        class="p-4 border-t border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between gap-3">
-        <button onclick="printSelectedOrder()"
-          class="flex-1 px-3 py-2 rounded-lg border border-white/10 text-xs font-semibold text-slate-300 hover:bg-white/5">Print
-          KOT</button>
-        <button onclick="dispatchSelectedOrder(this)"
-          class="flex-1 px-3 py-2 rounded-lg bg-[#FF7A00] text-xs font-bold text-white shadow-md hover:bg-[#FF7A00]/90">Mark
-          Out for Delivery</button>
+      <div class="p-4 border-t border-white/10 dark:border-white/10 light:border-slate-200 flex items-center justify-between gap-3">
+        <button onclick="printSelectedOrder()" class="flex-1 px-3 py-2 rounded-lg border border-white/10 text-xs font-semibold text-slate-300 hover:bg-white/5">Print KOT</button>
+        <button onclick="dispatchSelectedOrder(this)" class="flex-1 px-3 py-2 rounded-lg bg-[#FF7A00] text-xs font-bold text-white shadow-md hover:bg-[#FF7A00]/90">Mark Out for Delivery</button>
       </div>
     </div>
   </div>
@@ -1980,7 +1777,7 @@
     function getDateBounds(rangeType) {
       const now = new Date();
       const todayIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(now);
-
+      
       if (rangeType === 'TODAY') {
         return {
           startDate: todayIST,
@@ -2151,7 +1948,7 @@
           url.searchParams.delete('end_date');
         }
         window.history.replaceState(null, '', url.pathname + url.search);
-      } catch (e) { }
+      } catch(e){}
 
       currentPage = 1;
       fetchOrdersData();
@@ -2190,7 +1987,7 @@
         url.searchParams.set('start_date', customStartDate);
         url.searchParams.set('end_date', customEndDate);
         window.history.replaceState(null, '', url.pathname + url.search);
-      } catch (e) { }
+      } catch(e){}
 
       currentPage = 1;
       fetchOrdersData();
@@ -2201,7 +1998,7 @@
     }
 
     // Fetch Stats and Orders (Combining Active Orders and Recent Orders)
-
+    
     // =========================================================================
     // LIVE AUTO-SYNC (IRCTC DELAYS & STATUS REFRESH EVERY 30s)
     // =========================================================================
@@ -2253,7 +2050,7 @@
 
         let statsUrl = '/api/v1/orders/stats';
         let ordersUrl = '/api/v1/orders?limit=300';
-
+        
         if (bounds) {
           const qs = `start_date=${encodeURIComponent(bounds.startDate)}&end_date=${encodeURIComponent(bounds.endDate)}`;
           statsUrl += `?${qs}`;
@@ -2452,7 +2249,7 @@
           url.searchParams.delete('filter');
         }
         window.history.replaceState(null, '', url.pathname + url.search);
-      } catch (e) { }
+      } catch(e){}
       currentPage = 1;
       applyFilters();
       if (mode === 'ALL' && currentDateRange !== 'ALL') {
@@ -2540,11 +2337,11 @@
       try {
         const res = await fetch(`/api/v1/order/${oid}`, {
           method: 'PUT',
-          headers: {
+          headers: { 
             'Content-Type': 'application/json',
             'x-olf-request': '1'
           },
-          body: JSON.stringify({
+          body: JSON.stringify({ 
             status: newStatus,
             comment: comment || `Updated via railway operations panel to ${newStatus}`
           })
@@ -2553,18 +2350,18 @@
         if (!res.ok || json.status !== 1) throw new Error(json.info || 'Could not update order status');
 
         Admin.message(`Order #${oid} ${newStatus === 'ORDER_DELIVERED' ? 'delivered successfully and removed from Active Orders' : 'status advanced to ' + newStatus.replace(/^ORDER_/, '')}`);
-
+        
         // Update local object
         const target = allOrders.find(o => String(o.oid) === String(oid));
         if (target) {
           target.status = newStatus;
           target.updated_at = new Date().toISOString();
         }
-
+        
         // Instantly re-filter & update tab counters without waiting for network
         applyFilters();
         updateTabCounts(null);
-
+        
         fetchOrdersData(true);
 
         if (document.getElementById('orderDetailDrawer') && !document.getElementById('orderDetailDrawer').classList.contains('hidden')) {
@@ -2606,7 +2403,7 @@
         return;
       }
       if (!activeOtpTargetOid) return;
-
+      
       const oid = activeOtpTargetOid;
       closeOtpModal();
       await advanceOrderStatus(oid, 'ORDER_DELIVERED', `Passenger OTP verified: ${otp} at berth handover`);
@@ -2633,7 +2430,7 @@
             if (currentStatus === 'ACTIVE') {
               if (['ORDER_DELIVERED', 'COMPLETED', 'ORDER_CANCELLED', 'CANCELLED', 'ORDER_UNDELIVERED'].includes(key)) return false;
             } else {
-              const actual = ({ COMPLETED: 'ORDER_DELIVERED', CANCELLED: 'ORDER_CANCELLED' })[key] || key;
+              const actual = ({COMPLETED:'ORDER_DELIVERED', CANCELLED:'ORDER_CANCELLED'})[key] || key;
               const wanted = currentStatus === 'CONFIRMED' ? 'ORDER_CONFIRMED' : currentStatus;
               if (actual !== wanted) return false;
             }
@@ -2664,12 +2461,12 @@
           const outlet = String(order.outlet_name || '').toLowerCase();
 
           const matches = oid.includes(searchQuery) ||
-            pnr.includes(searchQuery) ||
-            customerName.includes(searchQuery) ||
-            customerPhone.includes(searchQuery) ||
-            trainName.includes(searchQuery) ||
-            trainNo.includes(searchQuery) ||
-            outlet.includes(searchQuery);
+                          pnr.includes(searchQuery) ||
+                          customerName.includes(searchQuery) ||
+                          customerPhone.includes(searchQuery) ||
+                          trainName.includes(searchQuery) ||
+                          trainNo.includes(searchQuery) ||
+                          outlet.includes(searchQuery);
           if (!matches) return false;
         }
 
@@ -2710,7 +2507,7 @@
 
         // Items display
         const firstItem = itemsList[0] || {};
-        const itemsDisplay = itemsList.length > 0
+        const itemsDisplay = itemsList.length > 0 
           ? `${firstItem.name || 'Item'} ${firstItem.quantity ? 'x' + firstItem.quantity : ''} ${itemsList.length > 1 ? '<span class="text-slate-500 font-medium">+' + (itemsList.length - 1) + ' more</span>' : ''}`
           : 'Custom Meal';
 
@@ -2719,7 +2516,7 @@
         const statusBadge = OrderProgress.render(row.status, row.oid, false, row.delivery_date, row.created_at, row.updated_at);
 
         // Amount & Mode
-        const modeBadge = row.mode === 'PRE_PAID'
+        const modeBadge = row.mode === 'PRE_PAID' 
           ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-bold ml-1.5 border border-emerald-500/30">PREPAID</span>'
           : '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-bold ml-1.5 border border-amber-500/30">COD</span>';
 
@@ -2752,20 +2549,22 @@
         const trainNum = delDetails.trainNo || delDetails.trainNumber || '';
         const trainNm = delDetails.trainName || 'Express';
         const trainBlock = `
-          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 whitespace-nowrap">
-            ${trainNum ? `<span class="px-1.5 py-0.5 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[11px] font-bold shrink-0">${trainNum}</span>` : ''}
-            <span class="truncate font-semibold text-xs text-slate-800 dark:text-slate-100 max-w-[160px]" title="${trainNm}">${trainNm}</span>
+          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1 whitespace-nowrap">
+            ${trainNum ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[10px] font-bold shrink-0">${trainNum}</span>` : ''}
+            <span class="truncate font-semibold text-xs text-slate-800 dark:text-slate-100 max-w-[115px]" title="${trainNm}">${trainNm}</span>
           </div>
-          <div class="mt-1 flex items-center gap-2 flex-wrap">
-            <span class="coach-berth-badge px-2 py-0.5 rounded text-[11px]">
-              Coach ${delDetails.coach || 'B1'} &bull; Berth ${delDetails.berth || '42'}
-            </span>
-            <span class="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
-              ${row.station_name || delDetails.station || 'Station'} <strong class="text-amber-500 dark:text-amber-400 font-mono font-bold">(${row.station_code || delDetails.stationCode || 'STN'})</strong>
-            </span>
+          <div class="mt-0.5 space-y-0.5">
+            <div class="flex items-center gap-1 flex-wrap">
+              <span class="coach-berth-badge px-1.5 py-0.2 rounded text-[10px]">
+                Coach ${delDetails.coach || 'B1'} &bull; Berth ${delDetails.berth || '42'}
+              </span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                <strong class="text-amber-500 dark:text-amber-400 font-mono font-bold">(${row.station_code || delDetails.stationCode || 'STN'})</strong>
+              </span>
+            </div>
             ${isLate ? `
-              <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-mono whitespace-nowrap">
-                <span class="material-symbols-outlined text-[11px]">warning</span> Late by ${eta.delayInMinutes}m (${eta.scheduledArrival} &rarr; ${eta.estimatedArrival}) &bull; PF ${eta.platformNumber || '1'}
+              <span class="inline-flex items-center gap-0.5 px-1 py-0.2 rounded text-[9px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-mono whitespace-nowrap">
+                <span class="material-symbols-outlined text-[10px]">warning</span> Late ${eta.delayInMinutes}m &bull; PF ${eta.platformNumber || '1'}
               </span>
             ` : ''}
           </div>
@@ -2832,20 +2631,20 @@
         let actionButtons = '';
         if (statusKey === 'ORDER_CONFIRMED') {
           actionButtons = `
-            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_PREPARING')" class="px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Cutoff Reached: Send to Kitchen for Cooking">
-              <span class="material-symbols-outlined text-[13px]">skillet</span> Cook
+            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_PREPARING')" class="px-2 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Cutoff Reached: Send to Kitchen for Cooking">
+              <span class="material-symbols-outlined text-[12px]">skillet</span> Cook
             </button>
           `;
         } else if (statusKey === 'ORDER_PREPARING') {
           actionButtons = `
-            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_OUT_FOR_DELIVERY')" class="px-2 py-0.5 rounded-md bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Food Packed: Dispatch Rider to Station Platform">
-              <span class="material-symbols-outlined text-[13px]">moped</span> Dispatch
+            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_OUT_FOR_DELIVERY')" class="px-2 py-0.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Food Packed: Dispatch Rider to Station Platform">
+              <span class="material-symbols-outlined text-[12px]">moped</span> Dispatch
             </button>
           `;
         } else if (statusKey === 'ORDER_OUT_FOR_DELIVERY') {
           actionButtons = `
-            <button onclick="openOtpModal('${row.oid}')" class="px-2 py-0.5 rounded-md bg-gradient-to-r from-amber-500 to-[#FF7A00] hover:brightness-110 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Train Halt: Collect Delivery OTP from Passenger">
-              <span class="material-symbols-outlined text-[13px]">pin</span> Verify OTP
+            <button onclick="openOtpModal('${row.oid}')" class="px-2 py-0.5 rounded-lg bg-gradient-to-r from-amber-500 to-[#FF7A00] hover:brightness-110 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Train Halt: Collect Delivery OTP from Passenger">
+              <span class="material-symbols-outlined text-[12px]">pin</span> Verify OTP
             </button>
           `;
         } else if (statusKey === 'ORDER_DELIVERED' || statusKey === 'COMPLETED') {
@@ -2857,9 +2656,9 @@
         }
 
         html += `
-          <tr class="${isLate ? 'bg-amber-500/10 dark:bg-amber-950/25 hover:bg-amber-500/15 dark:hover:bg-amber-950/35 border-l-4 border-l-amber-500 transition-colors cursor-pointer group' : 'hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group'}" onclick="openOrderDrawer('${row.oid}')">
+          <tr class="${isLate ? 'is-late-row bg-amber-500/10 dark:bg-amber-950/25 hover:bg-amber-500/15 dark:hover:bg-amber-950/35 border-l-4 border-l-amber-500 transition-colors cursor-pointer group' : 'hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group'}" onclick="openOrderDrawer('${row.oid}')">
             <!-- Order ID & PNR -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[105px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[105px] font-mono font-bold text-[#FF7A00] group-hover:underline table-sticky-left">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span>#${row.oid}</span>
                 ${isLate ? '<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 whitespace-nowrap animate-pulse">⚠️ DELAYED</span>' : ''}
@@ -2870,48 +2669,48 @@
             </td>
 
             <!-- Customer -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[110px]">
               ${customerBlock}
             </td>
 
             <!-- Train & Delivery -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[155px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[145px]">
               ${trainBlock}
             </td>
 
             <!-- Items -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[140px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[125px]">
               <div class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full ${isVeg ? 'bg-emerald-500 ring-2 ring-emerald-500/20' : 'bg-rose-500 ring-2 ring-rose-500/20'} shrink-0" title="${isVeg ? 'Vegetarian' : 'Non-Vegetarian'}"></span>
-                <span class="truncate max-w-[140px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
+                <span class="truncate max-w-[110px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
               </div>
             </td>
 
             <!-- Amount -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[95px] font-mono font-semibold text-slate-900 dark:text-white">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[85px] font-mono font-semibold text-slate-900 dark:text-white">
               <div class="text-xs">${totalPrice}</div>
               <div class="mt-0.5">${modeBadge}</div>
             </td>
 
             <!-- Status -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[120px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[115px]">
               ${statusBadgeHtml}
             </td>
 
             <!-- Outlet -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[110px] text-slate-700 dark:text-slate-300">
-              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[110px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
+            <td class="py-2 px-2.5 sm:px-3 min-w-[100px] text-slate-700 dark:text-slate-300">
+              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[95px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
               <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-0.5 mt-0.5">
                 <span class="material-symbols-outlined text-[12px]">verified</span> IRCTC Outlet
               </div>
             </td>
 
             <!-- Actions -->
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[95px] text-right" onclick="event.stopPropagation()">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[100px] text-right table-sticky-right" onclick="event.stopPropagation()">
               <div class="flex items-center justify-end gap-1">
                 ${actionButtons}
-                <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded-md hover:bg-white/10 text-slate-400 hover:text-white transition-colors" title="View Order Details">
-                  <span class="material-symbols-outlined text-[17px]">visibility</span>
+                <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors" title="View Order Details">
+                  <span class="material-symbols-outlined text-[16px]">visibility</span>
                 </button>
               </div>
             </td>
@@ -2955,7 +2754,7 @@
             const dIST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(d);
             if (dIST === todayIST) return true;
           }
-        } catch (e) { }
+        } catch (e) {}
       }
       return false;
     }
@@ -2979,7 +2778,7 @@
       }
 
       const CLOSED_KEYS = ['ORDER_DELIVERED', 'COMPLETED', 'ORDER_CANCELLED', 'CANCELLED', 'ORDER_UNDELIVERED', 'ORDER_PARTIALLY_DELIVERED'];
-
+      
       const todayClosed = allOrders.filter(o => {
         const key = OrderProgress.describe(o.status).key;
         return CLOSED_KEYS.includes(key) && isOrderOfToday(o);
@@ -3027,7 +2826,7 @@
         const custDetails = (row.customer_info && row.customer_info.customerDetails) || {};
         const itemsList = (row.menu_items && row.menu_items.items) || [];
         const firstItem = itemsList[0] || {};
-        const itemsDisplay = itemsList.length > 0
+        const itemsDisplay = itemsList.length > 0 
           ? `${Admin.esc(firstItem.name || 'Item')} ${firstItem.quantity ? 'x' + firstItem.quantity : ''} ${itemsList.length > 1 ? '<span class="text-slate-500 font-medium">+' + (itemsList.length - 1) + ' more</span>' : ''}`
           : 'Custom Meal';
 
@@ -3043,7 +2842,7 @@
           finalStatusHtml = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30">${statusKey.replace(/^ORDER_/, '')}</span>`;
         }
 
-        const modeBadge = row.mode === 'PRE_PAID'
+        const modeBadge = row.mode === 'PRE_PAID' 
           ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold ml-1 border border-emerald-500/30">PREPAID</span>'
           : '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold ml-1 border border-amber-500/30">COD</span>';
 
@@ -3053,17 +2852,17 @@
 
         return `
           <tr class="hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group" onclick="openOrderDrawer('${row.oid}')">
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[105px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[105px] font-mono font-bold text-[#FF7A00] group-hover:underline table-sticky-left">
               <div>#${row.oid}</div>
               <div class="text-[10px] font-sans text-slate-500 font-normal mt-0.5">
                 PNR: <strong class="text-slate-700 dark:text-slate-300 font-mono">${Admin.esc(delDetails.pnr || '---')}</strong>
               </div>
             </td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[110px]">
               <div class="font-semibold text-slate-900 dark:text-slate-200 text-xs">${Admin.esc(custDetails.fullName || 'Passenger')}</div>
               <div class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">${Admin.esc(custDetails.mobile || '---')}</div>
             </td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[155px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[155px]">
               <div class="font-bold text-slate-900 dark:text-slate-200 text-xs flex items-center gap-1.5">
                 ${trainNum ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[10px]">${trainNum}</span>` : ''}
                 <span class="truncate">${Admin.esc(trainNm)}</span>
@@ -3072,17 +2871,17 @@
                 Coach ${Admin.esc(delDetails.coach || 'B1')}, Berth ${Admin.esc(delDetails.berth || '42')} &bull; <strong class="text-amber-500 dark:text-amber-400 font-mono">${Admin.esc(row.station_code || delDetails.stationCode || 'STN')}</strong>
               </div>
             </td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[140px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[95px] font-mono text-xs">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[145px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
+            <td class="py-2 px-2.5 sm:px-3 min-w-[90px] font-mono text-xs">
               <span class="font-bold text-slate-900 dark:text-white">${totalPrice}</span>
               ${modeBadge}
             </td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[115px]">${finalStatusHtml}</td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[110px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[110px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[115px]">${finalStatusHtml}</td>
+            <td class="py-2 px-2.5 sm:px-3 min-w-[110px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[140px]">
               <div class="font-medium truncate">${Admin.esc(row.outlet_name || 'Outlet #' + row.outlet_id)}</div>
               <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">${Admin.esc(row.station_name || delDetails.station || '')}</div>
             </td>
-            <td class="py-2.5 px-2.5 sm:px-3 min-w-[80px] text-right" onclick="event.stopPropagation()">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[75px] text-right table-sticky-right" onclick="event.stopPropagation()">
               <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors" title="View Order Inspection">
                 <span class="material-symbols-outlined text-[18px]">visibility</span>
               </button>
@@ -3429,53 +3228,53 @@
 
 
 
-  <script src="/assets/admin-existing.js"></script>
-  <script id="olf-master-sidebar-logic">
-    // =========================================================================
-    // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
-    // =========================================================================
-    function toggleSubmenu(submenuId, chevronId) {
-      const submenu = document.getElementById(submenuId);
-      const chevron = document.getElementById(chevronId);
-      if (!submenu) return;
-      const isHidden = submenu.classList.contains('hidden');
-      if (isHidden) {
-        submenu.classList.remove('hidden');
-        if (chevron) chevron.classList.add('rotate-180');
-      } else {
-        submenu.classList.add('hidden');
-        if (chevron) chevron.classList.remove('rotate-180');
-      }
+<script src="/assets/admin-existing.js"></script>
+<script id="olf-master-sidebar-logic">
+  // =========================================================================
+  // UNIVERSAL SIDEBAR & TOPBAR THEME LOGIC
+  // =========================================================================
+  function toggleSubmenu(submenuId, chevronId) {
+    const submenu = document.getElementById(submenuId);
+    const chevron = document.getElementById(chevronId);
+    if (!submenu) return;
+    const isHidden = submenu.classList.contains('hidden');
+    if (isHidden) {
+      submenu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      submenu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
     }
+  }
 
-    function handleOutletNav(filterType, event) {
-      const isOutletsPage = window.location.pathname.startsWith('/outlets') ||
-        window.location.pathname.startsWith('/alloutlets') ||
-        window.location.pathname.startsWith('/inactiveoutlets') ||
-        window.location.pathname.startsWith('/pendingoutlets') ||
-        window.location.pathname.startsWith('/prepaidoutlets');
-      if (isOutletsPage && typeof setFilterTab === 'function') {
-        if (event) event.preventDefault();
-        setFilterTab(filterType);
-        try {
-          window.history.pushState(null, '', '/outlets?filter=' + filterType);
-        } catch (e) { }
-      }
+  function handleOutletNav(filterType, event) {
+    const isOutletsPage = window.location.pathname.startsWith('/outlets') || 
+                          window.location.pathname.startsWith('/alloutlets') || 
+                          window.location.pathname.startsWith('/inactiveoutlets') || 
+                          window.location.pathname.startsWith('/pendingoutlets') || 
+                          window.location.pathname.startsWith('/prepaidoutlets');
+    if (isOutletsPage && typeof setFilterTab === 'function') {
+      if (event) event.preventDefault();
+      setFilterTab(filterType);
+      try {
+        window.history.pushState(null, '', '/outlets?filter=' + filterType);
+      } catch(e){}
     }
+  }
 
-    function toggleTheme() {
-      const isDark = document.documentElement.classList.contains('dark');
-      if (isDark) {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-        localStorage.setItem('olf_theme', 'light');
-      } else {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('olf_theme', 'dark');
-      }
-      updateThemeToggleIcons();
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('olf_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('olf_theme', 'dark');
     }
+    updateThemeToggleIcons();
+  }
 
   function updateThemeToggleIcons() {
     const isDark = document.documentElement.classList.contains('dark');
@@ -3494,53 +3293,15 @@
     if (oldLabel) oldLabel.innerText = isDark ? 'Dark Theme' : 'Light Theme';
   }
 
-  function syncSidebarCollapseState(isCollapsed) {
-    const icon = document.getElementById('sidebarCollapseIcon');
-    if (icon) {
-      icon.innerText = isCollapsed ? 'keyboard_double_arrow_right' : 'keyboard_double_arrow_left';
-    }
-    const btn = document.getElementById('sidebarCollapseBtn');
-    if (btn) {
-      btn.setAttribute('title', isCollapsed ? 'Expand Menu (245px)' : 'Collapse Menu (64px slim rail)');
-    }
-  }
-
-  // Responsive Sidebar Toggle
-  window.toggleSidebar = function () {
-    if (window.innerWidth < 768) {
-      document.body.classList.toggle('sidebar-mobile-open');
-    } else {
-      const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
-      syncSidebarCollapseState(isCollapsed);
-      try {
-        localStorage.setItem('olf_sidebar_collapsed', isCollapsed ? '1' : '0');
-      } catch (e) { }
-    }
-  };
-
-  // Submenu toggle (if sidebar is collapsed, clicking an item expands it)
-  window.toggleSubmenu = function (submenuId, chevronId) {
-    if (document.body.classList.contains('sidebar-collapsed')) {
-      document.body.classList.remove('sidebar-collapsed');
-      syncSidebarCollapseState(false);
-      try { localStorage.setItem('olf_sidebar_collapsed', '0'); } catch (e) { }
-    }
-    const submenu = document.getElementById(submenuId);
-    const chevron = document.getElementById(chevronId);
-    if (!submenu) return;
-    const isHidden = submenu.classList.contains('hidden');
-    if (isHidden) {
-      submenu.classList.remove('hidden');
-      if (chevron) chevron.classList.add('rotate-180');
-    } else {
-      submenu.classList.add('hidden');
-      if (chevron) chevron.classList.remove('rotate-180');
-    }
-  };
-
-  // Auto-init sidebar collapse state and theme
+  // Auto-highlight active route on page load & apply theme
   (function initSidebar() {
-    const savedTheme = localStorage.getItem('olf_theme') || 'dark';
+    // 1. Theme application (default to dark if not set)
+    let savedTheme = localStorage.getItem('olf_theme');
+    if (!savedTheme) {
+      savedTheme = 'dark';
+      localStorage.setItem('olf_theme', 'dark');
+    }
+
     if (savedTheme === 'light') {
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
@@ -3550,25 +3311,130 @@
     }
     updateThemeToggleIcons();
 
+    // 2. Active route highlighting
+    const p = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    function activate(navId, subId, groupSubId, chevId) {
+      if (navId) {
+        const el = document.getElementById(navId);
+        if (el) el.classList.add('active');
+      }
+      if (subId) {
+        const el = document.getElementById(subId);
+        if (el) el.classList.add('active');
+      }
+      if (groupSubId) {
+        const grp = document.getElementById(groupSubId);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        if (grp && grp.previousElementSibling) {
+          grp.previousElementSibling.classList.add('active');
+        }
+      }
+    }
+
+    if (['/roles','/access','/roles-access'].includes(p)) {
+      activate('nav-access');
+    } else if (p === '/' || p === '/dashboard' || p === '') {
+      activate('nav-dashboard');
+    } else if (p.startsWith('/customers')) {
+      activate('nav-customers');
+    } else if (p.startsWith('/orders') || p.startsWith('/custque')) {
+      if (search.includes('filter=active')) {
+        activate(null, 'sublink-orders-live', 'sub-orders', 'chev-orders');
+      } else {
+        activate(null, 'sublink-orders', 'sub-orders', 'chev-orders');
+      }
+    } else if (p.startsWith('/inactiveoutlets') || search.includes('filter=inactive')) {
+      activate(null, 'sublink-inactive', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/pendingoutlets') || search.includes('filter=pending')) {
+      activate(null, 'sublink-pending', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/prepaidoutlets') || search.includes('filter=prepaid')) {
+      activate(null, 'sublink-prepaid', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/outlet') || p.startsWith('/alloutlets')) {
+      activate(null, 'sublink-outlets', 'sub-outlets', 'chev-outlets');
+    } else if (p.startsWith('/vendors')) {
+      activate('nav-vendors');
+    } else if (p.startsWith('/irctc-logs')) {
+      activate(null, 'sublink-irctc-logs', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/trains')) {
+      activate(null, 'sublink-trains', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/stations')) {
+      activate(null, 'sublink-stations', 'sub-stations', 'chev-stations');
+    } else if (p.startsWith('/menu') || p.startsWith('/itemreq')) {
+      activate('nav-menu');
+    } else if (p.startsWith('/requests')) {
+      activate('nav-requests');
+    } else if (p.startsWith('/invoices') || p.startsWith('/wallet')) {
+      activate('nav-invoices');
+    } else if (p.startsWith('/hr') || p.startsWith('/employees') || p.startsWith('/departments') || p.startsWith('/roles')) {
+      activate('nav-hr');
+    } else if (p.startsWith('/complaints') || p.startsWith('/ratings') || p.startsWith('/fssaiexp')) {
+      activate('nav-complaints');
+    } else if (p.startsWith('/reports') || p.startsWith('/complaint-reports')) {
+      const report = new URLSearchParams(window.location.search).get('report') || '';
+      let reportLink = 'sublink-reports';
+      if (p.startsWith('/complaint-reports') || ['complaints','ratings'].includes(report)) reportLink = 'sublink-complaint-reports';
+      else if (report === 'invoices') reportLink = 'sublink-report-invoices';
+      else if (['wallet-balances','wallet-ledger','vendor-settlements','settlement-exceptions','refunds'].includes(report)) reportLink = 'sublink-report-finance';
+      else if (['compliance','menu-margins','network-health'].includes(report)) reportLink = 'sublink-report-network';
+      else if (['customers','item-sales','payment-mix','channel-performance'].includes(report)) reportLink = 'sublink-report-sales';
+      else if (['employees','attendance','leave-balances','payroll','recruitment'].includes(report)) reportLink = 'sublink-report-people';
+      else if (report && report !== 'daily-sales') reportLink = 'sublink-report-operations';
+      activate(null, reportLink, 'sub-reports', 'chev-reports');
+    } else if (p.startsWith('/settings')) {
+      activate('nav-settings');
+    }
+
+    // Responsive Sidebar Toggle
+    window.toggleSidebar = function() {
+      if (window.innerWidth < 768) {
+        document.body.classList.toggle('sidebar-mobile-open');
+      } else {
+        document.body.classList.toggle('sidebar-collapsed');
+        try {
+          localStorage.setItem('olf_sidebar_collapsed', document.body.classList.contains('sidebar-collapsed') ? '1' : '0');
+        } catch (e) {}
+      }
+    };
+
+    // Submenu Toggle (Auto expands sidebar if currently collapsed)
+    window.toggleSubmenu = function(id, chevId) {
+      if (document.body.classList.contains('sidebar-collapsed')) {
+        toggleSidebar();
+        const grp = document.getElementById(id);
+        if (grp) grp.classList.remove('hidden');
+        const chev = document.getElementById(chevId);
+        if (chev) chev.classList.add('rotate-180');
+        return;
+      }
+      const grp = document.getElementById(id);
+      const chev = document.getElementById(chevId);
+      if (!grp) return;
+      const isHidden = grp.classList.toggle('hidden');
+      if (chev) {
+        if (isHidden) chev.classList.remove('rotate-180');
+        else chev.classList.add('rotate-180');
+      }
+    };
+
     try {
       const savedCollapsed = localStorage.getItem('olf_sidebar_collapsed');
-      if (savedCollapsed === '1' && window.innerWidth >= 768) {
+      if (savedCollapsed === '1') {
         document.body.classList.add('sidebar-collapsed');
-        syncSidebarCollapseState(true);
-      } else {
-        syncSidebarCollapseState(false);
+      } else if (savedCollapsed === null && window.innerWidth >= 768 && window.innerWidth < 1280) {
+        document.body.classList.add('sidebar-collapsed');
       }
-    } catch (e) { }
+    } catch (e) {}
   })();
 </script>
 
   <!-- OTP VERIFICATION MODAL FOR HANDOVER -->
-  <div id="otpModal"
-    class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
-    <div
-      class="bg-[#111622] dark:bg-[#111622] light:bg-white border border-emerald-500/40 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
-      <div
-        class="flex items-center justify-between pb-3 border-b border-white/10 dark:border-white/10 light:border-slate-200">
+  <div id="otpModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#111622] dark:bg-[#111622] light:bg-white border border-emerald-500/40 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10 dark:border-white/10 light:border-slate-200">
         <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
           <span class="material-symbols-outlined text-[20px]">pin</span>
           <span>Passenger Delivery OTP</span>
@@ -3582,22 +3448,19 @@
         <span id="modal-otp-train-info" class="text-[11px] font-mono text-slate-300 block mt-0.5">Train Delivery</span>
       </div>
       <p class="text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">
-        Train stops for only <strong>2 to 5 minutes</strong>. Collect the 4-digit OTP from passenger at coach door to
-        confirm handover:
+        Train stops for only <strong>2 to 5 minutes</strong>. Collect the 4-digit OTP from passenger at coach door to confirm handover:
       </p>
       <div class="space-y-2">
-        <input type="text" id="modal-otp-input" placeholder="e.g. 4821" maxlength="6"
-          class="w-full px-4 py-2.5 rounded-xl bg-black/50 dark:bg-black/50 light:bg-slate-50 border border-emerald-500/60 text-white dark:text-white light:text-slate-900 font-mono text-center text-xl tracking-widest focus:outline-none focus:border-emerald-400" />
+        <input type="text" id="modal-otp-input" placeholder="e.g. 4821" maxlength="6" class="w-full px-4 py-2.5 rounded-xl bg-black/50 dark:bg-black/50 light:bg-slate-50 border border-emerald-500/60 text-white dark:text-white light:text-slate-900 font-mono text-center text-xl tracking-widest focus:outline-none focus:border-emerald-400" />
       </div>
       <div class="flex items-center gap-2 pt-2">
-        <button type="button" onclick="closeOtpModal()"
-          class="flex-1 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold">Cancel</button>
-        <button type="button" onclick="confirmDeliveryWithOtp()"
-          class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-md transition-all">Verify
-          &amp; Deliver</button>
+        <button type="button" onclick="closeOtpModal()" class="flex-1 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold">Cancel</button>
+        <button type="button" onclick="confirmDeliveryWithOtp()" class="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-md transition-all">Verify &amp; Deliver</button>
       </div>
     </div>
   </div>
 </body>
-
 </html>
+
+
+
