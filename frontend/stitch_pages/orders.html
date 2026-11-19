@@ -100,8 +100,8 @@
 
   main.main-viewport {
     margin-left: 245px !important;
-    width: calc(100vw - 245px) !important;
-    max-width: calc(100vw - 245px) !important;
+    width: calc(100% - 245px) !important;
+    max-width: calc(100% - 245px) !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
@@ -114,8 +114,8 @@
 
   body.sidebar-collapsed main.main-viewport {
     margin-left: 0 !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   @media (max-width: 1023px) {
@@ -129,8 +129,8 @@
     }
     main.main-viewport {
       margin-left: 0 !important;
-      width: 100vw !important;
-      max-width: 100vw !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
     #sidebarMobileBackdrop {
       display: none;
@@ -138,6 +138,127 @@
     body.sidebar-mobile-open #sidebarMobileBackdrop {
       display: block !important;
     }
+  }
+
+  /* ========================================================================= */
+  /* PINNED / STICKY TABLE COLUMNS & DISTINCT SCROLLBAR                        */
+  /* ========================================================================= */
+  .table-sticky-left {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 15 !important;
+  }
+  .table-sticky-right {
+    position: sticky !important;
+    right: 0 !important;
+    z-index: 15 !important;
+  }
+  th.table-sticky-left, th.table-sticky-right {
+    z-index: 25 !important;
+  }
+  html.light .table-sticky-left {
+    background-color: #FFFFFF !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+  html.light tr:hover .table-sticky-left {
+    background-color: #F8FAFC !important;
+  }
+  html.light th.table-sticky-left {
+    background-color: #F1F5F9 !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+  html.light .table-sticky-right {
+    background-color: #FFFFFF !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+  html.light tr:hover .table-sticky-right {
+    background-color: #F8FAFC !important;
+  }
+  html.light th.table-sticky-right {
+    background-color: #F1F5F9 !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  html.dark .table-sticky-left {
+    background-color: #111622 !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark tr:hover .table-sticky-left {
+    background-color: #171F30 !important;
+  }
+  html.dark th.table-sticky-left {
+    background-color: #0E131E !important;
+    box-shadow: 4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark .table-sticky-right {
+    background-color: #111622 !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark tr:hover .table-sticky-right {
+    background-color: #171F30 !important;
+  }
+  html.dark th.table-sticky-right {
+    background-color: #0E131E !important;
+    box-shadow: -4px 0 10px -2px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Support delayed/late row background on sticky cells */
+  html.light tr.is-late-row .table-sticky-left,
+  html.light tr.is-late-row .table-sticky-right {
+    background-color: #FEF3C7 !important;
+  }
+  html.light tr.is-late-row:hover .table-sticky-left,
+  html.light tr.is-late-row:hover .table-sticky-right {
+    background-color: #FDE68A !important;
+  }
+  html.dark tr.is-late-row .table-sticky-left,
+  html.dark tr.is-late-row .table-sticky-right {
+    background-color: #241A08 !important;
+  }
+  html.dark tr.is-late-row:hover .table-sticky-left,
+  html.dark tr.is-late-row:hover .table-sticky-right {
+    background-color: #33230A !important;
+  }
+
+  /* Match Today's Closed Section Card Background */
+  html.dark #today-closed-section .table-sticky-left,
+  html.dark #today-closed-section .table-sticky-right {
+    background-color: #0B0F17 !important;
+  }
+  html.dark #today-closed-section tr:hover .table-sticky-left,
+  html.dark #today-closed-section tr:hover .table-sticky-right {
+    background-color: #171F30 !important;
+  }
+
+  /* High-Contrast Smooth Horizontal Scrollbar */
+  .custom-table-scroll {
+    overflow-x: auto !important;
+    scrollbar-width: thin !important;
+  }
+  .custom-table-scroll::-webkit-scrollbar {
+    height: 9px !important;
+  }
+  html.light .custom-table-scroll::-webkit-scrollbar-track {
+    background: #F1F5F9 !important;
+    border-radius: 4px;
+  }
+  html.light .custom-table-scroll::-webkit-scrollbar-thumb {
+    background: #94A3B8 !important;
+    border-radius: 4px;
+  }
+  html.light .custom-table-scroll::-webkit-scrollbar-thumb:hover {
+    background: #64748B !important;
+  }
+  html.dark .custom-table-scroll::-webkit-scrollbar-track {
+    background: #0B0F17 !important;
+    border-radius: 4px;
+  }
+  html.dark .custom-table-scroll::-webkit-scrollbar-thumb {
+    background: #334155 !important;
+    border-radius: 4px;
+  }
+  html.dark .custom-table-scroll::-webkit-scrollbar-thumb:hover {
+    background: #475569 !important;
   }
 
   /* ========================================================================= */
@@ -1338,8 +1459,8 @@
       <!-- ORDERS HIGH-DENSITY DATA TABLE -->
       <div class="card-glow rounded-xl bg-[#111622] dark:bg-[#111622] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 overflow-hidden">
         <!-- INTEGRATED RAILWAY DISPATCH TELEMETRY STRIP -->
-        <div id="active-orders-banner" class="px-4 py-2.5 bg-slate-50 dark:bg-white/[0.02] border-b border-slate-200 dark:border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs select-none">
-          <div class="flex items-center gap-3 overflow-x-auto pb-1 lg:pb-0 text-[11px]">
+        <div id="active-orders-banner" class="px-4 py-2.5 bg-slate-50 dark:bg-white/[0.02] border-b border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-2.5 text-xs select-none">
+          <div class="flex items-center gap-3 overflow-x-auto pb-1 lg:pb-0 text-[11px] flex-wrap sm:flex-nowrap">
             <div class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-100 shrink-0">
               <span class="w-6 h-6 rounded-md bg-[#FF7A00]/15 text-[#FF7A00] flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-[15px]">train</span>
@@ -1384,7 +1505,7 @@
           </div>
 
           <!-- Right Status Info -->
-          <div class="flex items-center gap-2.5 shrink-0 text-[11px]">
+          <div class="flex items-center gap-2.5 shrink-0 text-[11px] ml-auto">
             <span class="radar-in-flight-badge">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
               <span id="radar-total-active">45</span> In-Flight
@@ -1393,18 +1514,18 @@
           </div>
         </div>
 
-        <div class="overflow-x-auto w-full">
+        <div class="custom-table-scroll w-full">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <th class="py-3 px-3 sm:px-4 min-w-[120px]">Order ID &amp; PNR</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[130px]">Customer</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[185px]">Train &amp; Delivery</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[175px]">Meal Items</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[105px]">Amount &amp; Mode</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[135px]">Status &amp; Stage</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[125px]">Outlet</th>
-                <th class="py-3 px-3 sm:px-4 min-w-[115px] text-right">Actions</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px] table-sticky-left">Order ID &amp; PNR</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Customer</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[155px]">Train &amp; Delivery</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[145px]">Meal Items</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[90px]">Amount &amp; Mode</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[120px]">Status &amp; Stage</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Outlet</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px] text-right table-sticky-right">Actions</th>
               </tr>
             </thead>
             <tbody id="orders-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
@@ -1460,18 +1581,18 @@
         </div>
 
         <!-- Table -->
-        <div class="overflow-x-auto w-full">
+        <div class="custom-table-scroll w-full">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-black/30 dark:bg-black/30 light:bg-slate-100/75 border-b border-white/10 dark:border-white/10 light:border-slate-200 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                <th class="py-2.5 px-3 sm:px-4 min-w-[120px]">Order ID &amp; PNR</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[130px]">Customer</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[185px]">Train &amp; Delivery</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[170px]">Meal Items</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[105px]">Amount &amp; Mode</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[130px]">Final Status</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[120px]">Outlet</th>
-                <th class="py-2.5 px-3 sm:px-4 min-w-[75px] text-right">Details</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[105px] table-sticky-left">Order ID &amp; PNR</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Customer</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[155px]">Train &amp; Delivery</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[145px]">Meal Items</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[90px]">Amount &amp; Mode</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[115px]">Final Status</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[110px]">Outlet</th>
+                <th class="py-2.5 px-2.5 sm:px-3 min-w-[75px] text-right table-sticky-right">Details</th>
               </tr>
             </thead>
             <tbody id="today-closed-table-body" class="divide-y divide-white/5 dark:divide-white/5 light:divide-slate-200">
@@ -2307,20 +2428,22 @@
         const trainNum = delDetails.trainNo || delDetails.trainNumber || '';
         const trainNm = delDetails.trainName || 'Express';
         const trainBlock = `
-          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 whitespace-nowrap">
-            ${trainNum ? `<span class="px-1.5 py-0.5 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[11px] font-bold shrink-0">${trainNum}</span>` : ''}
-            <span class="truncate font-semibold text-xs text-slate-800 dark:text-slate-100 max-w-[160px]" title="${trainNm}">${trainNm}</span>
+          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1 whitespace-nowrap">
+            ${trainNum ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[10px] font-bold shrink-0">${trainNum}</span>` : ''}
+            <span class="truncate font-semibold text-xs text-slate-800 dark:text-slate-100 max-w-[115px]" title="${trainNm}">${trainNm}</span>
           </div>
-          <div class="mt-1 flex items-center gap-2 flex-wrap">
-            <span class="coach-berth-badge px-2 py-0.5 rounded text-[11px]">
-              Coach ${delDetails.coach || 'B1'} &bull; Berth ${delDetails.berth || '42'}
-            </span>
-            <span class="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
-              ${row.station_name || delDetails.station || 'Station'} <strong class="text-amber-500 dark:text-amber-400 font-mono font-bold">(${row.station_code || delDetails.stationCode || 'STN'})</strong>
-            </span>
+          <div class="mt-0.5 space-y-0.5">
+            <div class="flex items-center gap-1 flex-wrap">
+              <span class="coach-berth-badge px-1.5 py-0.2 rounded text-[10px]">
+                Coach ${delDetails.coach || 'B1'} &bull; Berth ${delDetails.berth || '42'}
+              </span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                <strong class="text-amber-500 dark:text-amber-400 font-mono font-bold">(${row.station_code || delDetails.stationCode || 'STN'})</strong>
+              </span>
+            </div>
             ${isLate ? `
-              <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-mono whitespace-nowrap">
-                <span class="material-symbols-outlined text-[11px]">warning</span> Late by ${eta.delayInMinutes}m (${eta.scheduledArrival} &rarr; ${eta.estimatedArrival}) &bull; PF ${eta.platformNumber || '1'}
+              <span class="inline-flex items-center gap-0.5 px-1 py-0.2 rounded text-[9px] font-bold bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-mono whitespace-nowrap">
+                <span class="material-symbols-outlined text-[10px]">warning</span> Late ${eta.delayInMinutes}m &bull; PF ${eta.platformNumber || '1'}
               </span>
             ` : ''}
           </div>
@@ -2387,34 +2510,34 @@
         let actionButtons = '';
         if (statusKey === 'ORDER_CONFIRMED') {
           actionButtons = `
-            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_PREPARING')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-sm flex items-center gap-1 transition-all" title="Cutoff Reached: Send to Kitchen for Cooking">
-              <span class="material-symbols-outlined text-[13px]">skillet</span> Cook
+            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_PREPARING')" class="px-2 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Cutoff Reached: Send to Kitchen for Cooking">
+              <span class="material-symbols-outlined text-[12px]">skillet</span> Cook
             </button>
           `;
         } else if (statusKey === 'ORDER_PREPARING') {
           actionButtons = `
-            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_OUT_FOR_DELIVERY')" class="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] shadow-sm flex items-center gap-1 transition-all" title="Food Packed: Dispatch Rider to Station Platform">
-              <span class="material-symbols-outlined text-[13px]">moped</span> Dispatch
+            <button onclick="advanceOrderStatus('${row.oid}', 'ORDER_OUT_FOR_DELIVERY')" class="px-2 py-0.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Food Packed: Dispatch Rider to Station Platform">
+              <span class="material-symbols-outlined text-[12px]">moped</span> Dispatch
             </button>
           `;
         } else if (statusKey === 'ORDER_OUT_FOR_DELIVERY') {
           actionButtons = `
-            <button onclick="openOtpModal('${row.oid}')" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-[#FF7A00] hover:brightness-110 text-white font-bold text-[11px] shadow-sm flex items-center gap-1 transition-all" title="Train Halt: Collect Delivery OTP from Passenger">
-              <span class="material-symbols-outlined text-[13px]">pin</span> Verify OTP
+            <button onclick="openOtpModal('${row.oid}')" class="px-2 py-0.5 rounded-lg bg-gradient-to-r from-amber-500 to-[#FF7A00] hover:brightness-110 text-white font-bold text-[10px] shadow-sm flex items-center gap-1 transition-all" title="Train Halt: Collect Delivery OTP from Passenger">
+              <span class="material-symbols-outlined text-[12px]">pin</span> Verify OTP
             </button>
           `;
         } else if (statusKey === 'ORDER_DELIVERED' || statusKey === 'COMPLETED') {
           actionButtons = `
-            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1 px-1.5 py-0.5">
-              <span class="material-symbols-outlined text-[13px]">check_circle</span> Delivered
+            <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1 px-1 py-0.5">
+              <span class="material-symbols-outlined text-[12px]">check_circle</span> Delivered
             </span>
           `;
         }
 
         html += `
-          <tr class="${isLate ? 'bg-amber-500/10 dark:bg-amber-950/25 hover:bg-amber-500/15 dark:hover:bg-amber-950/35 border-l-4 border-l-amber-500 transition-colors cursor-pointer group' : 'hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group'}" onclick="openOrderDrawer('${row.oid}')">
+          <tr class="${isLate ? 'is-late-row bg-amber-500/10 dark:bg-amber-950/25 hover:bg-amber-500/15 dark:hover:bg-amber-950/35 border-l-4 border-l-amber-500 transition-colors cursor-pointer group' : 'hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group'}" onclick="openOrderDrawer('${row.oid}')">
             <!-- Order ID & PNR -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[120px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[105px] font-mono font-bold text-[#FF7A00] group-hover:underline table-sticky-left">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span>#${row.oid}</span>
                 ${isLate ? '<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 whitespace-nowrap animate-pulse">⚠️ DELAYED</span>' : ''}
@@ -2425,48 +2548,48 @@
             </td>
 
             <!-- Customer -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[130px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[110px]">
               ${customerBlock}
             </td>
 
             <!-- Train & Delivery -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[185px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[145px]">
               ${trainBlock}
             </td>
 
             <!-- Items -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[175px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[125px]">
               <div class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full ${isVeg ? 'bg-emerald-500 ring-2 ring-emerald-500/20' : 'bg-rose-500 ring-2 ring-rose-500/20'} shrink-0" title="${isVeg ? 'Vegetarian' : 'Non-Vegetarian'}"></span>
-                <span class="truncate max-w-[175px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
+                <span class="truncate max-w-[110px] text-xs font-medium text-slate-800 dark:text-slate-200" title="${itemsDisplay}">${itemsDisplay}</span>
               </div>
             </td>
 
             <!-- Amount -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[105px] font-mono font-semibold text-slate-900 dark:text-white">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[85px] font-mono font-semibold text-slate-900 dark:text-white">
               <div class="text-xs">${totalPrice}</div>
               <div class="mt-0.5">${modeBadge}</div>
             </td>
 
             <!-- Status -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[135px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[115px]">
               ${statusBadgeHtml}
             </td>
 
             <!-- Outlet -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[125px] text-slate-700 dark:text-slate-300">
-              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[125px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
+            <td class="py-2 px-2.5 sm:px-3 min-w-[100px] text-slate-700 dark:text-slate-300">
+              <a href="${row.outlet_id ? '/outlet/' + row.outlet_id : '#'}" onclick="event.stopPropagation();" class="font-semibold text-xs text-slate-900 dark:text-white hover:text-[#FF7A00] dark:hover:text-[#FF7A00] transition-colors truncate max-w-[95px] block" title="Open Outlet Cockpit (${row.outlet_name || 'Kitchen Partner'})">${row.outlet_name || 'Kitchen Partner'}</a>
               <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-0.5 mt-0.5">
                 <span class="material-symbols-outlined text-[12px]">verified</span> IRCTC Outlet
               </div>
             </td>
 
             <!-- Actions -->
-            <td class="py-2.5 px-3 sm:px-4 min-w-[115px] text-right" onclick="event.stopPropagation()">
-              <div class="flex items-center justify-end gap-1.5">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[100px] text-right table-sticky-right" onclick="event.stopPropagation()">
+              <div class="flex items-center justify-end gap-1">
                 ${actionButtons}
-                <button onclick="openOrderDrawer('${row.oid}')" class="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors" title="View Order Details">
-                  <span class="material-symbols-outlined text-[18px]">visibility</span>
+                <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors" title="View Order Details">
+                  <span class="material-symbols-outlined text-[16px]">visibility</span>
                 </button>
               </div>
             </td>
@@ -2608,17 +2731,17 @@
 
         return `
           <tr class="hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-slate-50 transition-colors cursor-pointer group" onclick="openOrderDrawer('${row.oid}')">
-            <td class="py-2.5 px-3 sm:px-4 min-w-[120px] font-mono font-bold text-[#FF7A00] group-hover:underline">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[105px] font-mono font-bold text-[#FF7A00] group-hover:underline table-sticky-left">
               <div>#${row.oid}</div>
               <div class="text-[10px] font-sans text-slate-500 font-normal mt-0.5">
                 PNR: <strong class="text-slate-700 dark:text-slate-300 font-mono">${Admin.esc(delDetails.pnr || '---')}</strong>
               </div>
             </td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[130px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[110px]">
               <div class="font-semibold text-slate-900 dark:text-slate-200 text-xs">${Admin.esc(custDetails.fullName || 'Passenger')}</div>
               <div class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">${Admin.esc(custDetails.mobile || '---')}</div>
             </td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[185px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[155px]">
               <div class="font-bold text-slate-900 dark:text-slate-200 text-xs flex items-center gap-1.5">
                 ${trainNum ? `<span class="px-1.5 py-0.2 rounded bg-[#FF7A00]/10 text-[#FF7A00] font-mono text-[10px]">${trainNum}</span>` : ''}
                 <span class="truncate">${Admin.esc(trainNm)}</span>
@@ -2627,17 +2750,17 @@
                 Coach ${Admin.esc(delDetails.coach || 'B1')}, Berth ${Admin.esc(delDetails.berth || '42')} &bull; <strong class="text-amber-500 dark:text-amber-400 font-mono">${Admin.esc(row.station_code || delDetails.stationCode || 'STN')}</strong>
               </div>
             </td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[170px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[105px] font-mono text-xs">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[145px] text-slate-700 dark:text-slate-300 text-xs">${itemsDisplay}</td>
+            <td class="py-2 px-2.5 sm:px-3 min-w-[90px] font-mono text-xs">
               <span class="font-bold text-slate-900 dark:text-white">${totalPrice}</span>
               ${modeBadge}
             </td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[130px]">${finalStatusHtml}</td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[120px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[140px]">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[115px]">${finalStatusHtml}</td>
+            <td class="py-2 px-2.5 sm:px-3 min-w-[110px] text-slate-700 dark:text-slate-300 text-xs truncate max-w-[140px]">
               <div class="font-medium truncate">${Admin.esc(row.outlet_name || 'Outlet #' + row.outlet_id)}</div>
               <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">${Admin.esc(row.station_name || delDetails.station || '')}</div>
             </td>
-            <td class="py-2.5 px-3 sm:px-4 min-w-[75px] text-right" onclick="event.stopPropagation()">
+            <td class="py-2 px-2.5 sm:px-3 min-w-[75px] text-right table-sticky-right" onclick="event.stopPropagation()">
               <button onclick="openOrderDrawer('${row.oid}')" class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors" title="View Order Inspection">
                 <span class="material-symbols-outlined text-[18px]">visibility</span>
               </button>
@@ -3157,7 +3280,8 @@
     };
 
     try {
-      if (localStorage.getItem('olf_sidebar_collapsed') === '1' && window.innerWidth >= 1024) {
+      const savedCollapsed = localStorage.getItem('olf_sidebar_collapsed');
+      if (savedCollapsed === '1' || (savedCollapsed === null && window.innerWidth >= 1024 && window.innerWidth < 1280)) {
         document.body.classList.add('sidebar-collapsed');
       }
     } catch (e) {}
