@@ -114,6 +114,39 @@ export const usersDBPool:Pool=new Proxy(systemDBPool,{get(target,key){
 }});
 logger.info("DB Connection Pool: Success", 'DB CONN POOL');
 
+function tryRevivePostgresIfLocal(err: any): boolean {
+    if (process.platform !== 'linux') return false;
+    const msg = String(err?.message || err || '');
+    const code = err?.code;
+    if (code !== 'ECONNREFUSED' && !msg.includes('ECONNREFUSED') && !msg.includes('54321')) {
+        return false;
+    }
+    const host = (process.env.SQL_DB_HOST_IP || '').trim();
+    if (host !== '/tmp' && host !== 'localhost' && host !== '127.0.0.1') return false;
+
+    try {
+        const fs = require('fs');
+        const path = require('path');
+        const { execSync } = require('child_process');
+        const homeDir = process.env.HOME || '/home/u863663439';
+        let pgCtl = path.join(homeDir, 'domains/olf.technomantra.in/hbuilds/current/nodejs/node_modules/@embedded-postgres/linux-x64/native/bin/pg_ctl');
+        if (!fs.existsSync(pgCtl)) {
+            pgCtl = path.join(homeDir, 'domains/olf.technomantra.in/hbuilds/versions/olf-admin-20261104-release/nodejs/node_modules/@embedded-postgres/linux-x64/native/bin/pg_ctl');
+        }
+        const dataDir = path.join(homeDir, 'data/postgres');
+        if (fs.existsSync(pgCtl) && fs.existsSync(dataDir)) {
+            console.log('[WATCHDOG-RECOVERY] Detected ECONNREFUSED in DB layer. Auto-reviving PostgreSQL...');
+            try { execSync(`rm -f /tmp/.s.PGSQL.54321* "${path.join(dataDir, 'postmaster.pid')}"`, { stdio: 'ignore' }); } catch (_) {}
+            execSync(`"${pgCtl}" -D "${dataDir}" -o "-p 54321 -k /tmp" -l "${dataDir}/pg.log" start`, { stdio: 'ignore' });
+            console.log('[WATCHDOG-RECOVERY] PostgreSQL restarted successfully by DB layer.');
+            return true;
+        }
+    } catch (e: any) {
+        console.error('[WATCHDOG-RECOVERY] Failed to auto-revive postgres:', e.message);
+    }
+    return false;
+}
+
 export default class SQLMaster {
     autoCommit = true;
 
@@ -146,7 +179,31 @@ export default class SQLMaster {
 
             queryModel.tat = (new Date().getTime() - startMS) / 1000;
             return queryModel;
-        } catch (err) {
+        } catch (err: any) {
+            if (tryRevivePostgresIfLocal(err)) {
+                try {
+                    await new Promise((resolve) => setTimeout(resolve, 600));
+                    const retryResult = await usersDBPool.query(query, args);
+                    queryModel.status = Constants.SUCCESS;
+                    queryModel.info = "SUCCESS (AUTO-RECOVERED)";
+                    queryModel.command = retryResult.command;
+                    queryModel.oid = retryResult.oid;
+                    if (Array.isArray(retryResult.rows)) {
+                        queryModel.rowCount = retryResult.rowCount;
+                        queryModel.rows = retryResult.rows;
+                        if (query.trim().toUpperCase().startsWith("INSERT")) {
+                            queryModel.insertId = retryResult.rows?.[0]?.id ?? null;
+                            if (queryModel.insertId !== null) queryModel.info += `: Inserted Row ID: ${queryModel.insertId}`;
+                        }
+                        queryModel.info += `: Fetched Rows: ${queryModel.rowCount}`;
+                    }
+                    queryModel.tat = (new Date().getTime() - startMS) / 1000;
+                    return queryModel;
+                } catch (retryErr: any) {
+                    err = retryErr;
+                }
+            }
+
             const errorCode = err.code;
             const errorMessage = err.message;
             logger.error(`DB: ERROR on query: ${query} - Error Code: ${errorCode}, Message: ${errorMessage}`, 'SQLMaster : executeQuery');

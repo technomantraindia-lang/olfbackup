@@ -76,29 +76,20 @@ class App {
       if (fs.existsSync(pgCtl) && fs.existsSync(dataDir)) {
         try {
           const { execSync } = require('child_process');
+          let isRunning = false;
           try {
             execSync(`"${pgCtl}" -D "${dataDir}" status`, { stdio: 'ignore' });
+            isRunning = true;
           } catch {
-            console.log('[WATCHDOG] PostgreSQL daemon down, auto-starting...');
+            isRunning = false;
+          }
+
+          if (!isRunning) {
+            console.log('[WATCHDOG] PostgreSQL daemon down, cleaning stale locks and auto-starting...');
             const pidFile = path.join(dataDir, 'postmaster.pid');
-            if (fs.existsSync(pidFile)) {
-              try {
-                const pidContent = fs.readFileSync(pidFile, 'utf8');
-                const pid = parseInt(pidContent.split('\n')[0].trim(), 10);
-                if (pid) {
-                  try {
-                    process.kill(pid, 0);
-                  } catch (e: any) {
-                    if (e.code === 'ESRCH') {
-                      console.log('[WATCHDOG] Removing stale postmaster.pid (dead pid ' + pid + ')');
-                      fs.unlinkSync(pidFile);
-                    }
-                  }
-                }
-              } catch (err: any) {
-                console.error('[WATCHDOG] Error checking pid file:', err.message);
-              }
-            }
+            try {
+              execSync(`rm -f /tmp/.s.PGSQL.54321* "${pidFile}"`, { stdio: 'ignore' });
+            } catch (_) {}
             execSync(`"${pgCtl}" -D "${dataDir}" -o "-p 54321 -k /tmp" -l "${dataDir}/pg.log" start`, { stdio: 'ignore' });
             console.log('[WATCHDOG] PostgreSQL daemon started successfully.');
           }
