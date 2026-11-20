@@ -7,6 +7,7 @@ import path from "path";
 import cron from 'node-cron';
 import compression from 'compression';
 import { runComplaintReminders } from './utils/complaint-reminders';
+import { fssaiReminderService } from './services/fssai-reminder.service';
 import { usersDBPool, systemDBPool } from "./database/postgres.database";
 import { AuthRoutes } from "./routes/auth.routes";
 import { CronRoutes } from "./routes/cron.routes";
@@ -287,6 +288,14 @@ class App {
     // Runs even when the other scheduled jobs are off; it does nothing unless COMPLAINT_ALERT_EMAIL is set.
     cron.schedule('*/30 * * * *', () => {
       runComplaintReminders().catch(error => console.error('[complaint reminders] failed:', error?.message || error));
+    });
+
+    // FSSAI 60-Day Expiry Auto-Alert: Runs daily at 09:00 AM IST.
+    cron.schedule('0 9 * * *', () => {
+      fssaiReminderService.runDailyFssaiCheck().catch(error => console.error('[FSSAI cron] failed:', error?.message || error));
+    }, {
+      scheduled: true,
+      timezone: "Asia/Kolkata"
     });
 
     // Separate admin deployments can use the existing backend's scheduler.

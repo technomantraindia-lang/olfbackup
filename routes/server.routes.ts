@@ -39,6 +39,7 @@ import { BlogsController } from "../controllers/v1/blogs.controller";
 import { UploadController } from "../controllers/v1/api/upload.controller";
 import { OcrController } from "../controllers/v1/api/ocr.controller";
 import { InvoicesController } from "../controllers/v1/api/invoices/invoices.controller";
+import { FssaiReminderController } from "../controllers/v1/api/restraunts/fssai-reminder.controller";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -104,6 +105,7 @@ export class Routes {
     const uploadController = new UploadController();
     const ocrController = new OcrController();
     const accessController=new AccessController();
+    const fssaiReminderController = new FssaiReminderController();
     this.router.get('/access/catalog',accessController.catalog);
     this.router.post('/access/roles',accessController.role);
     this.router.put('/access/roles/:id',accessController.role);
@@ -122,6 +124,11 @@ export class Routes {
     //     this.router.post(`/restraunt/:stationCode`,  restrauntsController.pushOutletToIRCTC);
     //     this.router.put(`/restraunt/:id`,  restrauntsController.updateRestraunt);
     //     this.router.delete(`/restraunt/:id`,restrauntsController.deleteRestraunt);
+
+    // FSSAI Expiration Reminders (60-day Auto-Alert & Manual Trigger)
+    this.router.get('/outlets/fssai/expiring', fssaiReminderController.getExpiringOutlets);
+    this.router.post('/outlets/fssai/trigger-daily', fssaiReminderController.triggerDailyBatch);
+    this.router.post('/outlets/:outletId/fssai-reminder', fssaiReminderController.sendManualReminder);
     //     this.router.post('/restraunt/push-all/:stationCode', restrauntsController.pushAllOutletsToIRCTC);
 
     // this.router.post(`/restraunt/:stationCode`, restrauntsController.pushOutletToIRCTC);
