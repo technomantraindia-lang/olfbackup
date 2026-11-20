@@ -90,7 +90,7 @@ async function deploy(archiveFile) {
     host: '145.79.210.68',
     port: 65002,
     username: 'u863663439',
-    password: 'Rashmi@saha1988'
+    password: 'Olf@2026'
   });
 }
 
