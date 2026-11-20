@@ -367,7 +367,7 @@ export class InvoicesModel extends MasterModel {
 
     try {
       // Total number of all active outlets, independent of any dashboard filters
-      const query = `SELECT COUNT(*)::int as total_outlets FROM restraunts.restraunt_master WHERE status = 1`;
+      const query = `SELECT COUNT(*)::int as total_outlets FROM restraunts.restraunt_master WHERE status = 1 AND (verified = 1 OR verified IS NULL) AND verified != 0`;
       const queryModel = await this.sql.executeQuery(query, []);
 
       if (queryModel.status === Constants.SUCCESS && queryModel.rows.length > 0) {

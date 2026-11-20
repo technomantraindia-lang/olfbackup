@@ -18,8 +18,9 @@ export class StationsModel extends MasterModel {
                 COALESCE(ARRAY_AGG(r.outlet_name) FILTER (WHERE r.outlet_name IS NOT NULL), '{}') AS outlet_names,
                 COUNT(r.outlet_id) AS outlet_count,
                 COUNT(r.outlet_id) AS total_outlets,
-                SUM(CASE WHEN r.status = 1 THEN 1 ELSE 0 END) AS active_outlets,
-                SUM(CASE WHEN r.status = 2 THEN 1 ELSE 0 END) AS inactive_outlets,
+                SUM(CASE WHEN r.status = 1 AND (r.verified = 1 OR r.verified IS NULL) AND r.verified != 0 THEN 1 ELSE 0 END) AS active_outlets,
+                SUM(CASE WHEN (r.status != 1 OR r.status IS NULL OR r.verified = 2) AND r.verified != 0 THEN 1 ELSE 0 END) AS inactive_outlets,
+                SUM(CASE WHEN r.verified = 0 THEN 1 ELSE 0 END) AS pending_outlets,
                 SUM(CASE WHEN r.status = 0 THEN 1 ELSE 0 END) AS closed_outlets
             FROM 
                 stations.stations_master s

@@ -153,7 +153,7 @@ export class TrainsController extends MasterController {
                 SELECT UPPER(station_code) as station_code, COUNT(*)::int as outlet_count,
                        ARRAY_AGG(outlet_name) as outlet_names
                 FROM restraunts.restraunt_master
-                WHERE status = 1 AND station_code IS NOT NULL
+                WHERE status = 1 AND (verified = 1 OR verified IS NULL) AND verified != 0 AND station_code IS NOT NULL
                 GROUP BY UPPER(station_code)
             `);
             const outletMap = new Map<string, { count: number; names: string[] }>();

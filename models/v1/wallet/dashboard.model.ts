@@ -178,11 +178,12 @@ export class DashboardModel extends MasterModel {
             /* ── 3. Outlet network lifecycle ───────────────────────────────── */
             const outlets = await this.safe("outlets", async () => {
                 const r = await this.one(`
-                    SELECT COUNT(*) FILTER (WHERE status != 3)::int AS total,
-                           COUNT(*) FILTER (WHERE status = 1)::int AS active,
-                           COUNT(*) FILTER (WHERE status = 0)::int AS inactive,
+                    SELECT COUNT(*)::int AS total,
+                           COUNT(*) FILTER (WHERE status = 1 AND (verified = 1 OR verified IS NULL) AND verified != 0)::int AS active,
+                           COUNT(*) FILTER (WHERE (status != 1 OR status IS NULL OR verified = 2) AND verified != 0)::int AS inactive,
+                           COUNT(*) FILTER (WHERE verified = 0)::int AS pending,
                            COUNT(*) FILTER (WHERE status = 3)::int AS deleted,
-                           COUNT(*) FILTER (WHERE closing_period IS NOT NULL AND status != 3)::int AS scheduled_close
+                           COUNT(*) FILTER (WHERE closing_period IS NOT NULL)::int AS scheduled_close
                     FROM restraunts.restraunt_master`);
                 const compliance = await this.safe('compliance',()=>this.one(`
                     SELECT COUNT(*) FILTER (WHERE status = 1 AND (fssai IS NULL OR fssai <= 0))::int AS missing,
@@ -198,13 +199,14 @@ export class DashboardModel extends MasterModel {
                 const active = int(r.active);
                 return {
                     totalOutlets: int(r.total), activeOutlets: active, inactiveOutlets: int(r.inactive),
+                    pendingOutlets: int(r.pending),
                     deletedOutlets: int(r.deleted), scheduledCloseOutlets: int(r.scheduled_close),
                     outletsWithOrders: int(withOrders.with_orders), stationsServed: int(withOrders.stations_served),
                     silentActiveOutlets: Math.max(0, active - int(withOrders.with_orders)),
                     complianceAvailable: compliance !== null,
                     complianceMissing: compliance ? int(compliance.missing) : null, complianceExpired: compliance ? int(compliance.expired) : null, complianceDueSoon: compliance ? int(compliance.due_soon) : null,
                 };
-            }, { totalOutlets: 0, activeOutlets: 0, inactiveOutlets: 0, deletedOutlets: 0, scheduledCloseOutlets: 0, outletsWithOrders: 0, stationsServed: 0, silentActiveOutlets: 0, complianceAvailable: false, complianceMissing: null, complianceExpired: null, complianceDueSoon: null });
+            }, { totalOutlets: 0, activeOutlets: 0, inactiveOutlets: 0, pendingOutlets: 0, deletedOutlets: 0, scheduledCloseOutlets: 0, outletsWithOrders: 0, stationsServed: 0, silentActiveOutlets: 0, complianceAvailable: false, complianceMissing: null, complianceExpired: null, complianceDueSoon: null });
 
             const stationCount = await this.safe("stations-count",
                 async () => int((await this.one(`SELECT COUNT(*)::int AS c FROM stations.stations_master`)).c), 0);
@@ -390,6 +392,7 @@ export class DashboardModel extends MasterModel {
                     totalOrders: totals.totalOrders, revenue: totals.revenue, customers: totals.customers,
                     activeRestaurants: outlets.activeOutlets, inactiveRestaurants: outlets.inactiveOutlets,
                     totalOutlets: outlets.totalOutlets, activeOutlets: outlets.activeOutlets, inactiveOutlets: outlets.inactiveOutlets,
+                    pendingOutlets: outlets.pendingOutlets,
                     scheduledCloseOutlets: outlets.scheduledCloseOutlets, deletedOutlets: outlets.deletedOutlets,
                     ordersReceivedToday: totals.today.orders,
                     topComplaintsByRestaurant: complaints.topOutlets[0] || "No complaints recorded",
