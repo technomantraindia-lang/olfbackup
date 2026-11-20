@@ -54,8 +54,11 @@ const dbConfig = {
     user: process.env.SQL_DB_USER,
     password: process.env.SQL_DB_PASSWORD,
     max: 20,
-    idleTimeoutMillis: 30000,
+    min: 2,
+    idleTimeoutMillis: 600000,
     connectionTimeoutMillis: 10000,
+    keepAlive: true,
+    keepAliveInitialDelayMillis: 10000,
     ...(dbSsl ? { ssl: dbSsl } : {}),
 };
 

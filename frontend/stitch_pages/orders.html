@@ -2049,47 +2049,58 @@
         const bounds = getDateBounds(currentDateRange);
 
         let statsUrl = '/api/v1/orders/stats';
-        let ordersUrl = '/api/v1/orders?limit=300';
+        let ordersUrl = '/api/v1/orders?limit=150';
         
         if (bounds) {
           const qs = `start_date=${encodeURIComponent(bounds.startDate)}&end_date=${encodeURIComponent(bounds.endDate)}`;
           statsUrl += `?${qs}`;
-          ordersUrl = `/api/v1/orders?${qs}&limit=500`;
-        }
-
-        const statsPromise = fetch(statsUrl).then(r => r.json()).catch(() => null);
-        const mainOrdersPromise = fetch(ordersUrl).then(r => r.json()).catch(() => null);
-        const activePromise = fetch('/api/v1/orders?status=ORDER_CONFIRMED,ORDER_PREPARING,ORDER_OUT_FOR_DELIVERY,ORDER_PARTIALLY_DELIVERED&limit=200').then(r => r.json()).catch(() => null);
-        const todayPromise = fetch(`/api/v1/orders?start_date=${todayIST}&limit=200`).then(r => r.json()).catch(() => null);
-
-        const [statsJson, mainJson, activeJson, todayJson] = await Promise.all([statsPromise, mainOrdersPromise, activePromise, todayPromise]);
-
-        if (statsJson && statsJson.status === 1) {
-          renderStats(statsJson.data);
-          updateTabCounts(statsJson.data);
+          ordersUrl = `/api/v1/orders?${qs}&limit=250`;
         }
 
         const ordersMap = new Map();
-        if (mainJson && mainJson.data?.rows) {
-          mainJson.data.rows.forEach(r => ordersMap.set(String(r.oid), r));
-        }
-        if (activeJson && activeJson.data?.rows) {
-          activeJson.data.rows.forEach(r => {
-            if (!ordersMap.has(String(r.oid))) ordersMap.set(String(r.oid), r);
-          });
-        }
-        if (todayJson && todayJson.data?.rows) {
-          todayJson.data.rows.forEach(r => {
-            if (!ordersMap.has(String(r.oid))) ordersMap.set(String(r.oid), r);
-          });
-        }
+        let statsData = null;
 
+        const statsPromise = fetch(statsUrl).then(r => r.json()).then(statsJson => {
+          if (statsJson && statsJson.status === 1) {
+            statsData = statsJson.data;
+            renderStats(statsData);
+            updateTabCounts(statsData);
+          }
+          return statsJson;
+        }).catch(() => null);
+
+        const activePromise = fetch('/api/v1/orders?status=ORDER_CONFIRMED,ORDER_PREPARING,ORDER_OUT_FOR_DELIVERY,ORDER_PARTIALLY_DELIVERED&limit=100').then(r => r.json()).then(activeJson => {
+          if (activeJson && activeJson.data?.rows) {
+            activeJson.data.rows.forEach(r => ordersMap.set(String(r.oid), r));
+            allOrders = Array.from(ordersMap.values());
+            if (currentViewMode === 'ACTIVE') applyFilters();
+          }
+          return activeJson;
+        }).catch(() => null);
+
+        const mainOrdersPromise = fetch(ordersUrl).then(r => r.json()).then(mainJson => {
+          if (mainJson && mainJson.data?.rows) {
+            mainJson.data.rows.forEach(r => ordersMap.set(String(r.oid), r));
+            allOrders = Array.from(ordersMap.values());
+            applyFilters();
+          }
+          return mainJson;
+        }).catch(() => null);
+
+        const todayPromise = fetch(`/api/v1/orders?start_date=${todayIST}&limit=100`).then(r => r.json()).then(todayJson => {
+          if (todayJson && todayJson.data?.rows) {
+            todayJson.data.rows.forEach(r => {
+              if (!ordersMap.has(String(r.oid))) ordersMap.set(String(r.oid), r);
+            });
+            allOrders = Array.from(ordersMap.values());
+            applyFilters();
+          }
+          return todayJson;
+        }).catch(() => null);
+
+        await Promise.all([statsPromise, activePromise, mainOrdersPromise, todayPromise]);
         allOrders = Array.from(ordersMap.values());
-        if (statsJson && statsJson.data) {
-          updateTabCounts(statsJson.data);
-        } else {
-          updateTabCounts(null);
-        }
+        updateTabCounts(statsData);
         applyFilters();
       } catch (err) {
         console.error('Orders fetch error:', err);

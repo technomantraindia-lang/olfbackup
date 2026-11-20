@@ -14,7 +14,10 @@ console.log('TypeScript compilation finished.');
 const tarGzPath = path.join(__dirname, 'latest-backend.tar.gz');
 if (fs.existsSync(tarGzPath)) fs.unlinkSync(tarGzPath);
 
-const dirsToAdd = ['dist', 'controllers', 'routes', 'models', 'middlewares', 'services', 'utils', 'database/migrations', 'server.main.ts', 'frontend'];
+const dirsToAdd = [
+  'dist', 'controllers', 'routes', 'models', 'middlewares', 'services', 'utils', 'database/migrations', 'server.main.ts', 'frontend',
+  'node_modules/compression', 'node_modules/compressible', 'node_modules/on-headers', 'node_modules/vary', 'node_modules/bytes', 'node_modules/accepts'
+];
 const existingDirs = dirsToAdd.filter(d => fs.existsSync(d));
 
 console.log('Archiving with tar.exe...');

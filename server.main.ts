@@ -5,8 +5,9 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import cron from 'node-cron';
+import compression from 'compression';
 import { runComplaintReminders } from './utils/complaint-reminders';
-import { usersDBPool } from "./database/postgres.database";
+import { usersDBPool, systemDBPool } from "./database/postgres.database";
 import { AuthRoutes } from "./routes/auth.routes";
 import { CronRoutes } from "./routes/cron.routes";
 import { IRCTCRoutes } from "./routes/irctc.routes";
@@ -61,6 +62,11 @@ class App {
     this.initializServer();
     this.scheduleCronJobs();
     this.stopIrctcWorker=startIrctcWorker();
+    
+    // Neon Cloud Database Warm Keep-Alive (runs every 2 minutes to prevent compute sleep)
+    setInterval(() => {
+      systemDBPool.query('SELECT 1').catch(() => {});
+    }, 120000);
   }
 
   private ensurePostgresRunning(): void {
@@ -103,6 +109,7 @@ class App {
   }
 
   private middlewares(): void {
+    this.app.use(compression());
     this.app.use(cors());
     this.app.use(express.json({ limit: '100mb' }));
     this.app.use(express.urlencoded({ extended: true }));
