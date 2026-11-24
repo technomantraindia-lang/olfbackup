@@ -4732,18 +4732,18 @@ function closeOnboardModal() {
   document.body.style.overflow = '';
 }
 
-async function fetchVendorsForModal() {
+async function fetchVendorsForModal(force = false) {
   const selectEl = document.getElementById('modal-vendor-select');
   if (!selectEl) return;
 
-  if (loadedVendorsList.length > 0) {
+  if (!force && loadedVendorsList && loadedVendorsList.length > 0) {
     renderVendorsDropdown(loadedVendorsList);
     return;
   }
 
   try {
     selectEl.innerHTML = '<option value="" disabled selected>Loading vendors from database...</option>';
-    const res = await fetch('/api/v1/rest-vendor');
+    const res = await fetch('/api/v1/rest-vendor?all_db=true');
     const json = await res.json();
     if (json && json.data && json.data.rows) {
       loadedVendorsList = json.data.rows;
@@ -4769,7 +4769,8 @@ function renderVendorsDropdown(vendors) {
   selectEl.innerHTML = vendors.map(v => {
     const phone = v.vendor_phone ? ' (' + v.vendor_phone.split(',')[0].trim() + ')' : '';
     const email = v.vendor_email ? ' - ' + v.vendor_email : '';
-    return '<option value="' + v.vendor_id + '">' + v.vendor_name + phone + email + '</option>';
+    const isSelected = selectedVendorData && String(selectedVendorData.vendor_id || selectedVendorData.id) === String(v.vendor_id || v.id);
+    return '<option value="' + (v.vendor_id || v.id) + '"' + (isSelected ? ' selected' : '') + '>' + (v.vendor_name || 'Vendor') + phone + email + '</option>';
   }).join('');
 }
 
@@ -4788,12 +4789,17 @@ function filterVendorsDropdown(query) {
 }
 
 function onVendorSelected(vendorId) {
-  const v = loadedVendorsList.find(x => String(x.vendor_id) === String(vendorId));
+  if (!vendorId) return;
+  const v = (loadedVendorsList || []).find(x => String(x.vendor_id || x.id) === String(vendorId));
   if (!v) return;
   selectedVendorData = v;
   const label = document.getElementById('vendor-selected-label');
   if (label) {
-    label.innerText = 'Selected: ' + v.vendor_name + ' (ID: #' + v.vendor_id + ')';
+    label.innerText = 'Selected: ' + (v.vendor_name || 'Vendor') + ' (ID: #' + (v.vendor_id || v.id) + ')';
+  }
+  const selectEl = document.getElementById('modal-vendor-select');
+  if (selectEl && String(selectEl.value) !== String(vendorId)) {
+    selectEl.value = String(vendorId);
   }
 }
 
@@ -4816,7 +4822,7 @@ async function handleCreateVendorInline() {
   const address = document.getElementById('new-vendor-address')?.value.trim();
 
   if (!name || !phone) {
-    showToast('Please enter both Vendor Name and Phone.');
+    showToast('Please enter both Vendor Name and Phone.', 'error');
     return;
   }
 
@@ -4833,27 +4839,60 @@ async function handleCreateVendorInline() {
       })
     });
     const data = await res.json();
+    let newId = null;
+    let vendorObj = null;
+
     if (!res.ok || data.status !== 1) {
       if (data.info && data.info.includes('already exists')) {
-        const vRes = await fetch('/api/v1/rest-vendor?vendor_phone=' + encodeURIComponent(phone));
+        const vRes = await fetch('/api/v1/rest-vendor?all_db=true&vendor_phone=' + encodeURIComponent(phone));
         const vData = await vRes.json();
         const existing = vData.data?.rows?.[0];
         if (existing) {
-          await fetchVendorsForModal();
-          onVendorSelected(existing.vendor_id || existing.id);
-          showToast('Selected existing vendor: ' + (existing.vendor_name || name));
-          modalStepNext();
-          return;
+          newId = existing.vendor_id || existing.id;
+          vendorObj = existing;
         }
       }
-      throw new Error(data.info || data.message || 'Vendor creation failed');
+      if (!newId) {
+        throw new Error(data.info || data.message || 'Vendor creation failed');
+      }
+    } else {
+      newId = data.data?.rows?.[0]?.vendor_id || data.data?.rows?.[0]?.id || data.data?.insertId;
+      vendorObj = data.data?.rows?.[0];
     }
-    const newId = data.data?.rows?.[0]?.vendor_id || data.data?.rows?.[0]?.id || data.data?.insertId;
-    if(!newId) throw new Error('Server did not return the saved vendor ID');
-    await fetchVendorsForModal();
+
+    if (!newId) throw new Error('Server did not return the saved vendor ID');
+
+    // Force re-fetch the entire vendor list from database
+    await fetchVendorsForModal(true);
+
+    // If newly inserted vendor is somehow not in the fresh fetch, prepend manually
+    if (!loadedVendorsList.some(x => String(x.vendor_id || x.id) === String(newId))) {
+      const added = {
+        vendor_id: newId,
+        vendor_name: (vendorObj && vendorObj.vendor_name) || name,
+        vendor_phone: (vendorObj && vendorObj.vendor_phone) || phone,
+        vendor_email: (vendorObj && vendorObj.vendor_email) || email || '',
+        vendor_address: (vendorObj && vendorObj.vendor_address) || address || ''
+      };
+      loadedVendorsList.unshift(added);
+      renderVendorsDropdown(loadedVendorsList);
+    }
+
+    // Mark as selected vendor
     onVendorSelected(newId);
-    showToast('Vendor "' + name + '" saved');
-    modalStepNext();
+
+    // Switch radio to 'Select Existing Vendor'
+    const selectRadio = document.getElementById('selectVendorRadio');
+    if (selectRadio) {
+      selectRadio.checked = true;
+    }
+    toggleVendorMode('select');
+
+    showToast('Vendor "' + name + '" saved & selected');
+
+    // Move directly to Step 2: Basic Info
+    switchModalTab('basic');
+
   } catch(e) {
     showToast(e.message, true);
   }
@@ -4921,11 +4960,12 @@ function modalStepNext() {
       return;
     }
     const selectEl = document.getElementById('modal-vendor-select');
-    if (!selectEl || !selectEl.value) {
+    const chosenVal = selectEl?.value || (selectedVendorData && (selectedVendorData.vendor_id || selectedVendorData.id));
+    if (!chosenVal) {
       showToast('Please select a vendor or create a new one to continue.', 'error');
       return;
     }
-    onVendorSelected(selectEl.value);
+    onVendorSelected(chosenVal);
   } else if (currentModalStep === 1) {
     const outletNameEl = document.getElementById('input-outlet-name');
     const companyNameEl = document.getElementById('input-company-name');

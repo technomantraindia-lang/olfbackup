@@ -62,8 +62,8 @@ export class OutletVendorController extends MasterController {
                 resModel.info = "error: Empty fields: " + mandatoryFields + " : " + resModel.info;
                 return res.status(Constants.HTTP_BAD_REQUEST).json(resModel);
             }
-           let user: any = await this.vendorModel.fetch({ vendor_phone: payload.vendor_phone })
-            if (user.data.rowCount != 0) {
+            let user: any = await this.vendorModel.fetch({ all_db: 'true', vendor_phone: payload.vendor_phone });
+            if (user && user.data && ((user.data.rowCount && user.data.rowCount > 0) || (user.data.rows && user.data.rows.length > 0))) {
                 resModel.status = -9;
                 resModel.info = "error: " + "vendor already exists";
                 return res.status(Constants.HTTP_CONFLICT).json(resModel);

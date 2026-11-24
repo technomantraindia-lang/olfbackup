@@ -2070,7 +2070,7 @@
     }
 
     try {
-      const res = await fetch('/api/v1/rest-vendor?vendor_id=' + encodeURIComponent(vendorId));
+      const res = await fetch('/api/v1/rest-vendor?all_db=true&vendor_id=' + encodeURIComponent(vendorId));
       const json = await res.json();
       const v = (json && json.data && json.data.rows && json.data.rows[0]) ? json.data.rows[0] : null;
 
