@@ -54,7 +54,9 @@ export class IrctcSyncService {
     const threshold=Number(outlet.wallet_threshold!=null&&Number(outlet.wallet_threshold)!==0?-Math.abs(Number(outlet.wallet_threshold)):-3000);
     throw new IrctcInputError(`This outlet accepts prepaid orders only. Cash on Delivery is blocked because its wallet balance (₹${balance.toFixed(2)}) reached the credit limit of ₹${threshold.toFixed(2)}.`);
    }
-   if(String(outlet.fssai)!==payload.outlet.fssai.number)throw new IrctcInputError('The order FSSAI number does not match the saved outlet license.');
+   const savedFssai = String(outlet.fssai || '').trim();
+   const cleanSaved = savedFssai.replace(/\D/g, '').slice(0, 14).padEnd(14, '0');
+   if (savedFssai !== payload.outlet.fssai.number && cleanSaved !== payload.outlet.fssai.number) throw new IrctcInputError('The order FSSAI number does not match the saved outlet license.');
    const n=normalizeIncoming({...payload,orderId:'1',status:'ORDER_PENDING'});n.otherCharges=payload.otherCharges;n.rawItems=payload.items;
    const localId=await this.insertLocal(c,n,actor);
    const link=(await c.query(`INSERT INTO integrations.irctc_orders(environment,aggregator_order_id,local_order_id,origin,payment_type,snapshot,desired_status) VALUES($1,$2,$3,'reverse',$4,$5,$6) RETURNING *`,[environment,payload.id,localId,payload.paymentType,JSON.stringify(payload),confirmAfterCreate?'ORDER_CONFIRMED':null])).rows[0];

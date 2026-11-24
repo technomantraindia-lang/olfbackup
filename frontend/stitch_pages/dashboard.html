@@ -856,10 +856,10 @@
           <div id="notificationDropdownMenu" class="hidden absolute right-0 mt-2 w-80 bg-[#0B0F17] dark:bg-[#0B0F17] light:bg-white border border-white/10 dark:border-white/10 light:border-slate-200 rounded-xl shadow-2xl z-50 overflow-hidden text-xs"><div id="notification-items" class="p-4">Loading alerts...</div></div>
         </div>
 
-        <!-- Quick Action: Manual Order Booking -->
-        <button type="button" onclick="openManualOrderModal()" class="bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white font-semibold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-all" title="Create Passenger Order Hotline">
+        <!-- Quick Action: Manual Order Booking (Redirects to Train Search Booking Stepper) -->
+        <button type="button" onclick="location.href='/orders?create=1'" class="bg-[#FF7A00] hover:bg-[#FF7A00]/90 text-white font-semibold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-all" title="Create Passenger Order Hotline via Train Search">
           <span class="material-symbols-outlined text-[16px]">add_circle</span>
-          <span class="hidden md:inline">Manual Order</span>
+          <span class="hidden md:inline">+ New Order</span>
         </button>
 
         <!-- Quick Action: PNR Radar -->
@@ -2457,7 +2457,7 @@
 
     // Initial Load
     loadTelemetryData();
-    if (new URLSearchParams(location.search).get('booking') === '1') openManualOrderModal();
+    if (new URLSearchParams(location.search).get('booking') === '1') location.href = '/orders?create=1';
   </script>
 <script src="/assets/admin-existing.js"></script>
 <script id="olf-master-sidebar-logic">

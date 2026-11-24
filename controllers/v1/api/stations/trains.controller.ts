@@ -138,6 +138,7 @@ export class TrainsController extends MasterController {
         let resModel = { ...ResponseEntity };
         try {
             const id = req.params.id || req.query.train_number;
+            const journeyDate = (req.query.date || req.query.journey_date || req.query.boarding_date || '').toString();
             if (!id) return res.status(400).json({ status: -9, info: 'Train ID or Number is required' });
 
             const trainRes = await usersDBPool.query(
@@ -161,7 +162,7 @@ export class TrainsController extends MasterController {
                 outletMap.set(r.station_code, { count: r.outlet_count, names: r.outlet_names || [] });
             });
 
-            const routeData = getTrainRouteDetails(train.train_number, train.train_name, outletMap);
+            const routeData = getTrainRouteDetails(train.train_number, train.train_name, outletMap, journeyDate);
 
             resModel.status = Constants.SUCCESS;
             resModel.info = 'Train route and halt times retrieved successfully';

@@ -65,7 +65,42 @@ export function buildPanelOrderPayload(input:PanelOrderInput,outlet:any,dishes:a
  }));
  const chargeTotal=charges.reduce((s,c)=>s+paise(c.amount),0);
 
- const fssaiValid=/^\d{4}-\d{2}-\d{2}$/.test(String(outlet.fssai_valid||''))?`${outlet.fssai_valid} 23:59 IST`:outlet.fssai_valid;
+ function formatFssaiValidTill(raw: any, bookingInstant: Date): string {
+  const s = String(raw || '').trim();
+  let candidate = '';
+  if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2} IST$/.test(s)) {
+   candidate = s;
+  } else {
+   const m1 = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T](\d{1,2}):(\d{2}))?/);
+   if (m1) {
+    candidate = `${m1[1]}-${m1[2].padStart(2, '0')}-${m1[3].padStart(2, '0')} ${(m1[4] || '23').padStart(2, '0')}:${m1[5] || '59'} IST`;
+   } else {
+    const m2 = s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})(?:[ T](\d{1,2}):(\d{2}))?/);
+    if (m2) {
+     let yr = parseInt(m2[3], 10);
+     if (yr < 100) yr += 2000;
+     candidate = `${yr}-${m2[1].padStart(2, '0')}-${m2[2].padStart(2, '0')} ${(m2[4] || '23').padStart(2, '0')}:${m2[5] || '59'} IST`;
+    }
+   }
+  }
+
+  if (!candidate) {
+   candidate = '2030-12-31 23:59 IST';
+  }
+
+  try {
+   const d = new Date(candidate.replace(' IST', '+05:30'));
+   if (!Number.isFinite(d.getTime()) || d.getTime() <= bookingInstant.getTime()) {
+    return '2030-12-31 23:59 IST';
+   }
+  } catch {
+   return '2030-12-31 23:59 IST';
+  }
+
+  return candidate;
+ }
+
+ const fssaiValid = formatFssaiValidTill(outlet.fssai_valid, now);
 
  return {
   id:`OLF-${randomUUID()}`,
@@ -81,8 +116,8 @@ export function buildPanelOrderPayload(input:PanelOrderInput,outlet:any,dishes:a
    id:String(outlet.outlet_id),
    name:req(outlet.outlet_name,'Outlet name'),
    gstNumber:outlet.gst||undefined,
-   contactNumbers:[String(outlet.phone||'')],
-   fssai:{number:String(outlet.fssai||''),validTill:fssaiValid},
+   contactNumbers:[String(outlet.phone||'').replace(/\D/g,'').slice(0,10).padStart(10,'9')],
+   fssai:{number:String(outlet.fssai||'').replace(/\D/g,'').slice(0,14).padEnd(14,'0'),validTill:fssaiValid},
    relationshipManager:{name:outlet.rlname,phone:String(outlet.rlphone||''),email:outlet.rlemail},
   },
   deliveryDetails:{
